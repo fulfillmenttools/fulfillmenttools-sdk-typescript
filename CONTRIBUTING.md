@@ -10,8 +10,6 @@ Following these guidelines helps to communicate that you respect the time of the
 
 We use [GitHub issues](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/issues) for our public bugs. If you would like to report a problem, take a look around and see if someone already opened an issue about it. If you are certain this is a new unreported bug, you can submit a bug report.
 
-_TODO_
-
 ## Submitting a Pull Request
 
 Good pull requests, such as patches, improvements, and new features, are a fantastic help. They should remain focused in scope and avoid containing unrelated commits.
@@ -22,16 +20,15 @@ Please also provide a test plan, i.e. specify how you verified that your additio
 
 Please adhere to the coding conventions used throughout a project (indentation, accurate comments, etc.) and any other requirements (such as test coverage).
 
-_TODO_
-
 ## Setting Up a Local Copy
 
 1. Clone the repo with `git clone git@github.com:fulfillmenttools/fulfillmenttools-sdk-typescript.git`
-1. _TODO_
+1. Run `nvm use` and `npm install`
+1. Use `npm run build`, `npm run test`, and `npm run lint` to make sure your modifications can be compiled and all tests are green.
 
 ### Coding Conventions
 
-_TODO_
+We use [ESLint](https://eslint.org/), [Prettier](https://prettier.io/), and [EditorConfig](https://editorconfig.org/) for consistent coding style and formatting.
 
 ## Questions
 
@@ -39,5 +36,5 @@ Feel free to reach out to us at [opensource@fulfillmenttools.com](mailto:opensou
 
 ## License
 
-By contributing to the Fulfillmenttools Commercetools Connect App, you agree that your contributions will be licensed under its [MIT license](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/blob/master/LICENSE).
+By contributing to the Fulfillmenttools TypeScript SDK, you agree that your contributions will be licensed under its [MIT license](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/blob/master/LICENSE).
 

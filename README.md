@@ -47,6 +47,23 @@ $ npm run test
 ```bash
 $ npm run lint
 ```
+## 👉 Usage
+
+```typescript
+import { FftApiClient, FftOrderService, OrderForCreation } from 'fulfillmenttools-sdk-typescript';
+
+const fftApiClient = new FftApiClient(
+  process.env.FFT_PROJECT_ID || '',
+  process.env.FFT_API_USER || '',
+  process.env.FFT_API_PASSWORD || '',
+  process.env.FFT_API_KEY || ''
+);
+
+const fftOrderService = new FftOrderService(fftApiClient);
+
+const fftOrder = {} as OrderForCreation;
+await fftOrderService.create(fftOrder);
+```
 
 ## 📖 Documentation
 
