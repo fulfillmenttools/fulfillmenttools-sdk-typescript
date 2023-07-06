@@ -1,5 +1,5 @@
 {
-  "name": "fulfillmenttools-sdk-typescript",
+  "name": "@fulfillmenttools/fulfillmenttools-sdk-typescript",
   "version": "0.1.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

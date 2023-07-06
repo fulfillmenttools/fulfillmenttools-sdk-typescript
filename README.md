@@ -49,8 +49,12 @@ $ npm run lint
 ```
 ## 👉 Usage
 
+This software is published on [npmjs.com](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript)
+
+Here's a little example how to use it in TypeScript:
+
 ```typescript
-import { FftApiClient, FftOrderService, OrderForCreation } from 'fulfillmenttools-sdk-typescript';
+import { FftApiClient, FftOrderService, OrderForCreation } from '@fulfillmenttools/fulfillmenttools-sdk-typescript';
 
 const fftApiClient = new FftApiClient(
   process.env.FFT_PROJECT_ID || '',
