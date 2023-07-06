@@ -1,6 +1,6 @@
-#  Contributing to the Fulfillmenttools TypeScript SDK
+#  Contributing to the fulfillmenttools TypeScript SDK
 
-Thank you for your interest in contributing to the Fulfillmenttools TypeScript SDK!
+Thank you for your interest in contributing to the fulfillmenttools TypeScript SDK!
 
 Please take a moment to review this document in order to make the contribution process easy and effective for everyone involved.
 
@@ -36,5 +36,5 @@ Feel free to reach out to us at [opensource@fulfillmenttools.com](mailto:opensou
 
 ## License
 
-By contributing to the Fulfillmenttools TypeScript SDK, you agree that your contributions will be licensed under its [MIT license](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/blob/master/LICENSE).
+By contributing to the fulfillmenttools TypeScript SDK, you agree that your contributions will be licensed under its [MIT license](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/blob/master/LICENSE).
 

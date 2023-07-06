@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "description": "Fulfillmenttools TypeScript SDK",
+  "description": "fulfillmenttools TypeScript SDK",
   "author": "OC fulfillment GmbH (https://fulfillmenttools.com/)",
   "license": "MIT",
   "scripts": {

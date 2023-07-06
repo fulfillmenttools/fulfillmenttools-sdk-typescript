@@ -2,7 +2,7 @@
   <a href="https://fulfillmenttools.com/">
     <img alt="fulfillmenttools logo" src="./.github/images/fft-mach-alliance.svg">
   </a></br>
-  <b>Fulfillmenttools TypeScript SDK</b>
+  <b>fulfillmenttools TypeScript SDK</b>
 </p>
 
 [![npm version](https://img.shields.io/npm/v/@fulfillmenttools/fulfillmenttools-sdk-typescript.svg?style=flat)](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript) 
@@ -13,7 +13,7 @@
 
 # 🤖 Introduction
 
-This repository contains the source code of the Fulfillmenttools TypeScript SDK.
+This repository contains the source code of the fulfillmenttools TypeScript SDK.
 
 ## 👨‍💻 Development
 
@@ -67,7 +67,7 @@ await fftOrderService.create(fftOrder);
 
 ## 📖 Documentation
 
-The official Fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/api-docs/) and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/).
+The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/api-docs/) and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/).
 
 ## 📜 License
 
@@ -79,4 +79,4 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 
 ## :blue_heart: Thanks
 
-Thanks for all your contributions and efforts towards improving the Fulfillmenttools TypeScript SDK. We thank you for being part of our :sparkles: community :sparkles:!
+Thanks for all your contributions and efforts towards improving the fulfillmenttools TypeScript SDK. We thank you for being part of our :sparkles: community :sparkles:!
