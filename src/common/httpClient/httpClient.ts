@@ -8,6 +8,7 @@ import { CustomLogger } from '../logging';
 
 export class HttpClient implements BasicHttpClient {
   private readonly logger: Logger<HttpClient> = new CustomLogger<HttpClient>();
+  private logging: boolean;
   public async request<TDto>(config: HttpRequestConfiguration): Promise<HttpResult<TDto>> {
     const request = superagent(config.method, config.url)
       .set('Content-Type', 'application/json')
@@ -23,29 +24,41 @@ export class HttpClient implements BasicHttpClient {
       request.query(config.params);
     }
 
-    this.logger.debug(`Sending request. Url: ${request.url}, Method: ${request.method}`, [
-      {
-        params: config.params,
-        body: config.body,
-      },
-    ]);
+    if (this.logging) {
+      this.logger.debug(`Sending request. Url: ${request.url}, Method: ${request.method}`, [
+        {
+          params: config.params,
+          body: config.body,
+        },
+      ]);
+    }
 
     const response = await request
       .send(config.body)
       .serialize((body) => JSON.stringify(body, serializeWithDatesAsIsoString));
 
-    this.logger.debug(
-      `Received response. Url: ${request.url}, Method: ${request.method} - Response Status: ${response.statusCode}`,
-      [
-        {
-          body: response.body,
-        },
-      ]
-    );
+    if (this.logging) {
+      this.logger.debug(
+        `Received response. Url: ${request.url}, Method: ${request.method} - Response Status: ${response.statusCode}`,
+        [
+          {
+            body: response.body,
+          },
+        ]
+      );
+    }
 
     return {
       statusCode: response.statusCode,
       body: response.body as TDto,
     };
+  }
+
+  constructor(logging: boolean | null | undefined) {
+    if (logging === null || logging === undefined) {
+      this.logging = false;
+    } else {
+      this.logging = logging;
+    }
   }
 }

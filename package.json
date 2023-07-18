@@ -27,7 +27,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": ["fulfillment", "fulfillmenttools", "nodejs", "typescript", "sdk", "sdk-integration"],
+  "keywords": [
+    "fulfillment",
+    "fulfillmenttools",
+    "nodejs",
+    "typescript",
+    "sdk",
+    "sdk-integration"
+  ],
   "devDependencies": {
     "@tsconfig/node16": "1.0.4",
     "@types/express": "4.17.17",

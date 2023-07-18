@@ -1,8 +1,8 @@
 <p align="center">
   <a href="https://fulfillmenttools.com/">
     <img alt="fulfillmenttools logo" src="./.github/images/fft-mach-alliance.svg">
-  </a></br>
-  <b>fulfillmenttools TypeScript SDK</b>
+  </a><br />
+<b>fulfillmenttools TypeScript SDK</b>
 </p>
 
 [![npm version](https://img.shields.io/npm/v/@fulfillmenttools/fulfillmenttools-sdk-typescript.svg?style=flat)](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript) 
@@ -69,9 +69,27 @@ const fftOrder = {} as OrderForCreation;
 await fftOrderService.create(fftOrder);
 ```
 
+By default, logging is disabled. If you wish to have the HttpClient logging enabled, just add a boolean to your `FftApiClient`:
+```typescript
+import { FftApiClient, FftOrderService, OrderForCreation } from '@fulfillmenttools/fulfillmenttools-sdk-typescript';
+
+const fftApiClient = new FftApiClient(
+  process.env.FFT_PROJECT_ID || '',
+  process.env.FFT_API_USER || '',
+  process.env.FFT_API_PASSWORD || '',
+  process.env.FFT_API_KEY || '',
+  process.env.FFT_LOGGING_ENABLED || true
+);
+
+const fftOrderService = new FftOrderService(fftApiClient);
+
+const fftOrder = {} as OrderForCreation;
+await fftOrderService.create(fftOrder);
+```
+
 ## 📖 Documentation
 
-The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/api-docs/) and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/).
+The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/api-docs/), and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/).
 
 ## 📜 License
 

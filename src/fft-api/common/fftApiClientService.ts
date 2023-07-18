@@ -5,9 +5,9 @@ export class FftApiClient {
   private readonly baseUrl: string;
   private readonly authService: AuthService;
   private readonly httpClient: HttpClient;
-  constructor(projectId: string, username: string, password: string, apiKey: string) {
+  constructor(projectId: string, username: string, password: string, apiKey: string, logging: boolean | undefined) {
     this.baseUrl = `https://${projectId}.api.fulfillmenttools.com/api`;
-    this.httpClient = new HttpClient();
+    this.httpClient = new HttpClient(logging);
     this.authService = new AuthService(
       {
         apiKey,
