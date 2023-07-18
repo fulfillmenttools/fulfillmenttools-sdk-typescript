@@ -54,11 +54,7 @@ export class HttpClient implements BasicHttpClient {
     };
   }
 
-  constructor(logging: boolean | null | undefined) {
-    if (logging === null || logging === undefined) {
-      this.logging = false;
-    } else {
-      this.logging = logging;
-    }
+  constructor(logging?: boolean) {
+    this.logging = logging ?? false;
   }
 }
