@@ -8,7 +8,7 @@ import { CustomLogger } from '../logging';
 
 export class HttpClient implements BasicHttpClient {
   private readonly logger: Logger<HttpClient> = new CustomLogger<HttpClient>();
-  private logging: boolean;
+  private shouldLogHttpRequestAndResponse: boolean;
   public async request<TDto>(config: HttpRequestConfiguration): Promise<HttpResult<TDto>> {
     const request = superagent(config.method, config.url)
       .set('Content-Type', 'application/json')
@@ -24,7 +24,7 @@ export class HttpClient implements BasicHttpClient {
       request.query(config.params);
     }
 
-    if (this.logging) {
+    if (this.shouldLogHttpRequestAndResponse) {
       this.logger.debug(`Sending request. Url: ${request.url}, Method: ${request.method}`, [
         {
           params: config.params,
@@ -37,7 +37,7 @@ export class HttpClient implements BasicHttpClient {
       .send(config.body)
       .serialize((body) => JSON.stringify(body, serializeWithDatesAsIsoString));
 
-    if (this.logging) {
+    if (this.shouldLogHttpRequestAndResponse) {
       this.logger.debug(
         `Received response. Url: ${request.url}, Method: ${request.method} - Response Status: ${response.statusCode}`,
         [
@@ -54,7 +54,7 @@ export class HttpClient implements BasicHttpClient {
     };
   }
 
-  constructor(logging?: boolean) {
-    this.logging = logging ?? false;
+  constructor(shouldLogHttpRequestAndResponse?: boolean) {
+    this.shouldLogHttpRequestAndResponse = shouldLogHttpRequestAndResponse ?? false;
   }
 }
