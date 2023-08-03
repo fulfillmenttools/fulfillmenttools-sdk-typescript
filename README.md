@@ -13,7 +13,7 @@
 
 # 🤖 Introduction
 
-This repository contains the source code of the fulfillmenttools TypeScript SDK.
+This is a JavaScript/TypeScript SDK for the [fulfillmenttools API](https://fulfillmenttools.github.io/api-reference-ui/).
 
 ## 👨‍💻 Development
 
@@ -47,11 +47,13 @@ $ npm run test
 ```bash
 $ npm run lint
 ```
+
 ## 👉 Usage
 
-This software is published on [npmjs.com](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript)
+This software is published on [npmjs.com](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript).
+The package contains both an ESM and a CommonJS build.
 
-Here's a little example how to use it in TypeScript:
+Here's a little example how to create a client instance in TypeScript:
 
 ```typescript
 import { FftApiClient, FftOrderService, OrderForCreation } from '@fulfillmenttools/fulfillmenttools-sdk-typescript';
