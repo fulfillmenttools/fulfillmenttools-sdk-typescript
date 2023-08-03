@@ -70,6 +70,6 @@ jobs:
         with:
           base: main
           branch: release
-          title: Prepare release ${{ steps.version.outputs.release-version }}
-          commit-message: "chore: Prepare release v${{ steps.version.outputs.release-version }}"
+          title: Release ${{ steps.version.outputs.release-version }}
+          commit-message: "chore: Release v${{ steps.version.outputs.release-version }}"
           labels: ocff:release
