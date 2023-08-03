@@ -1,13 +1,14 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
-  "exclude": ["node_modules", "tmp", "lib"],
+  "exclude": ["node_modules", "tmp", "dist"],
   "compilerOptions": {
-    "lib": ["es2021"],
-    "target": "es2021",
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "lib": ["ESNext"],
     "resolveJsonModule": true,
-    "outDir": "./lib",
     "rootDir": "./src",
-    "inlineSourceMap": true,
-    "moduleResolution":"node"
+    "skipLibCheck": false,
+    "sourceMap": true,
+    "target": "esnext"
   }
 }

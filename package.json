@@ -1,13 +1,17 @@
 {
   "name": "@fulfillmenttools/fulfillmenttools-sdk-typescript",
   "version": "0.1.2",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
+  "types": "dist/mjs/index.d.ts",
   "description": "fulfillmenttools TypeScript SDK",
   "author": "OC fulfillment GmbH (https://fulfillmenttools.com/)",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf ./lib && tsc -d",
+    "ci": "npm run build",
+    "build": "rimraf ./dist && npm run build:cjs && npm run build:mjs",
+    "build:cjs": "tsc --project tsconfig.cjs.json && cp res/package.cjs.json dist/cjs/package.json",
+    "build:mjs": "tsc --project tsconfig.mjs.json && cp res/package.mjs.json dist/mjs/package.json",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettier": "prettier --write 'src/**/*.{js,ts}'",
@@ -15,6 +19,10 @@
     "test:watch": "jest --watch",
     "release": "release-it",
     "version": "auto-changelog -p && git add CHANGELOG.md"
+  },
+  "exports": {
+    "import": "./dist/mjs/index.js",
+    "require": "./dist/cjs/index.js"
   },
   "repository": {
     "type": "git",
