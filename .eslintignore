@@ -1,6 +1,5 @@
 node_modules
-lib
-build/
+dist/
 .nvmrc
 .eslintrc.cjs
 src/fft-api/types/typescript-fetch-client/
