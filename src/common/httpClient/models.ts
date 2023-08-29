@@ -30,7 +30,7 @@ export interface BasicHttpClient {
   request<TDto>(config: HttpRequestConfiguration): Promise<HttpResult<TDto>>;
 }
 
-//https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
+// https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
 export enum ResponseType {
   TEXT = 'text',
   BLOB = 'blob',
