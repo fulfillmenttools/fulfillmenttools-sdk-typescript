@@ -28,3 +28,11 @@ export interface HttpResult<TDto> {
 export interface BasicHttpClient {
   request<TDto>(config: HttpRequestConfiguration): Promise<HttpResult<TDto>>;
 }
+
+export enum ResponseType {
+  TEXT = 'text',
+  BLOB = 'blob',
+  JSON = 'json',
+  DOCUMENT = 'document',
+  ARRAY_BUFFER = 'arraybuffer',
+}
