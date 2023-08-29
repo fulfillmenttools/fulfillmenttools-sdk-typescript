@@ -1,7 +1,7 @@
 import superagent from 'superagent';
 import { HTTP_TIMEOUT_MS } from './constants';
 import { USER_AGENT } from '../projectConstants';
-import { BasicHttpClient, HttpRequestConfiguration, HttpResult } from './models';
+import { BasicHttpClient, HttpRequestConfiguration, HttpResult, ResponseType } from './models';
 import { serializeWithDatesAsIsoString } from './serialize';
 import { Logger } from 'tslog';
 import { CustomLogger } from '../logging';
@@ -14,6 +14,7 @@ export class HttpClient implements BasicHttpClient {
       .set('Content-Type', 'application/json')
       .set('User-Agent', USER_AGENT)
       .timeout(HTTP_TIMEOUT_MS)
+      .responseType(config.responseType ?? ResponseType.DEFAULT)
       .retry(config.retries);
 
     if (config.customHeaders) {
