@@ -18,6 +18,7 @@ export interface HttpRequestConfiguration {
   params?: QueryParams;
   body?: Record<string, unknown> | string;
   retries?: number;
+  responseType?: ResponseType;
 }
 
 export interface HttpResult<TDto> {
@@ -35,4 +36,5 @@ export enum ResponseType {
   JSON = 'json',
   DOCUMENT = 'document',
   ARRAY_BUFFER = 'arraybuffer',
+  DEFAULT = '',
 }
