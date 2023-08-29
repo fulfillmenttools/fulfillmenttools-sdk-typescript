@@ -1,5 +1,5 @@
 import { isDate } from 'date-fns';
-import { PickJob, StrippedPickJobs } from '../types';
+import { AbstractModificationAction, PickJob, StrippedPickJobs } from '../types';
 import { FftApiClient } from '../common';
 import { ResponseError } from 'superagent';
 import { CustomLogger, QueryParams } from '../../common';
@@ -84,6 +84,20 @@ export class FftPickJobService {
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
       );
+      throw err;
+    }
+  }
+  public async update(pickJob: PickJob, actions: AbstractModificationAction[]): Promise<PickJob> {
+    try {
+      return await this.apiClient.patch<PickJob>(`${this.path}/${pickJob.id}`, { version: pickJob.version, actions });
+    } catch (err) {
+      const httpError = err as ResponseError;
+      this.logger.error(
+        `Could not update pick job with id '${pickJob.id}'. Failed with status ${httpError.status}, error: ${
+          httpError.response ? JSON.stringify(httpError.response.body) : ''
+        }`
+      );
+
       throw err;
     }
   }
