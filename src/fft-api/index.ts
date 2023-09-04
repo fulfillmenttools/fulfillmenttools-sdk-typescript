@@ -6,6 +6,8 @@ export * from './loadunit';
 export * from './order';
 export * from './parcel';
 export * from './pickjob';
+export * from './packjob';
+export * from './process';
 export * from './routing-plan';
 export * from './shipment';
 export * from './subscription';
