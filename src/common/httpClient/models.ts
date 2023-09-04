@@ -18,6 +18,7 @@ export interface HttpRequestConfiguration {
   params?: QueryParams;
   body?: Record<string, unknown> | string;
   retries?: number;
+  responseType?: ResponseType;
 }
 
 export interface HttpResult<TDto> {
@@ -27,4 +28,14 @@ export interface HttpResult<TDto> {
 
 export interface BasicHttpClient {
   request<TDto>(config: HttpRequestConfiguration): Promise<HttpResult<TDto>>;
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
+export enum ResponseType {
+  TEXT = 'text',
+  BLOB = 'blob',
+  JSON = 'json',
+  DOCUMENT = 'document',
+  ARRAY_BUFFER = 'arraybuffer',
+  DEFAULT = '',
 }
