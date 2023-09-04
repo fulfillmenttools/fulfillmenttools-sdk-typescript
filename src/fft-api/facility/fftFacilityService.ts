@@ -18,7 +18,7 @@ import {
 import { FftApiClient } from '../common';
 import ActionEnum = ModifyShortpickAction.ActionEnum;
 import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
+import { CustomLogger, QueryParams } from '../../common';
 
 export class FftFacilityService {
   private static readonly facilityCache = new Map<string, string>();
@@ -52,13 +52,20 @@ export class FftFacilityService {
     return facility.id;
   }
 
+  public async get(params?: QueryParams): Promise<StrippedFacilities> {
+    try {
+      return await this.apiClient.get<StrippedFacilities>(this.PATH, params);
+    } catch (err) {
+      this.logger.error(`Getting Facilities failed: ${err}`);
+      throw err;
+    }
+  }
+
   public async createFacility(facilityForCreation: FacilityForCreation): Promise<Facility> {
     try {
       return await this.apiClient.post<Facility>(this.PATH, facilityForCreation);
     } catch (err) {
-      this.logger.error(
-        `Creating FFT Facility from CT Channel '${facilityForCreation.tenantFacilityId}' failed: ${err}`
-      );
+      this.logger.error(`Creating FFT Facility '${facilityForCreation.tenantFacilityId}' failed: ${err}`);
       throw err;
     }
   }
