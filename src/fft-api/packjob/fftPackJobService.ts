@@ -5,7 +5,7 @@ import { CustomLogger, QueryParams } from '../../common';
 import { Logger } from 'tslog';
 
 export class FftPackJobService {
-  private readonly path = 'pickjobs';
+  private readonly path = 'packjobs';
   private readonly logger: Logger<FftPackJobService> = new CustomLogger<FftPackJobService>();
   constructor(private readonly apiClient: FftApiClient) {}
 
