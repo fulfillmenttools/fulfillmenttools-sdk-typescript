@@ -1,5 +1,5 @@
 import { ResponseError } from 'superagent';
-import { Shipment } from '../types';
+import { Parcel, ParcelForCreation, Shipment } from '../types';
 import { FftApiClient } from '../common';
 import { Logger } from 'tslog';
 import { CustomLogger } from '../../common';
@@ -20,6 +20,23 @@ export class FftShipmentService {
         }`
       );
 
+      throw err;
+    }
+  }
+
+  public async createParcel(shipmentId: string, parcel: ParcelForCreation): Promise<Parcel> {
+    try {
+      return await this.apiClient.post<Parcel>(
+        `${this.path}/${shipmentId}/parcels`,
+        parcel as unknown as Record<string, unknown>
+      );
+    } catch (err) {
+      const httpError = err as ResponseError;
+      this.logger.error(
+        `Could not create parcel for shipment '${shipmentId}'. Failed with status ${httpError.status}, error: ${
+          httpError.response ? JSON.stringify(httpError.response.body) : ''
+        }`
+      );
       throw err;
     }
   }
