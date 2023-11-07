@@ -29,7 +29,7 @@ export class FftFacilityService {
 
   constructor(private readonly apiClient: FftApiClient) {}
 
-  public async getFacilityId(tenantFacilityId: string, lenient = false): Promise<string | undefined> {
+  public async getFacilityId(tenantFacilityId: string, relaxed = false): Promise<string | undefined> {
     if (FftFacilityService.facilityCache.has(tenantFacilityId)) {
       return FftFacilityService.facilityCache.get(tenantFacilityId) as string;
     }
@@ -48,7 +48,7 @@ export class FftFacilityService {
       facility = strippedFacilities.facilities?.[0] as StrippedFacility;
       FftFacilityService.facilityCache.set(tenantFacilityId, facility.id);
     } else {
-      if (lenient) {
+      if (relaxed) {
         this.logger.info(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
         return undefined;
       } else {
