@@ -38,15 +38,14 @@ export class FftFacilityService {
     const length = strippedFacilities.facilities?.length || 0;
     let facility: StrippedFacility;
 
-    if (length === 1) {
+    if (length >= 1) {
       facility = strippedFacilities.facilities?.[0] as StrippedFacility;
       FftFacilityService.facilityCache.set(tenantFacilityId, facility.id);
-    } else if (length > 1) {
-      this.logger.warn(
-        `Did not find exactly 1 facility with tenantFacilityId '${tenantFacilityId}' but ${length}, returning first one with id '${strippedFacilities.facilities?.[0].id}'`
-      );
-      facility = strippedFacilities.facilities?.[0] as StrippedFacility;
-      FftFacilityService.facilityCache.set(tenantFacilityId, facility.id);
+      if (length > 1) {
+        this.logger.warn(
+          `Did not find exactly 1 facility with tenantFacilityId '${tenantFacilityId}' but ${length}, returning first one with id '${facility.id}'`
+        );
+      }
     } else {
       if (relaxed) {
         this.logger.info(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
