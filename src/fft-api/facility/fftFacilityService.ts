@@ -29,25 +29,32 @@ export class FftFacilityService {
 
   constructor(private readonly apiClient: FftApiClient) {}
 
-  public async getFacilityId(tenantFacilityId: string): Promise<string> {
+  public async getFacilityId(tenantFacilityId: string, relaxed = false): Promise<string | undefined> {
     if (FftFacilityService.facilityCache.has(tenantFacilityId)) {
       return FftFacilityService.facilityCache.get(tenantFacilityId) as string;
     }
 
     const strippedFacilities = await this.apiClient.get<StrippedFacilities>(this.PATH, { tenantFacilityId });
-    if (!strippedFacilities.facilities?.length) {
-      this.logger.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
-      throw new Error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
-    }
+    const length = strippedFacilities.facilities?.length || 0;
+    let facility: StrippedFacility;
 
-    if (strippedFacilities.facilities.length > 1) {
-      this.logger.warn(
-        `Did not find exactly 1 facility with tenantFacilityId '${tenantFacilityId}' but ${strippedFacilities.facilities.length}, returning first one with id '${strippedFacilities.facilities[0].id}'`
-      );
+    if (length >= 1) {
+      facility = strippedFacilities.facilities?.[0] as StrippedFacility;
+      FftFacilityService.facilityCache.set(tenantFacilityId, facility.id);
+      if (length > 1) {
+        this.logger.warn(
+          `Did not find exactly 1 facility with tenantFacilityId '${tenantFacilityId}' but ${length}, returning first one with id '${facility.id}'`
+        );
+      }
+    } else {
+      if (relaxed) {
+        this.logger.info(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
+        return undefined;
+      } else {
+        this.logger.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
+        throw new Error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
+      }
     }
-
-    const [facility] = strippedFacilities.facilities;
-    FftFacilityService.facilityCache.set(tenantFacilityId, facility.id);
 
     return facility.id;
   }
