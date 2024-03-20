@@ -4,7 +4,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 TARGET_DIR="${SCRIPTDIR}/typescript-fetch-client"
 apiUrl="https://raw.githubusercontent.com/fulfillmenttools/fulfillmenttools-api-reference/master/api.swagger.yaml"
-openApiVersion="3.0.46"
+openApiVersion="3.0.54"
 swaggerFile="swagger-codegen-cli-${openApiVersion}.jar"
 localSwaggerFile="${SCRIPTDIR}/${swaggerFile}"
 swaggerCodeGenUrl="https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/${openApiVersion}/${swaggerFile}"
@@ -25,6 +25,7 @@ rm api_test.spec.ts
 #Workaround for https://github.com/swagger-api/swagger-codegen/issues/4839
 sed -i.bak "s/extends null<String, string> //g" api.ts
 sed -i.bak "s/extends null<String, string> //g" api.ts
+sed -i.bak "s/ModelObject/any/g" api.ts
 sed -i.bak "s/= <any>/=/g" api.ts
 rm api.ts.bak
 
