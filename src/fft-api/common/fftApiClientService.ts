@@ -43,6 +43,15 @@ export class FftApiClient {
     return this.doRequest(HttpMethod.PATCH, path, data, params, responseType);
   }
 
+  public async put<T>(
+    path: string,
+    data: Record<string, unknown>,
+    params?: QueryParams,
+    responseType?: ResponseType
+  ): Promise<T> {
+    return this.doRequest(HttpMethod.PUT, path, data, params, responseType);
+  }
+
   public async delete<T>(path: string, params?: QueryParams, responseType?: ResponseType): Promise<T> {
     return this.doRequest(HttpMethod.DELETE, path, undefined, params, responseType);
   }
