@@ -1,15 +1,18 @@
+# fulfillmenttools TypeScript SDK
+
 <p align="center">
   <a href="https://fulfillmenttools.com/">
     <img alt="fulfillmenttools logo" src="./.github/images/fft-mach-alliance.svg">
   </a><br />
-<b>fulfillmenttools TypeScript SDK</b>
 </p>
 
-[![npm version](https://img.shields.io/npm/v/@fulfillmenttools/fulfillmenttools-sdk-typescript.svg?style=flat)](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript) 
-![CI](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/actions/workflows/ci.yml/badge.svg)
+[![npm version](https://img.shields.io/npm/v/@fulfillmenttools/fulfillmenttools-sdk-typescript.svg?style=flat)](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript)
+[![Release](https://img.shields.io/github/v/release/fulfillmenttools/fulfillmenttools-sdk-typescript)](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/releases)
+[![CI](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/fulfillmenttools/fulfillmenttools-sdk-typescript)](./LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+[![TypeScript](https://img.shields.io/badge/Made%20with-TypeScript-1f425f.svg?color=3178c6)](https://www.typescriptlang.org/)
 
 # 🤖 Introduction
 
