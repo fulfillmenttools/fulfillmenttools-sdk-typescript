@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "ci": "npm run build",
-    "build": "rimraf ./dist && npm run build:cjs && npm run build:mjs",
+    "build": "rimraf ./dist ./coverage && npm run build:cjs && npm run build:mjs",
     "build:cjs": "tsc --project tsconfig.cjs.json && cp res/package.cjs.json dist/cjs/package.json",
     "build:mjs": "tsc --project tsconfig.mjs.json && cp res/package.mjs.json dist/mjs/package.json",
     "lint": "eslint .",
@@ -72,7 +72,7 @@
   "dependencies": {
     "date-fns": "2.30.0",
     "dotenv": "16.4.5",
-    "express": "4.18.3",
+    "express": "4.19.2",
     "http-status-enum": "1.0.2",
     "superagent": "8.1.2",
     "timers": "0.1.1",
