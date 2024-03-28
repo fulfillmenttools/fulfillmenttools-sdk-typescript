@@ -2,12 +2,12 @@
   "extends": "@tsconfig/node16/tsconfig.json",
   "exclude": ["node_modules", "tmp", "dist"],
   "compilerOptions": {
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "lib": ["ESNext"],
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
+    // "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
     "rootDir": "./src",
     "skipLibCheck": false,
