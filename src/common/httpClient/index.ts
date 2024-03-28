@@ -1,8 +1,8 @@
 export * from './constants';
 export * from './httpClient';
-export { HttpResult } from './models';
-export { HttpRequestConfiguration } from './models';
-export { QueryParams } from './models';
+export type { HttpResult } from './models';
+export type { HttpRequestConfiguration } from './models';
+export type { QueryParams } from './models';
 export { HttpMethod } from './models';
 
 export * from './testHttpClient';
