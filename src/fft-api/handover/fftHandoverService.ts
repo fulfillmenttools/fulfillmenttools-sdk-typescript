@@ -1,5 +1,7 @@
 import { ResponseError } from 'superagent';
 import {
+  HandoverJobCancelActionEnum,
+  HandoverJobCancelReason,
   Handoverjob,
   HandoverjobPatchActions,
   HandoverjobStatus,
@@ -65,6 +67,29 @@ export class FftHandoverService {
       const httpError = err as ResponseError;
       this.logger.error(
         `Could not mark handover job with id '${handoverJobId}' as delivered. Failed with status ${
+          httpError.status
+        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
+      );
+
+      throw err;
+    }
+  }
+
+  public async cancel(handoverJobId: string, version: number, reason: HandoverJobCancelReason): Promise<Handoverjob> {
+    try {
+      const handoverJob = await this.apiClient.post<Handoverjob>(`${this.path}/${handoverJobId}/actions`, {
+        name: HandoverJobCancelActionEnum.CANCEL,
+        version,
+        payload: {
+          handoverJobCancelReason: reason,
+        },
+      });
+
+      return handoverJob;
+    } catch (err) {
+      const httpError = err as ResponseError;
+      this.logger.error(
+        `Could not cancel handover job with id '${handoverJobId}' and version ${version}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
       );

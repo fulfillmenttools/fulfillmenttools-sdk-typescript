@@ -1,5 +1,13 @@
 import { isDate } from 'date-fns';
-import { AbstractModificationAction, PickJob, StrippedPickJobs } from '../types';
+import {
+  AbstractModificationAction,
+  PickJob,
+  PickJobAbortActionEnum,
+  PickJobObsoleteActionEnum,
+  PickJobResetActionEnum,
+  PickJobRestartActionEnum,
+  StrippedPickJobs,
+} from '../types';
 import { FftApiClient } from '../common';
 import { ResponseError } from 'superagent';
 import { CustomLogger, QueryParams } from '../../common';
@@ -26,19 +34,31 @@ export class FftPickJobService {
   }
 
   public async abort(pickJobId: string, version: number): Promise<PickJob> {
+    return await this.updateAction(pickJobId, version, PickJobAbortActionEnum.ABORT);
+  }
+
+  public async restart(pickJobId: string, version: number): Promise<PickJob> {
+    return await this.updateAction(pickJobId, version, PickJobRestartActionEnum.RESTART);
+  }
+
+  public async reset(pickJobId: string, version: number): Promise<PickJob> {
+    return await this.updateAction(pickJobId, version, PickJobResetActionEnum.RESET);
+  }
+
+  public async obsolete(pickJobId: string, version: number): Promise<PickJob> {
+    return await this.updateAction(pickJobId, version, PickJobObsoleteActionEnum.OBSOLETE);
+  }
+
+  public async updateAction(pickJobId: string, version: number, action: string): Promise<PickJob> {
     try {
-      return await this.apiClient.patch<PickJob>(`${this.path}/${pickJobId}`, {
+      return await this.apiClient.post<PickJob>(`${this.path}/${pickJobId}/actions`, {
+        name: action,
         version,
-        actions: [
-          {
-            action: 'AbortPickJob',
-          },
-        ],
       });
     } catch (err) {
       const httpError = err as ResponseError;
       this.logger.error(
-        `Could not abort pick job with id '${pickJobId}' and version ${version}. Failed with status ${
+        `Could not update pick job with id '${pickJobId}' and version ${version}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
       );
@@ -87,6 +107,7 @@ export class FftPickJobService {
       throw err;
     }
   }
+
   public async update(pickJob: PickJob, actions: AbstractModificationAction[]): Promise<PickJob> {
     try {
       return await this.apiClient.patch<PickJob>(`${this.path}/${pickJob.id}`, { version: pickJob.version, actions });
