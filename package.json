@@ -74,7 +74,7 @@
     "dotenv": "16.4.5",
     "express": "4.19.2",
     "http-status-enum": "1.0.2",
-    "superagent": "8.1.2",
+    "superagent": "9.0.1",
     "timers": "0.1.1",
     "tslog": "4.9.2"
   }
