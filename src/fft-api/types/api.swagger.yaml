@@ -1069,6 +1069,106 @@ paths:
         description: create/update packing central configuration
         required: true
       summary: Change the tenant wide packing central configuration
+  /api/configurations/handover:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandoverConfiguration'
+          description: >-
+            Handover configuration was found & you were allowed to access it.
+            The result is in the body.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Entity not found
+      tags:
+        - Fulfillment Operations - Handover
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      operationId: getHandoverConfiguration
+      summary: Read handover configuration
+    put:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HandoverConfiguration'
+          description: The handover configuration was successfully updated.
+        '400':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Invalid input. See response for details
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - Fulfillment Operations - Handover
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      operationId: putHandoverConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HandoverConfiguration'
+        description: Desired HandoverConfiguration
+        required: true
+      summary: Change the handover configuration
   /api/configurations/tags/packjob:
     get:
       responses:
@@ -1103,15 +1203,7 @@ paths:
           description: Entity not found
       tags:
         - Fulfillment Operations - Packing
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getPackJobTagConfiguration
       summary: Read tag configuration for the specified section
     put:
@@ -1289,15 +1381,7 @@ paths:
           description: Entity not found
       tags:
         - Fulfillment Operations - Handover
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getHandoverJobTagConfiguration
       summary: Read tag configuration for handoverJobs
     put:
@@ -1465,15 +1549,7 @@ paths:
           description: Entity not found
       tags:
         - Infrastructure - Artifacts
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getDomainConfiguration
       summary: Get default authentication domain of the tenant
     put:
@@ -1873,15 +1949,7 @@ paths:
             endpoint
       tags:
         - Core - Configuration
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getLocaleConfiguration
       summary: Get the tenant wide default locale configuration
     put:
@@ -1917,15 +1985,7 @@ paths:
             endpoint
       tags:
         - Core - Configuration
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: putLocaleConfiguration
       requestBody:
         content:
@@ -2303,15 +2363,7 @@ paths:
           description: Entity not found
       tags:
         - Fulfillment Operations - Picking
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getDefaultPickingTimesConfiguration
       summary: Get the current configuration for tenant wide default picking times
     put:
@@ -3188,15 +3240,7 @@ paths:
             endpoint
       tags:
         - Core - Configuration
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getLocales
       summary: Get the list of supported locales
   /api/configurations/packing/containerrequired:
@@ -4139,6 +4183,47 @@ paths:
         description: Patch set
         required: true
       summary: Patches a facility with the given ID
+  /api/facilities/{facilityId}/actions:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacilityActionsParameter'
+      parameters:
+        - description: Reference to the facility you want to call the action for
+          in: path
+          name: facilityId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
+          description: Updated Facility in the body.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - Core - Facilities
+      operationId: facilityAction
+      summary: Call a single action on a given facility
   /api/facilities/{facilityId}/carriers:
     get:
       parameters:
@@ -4554,8 +4639,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/StrippedListings'
           description: >-
-            Facility was found & you were allowed to access it. The result is in
-            the body.
+            Facility was found & you were allowed to access it. The results are
+            in the body.
         '401':
           content:
             application/json:
@@ -4586,7 +4671,7 @@ paths:
       summary: Get a facility with the given ID
     put:
       parameters:
-        - description: ID of facility you want to get its listing
+        - description: ID of facility you want to put listings to
           in: path
           name: facilityId
           required: true
@@ -4594,7 +4679,15 @@ paths:
             type: string
       responses:
         '200':
-          description: Facility listing was found & you were allowed to access it.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListingBulkOperationResult'
+          description: >-
+            Facility listing was found & you were allowed to access it. The
+            result is in the body.
         '401':
           content:
             application/json:
@@ -4620,7 +4713,9 @@ paths:
           description: Facility listing not found
       tags:
         - Core - Listings
-      description: ''
+      description: >-
+        Bulk PUT for Listings. Please note: This endpoint has legacy behaviour,
+        i.e. all PUTs fail if a single PUT fails.
       operationId: putFacilityListing
       requestBody:
         content:
@@ -5572,15 +5667,7 @@ paths:
           description: Your user is not allowed to operate against this API instance
       tags:
         - Fulfillment Operations - Picking
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: addPickRun
       requestBody:
         content:
@@ -5623,15 +5710,7 @@ paths:
             endpoint
       tags:
         - Fulfillment Operations - Picking
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getPickRun
       summary: Return a PickRun
     patch:
@@ -5674,15 +5753,7 @@ paths:
           description: Version conflict
       tags:
         - Fulfillment Operations - Picking
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: patchPickRun
       requestBody:
         content:
@@ -5725,15 +5796,7 @@ paths:
             endpoint
       tags:
         - Fulfillment Operations - Picking
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: patchPickRunPickJobs
       summary: Update pick jobs of a pick run
   /api/pickruns/{pickRunId}/actions:
@@ -7732,15 +7795,7 @@ paths:
           description: The document with given id
       tags:
         - Core - Processes
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: downloadProcessDocument
       summary: Download a document
   /api/documentSet/{documentSetRef}:
@@ -7780,15 +7835,7 @@ paths:
       operationId: getDocumentSetDeprecated
       summary: Simple query interface to find documents
       deprecated: true
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />Deprecated, use /api/documentsets/{documentSetRef} instead
+      description: Deprecated, use /api/documentsets/{documentSetRef} instead
   /api/documentSet/{documentSetRef}/documents:
     post:
       parameters:
@@ -7919,15 +7966,7 @@ paths:
           description: The document as a stream
       tags:
         - Core - Document Sets
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: downloadDocumentDeprecated
       summary: Download a document
     put:
@@ -8023,15 +8062,7 @@ paths:
       tags:
         - Core - Document Sets
       operationId: getDocumentSet
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       summary: Simple query interface to find documents
   /api/documentsets/{documentSetRef}/documents:
     post:
@@ -8157,15 +8188,7 @@ paths:
           description: The document as a stream
       tags:
         - Core - Document Sets
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: downloadDocument
       summary: Download a document
     put:
@@ -8263,6 +8286,59 @@ paths:
         - Fulfillment Operations - Picking
       operationId: pickJobAction
       summary: Call a single action on a given pickJob
+  /api/pickjobs/{pickJobId}/picklineitems/{pickLineItemId}/availablesubstitutes:
+    get:
+      parameters:
+        - description: Reference to the pick job you to get the available substitutes for
+          in: path
+          name: pickJobId
+          required: true
+          schema:
+            type: string
+        - description: >-
+            Reference to the pickLineItem you to get the available substitutes
+            for
+          in: path
+          name: pickLineItemId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolvedSubstitutes'
+          description: Available substitutes for given pickLineItem
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - Fulfillment Operations - Picking
+      operationId: queryPickLineItemsSubstitutes
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
   /api/pickjobs/{pickJobId}/loadunits:
     get:
       parameters:
@@ -8876,12 +8952,18 @@ paths:
           required: false
           schema:
             $ref: '#/components/schemas/SortDirection'
-        - description: Locked status for the query
+        - description: '@deprecated Use orderStatus instead'
           in: query
           name: locked
           required: false
           schema:
             type: boolean
+        - description: Order status for the query
+          in: query
+          name: orderStatus
+          required: false
+          schema:
+            $ref: '#/components/schemas/OrderStatus'
       responses:
         '200':
           content:
@@ -11925,16 +12007,15 @@ paths:
           description: Entity not found
       tags:
         - Fulfillment Operations - Packing
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
           That means that this endpoint, model, etc. can contain breaking changes
           and / or might not be available at all times in your API instance. It
           could disappear also without warning. Thus, it currently does not fall
           under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />Get PackingSourceContainer by ID.
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />Get PackingSourceContainer by ID.
       operationId: getPackingSourceContainerById
       summary: Get a single packingSourceContainer
   /api/packingsourcecontainers:
@@ -11973,16 +12054,15 @@ paths:
             endpoint
       tags:
         - Fulfillment Operations - Packing
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
           That means that this endpoint, model, etc. can contain breaking changes
           and / or might not be available at all times in your API instance. It
           could disappear also without warning. Thus, it currently does not fall
           under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />Creating new packingSourceContainer.
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />Creating new packingSourceContainer.
       operationId: addPackingSourceContainer
       requestBody:
         content:
@@ -12841,15 +12921,7 @@ paths:
           description: No more elements available
       tags:
         - Core - Tags
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getTags
       summary: Returns all tags
     post:
@@ -12885,15 +12957,7 @@ paths:
             endpoint
       tags:
         - Core - Tags
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: addTag
       requestBody:
         content:
@@ -12946,15 +13010,7 @@ paths:
           description: User not found
       tags:
         - Core - Tags
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getTag
       summary: Get a tag with the given key
     patch:
@@ -12999,15 +13055,7 @@ paths:
           description: Tag not found
       tags:
         - Core - Tags
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: putTag
       requestBody:
         content:
@@ -13369,15 +13417,7 @@ paths:
           description: Entity not found
       tags:
         - Fulfillment Operations - Picking
-      description: >-
-        <center><img
-        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
-          /></center> <br /> <i>This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      description: ''
       operationId: getPickJobTagConfiguration
       summary: Read tag configuration for pickjobs
     put:
@@ -13456,16 +13496,15 @@ paths:
       tags:
         - Core - Remote Configuration
       operationId: createRemoteConfiguration
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
           That means that this endpoint, model, etc. can contain breaking changes
           and / or might not be available at all times in your API instance. It
           could disappear also without warning. Thus, it currently does not fall
           under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
       summary: Create a new remote configuration
     get:
       parameters:
@@ -13536,16 +13575,15 @@ paths:
       tags:
         - Core - Remote Configuration
       operationId: getAllRemoteConfigurations
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
           That means that this endpoint, model, etc. can contain breaking changes
           and / or might not be available at all times in your API instance. It
           could disappear also without warning. Thus, it currently does not fall
           under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
       summary: Get all remote configurations
   /api/remoteconfigs/{id}:
     get:
@@ -13589,16 +13627,15 @@ paths:
       tags:
         - Core - Remote Configuration
       operationId: getRemoteConfiguration
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
           That means that this endpoint, model, etc. can contain breaking changes
           and / or might not be available at all times in your API instance. It
           could disappear also without warning. Thus, it currently does not fall
           under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
       summary: Get a single remote configuration
     delete:
       parameters:
@@ -13637,6 +13674,58 @@ paths:
       tags:
         - Core - Remote Configuration
       operationId: deleteRemoteConfiguration
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      summary: Delete a single remote configuration
+    patch:
+      parameters:
+        - description: Reference to the remote config you want to change
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoteConfigurationForUpdate'
+      responses:
+        '200':
+          description: Successfully Changed
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Entity not found
+      tags:
+        - Core - Remote Configuration
+      operationId: updateRemoteConfiguration
       description: |-
         <i><center>
           <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
@@ -13647,7 +13736,60 @@ paths:
           under our SLA regulations. For details on this topic please check our
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
-      summary: Delete a single remote configuration
+      summary: Update a single remote configuration
+    put:
+      parameters:
+        - description: Reference to the remote config you want to change
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoteConfigurationForPut'
+      responses:
+        '200':
+          description: Successfully Changed
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Entity not found
+      tags:
+        - Core - Remote Configuration
+      operationId: putRemoteConfiguration
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      summary: Override a single remote configuration
   /api/remoteconfigs/{id}/scopes:
     post:
       parameters:
@@ -13688,16 +13830,15 @@ paths:
       tags:
         - Core - Remote Configuration
       operationId: addRemoteConfigurationScope
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
           That means that this endpoint, model, etc. can contain breaking changes
           and / or might not be available at all times in your API instance. It
           could disappear also without warning. Thus, it currently does not fall
           under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
       summary: add a new scope to a remote configuration
   /api/remoteconfigs/{id}/scopes/{scopeId}:
     delete:
@@ -13747,16 +13888,15 @@ paths:
       tags:
         - Core - Remote Configuration
       operationId: deleteScopeFromRemoteConfiguration
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
           That means that this endpoint, model, etc. can contain breaking changes
           and / or might not be available at all times in your API instance. It
           could disappear also without warning. Thus, it currently does not fall
           under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
       summary: Delete a scope from a given remote configuration
   /api/configurations/return:
     get:
@@ -13933,6 +14073,57 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
       operationId: getItemReturns
       summary: Get item returns
+    post:
+      parameters:
+        - description: Id of the item return job to create the item return for
+          in: path
+          name: itemReturnJobId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddItemReturnToItemReturnJob'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemReturnJob'
+          description: ItemReturnJob containing the newly created item return
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - Fulfillment Operations - Returns
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />Create a new item return for an item return job
+      operationId: createItemReturn
+      summary: Creates a new ItemReturn
   /api/itemreturnjobs/{itemReturnJobId}/itemreturns/{itemReturnId}:
     get:
       parameters:
@@ -14005,6 +14196,145 @@ paths:
           </i><br /><br />
       operationId: getItemReturn
       summary: Get item return by id
+    delete:
+      parameters:
+        - description: id of the item return job to delete the item return for
+          in: path
+          name: itemReturnJobId
+          required: true
+          schema:
+            type: string
+        - description: id of the item return you want to delete
+          in: path
+          name: itemReturnId
+          required: true
+          schema:
+            type: string
+        - description: version of the item return job to delete the item return for
+          in: query
+          name: itemReturnJobVersion
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemReturn'
+          description: >-
+            item return was found and successfully deleted. Updated item return
+            job is returned.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Entity not found
+      tags:
+        - Fulfillment Operations - Returns
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />Delete an item return from an item return job
+      operationId: deleteItemReturn
+      summary: Delete an item return from an item return job
+  /api/itemreturnjobs/{itemReturnJobId}/itemreturns/{itemReturnId}/returnedLineItems:
+    put:
+      parameters:
+        - description: id of the item return job the item return belongs to
+          in: path
+          name: itemReturnJobId
+          required: true
+          schema:
+            type: string
+        - description: id of the item return the returned line items belong to
+          in: path
+          name: itemReturnId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceReturnedLineItems'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemReturnJob'
+          description: >-
+            The returned line items were successfully updated. Updated item
+            return job is returned.
+        '400':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Invalid input. See response for details
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '409':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Entity version conflict
+      tags:
+        - Fulfillment Operations - Returns
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />Replace returned line items of an item return of an item return job.
+      operationId: replaceReturnedLineItems
+      summary: replace returned line items
   /api/itemreturnjobs:
     get:
       parameters:
@@ -14432,6 +14762,230 @@ paths:
         description: Desired configuration to create/update
         required: true
       summary: Change the tenant wide configuration
+  /api/expiries:
+    get:
+      parameters:
+        - description: Status to filter the results
+          in: query
+          name: status
+          required: false
+          schema:
+            $ref: '#/components/schemas/ExpiryEntityStatus'
+        - description: ProcessRef to filter the results
+          in: query
+          name: processRef
+          required: false
+          schema:
+            type: string
+        - description: >-
+            StartDate to filter the results. Expiry Date of results is after or
+            equals the given value
+          in: query
+          name: startDate
+          required: false
+          schema:
+            type: string
+            format: date-time
+            example: '2020-02-03T08:45:51.525Z'
+        - description: >-
+            EndDate to filter the results. Expiry Date of results is before or
+            equals the given value
+          in: query
+          name: endDate
+          required: false
+          schema:
+            type: string
+        - description: entity to start after
+          in: query
+          name: startAfterId
+          required: false
+          schema:
+            type: string
+        - description: number of entities to show
+          in: query
+          name: size
+          required: false
+          schema:
+            default: 25
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpiryEntity'
+          description: found entities in the result.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - Core - Expiries
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      operationId: getExpiries
+      summary: Get expiries by filter parameter
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpiryEntityForCreation'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiryEntity'
+          description: created entity in the result.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - Core - Expiries
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      operationId: createExpiry
+      summary: Create Expiry
+  /api/expiries/{expiryId}:
+    get:
+      parameters:
+        - description: id for the searched entity
+          in: path
+          name: expiryId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiryEntity'
+          description: found entity in the result.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - Core - Expiries
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      operationId: getExpiry
+      summary: Get Expiry by Id
+    patch:
+      parameters:
+        - description: id of the entity to be changed
+          in: path
+          name: expiryId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpiryEntityForUpdate'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiryEntity'
+          description: changed entity in the result.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - Core - Expiries
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      operationId: updateExpiry
+      summary: Update Expiry
   /api/health:
     get:
       responses:
@@ -14466,16 +15020,7 @@ paths:
           description: Manual reroute configuration not found
       tags:
         - Infrastructure - Health
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
+      description: ''
       operationId: healthCheck
       summary: Do a health check
   /api/facilities/{facilityId}/storagelocations:
@@ -15897,6 +16442,37 @@ paths:
             type: array
             items:
               type: string
+        - description: Type of channel you want to filter for
+          in: query
+          name: channel
+          required: false
+          schema:
+            $ref: '#/components/schemas/ServiceJobFilterChannel'
+        - description: Start target date range for service jobs
+          in: query
+          name: startTargetTime
+          required: false
+          schema:
+            type: string
+            example: '2020-02-03T08:45:50.525Z'
+            format: date-time
+        - description: End target date range for service jobs
+          in: query
+          name: endTargetTime
+          required: false
+          schema:
+            type: string
+            example: '2020-02-03T08:45:50.525Z'
+            format: date-time
+        - description: >-
+            Search term you want to get the corresponding service jobs. Search
+            will be performed on multiple fields, like tenantOrderId,
+            consumerName, tenantArticleId and more
+          in: query
+          name: searchTerm
+          required: false
+          schema:
+            type: string
       summary: Get Service Jobs
       description: |-
         <i><center>
@@ -16123,59 +16699,54 @@ paths:
             type: array
             items:
               type: string
+        - description: >-
+            Reference to the statuses you want to get the corresponding linked
+            service jobs
+          in: query
+          name: status
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: sort order
+          in: query
+          name: orderBy
+          required: false
+          schema:
+            $ref: '#/components/schemas/LinkedServiceJobsOrderBy'
+        - description: type of channel you want to filter for
+          in: query
+          name: channel
+          required: false
+          schema:
+            $ref: '#/components/schemas/LinkedServiceJobsFilterChannel'
+        - description: Start target date range for linked service jobs
+          in: query
+          name: startTargetTime
+          required: false
+          schema:
+            type: string
+            example: '2020-02-03T08:45:50.525Z'
+            format: date-time
+        - description: End target date range for linked service jobs
+          in: query
+          name: endTargetTime
+          required: false
+          schema:
+            type: string
+            example: '2020-02-03T08:45:50.525Z'
+            format: date-time
+        - description: >-
+            Search term you want to get the corresponding linked service jobs.
+            Search will be performed on multiple fields, like tenantOrderId,
+            consumerName, tenantArticleId and more
+          in: query
+          name: searchTerm
+          required: false
+          schema:
+            type: string
       summary: Get LinkedServiceJobs
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-    post:
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LinkedServiceJobs'
-          description: The LinkedServiceJobs was successfully created.
-        '400':
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ApiError'
-          description: Invalid input. See response for details
-        '401':
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ApiError'
-          description: Your user is not allowed to operate against this API instance
-        '403':
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ApiError'
-          description: >-
-            Your user, although recognized, is not authorized to use this
-            endpoint
-      tags:
-        - Fulfillment Operations - Custom Services
-      operationId: createLinkedServiceJobs
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LinkedServiceJobsForCreation'
-        description: Desired LinkedServiceJobs to create
-        required: true
-      summary: Create a LinkedServiceJobs
       description: |-
         <i><center>
           <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
@@ -17877,6 +18448,27 @@ paths:
           in: query
           schema:
             type: boolean
+        - name: tenantArticleIds
+          required: false
+          in: query
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: channelRefs
+          required: false
+          in: query
+          explode: true
+          description: >-
+            The channels to included under "channelAdjusted" in the stock
+            summary. Provide up to 50 channelRefs, specify "UNALLOCATED for
+            unallocated stock."
+          schema:
+            maxItems: 50
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: >-
@@ -17960,6 +18552,27 @@ paths:
           in: query
           schema:
             type: boolean
+        - name: tenantArticleIds
+          required: false
+          in: query
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: channelRefs
+          required: false
+          in: query
+          explode: true
+          description: >-
+            The channels to included under "channelAdjusted" in the stock
+            summary. Provide up to 50 channelRefs, specify "UNALLOCATED for
+            unallocated stock."
+          schema:
+            maxItems: 50
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: >-
@@ -18038,8 +18651,21 @@ paths:
         - name: facilityIds
           required: false
           in: query
-          explode: false
+          explode: true
           schema:
+            type: array
+            items:
+              type: string
+        - name: channelRefs
+          required: false
+          in: query
+          explode: true
+          description: >-
+            The channels to included under "channelAdjusted" in each summary and
+            facility stock. Provide up to 50 channelRefs, specify "UNALLOCATED
+            for unallocated stock."
+          schema:
+            maxItems: 50
             type: array
             items:
               type: string
@@ -18587,737 +19213,6 @@ paths:
                 $ref: '#/components/schemas/ApiError'
       tags:
         - Inventory Management - Stocks
-  /api/flowtemplates:
-    get:
-      operationId: getFlowTemplates
-      summary: Get all flowTemplates
-      parameters:
-        - name: size
-          required: true
-          in: query
-          schema:
-            type: number
-        - name: startAfterId
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: FlowTemplates
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowTemplatePaginatedResult'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-    post:
-      operationId: createFlowTemplate
-      summary: Create a new flowTemplate
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FlowTemplateForCreation'
-      responses:
-        '201':
-          description: FlowTemplate successfully created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowTemplate'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-  /api/flowtemplates/{flowTemplateId}:
-    get:
-      operationId: getFlowTemplateById
-      summary: Get flowTemplate by its Id
-      parameters:
-        - name: flowTemplateId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Found flowTemplate
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowTemplate'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-    patch:
-      operationId: updateFlowTemplate
-      summary: update a flowTemplate
-      parameters:
-        - name: flowTemplateId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FlowTemplateForUpdate'
-      responses:
-        '200':
-          description: FlowTemplate successfully updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowTemplate'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-    delete:
-      operationId: deleteFlowTemplate
-      summary: delete a flowTemplate
-      parameters:
-        - name: flowTemplateId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: FlowTemplate successfully deleted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowTemplate'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-  /api/flowtemplates/{flowTemplateId}/transitions:
-    post:
-      operationId: addFlowTemplateTransition
-      summary: add a transition to given flowTemplate
-      parameters:
-        - name: flowTemplateId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TransitionForUpsert'
-      responses:
-        '201':
-          description: FlowTemplates transition successfully added
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowTemplate'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-  /api/flowtemplates/{flowTemplateId}/transitions/{transitionId}:
-    patch:
-      operationId: updateFlowTemplateTransition
-      summary: update a flowTemplates transition
-      parameters:
-        - name: flowTemplateId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: transitionId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TransitionForUpsert'
-      responses:
-        '200':
-          description: FlowTemplates transition successfully updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowTemplate'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-    delete:
-      operationId: deleteFlowTemplateTransition
-      summary: delete a flowTemplates transition
-      parameters:
-        - name: flowTemplateId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: transitionId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: flowTemplateVersion
-          required: true
-          in: query
-          schema:
-            type: number
-      responses:
-        '200':
-          description: FlowTemplates transition successfully deleted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowTemplate'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-  /api/flowtemplatemappings/supportedmappings:
-    get:
-      operationId: getFlowTemplateSupportedMappings
-      summary: get supported mappings for flow templates
-      parameters: []
-      responses:
-        '200':
-          description: Found Supported Flow Mappings
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SupportedFlowSourceTargetMappings'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-  /api/flowinstances/{flowInstanceId}:
-    get:
-      operationId: getFlowInstancesById
-      summary: Get flowInstance by Id
-      parameters:
-        - name: flowInstanceId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Found flowTemplate
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowInstance'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-    patch:
-      operationId: updateFlowInstance
-      summary: Update flowInstance by Id
-      parameters:
-        - name: flowInstanceId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FlowInstanceForUpdate'
-      responses:
-        '200':
-          description: Found flowTemplate
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowInstance'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-  /api/flowinstances/process/{processRef}:
-    get:
-      operationId: getFlowInstancesByProcessRef
-      summary: Get flowInstance by process Id
-      parameters:
-        - name: processRef
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: size
-          required: true
-          in: query
-          schema:
-            type: number
-        - name: startAfterId
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Found flowTemplate
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowInstance'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-  /api/flowinstances/template/{templateId}:
-    get:
-      operationId: getAllFlowInstancesForTemplate
-      summary: Get flowInstance for template
-      parameters:
-        - name: templateId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: templateVersion
-          required: true
-          in: query
-          schema:
-            type: number
-        - name: size
-          required: true
-          in: query
-          schema:
-            type: number
-        - name: startAfterId
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Found flowTemplate
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FlowInstance'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '404':
-          description: The requested entity was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Fulfillment Operations - Flows
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
   /api/configurations/notifications:
     get:
       operationId: getNotificationCenterConfig
@@ -19927,7 +19822,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
       tags:
         - Inventory Management - Channel Availability
-  /api/availabilitychannels/{channelId}:
+  /api/availabilitychannels/{availabilityChannelId}:
     put:
       operationId: replaceAvailabilityChannel
       summary: Replace an existing Availability Channel
@@ -19943,7 +19838,7 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
-        - name: channelId
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
@@ -19996,7 +19891,7 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
-        - name: channelId
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
@@ -20043,7 +19938,7 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
-        - name: channelId
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
@@ -20071,10 +19966,10 @@ paths:
                 $ref: '#/components/schemas/ApiError'
       tags:
         - Inventory Management - Channel Availability
-  /api/availabilitychannels/{channelId}/allocations:
+  /api/availabilitychannels/{availabilityChannelId}/groups:
     get:
-      operationId: getAllocationsUnderChannel
-      summary: Get Allocations under Channel
+      operationId: getGroupsUnderChannel
+      summary: Get Groups under Channel
       deprecated: false
       description: |-
         <i><center>
@@ -20087,7 +19982,7 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
-        - name: channelId
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
@@ -20117,11 +20012,12 @@ paths:
             type: string
       responses:
         '200':
-          description: Available Allocations
+          description: Available Groups
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AvailabilityAllocationPaginatedResult'
+                $ref: >-
+                  #/components/schemas/AvailabilityAllocationGroupPaginatedResult
         '401':
           description: Your user is not allowed to operate against this API instance
           content:
@@ -20143,8 +20039,8 @@ paths:
       tags:
         - Inventory Management - Channel Availability
     post:
-      operationId: createAllocationUnderChannel
-      summary: Create a new Allocation under Channel
+      operationId: createGroupUnderChannel
+      summary: Create a Group under Channel
       deprecated: false
       description: |-
         <i><center>
@@ -20157,7 +20053,7 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
-        - name: channelId
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
@@ -20168,14 +20064,14 @@ paths:
           application/json:
             schema:
               $ref: >-
-                #/components/schemas/AvailabilityAllocationForCreationUnderChannel
+                #/components/schemas/AvailabilityAllocationGroupForCreationUnderChannel
       responses:
         '200':
-          description: The created Allocation
+          description: The created Group
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AvailabilityAllocation'
+                $ref: '#/components/schemas/AvailabilityAllocationGroup'
         '401':
           description: Your user is not allowed to operate against this API instance
           content:
@@ -20196,10 +20092,10 @@ paths:
                 $ref: '#/components/schemas/ApiError'
       tags:
         - Inventory Management - Channel Availability
-  /api/availabilitychannels/{channelId}/allocations/{allocationId}:
+  /api/availabilitychannels/{availabilityChannelId}/groups/{groupId}:
     put:
-      operationId: replaceAllocationUnderChannel
-      summary: Replace an existing Allocation under a channel
+      operationId: replaceGroupUnderChannel
+      summary: Replace a  Group under Channel
       deprecated: false
       description: |-
         <i><center>
@@ -20212,12 +20108,12 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
-        - name: channelId
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
             type: string
-        - name: allocationId
+        - name: groupId
           required: true
           in: path
           schema:
@@ -20227,14 +20123,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AvailabilityAllocationForReplacement'
+              $ref: '#/components/schemas/AvailabilityAllocationGroupForReplacement'
       responses:
         '200':
-          description: The replaced Allocation
+          description: The replaced Group
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AvailabilityAllocation'
+                $ref: '#/components/schemas/AvailabilityAllocationGroup'
         '401':
           description: Your user is not allowed to operate against this API instance
           content:
@@ -20256,8 +20152,8 @@ paths:
       tags:
         - Inventory Management - Channel Availability
     get:
-      operationId: getAllocationUnderChannelById
-      summary: Get an Allocation under a Channel by its id
+      operationId: getGroupUnderChannelById
+      summary: Get Groups under Channel by its ID
       deprecated: false
       description: |-
         <i><center>
@@ -20270,23 +20166,24 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
-        - name: channelId
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
             type: string
-        - name: allocationId
+        - name: groupId
           required: true
           in: path
           schema:
             type: string
       responses:
         '200':
-          description: The Allocation
+          description: The Group
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AvailabilityAllocation'
+                $ref: >-
+                  #/components/schemas/AvailabilityAllocationGroupPaginatedResult
         '401':
           description: Your user is not allowed to operate against this API instance
           content:
@@ -20308,8 +20205,8 @@ paths:
       tags:
         - Inventory Management - Channel Availability
     delete:
-      operationId: deleteAllocationUnderChannel
-      summary: Delete an existing Allocation under Channel
+      operationId: deleteGroupUnderChannel
+      summary: Delete an existing Group under Channel
       deprecated: false
       description: |-
         <i><center>
@@ -20322,12 +20219,12 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
-        - name: allocationId
+        - name: groupId
           required: true
           in: path
           schema:
             type: string
-        - name: channelId
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
@@ -20355,10 +20252,10 @@ paths:
                 $ref: '#/components/schemas/ApiError'
       tags:
         - Inventory Management - Channel Availability
-  /api/availabilityallocations:
-    post:
-      operationId: createAvailabilityAllocation
-      summary: Create a new Allocation
+  /api/availabilitychannels/{availabilityChannelId}/groups/{groupId}/allocations:
+    get:
+      operationId: getAllocationsUnderGroup
+      summary: Get Allocations under Group
       deprecated: false
       description: |-
         <i><center>
@@ -20370,13 +20267,98 @@ paths:
           under our SLA regulations. For details on this topic please check our
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
-      parameters: []
+      parameters:
+        - name: groupId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: availabilityChannelId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: searchTerm
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: searchTermExact
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: size
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 100
+            default: 25
+            type: number
+        - name: startAfterId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Available Allocations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityAllocationPaginatedResult'
+        '401':
+          description: Your user is not allowed to operate against this API instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '403':
+          description: Your user, although recognized, is not authorized to use this
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '404':
+          description: The requested entity was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+      tags:
+        - Inventory Management - Channel Availability
+    post:
+      operationId: createAllocationUnderGroup
+      summary: Create a new Allocation under Group
+      deprecated: false
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      parameters:
+        - name: groupId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: availabilityChannelId
+          required: true
+          in: path
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AvailabilityAllocationForCreation'
+              $ref: '#/components/schemas/AvailabilityAllocationForCreationUnderGroup'
       responses:
         '200':
           description: The created Allocation
@@ -20404,74 +20386,10 @@ paths:
                 $ref: '#/components/schemas/ApiError'
       tags:
         - Inventory Management - Channel Availability
-    get:
-      operationId: getAvailabilityAllocations
-      summary: Get all Allocations
-      deprecated: false
-      description: |-
-        <i><center>
-          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
-          </center> <br /> This part of the API is currently under development.
-          That means that this endpoint, model, etc. can contain breaking changes
-          and / or might not be available at all times in your API instance. It
-          could disappear also without warning. Thus, it currently does not fall
-          under our SLA regulations. For details on this topic please check our
-          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
-          </i><br /><br />
-      parameters:
-        - name: size
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            maximum: 100
-            default: 25
-            type: number
-        - name: startAfterId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: searchTerm
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: searchTermExact
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: channelRef
-          required: false
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Available Allocations
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AvailabilityAllocationPaginatedResult'
-        '401':
-          description: Your user is not allowed to operate against this API instance
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-        '403':
-          description: Your user, although recognized, is not authorized to use this
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiError'
-      tags:
-        - Inventory Management - Channel Availability
-  /api/availabilityallocations/{allocationId}:
+  /api/availabilitychannels/{availabilityChannelId}/groups/{groupId}/allocations/{allocationId}:
     put:
-      operationId: replaceAvailabilityAllocation
-      summary: Replace an existing Allocation
+      operationId: replaceAllocationUnderGroup
+      summary: Replace an existing Allocation under a group
       deprecated: false
       description: |-
         <i><center>
@@ -20484,7 +20402,17 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
+        - name: groupId
+          required: true
+          in: path
+          schema:
+            type: string
         - name: allocationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
@@ -20523,8 +20451,8 @@ paths:
       tags:
         - Inventory Management - Channel Availability
     get:
-      operationId: getAvailabilityAllocationById
-      summary: Get a single Allocation
+      operationId: getAllocationUnderGroupById
+      summary: Get an Allocation under a Group by its id
       deprecated: false
       description: |-
         <i><center>
@@ -20537,7 +20465,17 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       parameters:
+        - name: groupId
+          required: true
+          in: path
+          schema:
+            type: string
         - name: allocationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: availabilityChannelId
           required: true
           in: path
           schema:
@@ -20570,8 +20508,8 @@ paths:
       tags:
         - Inventory Management - Channel Availability
     delete:
-      operationId: deleteAvailablityAllocation
-      summary: Delete a single Allocation
+      operationId: deleteAllocationUnderGroup
+      summary: Delete an existing Allocation under Group
       deprecated: false
       description: |-
         <i><center>
@@ -20589,9 +20527,19 @@ paths:
           in: path
           schema:
             type: string
+        - name: groupId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: availabilityChannelId
+          required: true
+          in: path
+          schema:
+            type: string
       responses:
         '200':
-          description: Result of the bulk operations
+          description: ''
         '401':
           description: Your user is not allowed to operate against this API instance
           content:
@@ -21006,6 +20954,7 @@ components:
         - disabled
       type: string
     ParcelLabelClassificationForCreation:
+      additionalProperties: false
       properties:
         nameLocalized:
           description: Localized name for parcel label classification
@@ -21014,6 +20963,8 @@ components:
             en_US: S-Parcel
             ru_RU: S-пакет
           $ref: '#/components/schemas/LocaleString'
+        services:
+          $ref: '#/components/schemas/ParcelLabelClassificationServices'
         dimensions:
           $ref: '#/components/schemas/ParcelDimensions'
       required:
@@ -21021,6 +20972,7 @@ components:
         - dimensions
       type: object
     ParcelLabelClassification:
+      additionalProperties: false
       properties:
         name:
           description: Name of the parcel label classification
@@ -21033,11 +20985,20 @@ components:
             en_US: S-Parcel
             ru_RU: S-пакет
           $ref: '#/components/schemas/LocaleString'
+        services:
+          $ref: '#/components/schemas/ParcelLabelClassificationServices'
         dimensions:
           $ref: '#/components/schemas/ParcelDimensions'
       required:
         - nameLocalized
         - dimensions
+      type: object
+    ParcelLabelClassificationServices:
+      additionalProperties: false
+      properties:
+        bulkyGoods:
+          type: boolean
+          default: false
       type: object
     Carrier:
       allOf:
@@ -21400,6 +21361,8 @@ components:
           example: test@try.de
         addressType:
           $ref: '#/components/schemas/AddressType'
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
       type: object
     CheckoutOptionsConsumerAddress:
       properties:
@@ -21813,10 +21776,23 @@ components:
           $ref: '#/components/schemas/AvailabilityDuringRerouteStock'
         stockInformationPostRerouteAdjustment:
           $ref: '#/components/schemas/AvailabilityDuringRoutingStock'
+        bundleInformation:
+          type: array
+          items:
+            $ref: '#/components/schemas/BundleInformation'
       required:
         - tenantArticleId
         - requestedQuantity
         - stockInformation
+    BundleInformation:
+      properties:
+        customServiceNodeId:
+          type: string
+        requestedQuantity:
+          type: number
+      required:
+        - customServiceNodeId
+        - requestedQuantity
     AvailabilityDuringRerouteStock:
       properties:
         rerouteReason:
@@ -22369,8 +22345,18 @@ components:
         carrierProduct:
           type: string
           example: WORLDWIDE
+        carrierServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierServices'
       required:
         - carrierKey
+    CarrierServices:
+      example: SIGNATURE
+      description: Services which should be booked from carrier
+      enum:
+        - SIGNATURE
+      type: string
     DHLV2CarrierCredentials:
       allOf:
         - $ref: '#/components/schemas/AbstractCarrierCredentials'
@@ -22581,6 +22567,10 @@ components:
           items:
             $ref: '#/components/schemas/Sticker'
           type: array
+        allowedSubstitutes:
+          items:
+            $ref: '#/components/schemas/Substitute'
+          type: array
       required:
         - quantity
         - article
@@ -22667,6 +22657,76 @@ components:
             - picked
             - status
           type: object
+    ShortPickReason:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        version:
+          description: >-
+            The version of the document to be used in optimistic locking
+            mechanisms.
+          example: 42
+          format: int64
+        created:
+          description: >-
+            The date this entity was created at the platform. This value is
+            generated by the service.
+          example: '2020-02-03T08:45:51.525Z'
+          format: date-time
+          type: string
+        lastModified:
+          description: >-
+            The date this entity was modified last. This value is generated by
+            the service.
+          example: '2020-02-03T09:45:51.525Z'
+          format: date-time
+          type: string
+        active:
+          type: boolean
+          example: true
+          description: Flag to mark a reason as active or inactive
+        reason:
+          description: translated reasonLocalized according to the given locale
+          type: string
+        reasonLocalized:
+          description: Localized reason
+          example: '{ en_US: ''SomeName'' }'
+          $ref: '#/components/schemas/LocaleString'
+      required:
+        - id
+        - version
+        - lastModified
+        - active
+        - created
+        - reasonLocalized
+    PickLineShortPickReason:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        version:
+          description: >-
+            The version of the document to be used in optimistic locking
+            mechanisms.
+          example: 42
+          format: int64
+        active:
+          type: boolean
+          example: true
+          description: Flag to mark a reason as active or inactive
+        reason:
+          description: translated reasonLocalized according to the given locale
+          type: string
+        reasonLocalized:
+          description: Localized reason
+          example: '{ en_US: ''SomeName'' }'
+          $ref: '#/components/schemas/LocaleString'
+      required:
+        - id
+        - version
+        - active
+        - reasonLocalized
     PickingScanningConfigurationEnum:
       example: MUST_SCAN_FIRST
       description: Way in which the scanning of articles during picking is enforced
@@ -23093,12 +23153,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/FacilityAddressForCreation'
         - properties:
-            resolvedCoordinates:
-              $ref: '#/components/schemas/Coordinates'
-              description: >-
-                The resolved location of this facility - optional read-only
-                property that is filled when the facility is first used in
-                routing calculations
             resolvedTimeZone:
               $ref: '#/components/schemas/TimeZone'
               description: >-
@@ -23131,6 +23185,13 @@ components:
                   - value
                 type: object
               type: array
+            resolvedCoordinates:
+              $ref: '#/components/schemas/Coordinates'
+              description: >-
+                The coordinates correspond to the address of this facility. If
+                the coordinates are not provided during the creation or updating
+                of the facility, they are automatically resolved by the backend
+                system
           required:
             - companyName
           type: object
@@ -23556,6 +23617,7 @@ components:
           type: integer
       type: object
     Fence:
+      additionalProperties: false
       properties:
         active:
           type: boolean
@@ -23603,6 +23665,7 @@ components:
         - FACILITY-PICKING-TIME-CAPACITY
         - PRESELECTED-FACILITY
         - SAMEDAY-POSSIBLE
+        - AVOID-ZERO-STOCK
       type: string
       xml:
         name: FenceImplementation
@@ -24280,6 +24343,27 @@ components:
         - CONSUMER_REJECTS
         - ORDER_CANCELED
       type: string
+    HandoverConfiguration:
+      allOf:
+        - $ref: '#/components/schemas/VersionedResource'
+      properties:
+        availableRefusedReasons:
+          items:
+            $ref: '#/components/schemas/AvailableRefusedReason'
+      required:
+        - availableRefusedReasons
+      type: object
+    AvailableRefusedReason:
+      additionalProperties: false
+      properties:
+        refusedReasonLocalized:
+          $ref: '#/components/schemas/LocaleString'
+        refusedReason:
+          description: translated refusedReason selected from refusedReasonLocalized
+          example: Broken Item
+          type: string
+      required:
+        - refusedReasonLocalized
     ItemsFulfillabilityConstraintType:
       allOf:
         - $ref: '#/components/schemas/AbstractFulfillabilityConstraintType'
@@ -24510,7 +24594,7 @@ components:
           description: >-
             The currency of the price as an ISO 4217 code. Attention - Routing
             currently does not convert between different currencies. Don't use
-            multiple currencies when price ratings in order routing.
+            multiple currencies when using price ratings in order routing.
           example: EUR
           nullable: true
           allOf:
@@ -25191,6 +25275,8 @@ components:
           example: Hauptstr.
           pattern: ^.+$
           type: string
+        resolvedCoordinates:
+          $ref: '#/components/schemas/Coordinates'
       type: object
     ModifyCarrierAction:
       allOf:
@@ -25505,6 +25591,48 @@ components:
           type: object
       xml:
         name: ModifyFacilityAction
+    AbstractFacilityActionsParameter:
+      discriminator:
+        propertyName: name
+      properties:
+        name:
+          type: string
+        version:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - version
+    UpdateFacilityCoordinatesActionParameter:
+      allOf:
+        - $ref: '#/components/schemas/AbstractFacilityActionsParameter'
+      properties:
+        name:
+          enum:
+            - UPDATE_FACILITY_COORDINATES
+          type: string
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+      required:
+        - name
+        - coordinates
+        - version
+    RemoveFacilityCoordinatesActionParameter:
+      allOf:
+        - $ref: '#/components/schemas/AbstractFacilityActionsParameter'
+      properties:
+        name:
+          enum:
+            - REMOVE_FACILITY_COORDINATES
+          type: string
+      required:
+        - name
+        - version
+    FacilityActionsParameter:
+      anyOf:
+        - $ref: '#/components/schemas/RemoveFacilityCoordinatesActionParameter'
+        - $ref: '#/components/schemas/UpdateFacilityCoordinatesActionParameter'
     ModifyFacilityAddress:
       allOf:
         - $ref: '#/components/schemas/ModifyAddress'
@@ -25548,6 +25676,8 @@ components:
             result:
               $ref: '#/components/schemas/ParcelResult'
               description: The result of the parcel
+            customAttributes:
+              type: object
           required:
             - action
           type: object
@@ -25800,7 +25930,7 @@ components:
               description: >-
                 The currency of the price as an ISO 4217 code. Attention -
                 Routing currently does not convert between different currencies.
-                Don't use multiple currencies when price ratings in order
+                Don't use multiple currencies when using price ratings in order
                 routing.
               example: EUR
               nullable: true
@@ -25953,6 +26083,9 @@ components:
                 - ModifyOrderSplit
               type: string
             active:
+              default: false
+              type: boolean
+            shouldUseWaitingRoomForPreBackOrderItems:
               default: false
               type: boolean
             activeForSameDay:
@@ -26440,12 +26573,18 @@ components:
                 Id of the global process related to this entity. For example
                 used for starting the GDPR process and others.
               type: string
+            customServices:
+              type: array
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/CustomServiceReference'
             schemaVersion:
               type: number
           required:
             - id
             - status
             - orderLineItems
+            - processId
           type: object
       xml:
         name: Order
@@ -26475,8 +26614,11 @@ components:
       oneOf:
         - $ref: '#/components/schemas/OrderUnlockActionParameter'
         - $ref: '#/components/schemas/OrderCancelActionParameter'
+        - $ref: '#/components/schemas/PromiseConfirmActionParameter'
+        - $ref: '#/components/schemas/PromiseExtendActionParameter'
+        - $ref: '#/components/schemas/OrderConsumerAddressChangeActionParameter'
+        - $ref: '#/components/schemas/OrderConsumerAddressesReplaceActionParameter'
     AbstractOrderActionsParameter:
-      additionalProperties: false
       discriminator:
         propertyName: name
       properties:
@@ -26511,15 +26653,67 @@ components:
       required:
         - name
         - version
-    CustomServiceReference:
-      additionalProperties: false
+    OrderConsumerAddressChangeActionParameter:
+      allOf:
+        - $ref: '#/components/schemas/AbstractOrderActionsParameter'
       properties:
-        customServiceDefinition:
-          $ref: '#/components/schemas/CustomServiceDefinition'
-        articleItems:
-          items:
-            $ref: '#/components/schemas/ArticleItem'
+        name:
+          enum:
+            - CHANGE_CONSUMER_ADDRESS
+          type: string
+        consumerAddress:
+          $ref: '#/components/schemas/ConsumerAddress'
+        addressType:
+          $ref: '#/components/schemas/AddressType'
+      required:
+        - name
+        - version
+        - consumerAddress
+        - addressType
+    OrderConsumerAddressesReplaceActionParameter:
+      allOf:
+        - $ref: '#/components/schemas/AbstractOrderActionsParameter'
+      properties:
+        name:
+          enum:
+            - REPLACE_CONSUMER_ADDRESSES
+          type: string
+        consumerAddresses:
           type: array
+          items:
+            $ref: '#/components/schemas/ConsumerAddress'
+      required:
+        - name
+        - version
+        - consumerAddresses
+    PromiseConfirmActionParameter:
+      allOf:
+        - $ref: '#/components/schemas/AbstractOrderActionsParameter'
+      properties:
+        name:
+          enum:
+            - CONFIRM_PROMISE
+          type: string
+      required:
+        - name
+        - version
+    PromiseExtendActionParameter:
+      allOf:
+        - $ref: '#/components/schemas/AbstractOrderActionsParameter'
+      properties:
+        name:
+          enum:
+            - EXTEND_PROMISE
+          type: string
+      required:
+        - name
+        - version
+    CustomServiceReference:
+      allOf:
+        - $ref: '#/components/schemas/CustomServiceReferenceForCreation'
+      properties:
+        id:
+          type: string
         customServiceItems:
           items:
             $ref: '#/components/schemas/CustomServiceItem'
@@ -26529,7 +26723,8 @@ components:
         - customServiceDefinition
         - articleItems
         - customServiceItems
-    CustomServiceItem:
+        - id
+    CustomServiceReferenceForCreation:
       additionalProperties: false
       properties:
         customServiceDefinition:
@@ -26540,7 +26735,41 @@ components:
           type: array
         customServiceItems:
           items:
+            $ref: '#/components/schemas/CustomServiceItemForCreation'
+          type: array
+      type: object
+      required:
+        - customServiceDefinition
+        - articleItems
+        - customServiceItems
+    CustomServiceItem:
+      allOf:
+        - $ref: '#/components/schemas/CustomServiceItemForCreation'
+      properties:
+        id:
+          type: string
+        customServiceItems:
+          items:
             $ref: '#/components/schemas/CustomServiceItem'
+          type: array
+      type: object
+      required:
+        - id
+        - customServiceItems
+        - articleItems
+        - customServiceDefinition
+    CustomServiceItemForCreation:
+      additionalProperties: false
+      properties:
+        customServiceDefinition:
+          $ref: '#/components/schemas/CustomServiceDefinition'
+        articleItems:
+          items:
+            $ref: '#/components/schemas/ArticleItem'
+          type: array
+        customServiceItems:
+          items:
+            $ref: '#/components/schemas/CustomServiceItemForCreation'
           type: array
       type: object
       required:
@@ -26554,6 +26783,9 @@ components:
             A reference to the custom service to be applied to the orderline
             items
           type: string
+        isBundled:
+          description: if true all articles below this service are intrpreted as a bundle
+          type: boolean
         additionalInformation:
           items:
             properties:
@@ -26641,7 +26873,7 @@ components:
           type: array
           minItems: 1
           items:
-            $ref: '#/components/schemas/CustomServiceReference'
+            $ref: '#/components/schemas/CustomServiceReferenceForCreation'
         paymentInfo:
           $ref: '#/components/schemas/OrderPaymentInfo'
         provisioningTime:
@@ -27094,6 +27326,15 @@ components:
           items:
             $ref: '#/components/schemas/TagReference'
           type: array
+        allowedSubstitutes:
+          items:
+            $ref: '#/components/schemas/Substitute'
+          type: array
+          description: >-
+            Array of allowed substitutes for given orderLineItem. If an empty
+            array is provided, no substitute is allowed for this orderLineItem.
+            If allowedSubstitutes is not provided, this configured substitutes
+            on listing level will be available
       required:
         - article
         - quantity
@@ -27118,11 +27359,15 @@ components:
           could disappear also without warning. Thus, it currently does not fall
           under our SLA regulations. For details on this topic please check our
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      additionalProperties: false
       properties:
         active:
           default: false
           type: boolean
         activeForSameDay:
+          default: false
+          type: boolean
+        shouldUseWaitingRoomForPreBackOrderItems:
           default: false
           type: boolean
         fixedCountConfiguration:
@@ -27147,6 +27392,7 @@ components:
         - CANCELLED
         - PROMISED
         - LOCKED
+        - OBSOLETE
       type: string
     ParcelDimensions:
       properties:
@@ -27167,7 +27413,15 @@ components:
           example: 25
           type: number
       type: object
+    ParcelServices:
+      additionalProperties: false
+      properties:
+        bulkyGoods:
+          type: boolean
+        signature:
+          type: boolean
     Parcel:
+      additionalProperties: false
       allOf:
         - $ref: '#/components/schemas/VersionedResource'
         - properties:
@@ -27183,8 +27437,16 @@ components:
               description: Desired product of given carrier to choose when ordering a label
               type: string
               example: EXPRESS
+            customAttributes:
+              description: >-
+                Attributes that can be added to the parcel. These attributes
+                cannot be used within fulfillment processes, but it could be
+                useful to have the information carried here.
+              type: object
             dimensions:
               $ref: '#/components/schemas/ParcelDimensions'
+            services:
+              $ref: '#/components/schemas/ParcelServices'
             id:
               description: >-
                 The id of this parcel. It is generated during creation
@@ -27224,6 +27486,8 @@ components:
               $ref: '#/components/schemas/ParcelStatus'
             paymentInformation:
               $ref: '#/components/schemas/PaymentInformation'
+            pickUpInformation:
+              $ref: '#/components/schemas/ParcelPickUpInformation'
             productValue:
               description: >-
                 Monetary value of all goods in this parcel. Needed for sending
@@ -27242,13 +27506,24 @@ components:
             - loadUnitRefs
           type: object
     ParcelForCreation:
+      additionalProperties: false
       properties:
+        status:
+          $ref: '#/components/schemas/ParcelStatus'
         carrierProduct:
           description: Desired product of given carrier to choose when ordering a label
           type: string
           example: EXPRESS
+        customAttributes:
+          description: >-
+            Attributes that can be added to the parcel. These attributes cannot
+            be used within fulfillment processes, but it could be useful to have
+            the information carried here.
+          type: object
         dimensions:
           $ref: '#/components/schemas/ParcelDimensions'
+        services:
+          $ref: '#/components/schemas/ParcelServices'
         loadUnitRefs:
           description: Reference to array of load unit Refs
           items:
@@ -27266,6 +27541,8 @@ components:
           $ref: '#/components/schemas/FacilityAddress'
         paymentInformation:
           $ref: '#/components/schemas/PaymentInformation'
+        pickUpInformation:
+          $ref: '#/components/schemas/ParcelPickUpInformation'
         productValue:
           description: >-
             Monetary value of all goods in this parcel. Needed for sending cross
@@ -27273,7 +27550,26 @@ components:
             given under paymentInformation.currency
           type: number
           example: 12.5
+        result:
+          description: >-
+            Possibility to add data from carrier while creating a parcel. Parcel
+            must be in a final status to add this field.
+          $ref: '#/components/schemas/ParcelResult'
       type: object
+    ParcelPickUpInformation:
+      additionalProperties: false
+      properties:
+        startTime:
+          description: needs to be before end time
+          format: date-time
+          type: string
+        endTime:
+          description: needs to be after start time
+          format: date-time
+          type: string
+      required:
+        - startTime
+        - endTime
     ParcelPostalCharge:
       properties:
         value:
@@ -27438,6 +27734,8 @@ components:
           type: object
     PickJobForCreation:
       properties:
+        operativeProcessRef:
+          type: string
         customAttributes:
           description: >-
             Attributes that can be added to the pickjob. These attributes cannot
@@ -27646,9 +27944,28 @@ components:
               items:
                 $ref: '#/components/schemas/OrderArticleAttributeItem'
               type: array
+            prices:
+              items:
+                $ref: '#/components/schemas/ArticlePrice'
+              type: array
           type: object
       xml:
         name: PickLineItemArticle
+    ArticlePrice:
+      additionalProperties: false
+      type: object
+      properties:
+        pricePerUnit:
+          type: number
+          example: 9.99
+          description: Price value for a given currency per unit
+          minimum: 0
+        currency:
+          description: The currency of the price as an ISO 4217 code.
+          example: EUR
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
     PickingPatchActions:
       properties:
         actions:
@@ -28146,6 +28463,10 @@ components:
                     label
                   type: string
                   example: EXPRESS
+                carrierServices:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CarrierServices'
                 identifier:
                   description: >-
                     Includes information on how to identify Ship from Store
@@ -28154,6 +28475,8 @@ components:
                 recipientaddress:
                   $ref: '#/components/schemas/ConsumerAddress'
                 invoiceAddress:
+                  $ref: '#/components/schemas/ConsumerAddress'
+                postalAddress:
                   $ref: '#/components/schemas/ConsumerAddress'
                 serviceLevel:
                   description: TBD
@@ -28543,6 +28866,7 @@ components:
         - file
       type: object
     Rating:
+      additionalProperties: false
       description: >-
         A rating is used to rate a set of possible facilities against each other
         during routing of orders.
@@ -29650,6 +29974,7 @@ components:
         - decisionLogs
         - routingRun
         - finalizeRun
+        - processId
       type: object
     RoutingPlanStatusReason:
       anyOf:
@@ -29821,6 +30146,7 @@ components:
           type: integer
       type: object
     RoutingRule:
+      additionalProperties: false
       properties:
         fences:
           items:
@@ -29966,6 +30292,8 @@ components:
     ShipmentForCreation:
       additionalProperties: false
       properties:
+        operativeProcessRef:
+          type: string
         carrierLogoUrl:
           description: The URL to the carrier logo
           type: string
@@ -29977,6 +30305,10 @@ components:
           description: Desired product of given carrier to choose when ordering a label
           type: string
           example: EXPRESS
+        carrierServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierServices'
         customAttributes:
           description: >-
             Attributes that can be added to the shipment. These attributes
@@ -30011,6 +30343,8 @@ components:
         targetAddress:
           $ref: '#/components/schemas/ConsumerAddress'
         invoiceAddress:
+          $ref: '#/components/schemas/ConsumerAddress'
+        postalAddress:
           $ref: '#/components/schemas/ConsumerAddress'
         targetTime:
           description: At which time the result is expected.
@@ -30425,6 +30759,22 @@ components:
           example: 42
           type: integer
       type: object
+    ListingBulkOperationResult:
+      type: object
+      properties:
+        listing:
+          $ref: '#/components/schemas/Listing'
+        status:
+          $ref: '#/components/schemas/BulkOperationResultStatus'
+      required:
+        - listing
+        - status
+    BulkOperationResultStatus:
+      type: string
+      enum:
+        - UPDATED
+        - CREATED
+        - FAILED
     StrippedOrder:
       allOf:
         - $ref: '#/components/schemas/VersionedResource'
@@ -30811,6 +31161,20 @@ components:
       type: object
       xml:
         name: SubstitutesForUpsert
+    ResolvedSubstitutes:
+      properties:
+        substitutes:
+          items:
+            $ref: '#/components/schemas/Substitute'
+          type: array
+        tenantArticleId:
+          type: string
+      required:
+        - substitutes
+        - tenantArticleId
+      type: object
+      xml:
+        name: ResolvedSubstitutes
     PackingConfigurations:
       allOf:
         - $ref: '#/components/schemas/VersionedResource'
@@ -31637,6 +32001,7 @@ components:
           enum:
             - Number
             - String
+            - Date
         description:
           type: string
         descriptionLocalized:
@@ -31649,11 +32014,14 @@ components:
           enum:
             - dimensions.weight
             - productValue
+            - pickUpInformation.startTime
+            - pickUpInformation.endTime
         dataType:
           type: string
           enum:
             - Number
             - String
+            - Date
         description:
           type: string
         descriptionLocalized:
@@ -32519,6 +32887,11 @@ components:
           type: number
       type: object
     AddressType:
+      description: >-
+        Type of this address, used e.g. for communication with the carrier. Use
+        POSTAL_ADDRESS for the address where the order should be shipped to,
+        INVOICE_ADDRESS for the address where the invoice is sent to and
+        PARCEL_LOCKER if a parcel locker is used for this order.
       type: string
       enum:
         - POSTAL_ADDRESS
@@ -33923,14 +34296,23 @@ components:
         - returnedLineItems
         - status
         - returnFacilityRef
+    AddItemReturnToItemReturnJob:
+      additionalProperties: false
+      properties:
+        itemReturnForCreation:
+          $ref: '#/components/schemas/ItemReturnForCreation'
+        itemReturnJobVersion:
+          description: Version of the itemReturnJob the itemReturn gets added to
+          minimum: 0
+          type: integer
+      required:
+        - itemReturnForCreation
+        - itemReturnJobVersion
     ItemReturnLineItemForCreation:
       additionalProperties: false
       properties:
         itemConditionLocalized:
           $ref: '#/components/schemas/LocaleString'
-          example:
-            de_DE: Bschädigt
-            en_US: Damaged
         itemConditionComment:
           type: string
           minLength: 1
@@ -33953,86 +34335,9 @@ components:
         - tenantArticleId
         - reasons
         - status
-    ItemReturnLineItemStatus:
-      enum:
-        - OPEN
-        - IN_PROGRESS
-        - WAITING_FOR_INPUT
-        - REJECTED
-        - ACCEPTED
-      type: string
-    ItemReturnJobActionsParameter:
-      anyOf:
-        - $ref: '#/components/schemas/ItemReturnJobStatusChangeActionParameter'
-        - $ref: '#/components/schemas/AddItemReturnActionParameter'
-    ItemReturnJobStatusChangeActionParameter:
+    ReplaceReturnedLineItems:
       additionalProperties: false
       properties:
-        name:
-          $ref: '#/components/schemas/ItemReturnJobStatusChangeAction'
-        version:
-          description: Version of the entity to be changed
-          minimum: 0
-          type: integer
-        status:
-          $ref: '#/components/schemas/ItemReturnJobStatus'
-      required:
-        - name
-        - version
-        - status
-    ItemReturnJobStatusChangeAction:
-      enum:
-        - STATUS_CHANGE
-      type: string
-    AddItemReturnActionParameter:
-      additionalProperties: false
-      properties:
-        name:
-          $ref: '#/components/schemas/AddItemReturnAction'
-        version:
-          description: Version of the entity to be changed
-          minimum: 0
-          type: integer
-        itemReturn:
-          $ref: '#/components/schemas/ItemReturnForCreation'
-      required:
-        - name
-        - version
-        - itemReturn
-    AddItemReturnAction:
-      enum:
-        - ADD_ITEM_RETURN
-      type: string
-    ItemReturnActionsParameter:
-      anyOf:
-        - $ref: '#/components/schemas/ItemReturnStatusChangeActionParameter'
-        - $ref: >-
-            #/components/schemas/ItemReturnReplaceReturnedLineItemsActionParameter
-        - $ref: '#/components/schemas/DeleteItemReturnActionParameter'
-    ItemReturnStatusChangeActionParameter:
-      additionalProperties: false
-      properties:
-        name:
-          $ref: '#/components/schemas/ItemReturnStatusChangeAction'
-        itemReturnJobVersion:
-          description: Version of the entity to be changed
-          minimum: 0
-          type: integer
-        status:
-          $ref: '#/components/schemas/ItemReturnStatus'
-      required:
-        - name
-        - itemReturnJobVersion
-        - status
-    ItemReturnStatusChangeAction:
-      enum:
-        - STATUS_CHANGE
-      type: string
-    ItemReturnReplaceReturnedLineItemsActionParameter:
-      additionalProperties: false
-      properties:
-        name:
-          $ref: '#/components/schemas/ItemReturnReplaceReturnedLineItemsAction'
         itemReturnJobVersion:
           description: Version of the entity to be changed
           minimum: 0
@@ -34043,18 +34348,81 @@ components:
           items:
             $ref: '#/components/schemas/ItemReturnLineItemForCreation'
       required:
-        - name
         - itemReturnJobVersion
         - returnedLineItems
-    ItemReturnReplaceReturnedLineItemsAction:
+    ItemReturnLineItemStatus:
       enum:
-        - REPLACE_RETURNED_LINE_ITEMS
+        - OPEN
+        - IN_PROGRESS
+        - WAITING_FOR_INPUT
+        - REJECTED
+        - ACCEPTED
       type: string
-    DeleteItemReturnActionParameter:
+    ItemReturnJobActionsParameter:
+      anyOf:
+        - $ref: '#/components/schemas/StartItemReturnJobActionParameter'
+        - $ref: '#/components/schemas/FinishItemReturnJobActionParameter'
+        - $ref: '#/components/schemas/RestartItemReturnJobActionParameter'
+    StartItemReturnJobActionParameter:
       additionalProperties: false
       properties:
         name:
-          $ref: '#/components/schemas/DeleteItemReturnAction'
+          $ref: '#/components/schemas/StartItemReturnJobActionEnum'
+        version:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - version
+    StartItemReturnJobActionEnum:
+      enum:
+        - StartItemReturnJob
+      type: string
+    FinishItemReturnJobActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/FinishItemReturnJobActionEnum'
+        version:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - version
+    FinishItemReturnJobActionEnum:
+      enum:
+        - FinishItemReturnJob
+      type: string
+    RestartItemReturnJobActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/RestartItemReturnJobActionEnum'
+        version:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - version
+    RestartItemReturnJobActionEnum:
+      enum:
+        - RestartItemReturnJob
+      type: string
+    ItemReturnActionsParameter:
+      anyOf:
+        - $ref: '#/components/schemas/AnnounceItemReturnActionParameter'
+        - $ref: '#/components/schemas/OpenItemReturnActionParameter'
+        - $ref: '#/components/schemas/StartItemReturnActionParameter'
+        - $ref: '#/components/schemas/PauseItemReturnActionParameter'
+        - $ref: '#/components/schemas/FinishItemReturnActionParameter'
+    AnnounceItemReturnActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/AnnounceItemReturnActionEnum'
         itemReturnJobVersion:
           description: Version of the entity to be changed
           minimum: 0
@@ -34062,9 +34430,73 @@ components:
       required:
         - name
         - itemReturnJobVersion
-    DeleteItemReturnAction:
+    AnnounceItemReturnActionEnum:
       enum:
-        - DELETE_ITEM_RETURN
+        - AnnounceItemReturn
+      type: string
+    OpenItemReturnActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/OpenItemReturnActionEnum'
+        itemReturnJobVersion:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - itemReturnJobVersion
+    OpenItemReturnActionEnum:
+      enum:
+        - OpenItemReturn
+      type: string
+    StartItemReturnActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/StartItemReturnActionEnum'
+        itemReturnJobVersion:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - itemReturnJobVersion
+    StartItemReturnActionEnum:
+      enum:
+        - StartItemReturn
+      type: string
+    PauseItemReturnActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/PauseItemReturnActionEnum'
+        itemReturnJobVersion:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - itemReturnJobVersion
+    PauseItemReturnActionEnum:
+      enum:
+        - PauseItemReturn
+      type: string
+    FinishItemReturnActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/FinishItemReturnActionEnum'
+        itemReturnJobVersion:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - itemReturnJobVersion
+    FinishItemReturnActionEnum:
+      enum:
+        - FinishItemReturn
       type: string
     OperativeProcess:
       allOf:
@@ -34085,15 +34517,19 @@ components:
           description: >-
             References to all operational entities belonging to this operative
             process
+          minLength: 0
         entityChildren:
           items:
             $ref: '#/components/schemas/OperativeEntity'
           description: Tree structure of entities belonging to this operative process
+          minLength: 0
       type: object
       required:
         - id
         - processRef
         - facilityRef
+        - flatEntityRefs
+        - entityChildren
     OperativeProcessForCreation:
       additionalProperties: false
       properties:
@@ -34129,14 +34565,129 @@ components:
     OperativeEntityType:
       type: string
       enum:
-        - PICKJOB
-        - PACKJOB
+        - PICK_JOB
+        - PACK_JOB
         - SHIPMENT
-        - HANDOVERJOB
+        - HANDOVER_JOB
         - PARCEL
-        - SERVICEJOB
-        - RESTOWITEM
-        - ITEMRETURNJOB
+        - SERVICE_JOB
+        - RESTOW_ITEM
+        - ITEM_RETURN_JOB
+    ExpiryEntity:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Generated identifier of this entity
+          example: 611c860f-3f00-4b01-9f4c-64cdee38a30e
+        version:
+          type: integer
+          format: int64
+          example: 42
+          description: >-
+            The version of the document to be used in optimistic locking
+            mechanisms.
+        created:
+          type: string
+          format: date-time
+          example: '2020-02-03T08:45:51.525Z'
+          description: >-
+            The date this entity was created at the platform. This value is
+            generated by the service.
+        lastModified:
+          type: string
+          format: date-time
+          example: '2020-02-03T09:45:51.525Z'
+          description: >-
+            The date this entity was modified last. This value is generated by
+            the service.
+        processRef:
+          type: string
+          example: c4e5fb70-a893-4ffa-b7b0-e042cda6fb9f
+          description: Reference to the Process of this Entity
+        provisioningTime:
+          type: string
+          format: date-time
+          example: '2020-02-03T08:45:51.525Z'
+          description: >-
+            Planned time where this entity should be provided or handed over to
+            the customer
+        expiryTime:
+          type: string
+          format: date-time
+          example: '2020-02-03T08:45:51.525Z'
+          description: Time where the connected process expires, if not fulfilled
+        status:
+          $ref: '#/components/schemas/ExpiryEntityStatus'
+      required:
+        - id
+        - version
+        - created
+        - lastModified
+        - processRef
+        - provisioningTime
+        - expiryTime
+        - status
+    ExpiryEntityForCreation:
+      additionalProperties: false
+      properties:
+        processRef:
+          type: string
+          example: c4e5fb70-a893-4ffa-b7b0-e042cda6fb9f
+          description: >-
+            Reference to the Process for which this expiry entity will be
+            created
+        provisioningTime:
+          type: string
+          format: date-time
+          example: '2020-02-03T08:45:51.525Z'
+          description: >-
+            Planned time where this entity should be provided or handed over to
+            the customer
+        status:
+          $ref: '#/components/schemas/ExpiryEntityStatus'
+      required:
+        - processRef
+        - provisioningTime
+        - status
+    ExpiryEntityForUpdate:
+      additionalProperties: false
+      properties:
+        version:
+          type: integer
+          description: version of the entity you want to alter
+        provisioningTime:
+          type: string
+          format: date-time
+          example: '2020-02-03T08:45:51.525Z'
+          description: >-
+            Planned time where this entity should be provided or handed over to
+            the customer
+        status:
+          $ref: '#/components/schemas/ExpiryEntityStatus'
+      required:
+        - version
+    ExpiryEntityFilter:
+      additionalProperties: false
+      properties:
+        processRef:
+          type: string
+          description: process of the entity you want to load
+        status:
+          $ref: '#/components/schemas/ExpiryEntityStatus'
+        startDate:
+          format: date-time
+          example: '2020-02-03T08:45:51.525Z'
+          description: start date range for expiryTime
+        endDate:
+          format: date-time
+          example: '2020-02-03T08:45:51.525Z'
+          description: end date range for expiryTime
+    ExpiryEntityStatus:
+      enum:
+        - ACTIVE
+        - INACTIVE
+      type: string
     StorageLocationForCreation:
       properties:
         name:
@@ -34478,6 +35029,63 @@ components:
         - groups
         - flattenScopeIds
       type: object
+    RemoteConfigurationForUpdate:
+      additionalProperties: false
+      properties:
+        version:
+          type: integer
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfigurationScopeForCreation'
+        valueType:
+          $ref: '#/components/schemas/RemoteConfigurationValueType'
+        value:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: number
+            - type: boolean
+            - type: object
+        groups:
+          type: array
+          items:
+            example: INVENTORY
+            type: string
+          minItems: 1
+      required:
+        - version
+      type: object
+    RemoteConfigurationForPut:
+      additionalProperties: false
+      properties:
+        version:
+          type: integer
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfigurationScopeForCreation'
+        valueType:
+          $ref: '#/components/schemas/RemoteConfigurationValueType'
+        value:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: number
+            - type: boolean
+            - type: object
+        groups:
+          type: array
+          items:
+            example: INVENTORY
+            type: string
+          minItems: 1
+      required:
+        - version
+        - value
+        - valueType
+        - groups
+      type: object
     RemoteConfigurations:
       properties:
         remoteConfigurations:
@@ -34659,6 +35267,7 @@ components:
         - CANCELLED
         - WAITING_FOR_INPUT
         - OBSOLETE
+        - NOT_READY
     AdditionalInformationValueType:
       type: string
       enum:
@@ -34825,6 +35434,8 @@ components:
         - $ref: '#/components/schemas/VersionedResource'
       additionalProperties: false
       properties:
+        operativeProcessRef:
+          type: string
         id:
           type: string
         name:
@@ -34852,6 +35463,9 @@ components:
           type: boolean
         itemsRequired:
           $ref: '#/components/schemas/ItemsRequiredEnum'
+        shortId:
+          type: string
+          example: KD-12-1
         additionalInformation:
           type: array
           items:
@@ -34879,6 +35493,13 @@ components:
           description: ID of the tenant order, the linked service jobs are part of
           type: string
           example: ocff-order-100
+        inheritedLineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/InheritedServiceJobLineItem'
+          description: >-
+            Line items that are inherited from a preceding service job in a
+            linked service job
       required:
         - id
         - lineItems
@@ -34891,6 +35512,8 @@ components:
         - customServiceRef
     ServiceJobForCreation:
       properties:
+        operativeProcessRef:
+          type: string
         customServiceRef:
           type: string
           description: ID of the Custom Service, the Service Job should reference.
@@ -34903,6 +35526,9 @@ components:
           type: string
           description: ID of the Facility, the Service Job is executed in.
           example: ba095e30-879f-11ee-b9d1-0242ac120002
+        shortId:
+          type: string
+          example: KD-12-1
         lineItems:
           type: array
           items:
@@ -34985,6 +35611,30 @@ components:
       required:
         - name
         - version
+    ServiceJobObsoleteActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/ServiceJobObsoleteActionEnum'
+        version:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - version
+    ServiceJobOpenActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/ServiceJobOpenActionEnum'
+        version:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - version
     ServiceJobInProgressActionEnum:
       enum:
         - StartServiceJob
@@ -35004,6 +35654,14 @@ components:
     ServiceJobFinishedActionEnum:
       enum:
         - FinishServiceJob
+      type: string
+    ServiceJobOpenActionEnum:
+      enum:
+        - OpenServiceJob
+      type: string
+    ServiceJobObsoleteActionEnum:
+      enum:
+        - ObsoleteServiceJob
       type: string
     ServiceJobCancelledActionParameter:
       additionalProperties: false
@@ -35043,6 +35701,8 @@ components:
         - $ref: '#/components/schemas/ServiceJobFinishedActionParameter'
         - $ref: '#/components/schemas/ServiceJobCancelledActionParameter'
         - $ref: '#/components/schemas/ServiceJobWaitingForInputActionParameter'
+        - $ref: '#/components/schemas/ServiceJobObsoleteActionParameter'
+        - $ref: '#/components/schemas/ServiceJobOpenActionParameter'
     FacilityCustomServiceConnectionStatus:
       type: string
       enum:
@@ -35149,10 +35809,6 @@ components:
             $ref: '#/components/schemas/ServiceJobLink'
           type: array
           minItems: 1
-        tenantOrderId:
-          description: ID of the tenant order, the linked service jobs are part of
-          type: string
-          example: ocff-order-100
       required:
         - id
         - serviceJobLinks
@@ -35178,10 +35834,6 @@ components:
             $ref: '#/components/schemas/ServiceJobLinkForCreation'
           type: array
           minItems: 1
-        tenantOrderId:
-          description: ID of the tenant order, the linked service jobs are part of
-          type: string
-          example: ocff-order-100
       required:
         - serviceJobLinks
     ServiceJobLinkForCreation:
@@ -35249,6 +35901,42 @@ components:
         - previousServiceJobRefs
         - previousServiceJobLinkRefs
         - nextServiceJobLinks
+    InheritedServiceJobLineItem:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        quantity:
+          type: integer
+          description: Quantity of the items
+          example: 12
+          minimum: 1
+        scannableCodes:
+          items:
+            type: string
+            description: Codes, that identify the article
+            example: '4012345678901'
+          type: array
+        article:
+          $ref: '#/components/schemas/ServiceJobLineItemArticle'
+        serviceJobRef:
+          type: string
+      required:
+        - id
+        - quantity
+        - article
+        - serviceJobRef
+    LinkedServiceJobsWithSearchPaths:
+      allOf:
+        - $ref: '#/components/schemas/LinkedServiceJobs'
+      additionalProperties: false
+      properties:
+        searchPaths:
+          type: array
+          items:
+            type: string
+      required:
+        - searchPaths
     LinkedServiceJobsPaginatedResult:
       additionalProperties: false
       type: object
@@ -35259,10 +35947,27 @@ components:
         linkedServiceJobs:
           type: array
           items:
-            $ref: '#/components/schemas/LinkedServiceJobs'
+            $ref: '#/components/schemas/LinkedServiceJobsWithSearchPaths'
       required:
         - total
         - linkedServiceJobs
+    LinkedServiceJobsOrderBy:
+      description: Attribute to order linked service jobs by
+      enum:
+        - LAST_MODIFIED_ASC
+        - LAST_MODIFIED_DESC
+        - TARGET_TIME_ASC
+        - TARGET_TIME_DESC
+      type: string
+      xml:
+        name: LinkedServiceJobsOrderBy
+    LinkedServiceJobsFilterChannel:
+      enum:
+        - COLLECT
+        - SHIPPING
+      type: string
+      xml:
+        name: LinkedServiceJobsFilterChannel
     HealthResult:
       properties:
         status:
@@ -35829,15 +36534,22 @@ components:
           type: number
         available:
           type: number
+          deprecated: true
         byTrait:
           $ref: '#/components/schemas/InventoryFacilityStockShapeByTrait'
         availableToPromise:
           type: number
+          deprecated: true
         readyToPick:
           type: number
+          deprecated: true
         availableForPicking:
           type: number
         stockCount:
+          type: number
+        availableOnStock:
+          type: number
+        stockOnHand:
           type: number
       required:
         - totalAmount
@@ -35849,6 +36561,8 @@ components:
         - readyToPick
         - availableForPicking
         - stockCount
+        - availableOnStock
+        - stockOnHand
     InventoryFacilityStockStaleReason:
       type: object
       properties:
@@ -36786,11 +37500,16 @@ components:
     StockSummaryExpectedStock:
       type: object
       properties:
+        expectedStockRef:
+          type: string
         expectedDate:
           $ref: '#/components/schemas/RequestedDate'
         quantity:
           $ref: '#/components/schemas/Quantity'
+        inboundProcessRef:
+          type: string
       required:
+        - expectedStockRef
         - expectedDate
         - quantity
     ByTrait:
@@ -36803,6 +37522,19 @@ components:
       required:
         - PICKABLE
         - ACCESSIBLE
+    ChannelStockAvailability:
+      type: object
+      properties:
+        channelRef:
+          type: string
+        availableForPicking:
+          type: number
+        availableOnStock:
+          type: number
+      required:
+        - channelRef
+        - availableForPicking
+        - availableOnStock
     StockSummaryDetails:
       type: object
       properties:
@@ -36815,6 +37547,12 @@ components:
         available:
           type: number
           minimum: 0
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
         safetyStock:
           type: number
           minimum: 0
@@ -36828,8 +37566,28 @@ components:
           type: number
         availableToPromise:
           type: number
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
         readyToPick:
           type: number
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
+        availableOnStock:
+          type: number
+        stockOnHand:
+          type: number
+        channelAdjusted:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelStockAvailability'
       required:
         - reserved
         - totalAmount
@@ -36840,14 +37598,24 @@ components:
         - availableForPicking
         - availableToPromise
         - readyToPick
+        - availableOnStock
+        - stockOnHand
     StockSummary:
       type: object
       properties:
+        includedFacilityRefs:
+          description: >-
+            ALPHA Status!. The facilityRefs that are included in the stock
+            summary.
+          type: array
+          items:
+            type: string
         article:
           $ref: '#/components/schemas/StockSummaryArticle'
         details:
           $ref: '#/components/schemas/StockSummaryDetails'
       required:
+        - includedFacilityRefs
         - article
         - details
     StockSummaries:
@@ -36863,6 +37631,103 @@ components:
       required:
         - total
         - stockSummaries
+    FacilityStockDistribution:
+      type: object
+      properties:
+        reserved:
+          type: number
+          minimum: 0
+        totalAmount:
+          type: number
+          minimum: 0
+        available:
+          type: number
+          minimum: 0
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
+        safetyStock:
+          type: number
+          minimum: 0
+        expectedStocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/StockSummaryExpectedStock'
+        byTrait:
+          $ref: '#/components/schemas/ByTrait'
+        availableForPicking:
+          type: number
+        availableToPromise:
+          type: number
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
+        readyToPick:
+          type: number
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
+        availableOnStock:
+          type: number
+        stockOnHand:
+          type: number
+        channelAdjusted:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelStockAvailability'
+        facilityId:
+          type: string
+        facilityName:
+          type: string
+        facilityServiceTypes:
+          type: array
+          items:
+            type: string
+            $ref: '#/components/schemas/FacilityServiceType'
+        facilityStatus:
+          $ref: '#/components/schemas/FacilityStatus'
+        price:
+          type: number
+          nullable: true
+      required:
+        - reserved
+        - totalAmount
+        - available
+        - safetyStock
+        - expectedStocks
+        - byTrait
+        - availableForPicking
+        - availableToPromise
+        - readyToPick
+        - availableOnStock
+        - stockOnHand
+        - facilityId
+        - facilityName
+        - price
+    StockDistribution:
+      type: object
+      properties:
+        tenantArticleId:
+          type: string
+        summary:
+          $ref: '#/components/schemas/StockSummaryDetails'
+        facilityStocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacilityStockDistribution'
+      required:
+        - tenantArticleId
+        - summary
+        - facilityStocks
     FacilityStock:
       type: object
       properties:
@@ -36885,21 +37750,6 @@ components:
         - tenantArticleId
         - facilityRef
         - id
-    StockDistribution:
-      type: object
-      properties:
-        tenantArticleId:
-          type: string
-        summary:
-          $ref: '#/components/schemas/StockSummaryDetails'
-        facilityStocks:
-          type: array
-          items:
-            $ref: '#/components/schemas/FacilityStock'
-      required:
-        - tenantArticleId
-        - summary
-        - facilityStocks
     FacilityStockBulkOperation:
       type: object
       properties:
@@ -37253,6 +38103,9 @@ components:
       properties:
         stocks:
           type: array
+          description: >-
+            Please be sure to include each stock (by ID) only once, when
+            updating. Otherwise the whole batch is rejected with an error.
           items:
             oneOf:
               - $ref: '#/components/schemas/StockForCreation'
@@ -37515,6 +38368,24 @@ components:
       required:
         - payload
       type: object
+    ShipmentCreatedWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
+      properties:
+        payload:
+          $ref: '#/components/schemas/Shipment'
+      required:
+        - payload
+      type: object
+    ShipmentUpdatedWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
+      properties:
+        payload:
+          $ref: '#/components/schemas/Shipment'
+      required:
+        - payload
+      type: object
     RoutingPlanSplittedWebHookEvent:
       allOf:
         - $ref: '#/components/schemas/WebHookEvent'
@@ -37716,146 +38587,33 @@ components:
       required:
         - payload
       type: object
-    FlowTemplate:
-      type: object
+    UserCreatedWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
       properties:
-        id:
-          type: string
-        version:
-          type: number
-        name:
-          type: string
-        trigger:
-          type: string
-        transitions:
-          type: array
-          items:
-            type: string
-        lastModified:
-          format: date-time
-          type: string
-        created:
-          format: date-time
-          type: string
-        status:
-          type: string
+        payload:
+          $ref: '#/components/schemas/User'
       required:
-        - id
-        - version
-        - name
-        - trigger
-        - transitions
-        - lastModified
-        - created
-        - status
-    FlowTemplatePaginatedResult:
+        - payload
       type: object
+    UserUpdatedWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
       properties:
-        total:
-          type: object
-          minimum: 0
-        flowTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlowTemplate'
+        payload:
+          $ref: '#/components/schemas/User'
       required:
-        - total
-        - flowTemplates
-    FlowTemplateForCreation:
+        - payload
       type: object
+    UserDeletedWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
       properties:
-        name:
-          type: string
-        trigger:
-          type: string
-        transitions:
-          type: array
-          items:
-            type: string
-        status:
-          type: string
+        payload:
+          $ref: '#/components/schemas/User'
       required:
-        - name
-        - trigger
-        - transitions
-        - status
-    FlowTemplateForUpdate:
+        - payload
       type: object
-      properties:
-        version:
-          type: number
-        name:
-          type: string
-        trigger:
-          type: string
-        status:
-          type: string
-      required:
-        - version
-        - name
-        - trigger
-        - status
-    TransitionForUpsert:
-      type: object
-      properties:
-        flowTemplateVersion:
-          type: number
-        source:
-          type: string
-        targets:
-          type: array
-          items:
-            type: string
-      required:
-        - flowTemplateVersion
-        - source
-        - targets
-    SupportedFlowSourceTargetMappings:
-      type: object
-      properties:
-        mappings:
-          type: array
-          items:
-            type: string
-      required:
-        - mappings
-    FlowInstance:
-      type: object
-      properties:
-        version:
-          type: number
-        id:
-          type: string
-        processRef:
-          type: string
-        facilityRef:
-          type: string
-        flowTemplate:
-          $ref: '#/components/schemas/FlowTemplate'
-        status:
-          type: string
-        lastModified:
-          format: date-time
-          type: string
-        created:
-          format: date-time
-          type: string
-      required:
-        - version
-        - id
-        - processRef
-        - facilityRef
-        - flowTemplate
-        - status
-        - lastModified
-        - created
-    FlowInstanceForUpdate:
-      type: object
-      properties:
-        version:
-          type: number
-      required:
-        - version
     EmailReceiver:
       type: object
       properties:
@@ -37877,14 +38635,16 @@ components:
           uniqueItems: true
           description: |-
             Supported events for triggering external notifications: 
-                  - PICK_JOB_CREATED: Available for facility scoped config
-                  - ROUTING_PLAN_NOT_ROUTABLE: Available for facility scoped and tenant wide config
+                  - PICK_JOB_CREATED: Available for facility scoped config and tenant wide config
+                  - ROUTING_PLAN_NOT_ROUTABLE: Available for tenant wide config
+                  - ROUTING_PLAN_WAITING: Available for tenant wide config
               
           items:
             type: string
             enum:
               - PICK_JOB_CREATED
               - ROUTING_PLAN_NOT_ROUTABLE
+              - ROUTING_PLAN_WAITING
         type:
           type: string
         id:
@@ -37954,14 +38714,16 @@ components:
           uniqueItems: true
           description: |-
             Supported events for triggering external notifications: 
-                  - PICK_JOB_CREATED: Available for facility scoped config
-                  - ROUTING_PLAN_NOT_ROUTABLE: Available for facility scoped and tenant wide config
+                  - PICK_JOB_CREATED: Available for facility scoped config and tenant wide config
+                  - ROUTING_PLAN_NOT_ROUTABLE: Available for tenant wide config
+                  - ROUTING_PLAN_WAITING: Available for tenant wide config
               
           items:
             type: string
             enum:
               - PICK_JOB_CREATED
               - ROUTING_PLAN_NOT_ROUTABLE
+              - ROUTING_PLAN_WAITING
         type:
           type: string
         receiver:
@@ -38078,19 +38840,6 @@ components:
         - name
         - strategy
         - version
-    AvailabilityAllocationPaginatedResult:
-      type: object
-      properties:
-        total:
-          type: number
-          minimum: 0
-        allocations:
-          type: array
-          items:
-            $ref: '#/components/schemas/AvailabilityChannel'
-      required:
-        - total
-        - allocations
     AvailabilityAllocationPeriod:
       type: object
       properties:
@@ -38100,7 +38849,7 @@ components:
         end:
           type: string
           format: date-time
-    AvailabilityAllocationForCreationUnderChannel:
+    AvailabilityAllocationGroup:
       type: object
       properties:
         tenantArticleIds:
@@ -38108,31 +38857,6 @@ components:
           type: array
           items:
             type: string
-        facilityRef:
-          type: string
-        initialStockQuantity:
-          type: number
-        active:
-          type: boolean
-        activePeriod:
-          $ref: '#/components/schemas/AvailabilityAllocationPeriod'
-      required:
-        - tenantArticleIds
-        - facilityRef
-        - initialStockQuantity
-        - active
-    AvailabilityAllocation:
-      type: object
-      properties:
-        tenantArticleIds:
-          maxItems: 1
-          type: array
-          items:
-            type: string
-        facilityRef:
-          type: string
-        initialStockQuantity:
-          type: number
         active:
           type: boolean
         activePeriod:
@@ -38151,9 +38875,100 @@ components:
           type: string
       required:
         - tenantArticleIds
+        - active
+        - channelRef
+        - id
+        - version
+        - created
+        - lastModified
+    AvailabilityAllocationGroupPaginatedResult:
+      type: object
+      properties:
+        total:
+          type: number
+          minimum: 0
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailabilityAllocationGroup'
+      required:
+        - total
+        - groups
+    AvailabilityAllocationGroupForCreationUnderChannel:
+      type: object
+      properties:
+        tenantArticleIds:
+          maxItems: 1
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+        activePeriod:
+          $ref: '#/components/schemas/AvailabilityAllocationPeriod'
+      required:
+        - tenantArticleIds
+        - active
+    AvailabilityAllocationGroupForReplacement:
+      type: object
+      properties:
+        version:
+          type: number
+        active:
+          type: boolean
+        activePeriod:
+          $ref: '#/components/schemas/AvailabilityAllocationPeriod'
+      required:
+        - version
+        - active
+    AvailabilityAllocationPaginatedResult:
+      type: object
+      properties:
+        total:
+          type: number
+          minimum: 0
+        allocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailabilityChannel'
+      required:
+        - total
+        - allocations
+    AvailabilityAllocationForCreationUnderGroup:
+      type: object
+      properties:
+        facilityRef:
+          type: string
+        initialStockQuantity:
+          type: number
+      required:
         - facilityRef
         - initialStockQuantity
-        - active
+    AvailabilityAllocation:
+      type: object
+      properties:
+        facilityRef:
+          type: string
+        initialStockQuantity:
+          type: number
+        groupRef:
+          type: string
+        channelRef:
+          type: string
+        id:
+          type: string
+        version:
+          type: number
+        created:
+          format: date-time
+          type: string
+        lastModified:
+          format: date-time
+          type: string
+      required:
+        - facilityRef
+        - initialStockQuantity
+        - groupRef
         - channelRef
         - id
         - version
@@ -38164,40 +38979,13 @@ components:
       properties:
         version:
           type: number
-        active:
-          type: boolean
-        activePeriod:
-          $ref: '#/components/schemas/AvailabilityAllocationPeriod'
         initialStockQuantity:
           type: number
+        groupId:
+          type: string
       required:
         - version
-        - active
         - initialStockQuantity
-    AvailabilityAllocationForCreation:
-      type: object
-      properties:
-        tenantArticleIds:
-          maxItems: 1
-          type: array
-          items:
-            type: string
-        facilityRef:
-          type: string
-        initialStockQuantity:
-          type: number
-        active:
-          type: boolean
-        activePeriod:
-          $ref: '#/components/schemas/AvailabilityAllocationPeriod'
-        channelRef:
-          type: string
-      required:
-        - tenantArticleIds
-        - facilityRef
-        - initialStockQuantity
-        - active
-        - channelRef
 tags:
   - description: >-
       Everything your customer ordered in your shop, so everything he or she
