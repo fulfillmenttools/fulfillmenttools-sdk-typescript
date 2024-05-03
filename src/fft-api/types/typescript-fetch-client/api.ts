@@ -9552,7 +9552,7 @@ export interface InventoryFacilityStockShape {
      */
     safetyStock: number;
     /**
-     * 
+     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
      * @memberof InventoryFacilityStockShape
      */
@@ -9570,13 +9570,13 @@ export interface InventoryFacilityStockShape {
      */
     changeReason: InventoryFacilityStockShape.ChangeReasonEnum;
     /**
-     * 
+     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
      * @memberof InventoryFacilityStockShape
      */
     availableToPromise: number;
     /**
-     * 
+     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
      * @memberof InventoryFacilityStockShape
      */
@@ -9599,6 +9599,18 @@ export interface InventoryFacilityStockShape {
      * @memberof InventoryFacilityStockShape
      */
     staleReasons: Array<InventoryFacilityStockStaleReason>;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityStockShape
+     */
+    stockOnHand: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityStockShape
+     */
+    availableOnStock: number;
 }
 
 /**
@@ -10254,6 +10266,12 @@ export interface LinkedServiceJobs extends VersionedResource {
      * @memberof LinkedServiceJobs
      */
     serviceJobLinks: Array<ServiceJobLink>;
+    /**
+     * Full identifier of the service job. Using the full name of the customer when created from an order.
+     * @type {string}
+     * @memberof LinkedServiceJobs
+     */
+    fullIdentifier?: string;
 }
 /**
  * 
@@ -10276,6 +10294,12 @@ export interface LinkedServiceJobsForCreation {
      * @memberof LinkedServiceJobsForCreation
      */
     serviceJobLinks: Array<ServiceJobLinkForCreation>;
+    /**
+     * Full identifier of the service job. Using the full name of the customer when created from an order.
+     * @type {string}
+     * @memberof LinkedServiceJobsForCreation
+     */
+    fullIdentifier?: string;
 }
 /**
  * Attribute to order linked service jobs by
@@ -19498,6 +19522,12 @@ export interface PurchaseOrderSupplier {
      * @memberof PurchaseOrderSupplier
      */
     name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseOrderSupplier
+     */
+    facilityRef?: string;
 }
 /**
  * 

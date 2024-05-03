@@ -35809,6 +35809,12 @@ components:
             $ref: '#/components/schemas/ServiceJobLink'
           type: array
           minItems: 1
+        fullIdentifier:
+          type: string
+          description: >-
+            Full identifier of the service job. Using the full name of the
+            customer when created from an order.
+          example: 240429_lorem-42
       required:
         - id
         - serviceJobLinks
@@ -35834,6 +35840,12 @@ components:
             $ref: '#/components/schemas/ServiceJobLinkForCreation'
           type: array
           minItems: 1
+        fullIdentifier:
+          type: string
+          description: >-
+            Full identifier of the service job. Using the full name of the
+            customer when created from an order.
+          example: 240429_lorem-42
       required:
         - serviceJobLinks
     ServiceJobLinkForCreation:
@@ -36324,6 +36336,8 @@ components:
       properties:
         name:
           type: string
+        facilityRef:
+          type: string
     InboundProcessPurchaseOrder:
       type: object
       properties:
@@ -36591,6 +36605,12 @@ components:
           type: number
         available:
           type: number
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
         byTrait:
           $ref: '#/components/schemas/InventoryFacilityStockShapeByTrait'
         changeReason:
@@ -36599,8 +36619,20 @@ components:
             - UNKNOWN
         availableToPromise:
           type: number
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
         readyToPick:
           type: number
+          deprecated: true
+          description: >-
+            This field is deprecated and replaced by new availability concepts.
+            Please see
+            https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability
+            for more information.
         availableForPicking:
           type: number
         delta:
@@ -36609,6 +36641,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InventoryFacilityStockStaleReason'
+        stockOnHand:
+          type: number
+        availableOnStock:
+          type: number
       required:
         - facilityRef
         - tenantArticleId
@@ -36623,6 +36659,8 @@ components:
         - availableForPicking
         - delta
         - staleReasons
+        - stockOnHand
+        - availableOnStock
     RequestedDate:
       type: object
       properties:
