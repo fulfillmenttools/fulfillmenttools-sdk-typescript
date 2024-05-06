@@ -59,7 +59,7 @@ export class FftStockService {
         }
 
         if (tenantArticleIds.length > 1) {
-          queryParams['tenantArticleIds'] = buildQueryFromArray('tenantArticleIds', tenantArticleIds, 500);
+          queryParams['tenantArticleId'] = buildQueryFromArray('tenantArticleId', tenantArticleIds, 500);
         }
       }
 
