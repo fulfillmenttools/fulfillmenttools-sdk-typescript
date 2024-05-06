@@ -59,11 +59,7 @@ export class FftStockService {
         }
 
         if (tenantArticleIds.length > 1) {
-          let query = `${tenantArticleIds[0]}&tenantArticleIds=`;
-          tenantArticleIds = tenantArticleIds.slice(1, 499);
-          query += tenantArticleIds.join('&tenantArticleId=');
-
-          queryParams['tenantArticleId'] = query;
+          queryParams['tenantArticleIds'] = buildQueryFromArray('tenantArticleIds', tenantArticleIds, 500);
         }
       }
 
@@ -170,7 +166,8 @@ export class FftStockService {
     facilityStatuses?: FacilityStatus[],
     facilityRefs?: string[],
     allowStale?: boolean,
-    tenantArticleIds?: string[]
+    tenantArticleIds?: string[],
+    channelRefs?: string[]
   ): Promise<StockSummaries> {
     try {
       const queryParams: Record<string, string> = {};
@@ -201,6 +198,10 @@ export class FftStockService {
 
       if (tenantArticleIds) {
         queryParams['tenantArticleIds'] = buildQueryFromArray('tenantArticleIds', tenantArticleIds, 500);
+      }
+
+      if (channelRefs) {
+        queryParams['channelRefs'] = buildQueryFromArray('channelRefs', channelRefs, 50);
       }
 
       return await this.apiClient.get<StockSummaries>(`${this.path}/summaries`, queryParams);
