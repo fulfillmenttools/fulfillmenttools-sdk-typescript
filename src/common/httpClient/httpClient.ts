@@ -22,9 +22,6 @@ export class HttpClient implements BasicHttpClient {
     }
 
     if (config.params) {
-      if (Array.isArray(config.params)) {
-        request.query(config.params.join('&'));
-      }
       request.query(config.params);
     }
 
