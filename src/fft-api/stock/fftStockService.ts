@@ -12,9 +12,8 @@ import {
   StockSummaries,
   StockUpsertOperationResult,
 } from '../types';
-import { CustomLogger } from '../../common';
+import { CustomLogger, QueryParams } from '../../common';
 import { ResponseError } from 'superagent';
-import { buildQueryFromArray } from '../../common/utils/queryParamBuilder';
 
 export class FftStockService {
   private readonly path: string = 'stocks';
@@ -45,38 +44,20 @@ export class FftStockService {
     startAfterId?: string
   ): Promise<StockPaginatedResult> {
     try {
-      const queryParams: Record<string, string> = {};
+      const queryParams: QueryParams = {};
 
       if (facilityRef) {
-        queryParams['facilityRef'] = facilityRef;
+        queryParams['facilityRefs'] = facilityRef;
       }
 
       if (tenantArticleIds) {
         tenantArticleIds = tenantArticleIds.slice(0, 499);
-
-        if (tenantArticleIds.length == 1) {
-          queryParams['tenantArticleId'] = tenantArticleIds[0];
-        }
-
-        if (tenantArticleIds.length > 1) {
-          queryParams['tenantArticleId'] = buildQueryFromArray('tenantArticleId', tenantArticleIds, 500);
-        }
+        queryParams['tenantArticleIds'] = tenantArticleIds;
       }
 
       if (locationRefs) {
         locationRefs = locationRefs.slice(0, 499);
-
-        if (locationRefs.length == 1) {
-          queryParams['locationRef'] = locationRefs[0];
-        }
-
-        if (locationRefs.length > 1) {
-          let query = `${locationRefs[0]}&locationRef=`;
-          locationRefs = locationRefs.slice(1, 499);
-          query += locationRefs.join('&locationRef=');
-
-          queryParams['locationRef'] = query;
-        }
+        queryParams['locationRefs'] = locationRefs;
       }
 
       if (size && size <= 100) {
@@ -86,6 +67,7 @@ export class FftStockService {
       if (startAfterId) {
         queryParams['startAfterId'] = startAfterId;
       }
+
       return await this.apiClient.get<StockPaginatedResult>(this.path, queryParams);
     } catch (error) {
       const httpError = error as ResponseError;
@@ -170,7 +152,7 @@ export class FftStockService {
     channelRefs?: string[]
   ): Promise<StockSummaries> {
     try {
-      const queryParams: Record<string, string> = {};
+      const queryParams: QueryParams = {};
 
       if (size && size <= 100) {
         queryParams['size'] = size.toString();
@@ -181,15 +163,16 @@ export class FftStockService {
       }
 
       if (serviceTypes && serviceTypes.length > 0) {
-        queryParams['facilityServiceTypes'] = buildQueryFromArray('facilityServiceTypes', serviceTypes);
+        queryParams['serviceTypes'] = serviceTypes;
       }
 
       if (facilityStatuses) {
-        queryParams['facilityStatus'] = buildQueryFromArray('facilityStatus', facilityStatuses);
+        queryParams['facilityStatus'] = facilityStatuses;
       }
 
       if (facilityRefs) {
-        queryParams['facilityRefs'] = buildQueryFromArray('facilityRefs', facilityRefs, 500);
+        facilityRefs = facilityRefs.slice(0, 499);
+        queryParams['facilityRefs'] = facilityRefs;
       }
 
       if (allowStale) {
@@ -197,13 +180,14 @@ export class FftStockService {
       }
 
       if (tenantArticleIds) {
-        queryParams['tenantArticleIds'] = buildQueryFromArray('tenantArticleIds', tenantArticleIds, 500);
+        tenantArticleIds = tenantArticleIds.slice(0, 499);
+        queryParams['tenantArticleIds'] = tenantArticleIds;
       }
 
       if (channelRefs) {
-        queryParams['channelRefs'] = buildQueryFromArray('channelRefs', channelRefs, 50);
+        channelRefs = channelRefs.slice(0, 49);
+        queryParams['channelRefs'] = channelRefs;
       }
-
       return await this.apiClient.get<StockSummaries>(`${this.path}/summaries`, queryParams);
     } catch (error) {
       const httpError = error as ResponseError;
@@ -230,14 +214,14 @@ export class FftStockService {
     }
 
     try {
-      const queryParams: Record<string, string> = {};
+      const queryParams: QueryParams = {};
 
       if (facilityServiceTypes) {
-        queryParams['facilityServiceTypes'] = buildQueryFromArray('facilityServiceTypes', facilityServiceTypes);
+        queryParams['facilityServiceTypes'] = facilityServiceTypes;
       }
 
       if (facilityStatuses) {
-        queryParams['facilityStatus'] = buildQueryFromArray('facilityStatus', facilityStatuses);
+        queryParams['facilityStatus'] = facilityStatuses;
       }
 
       if (facilityName) {
@@ -245,11 +229,13 @@ export class FftStockService {
       }
 
       if (facilityIds) {
-        queryParams['facilityIds'] = buildQueryFromArray('facilityIds', facilityIds, 500);
+        facilityIds = facilityIds.slice(0, 499);
+        queryParams['facilityIds'] = facilityIds;
       }
 
       if (channelRefs) {
-        queryParams['channelRefs'] = buildQueryFromArray('channelRefs', channelRefs, 50);
+        channelRefs = channelRefs.slice(0, 49);
+        queryParams['channelRefs'] = channelRefs;
       }
 
       return await this.apiClient.get<StockDistribution>(`articles/${tenantArticleId}/stockdistribution`, queryParams);
