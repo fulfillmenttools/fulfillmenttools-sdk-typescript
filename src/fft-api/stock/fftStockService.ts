@@ -47,17 +47,17 @@ export class FftStockService {
       const queryParams: QueryParams = {};
 
       if (facilityRef) {
-        queryParams['facilityRefs'] = facilityRef;
+        queryParams['facilityRef'] = facilityRef;
       }
 
       if (tenantArticleIds) {
         tenantArticleIds = tenantArticleIds.slice(0, 499);
-        queryParams['tenantArticleIds'] = tenantArticleIds;
+        queryParams['tenantArticleId'] = tenantArticleIds;
       }
 
       if (locationRefs) {
         locationRefs = locationRefs.slice(0, 499);
-        queryParams['locationRefs'] = locationRefs;
+        queryParams['locationRef'] = locationRefs;
       }
 
       if (size && size <= 100) {
@@ -144,7 +144,7 @@ export class FftStockService {
   public async getStockSummaries(
     size?: number,
     startAfterId?: string,
-    serviceTypes?: FacilityServiceType[],
+    facilityServiceTypes?: FacilityServiceType[],
     facilityStatuses?: FacilityStatus[],
     facilityRefs?: string[],
     allowStale?: boolean,
@@ -162,8 +162,8 @@ export class FftStockService {
         queryParams['startAfterId'] = startAfterId;
       }
 
-      if (serviceTypes && serviceTypes.length > 0) {
-        queryParams['serviceTypes'] = serviceTypes;
+      if (facilityServiceTypes && facilityServiceTypes.length > 0) {
+        queryParams['facilityServiceTypes'] = facilityServiceTypes;
       }
 
       if (facilityStatuses) {
