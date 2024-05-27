@@ -12,3 +12,4 @@ export * from './routing-plan';
 export * from './shipment';
 export * from './subscription';
 export * from './types';
+export * from './stock';

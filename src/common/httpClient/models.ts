@@ -9,7 +9,7 @@ export enum HttpMethod {
   OPTIONS = 'OPTIONS',
 }
 
-export type QueryParams = Record<string, string>;
+export type QueryParams = Record<string, string | string[]>;
 
 export interface HttpRequestConfiguration {
   method: HttpMethod;
