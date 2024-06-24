@@ -22,7 +22,7 @@ This is a JavaScript/TypeScript SDK for the [fulfillmenttools API](https://docs.
 
 ### 👉 Requirements
 
-- [Node.js](https://nodejs.org/en/) 18 with [NVM](https://github.com/nvm-sh/nvm) and npm
+- [Node.js](https://nodejs.org/en/) 20 with [NVM](https://github.com/nvm-sh/nvm) and npm
 
 ### 🛫 Setup
 
