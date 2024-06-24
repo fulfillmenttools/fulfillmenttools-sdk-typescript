@@ -16,7 +16,7 @@
 
 # 🤖 Introduction
 
-This is a JavaScript/TypeScript SDK for the [fulfillmenttools API](https://fulfillmenttools.github.io/api-reference-ui/).
+This is a JavaScript/TypeScript SDK for the [fulfillmenttools API](https://docs.fulfillmenttools.com/api-docs/).
 
 ## 👨‍💻 Development
 
@@ -56,6 +56,10 @@ $ npm run lint
 This software is published on [npmjs.com](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript).
 The package contains both an ESM and a CommonJS build.
 
+```bash
+$ npm install @fulfillmenttools/fulfillmenttools-sdk-typescript`
+```
+
 Here's a little example how to create a client instance in TypeScript:
 
 ```typescript
@@ -74,7 +78,7 @@ const fftOrder = {} as OrderForCreation;
 await fftOrderService.create(fftOrder);
 ```
 
-By default, logging is disabled. If you wish to have the HttpClient logging enabled, just add a boolean to your `FftApiClient`:
+By default, HTTP request logging is disabled. If you wish to have it logging enabled, just add a boolean to your `FftApiClient`:
 ```typescript
 import { FftApiClient, FftOrderService, OrderForCreation } from '@fulfillmenttools/fulfillmenttools-sdk-typescript';
 
@@ -85,11 +89,6 @@ const fftApiClient = new FftApiClient(
   process.env.FFT_API_KEY || '',
   process.env.FFT_LOGGING_ENABLED || true
 );
-
-const fftOrderService = new FftOrderService(fftApiClient);
-
-const fftOrder = {} as OrderForCreation;
-await fftOrderService.create(fftOrder);
 ```
 
 ## 📖 Documentation
