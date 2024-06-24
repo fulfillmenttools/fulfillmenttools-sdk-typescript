@@ -4,6 +4,7 @@ import {
   FacilityServiceType,
   FacilityStatus,
   Stock,
+  StockActionResult,
   StockDistribution,
   StockForCreation,
   StockForUpdate,
@@ -118,6 +119,94 @@ export class FftStockService {
       const httpError = error as ResponseError;
       this.logger.error(
         `Could not delete stock with id ${stockId}. Failed with status ${httpError.status}, error: ${
+          httpError.response ? JSON.stringify(httpError.response.body) : ''
+        }`
+      );
+
+      throw error;
+    }
+  }
+
+  public async deleteByIds(stockIds: string[]): Promise<StockActionResult> {
+    if (stockIds === undefined || stockIds.length === 0) {
+      return {
+        name: StockActionResult.NameEnum.DELETEBYIDS,
+        result: {
+          ids: [],
+        },
+      };
+    }
+    const action = {
+      action: {
+        name: StockActionResult.NameEnum.DELETEBYIDS,
+        ids: stockIds,
+      },
+    };
+    try {
+      return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
+    } catch (error) {
+      const httpError = error as ResponseError;
+      this.logger.error(
+        `Could not delete stocks with ids ${stockIds.join()}. Failed with status ${httpError.status}, error: ${
+          httpError.response ? JSON.stringify(httpError.response.body) : ''
+        }`
+      );
+
+      throw error;
+    }
+  }
+
+  public async deleteByProducts(facilityId: string, tenantArticleIds: string[]): Promise<StockActionResult> {
+    if (tenantArticleIds === undefined || tenantArticleIds.length === 0) {
+      return {
+        name: StockActionResult.NameEnum.DELETEBYPRODUCTS,
+        result: {
+          ids: [],
+        },
+      };
+    }
+    const action = {
+      action: {
+        name: StockActionResult.NameEnum.DELETEBYPRODUCTS,
+        facilityRef: facilityId,
+        tenantArticleIds,
+      },
+    };
+    try {
+      return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
+    } catch (error) {
+      const httpError = error as ResponseError;
+      this.logger.error(
+        `Could not delete stocks in facility ${facilityId} for ${tenantArticleIds.join()}. Failed with status ${
+          httpError.status
+        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
+      );
+
+      throw error;
+    }
+  }
+
+  public async deleteByLocations(locationIds: string[]): Promise<StockActionResult> {
+    if (locationIds === undefined || locationIds.length === 0) {
+      return {
+        name: StockActionResult.NameEnum.DELETEBYLOCATIONS,
+        result: {
+          ids: [],
+        },
+      };
+    }
+    const action = {
+      action: {
+        name: StockActionResult.NameEnum.DELETEBYLOCATIONS,
+        locationRefs: locationIds,
+      },
+    };
+    try {
+      return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
+    } catch (error) {
+      const httpError = error as ResponseError;
+      this.logger.error(
+        `Could not delete stocks for locations ${locationIds.join()}. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
       );
