@@ -1,9 +1,10 @@
 import { Logger } from 'tslog';
-import { FftApiClient } from '../common';
+import { FftApiClient, MAX_ARRAY_SIZE } from '../common';
 import {
   FacilityServiceType,
   FacilityStatus,
   Stock,
+  StockActionResult,
   StockDistribution,
   StockForCreation,
   StockForUpdate,
@@ -51,12 +52,12 @@ export class FftStockService {
       }
 
       if (tenantArticleIds) {
-        tenantArticleIds = tenantArticleIds.slice(0, 499);
+        tenantArticleIds = tenantArticleIds.slice(0, MAX_ARRAY_SIZE);
         queryParams['tenantArticleId'] = tenantArticleIds;
       }
 
       if (locationRefs) {
-        locationRefs = locationRefs.slice(0, 499);
+        locationRefs = locationRefs.slice(0, MAX_ARRAY_SIZE);
         queryParams['locationRef'] = locationRefs;
       }
 
@@ -126,6 +127,134 @@ export class FftStockService {
     }
   }
 
+  public async deleteByIds(stockIds: string[]): Promise<StockActionResult> {
+    if (stockIds === undefined || stockIds.length === 0) {
+      return {
+        name: StockActionResult.NameEnum.DELETEBYIDS,
+        result: {
+          ids: [],
+        },
+      };
+    }
+    if (stockIds) {
+      stockIds = stockIds.slice(0, MAX_ARRAY_SIZE);
+    }
+    const action = {
+      action: {
+        name: StockActionResult.NameEnum.DELETEBYIDS,
+        ids: stockIds,
+      },
+    };
+    try {
+      return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
+    } catch (error) {
+      const httpError = error as ResponseError;
+      this.logger.error(
+        `Could not delete stocks with ids ${stockIds.join()}. Failed with status ${httpError.status}, error: ${
+          httpError.response ? JSON.stringify(httpError.response.body) : ''
+        }`
+      );
+
+      throw error;
+    }
+  }
+
+  public async deleteByProducts(facilityId: string, tenantArticleIds: string[]): Promise<StockActionResult> {
+    if (tenantArticleIds === undefined || tenantArticleIds.length === 0) {
+      return {
+        name: StockActionResult.NameEnum.DELETEBYPRODUCTS,
+        result: {
+          ids: [],
+        },
+      };
+    }
+    if (tenantArticleIds) {
+      tenantArticleIds = tenantArticleIds.slice(0, MAX_ARRAY_SIZE);
+    }
+    const action = {
+      action: {
+        name: StockActionResult.NameEnum.DELETEBYPRODUCTS,
+        facilityRef: facilityId,
+        tenantArticleIds,
+      },
+    };
+    try {
+      return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
+    } catch (error) {
+      const httpError = error as ResponseError;
+      this.logger.error(
+        `Could not delete stocks in facility ${facilityId} for ${tenantArticleIds.join()}. Failed with status ${
+          httpError.status
+        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
+      );
+
+      throw error;
+    }
+  }
+
+  public async deleteByLocations(locationIds: string[]): Promise<StockActionResult> {
+    if (locationIds === undefined || locationIds.length === 0) {
+      return {
+        name: StockActionResult.NameEnum.DELETEBYLOCATIONS,
+        result: {
+          ids: [],
+        },
+      };
+    }
+    if (locationIds) {
+      locationIds = locationIds.slice(0, MAX_ARRAY_SIZE);
+    }
+    const action = {
+      action: {
+        name: StockActionResult.NameEnum.DELETEBYLOCATIONS,
+        locationRefs: locationIds,
+      },
+    };
+    try {
+      return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
+    } catch (error) {
+      const httpError = error as ResponseError;
+      this.logger.error(
+        `Could not delete stocks for locations ${locationIds.join()}. Failed with status ${httpError.status}, error: ${
+          httpError.response ? JSON.stringify(httpError.response.body) : ''
+        }`
+      );
+
+      throw error;
+    }
+  }
+
+  public async moveToLocation(
+    fromStockId: string,
+    toLocationId: string,
+    amount: number,
+    deleteFromStockIfZero = true
+  ): Promise<StockActionResult> {
+    const action = {
+      action: {
+        name: StockActionResult.NameEnum.MOVETOLOCATION,
+        fromStockId,
+        toLocationRef: toLocationId,
+        amount,
+        options: {
+          deleteFromStockIfZero,
+        },
+      },
+    };
+    try {
+      return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
+    } catch (error) {
+      const httpError = error as ResponseError;
+      this.logger.error(
+        `Could not move stock ${fromStockId} to location ${toLocationId}. Failed with status ${
+          httpError.status
+        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
+      );
+
+      throw error;
+    }
+  }
+
   public async getById(stockId: string): Promise<Stock> {
     try {
       return await this.apiClient.get<Stock>(`${this.path}/${stockId}`);
@@ -171,7 +300,7 @@ export class FftStockService {
       }
 
       if (facilityRefs) {
-        facilityRefs = facilityRefs.slice(0, 499);
+        facilityRefs = facilityRefs.slice(0, MAX_ARRAY_SIZE);
         queryParams['facilityRefs'] = facilityRefs;
       }
 
@@ -180,12 +309,12 @@ export class FftStockService {
       }
 
       if (tenantArticleIds) {
-        tenantArticleIds = tenantArticleIds.slice(0, 499);
+        tenantArticleIds = tenantArticleIds.slice(0, MAX_ARRAY_SIZE);
         queryParams['tenantArticleIds'] = tenantArticleIds;
       }
 
       if (channelRefs) {
-        channelRefs = channelRefs.slice(0, 49);
+        channelRefs = channelRefs.slice(0, 50);
         queryParams['channelRefs'] = channelRefs;
       }
       return await this.apiClient.get<StockSummaries>(`${this.path}/summaries`, queryParams);
@@ -229,7 +358,7 @@ export class FftStockService {
       }
 
       if (facilityIds) {
-        facilityIds = facilityIds.slice(0, 499);
+        facilityIds = facilityIds.slice(0, MAX_ARRAY_SIZE);
         queryParams['facilityIds'] = facilityIds;
       }
 
