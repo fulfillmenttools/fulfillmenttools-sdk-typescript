@@ -10,6 +10,7 @@ export * from './packjob';
 export * from './process';
 export * from './routing-plan';
 export * from './shipment';
+export * from './stock';
 export * from './subscription';
 export * from './types';
-export * from './stock';
+export * from './user';
