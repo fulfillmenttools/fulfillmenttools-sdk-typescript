@@ -29,9 +29,9 @@ export class FftZoneService {
     }
   }
 
-  public async getAll(facilityId: string, size = 25): Promise<Zone> {
+  public async getAll(facilityId: string, size = 25): Promise<Zone[]> {
     try {
-      return await this.apiClient.get<Zone>(`facilities/${facilityId}/${this.PATH}`, {
+      return await this.apiClient.get<Zone[]>(`facilities/${facilityId}/${this.PATH}`, {
         ...(size && { size: size.toString() }),
       });
     } catch (error) {
