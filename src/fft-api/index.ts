@@ -13,3 +13,4 @@ export * from './shipment';
 export * from './subscription';
 export * from './types';
 export * from './stock';
+export * from './zone';
