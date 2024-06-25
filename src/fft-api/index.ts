@@ -11,5 +11,6 @@ export * from './process';
 export * from './routing-plan';
 export * from './shipment';
 export * from './subscription';
+export * from './tag';
 export * from './types';
 export * from './stock';
