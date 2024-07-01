@@ -4,7 +4,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 TARGET_DIR="${SCRIPTDIR}/typescript-fetch-client"
 apiUrl="https://raw.githubusercontent.com/fulfillmenttools/fulfillmenttools-api-reference/master/api.swagger.yaml"
-openApiVersion="3.0.54"
+openApiVersion="3.0.57"
 swaggerFile="swagger-codegen-cli-${openApiVersion}.jar"
 localSwaggerFile="${SCRIPTDIR}/${swaggerFile}"
 swaggerCodeGenUrl="https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/${openApiVersion}/${swaggerFile}"
