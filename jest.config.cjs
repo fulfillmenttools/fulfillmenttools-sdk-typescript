@@ -1,9 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { join } = require('path');
-const dotenv = require('dotenv');
-
-dotenv.config({ path: join(__dirname, '.env.local') });
-
 module.exports = {
   displayName: 'Tests - fulfillmenttools TypeScript SDK',
   moduleDirectories: ['node_modules', 'src'],

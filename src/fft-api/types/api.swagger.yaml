@@ -8172,6 +8172,72 @@ paths:
       description: ''
       operationId: status
       summary: A public status endpoint that renders general availability information
+  /api/itemreturnjobs/{itemReturnJobId}/itemreturns/{itemReturnId}/parcels:
+    post:
+      parameters:
+        - description: itemReturnJobId
+          in: path
+          name: itemReturnJobId
+          required: true
+          schema:
+            type: string
+        - description: id of the itemReturn to create a parcel for
+          in: path
+          name: itemReturnId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParcelForCreation'
+        description: Payload of the parcel you want to create
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Parcel'
+          description: Create a parcel for an itemReturn
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Entity not found
+      tags:
+        - Fulfillment Operations - Returns
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />
+      operationId: createItemReturnParcel
+      summary: Create a parcel for an itemReturn
   /api/subscriptions:
     get:
       parameters:
@@ -16343,6 +16409,115 @@ paths:
       summary: >-
         Provides information which kind of fulfillment is possible under given
         circumstances.
+  /api/promises/checkoutoptions/delivery/earliest:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutOptionsDeliveryEarliestResponse'
+          description: |-
+
+            The request could be evaluated.
+        '400':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Invalid input. See response for details
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: |-
+
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - DOMS - Checkout Options
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />The list of items depicts the items you would like to get information about their earliest possbile delivery. The provided list of tenant article ids are considered individual (as if not in a basket together, but seperately ordered). Additionally you can add information about the address these items should be delivered to to further refine the response. 
+      operationId: checkoutoptionDeliveryEarliest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutOptionsDeliveryEarliestRequest'
+        required: true
+      summary: delivery/earliest
+  /api/promises/checkoutoptions/delivery/timeperiod:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutOptionsDeliveryTimePeriodResponse'
+          description: |-
+
+            The request could be evaluated.
+        '400':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Invalid input. See response for details
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - DOMS - Checkout Options
+      operationId: checkoutoptionDeliveryTimePeriod
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutOptionsDeliveryTimePeriodRequest'
+        required: true
+      summary: delivery/timeperiod
+      description: |-
+        <i><center>
+          <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
+          </center> <br /> This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
+          </i><br /><br />The basket attribute depicts the items you would like to get details about their possbile delivery. All the provided tenantArticleIds within the basket are considered together (as if they are in the same basket/order). Additionally you can add information about the address these items should be delivered to to further refine the quality of the response.
   /api/promises/checkoutoptions:
     post:
       responses:
@@ -16378,7 +16553,7 @@ paths:
             Your user, although recognized, is not authorized to use this
             endpoint
       tags:
-        - DOMS - Orders
+        - DOMS - Checkout Options
       description: |-
         <i><center>
           <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
@@ -22748,6 +22923,8 @@ components:
       description: Services which should be booked from carrier
       enum:
         - SIGNATURE
+        - CUSTOMER_SIGNATURE
+        - ADULT_SIGNATURE
       type: string
     DHLV2CarrierCredentials:
       allOf:
@@ -25496,19 +25673,27 @@ components:
               type: string
             status:
               $ref: '#/components/schemas/ParcelStatus'
-              description: The state of the parcel we want to change.
             result:
               $ref: '#/components/schemas/ParcelResult'
-              description: The result of the parcel
             customAttributes:
               type: object
+            dimensions:
+              $ref: '#/components/schemas/ParcelDimensions'
+            productValue:
+              nullable: true
+              description: >-
+                Monetary value of all goods in this parcel. Needed for sending
+                cross border packages (customs) To be interpreted as money in
+                the currency given under paymentInformation.currency
+              type: number
+              example: 12.5
+            pickUpInformation:
+              $ref: '#/components/schemas/ParcelPickUpInformation'
+            services:
+              $ref: '#/components/schemas/ParcelServices'
             carrierProduct:
               nullable: true
               type: string
-              description: Only changable on status OPEN or FAILED of the existing Parcel
-            services:
-              nullable: true
-              $ref: '#/components/schemas/ParcelServices'
               description: Only changable on status OPEN or FAILED of the existing Parcel
           required:
             - action
@@ -26254,6 +26439,8 @@ components:
         - OBSOLETE
       type: string
     ParcelDimensions:
+      additionalProperties: false
+      nullable: true
       properties:
         height:
           description: The height of the package (in cm)
@@ -26274,10 +26461,18 @@ components:
       type: object
     ParcelServices:
       additionalProperties: false
+      nullable: true
       properties:
         bulkyGoods:
           type: boolean
         signature:
+          description: Signature from anyone needed
+          type: boolean
+        adultSignature:
+          description: Signature from some adult
+          type: boolean
+        customerSignature:
+          description: Signature from the ordering customer needed
           type: boolean
     Parcel:
       additionalProperties: false
@@ -26327,6 +26522,8 @@ components:
               $ref: '#/components/schemas/ConsumerAddress'
             processRef:
               type: string
+            facilityRef:
+              type: string
             operativeProcessRef:
               type: string
             items:
@@ -26367,7 +26564,6 @@ components:
             - id
             - status
             - carrierRef
-            - shipmentRef
             - processRef
             - sender
             - recipient
@@ -26382,6 +26578,11 @@ components:
           description: Desired product of given carrier to choose when ordering a label
           type: string
           example: EXPRESS
+        carrierRef:
+          description: >-
+            references the carrier to be used for sending. Can not be set when
+            creating a parcel for an existing shipment.
+          type: string
         customAttributes:
           description: >-
             Attributes that can be added to the parcel. These attributes cannot
@@ -26399,7 +26600,7 @@ components:
           type: array
         items:
           items:
-            $ref: '#/components/schemas/ParcelItem'
+            $ref: '#/components/schemas/ParcelItemForCreation'
           type: array
         recipient:
           $ref: '#/components/schemas/ConsumerAddress'
@@ -26428,34 +26629,7 @@ components:
           items:
             $ref: '#/components/schemas/OperativeTransfer'
       type: object
-    ParcelPickUpInformation:
-      additionalProperties: false
-      properties:
-        startTime:
-          description: needs to be before end time
-          format: date-time
-          type: string
-        endTime:
-          description: needs to be after start time
-          format: date-time
-          type: string
-      required:
-        - startTime
-        - endTime
-    ParcelPostalCharge:
-      properties:
-        value:
-          type: number
-          description: Monetary Value in the given currency
-          example: 15.5
-        currency:
-          type: string
-          description: Currency of the given value
-          example: EUR
-      required:
-        - currency
-        - value
-    ParcelItem:
+    ParcelItemForCreation:
       properties:
         quantity:
           type: integer
@@ -26483,6 +26657,90 @@ components:
         - quantity
       type: object
       xml:
+        name: ParcelItemForCreation
+    ParcelItemForUpdate:
+      additionalProperties: false
+      properties:
+        id:
+          description: >-
+            The id of this parcelItem. It is generated during creation
+            automatically and suits as the primary identifier of the described
+            entity.
+          example: ae3ba67c-a42c-4816-96ac-16231e49640c
+          type: string
+        parcelItemValue:
+          $ref: '#/components/schemas/ParcelItemValue'
+        weightInGram:
+          type: integer
+          nullable: true
+          description: Weight of a single item in gram
+          example: 10000
+      required:
+        - id
+      type: object
+    ParcelPickUpInformation:
+      additionalProperties: false
+      nullable: true
+      properties:
+        startTime:
+          description: needs to be before end time
+          format: date-time
+          type: string
+        endTime:
+          description: needs to be after start time
+          format: date-time
+          type: string
+      required:
+        - startTime
+        - endTime
+      xml:
+        name: ParcelItemForCreation
+    ParcelPostalCharge:
+      properties:
+        value:
+          type: number
+          description: Monetary Value in the given currency
+          example: 15.5
+        currency:
+          type: string
+          description: Currency of the given value
+          example: EUR
+      required:
+        - currency
+        - value
+    ParcelItem:
+      properties:
+        id:
+          description: The id of this parcelItem.
+          example: ae3ba67c-a42c-4816-96ac-16231e49640c
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+          description: amount of the given items
+          example: 5
+        hsCode:
+          type: string
+          maxLength: 50
+        description:
+          description: Description of the given item/items
+          example: Item Description
+          type: string
+        weightInGram:
+          type: integer
+          description: Weight of a single item in gram
+          example: 10000
+        parcelItemValue:
+          $ref: '#/components/schemas/ParcelItemValue'
+        countryOfManufacture:
+          type: string
+        article:
+          $ref: '#/components/schemas/ParcelItemArticle'
+      required:
+        - id
+        - quantity
+      type: object
+      xml:
         name: ParcelItem
     ParcelItemArticle:
       allOf:
@@ -26496,6 +26754,7 @@ components:
       xml:
         name: ParcelItemArticle
     ParcelItemValue:
+      nullable: true
       properties:
         value:
           type: number
@@ -30046,15 +30305,52 @@ components:
           items:
             $ref: '#/components/schemas/NonDeliveryDaysPerCountryAndProvince'
         countryServiceMappings:
+          description: >-
+            Deprecated - manual country service mapping is deprecated, please
+            use the predefined staticCountryServiceMappings if available to see
+            which fields are needed
           items:
             $ref: '#/components/schemas/CarrierCountryServiceMapping'
           type: array
+        staticCountryServiceMappings:
+          items:
+            $ref: '#/components/schemas/StaticCarrierCountryServiceMapping'
+          type: array
+        thresholdPriceValue:
+          $ref: '#/components/schemas/ThresholdPriceValue'
         serviceUrl:
           type: string
       required:
         - returnLabel
         - carrierRef
       type: object
+    ThresholdPriceValue:
+      additionalProperties: false
+      type: object
+      properties:
+        priority:
+          type: integer
+          minimum: 1
+        priceRange:
+          $ref: '#/components/schemas/PriceRange'
+      required:
+        - priority
+        - priceRange
+    PriceRange:
+      additionalProperties: false
+      type: object
+      properties:
+        from:
+          type: number
+          example: 12.99
+          minimum: 0
+        to:
+          type: number
+          example: 2500
+          minimum: 1
+      required:
+        - from
+        - to
     DeliveryCost:
       type: object
       additionalProperties: false
@@ -30071,42 +30367,16 @@ components:
       required:
         - cost
         - currency
-    CarrierCountryServiceMapping:
+    StaticCarrierCountryServiceMapping:
       type: object
       additionalProperties: false
       properties:
-        id:
-          description: unique identifier for a countryServiceMapping
-          example: bc5b581a-8f65-45b0-9f81-6e0d4babbcb2
-          type: string
         source:
           $ref: '#/components/schemas/RegionInformation'
         destinations:
           description: The destination regions this mapping should be applied to.
           items:
             $ref: '#/components/schemas/RegionInformation'
-          minItems: 1
-          type: array
-        sourceCountry:
-          deprecated: true
-          type: string
-          minLength: 2
-          maxLength: 2
-          description: >-
-            <center><img
-            src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center>
-            <br /> <i>This endpoint is deprecated and has been replaced.</i><br
-            /><br />@deprecated Use source instead.
-          example: DE
-        destinationCountries:
-          deprecated: true
-          description: >-
-            <center><img
-            src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center>
-            <br /> <i>This endpoint is deprecated and has been replaced.</i><br
-            /><br />@deprecated Use destination instead.
-          items:
-            $ref: '#/components/schemas/CountryCode'
           minItems: 1
           type: array
         mandatoryShippingAttributes:
@@ -30132,9 +30402,40 @@ components:
           type: array
           maxItems: 1
       required:
-        - id
         - source
         - destinations
+    CarrierCountryServiceMapping:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/StaticCarrierCountryServiceMapping'
+        - properties:
+            id:
+              description: unique identifier for a countryServiceMapping
+              example: bc5b581a-8f65-45b0-9f81-6e0d4babbcb2
+              type: string
+            sourceCountry:
+              type: string
+              minLength: 2
+              maxLength: 2
+              description: >-
+                <center><img
+                src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center>
+                <br /> <i>This endpoint is deprecated and has been
+                replaced.</i><br /><br />Deprecated - Use source instead.
+              example: DE
+            destinationCountries:
+              description: >-
+                <center><img
+                src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center>
+                <br /> <i>This endpoint is deprecated and has been
+                replaced.</i><br /><br />Deprecated - Use destination instead.
+              items:
+                $ref: '#/components/schemas/CountryCode'
+              minItems: 1
+              type: array
+      required:
+        - id
     CarrierCountryServiceMappingForCreation:
       type: object
       additionalProperties: false
@@ -31190,6 +31491,8 @@ components:
           type: string
         packJobRef:
           type: string
+        operativeProcessRef:
+          type: string
         iconUrl:
           type: string
         id:
@@ -32237,6 +32540,12 @@ components:
           items:
             type: string
           type: array
+        parcelRefs:
+          type: array
+          items:
+            type: string
+            description: references the parcel
+            example: 672f3f72-b5d3-47c7-941c-9af5348e3cd7
         returnedLineItems:
           type: array
           minItems: 1
@@ -32649,6 +32958,7 @@ components:
         - RESTOW_ITEM
         - ITEM_RETURN_JOB
         - LINKED_SERVICE_JOBS
+        - PACKING_TARGET_CONTAINER
     ExpiryEntity:
       additionalProperties: false
       properties:
@@ -33916,6 +34226,8 @@ components:
           type: string
         serviceUrl:
           type: string
+        thresholdPriceValue:
+          $ref: '#/components/schemas/ThresholdPriceValue'
       required:
         - key
       type: object
@@ -35131,6 +35443,10 @@ components:
             - descriptive
             - miscellaneous
             - pickingSequence
+            - customs
+            - insurance
+            - shop
+            - dimensions
           description: |-
             This category is used by OCFF to customize implemented processes.
             Categorized attributes are used by various processes and tools
@@ -35318,6 +35634,12 @@ components:
         isBundled:
           description: if true all articles below this service are intrpreted as a bundle
           type: boolean
+        customAttributes:
+          description: >-
+            Attributes that can be added to the consumer. These attributes
+            cannot be used within fulfillment processes, but it could be useful
+            to have the informations carried here.
+          type: object
         additionalInformation:
           items:
             properties:
@@ -35518,6 +35840,48 @@ components:
       type: object
       required:
         - country
+    CheckoutOptionsDeliveryEarliestResponse:
+      properties:
+        checkoutOptions:
+          type: array
+          description: >-
+            The results of the corresponding request containing information, if
+            present, on when the items can supposingly be delivered earliest.
+            Please note: When it was not possible to calculate the delivery
+            information for a requested tenantArticleId there is no entry here.
+          items:
+            $ref: '#/components/schemas/CheckoutOptionsDeliveryEarliestResponseItem'
+      required:
+        - checkoutOptions
+    CheckoutOptionsDeliveryEarliestResponseItem:
+      properties:
+        tenantArticleId:
+          type: string
+          example: DE-ZGT-4711
+        earliestPredictedDeliveryDate:
+          type: string
+          example: '2020-02-03T08:45:50.525Z'
+          format: date-time
+        availableCarriers:
+          description: List of available carriers.
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
+      required:
+        - tenantArticleId
+        - predictedDeliveryDate
+    CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier:
+      properties:
+        name:
+          type: string
+          example: DHL
+        nonDeliveryDays:
+          type: array
+          items:
+            description: ISO 3166-2 province code
+            type: string
+            example: DE-NW
     CheckoutOptionsInput:
       additionalProperties: false
       properties:
@@ -35583,6 +35947,10 @@ components:
         deliveryPromiseValidUntil:
           type: string
           format: date-time
+        latestPickingStart:
+          example: '2020-02-03T09:45:51.525Z'
+          format: date-time
+          type: string
       required:
         - carrierKey
         - carrierName
@@ -35625,6 +35993,58 @@ components:
       type: object
       xml:
         name: PromiseDeliveryOptions
+    CheckoutOptionsDeliveryEarliestRequest:
+      properties:
+        earliestDeliveryDate:
+          description: >-
+            The date from which to search for the earliest potential delivery
+            date. Defaults to "now" (timestamp of the request)
+          example: '2024-06-01T00:00:00.000Z'
+          default: now
+          format: date-time
+          type: string
+        tenantArticleIds:
+          type: array
+          items:
+            type: string
+            description: >-
+              The tenant articleIds for which the check is performed. The
+              provided items are considered individually.
+            example: DE-ZGT-4711
+            minLength: 1
+            maxLength: 50
+        consumerAddress:
+          $ref: '#/components/schemas/CheckoutOptionsConsumerAddress'
+      required:
+        - tenantArticleIds
+    CheckoutOptionsDeliveryTimePeriodResponse:
+      properties:
+        checkoutOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CheckoutOptionsDeliveryTimePeriodResponseItem'
+      required:
+        - checkoutOptions
+    CheckoutOptionsDeliveryTimePeriodResponseItem:
+      properties:
+        overallStatus:
+          type: string
+          enum:
+            - ALL
+            - PARTIAL
+            - NONE
+        date:
+          type: string
+          example: '2020-02-03T00:00:00.000Z'
+          format: date-time
+        availableCarriers:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
+      required:
+        - date
+        - overallStatus
     CheckoutOptionsCustomServices:
       additionalProperties: false
       properties:
@@ -38261,6 +38681,7 @@ components:
       enum:
         - SCHEDULED
         - ASAP
+        - ALAP
     DeliveryReservationPreferences:
       properties:
         mode:
@@ -38603,6 +39024,38 @@ components:
         - reasons
         - rerouteDescriptions
       type: object
+    CheckoutOptionsDeliveryTimePeriodRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+          example: '2024-06-03T00:00:00.000Z'
+          format: date-time
+          description: >-
+            The start of the evaluated time period. Defaults to "now" (timestamp
+            of the request)
+          default: now
+        endDate:
+          type: string
+          example: 2024-07-013T00:00:00.000Z
+          format: date-time
+          description: >-
+            The end of the evaluated time period. Default is the start date + 60
+            days. Please note that the maximum time period can not exceed 60
+            days.
+        basket:
+          description: Items, that are considered to be delivered together.
+          type: array
+          minLength: 1
+          maxLength: 50
+          items:
+            $ref: '#/components/schemas/BasketItem'
+        consumerAddress:
+          $ref: '#/components/schemas/CheckoutOptionsConsumerAddress'
+        deliveryPreferences:
+          $ref: '#/components/schemas/CheckoutOptionsDeliveryPreferences'
+      required:
+        - basket
     CheckoutOptionsDeliveryTimePointRequest:
       properties:
         desiredDeliveryDate:
@@ -38653,6 +39106,54 @@ components:
         - tenantArticleId
         - available
         - facilityRef
+    CheckoutOptionsDeliveryPreferences:
+      properties:
+        serviceLevel:
+          description: >-
+            DELIVERY: The parcel will reach the recipient according to the cycle
+            time of the carrier, typically 1-3 days when shipping nationaly.
+
+            EXPRESS: The parcel will reach the recipient using an express
+            service level.
+          enum:
+            - DELIVERY
+            - EXPRESS
+          type: string
+        preferredCarriers:
+          type: array
+          example: DPD
+          items:
+            type: string
+        preferredCarriersWithProduct:
+          $ref: >-
+            #/components/schemas/CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
+    BasketItem:
+      properties:
+        tenantArticleId:
+          type: string
+          example: DE-ZGT-4711
+        quantity:
+          type: number
+          example: 4
+      required:
+        - tenantArticleId
+        - quantity
+    CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct:
+      properties:
+        carrierKey:
+          type: string
+          example: DPD
+        carrierProduct:
+          type: string
+          example: WORLDWIDE
+        carrierServices:
+          type: array
+          items:
+            type: string
+            example: SIGNATURE
+        carrierProductCategory:
+          type: string
+          example: STANDARD
     FacilityRefLatestPickingStartPair:
       properties:
         facilityRef:
@@ -40970,6 +41471,37 @@ components:
         - payload
         - pickJobRef
       type: object
+    ExternalActionExecutedWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
+      properties:
+        payload:
+          $ref: '#/components/schemas/ExternalActionExecutedWebHookEventPayload'
+      required:
+        - payload
+      type: object
+    ExternalActionExecutedWebHookEventPayload:
+      properties:
+        logId:
+          type: string
+        externalActionRef:
+          type: string
+        type:
+          $ref: '#/components/schemas/ExternalActionType'
+        editor:
+          $ref: '#/components/schemas/Editor'
+        actionPayload:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/ExternalLinkActionLogPayload'
+            - $ref: '#/components/schemas/ExternalFormActionLogPayload'
+      required:
+        - logId
+        - externalActionRef
+        - type
+        - editor
+        - actionPayload
+      type: object
     PickjobPickingCommencedWebHookEvent:
       allOf:
         - $ref: '#/components/schemas/WebHookEvent'
@@ -41138,6 +41670,24 @@ components:
       properties:
         payload:
           $ref: '#/components/schemas/User'
+      required:
+        - payload
+      type: object
+    ServiceJobCreatedWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
+      properties:
+        payload:
+          $ref: '#/components/schemas/ServiceJob'
+      required:
+        - payload
+      type: object
+    ServiceJobFinishedWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
+      properties:
+        payload:
+          $ref: '#/components/schemas/ServiceJob'
       required:
         - payload
       type: object
