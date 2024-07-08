@@ -131,6 +131,12 @@ export interface AbstractFacilityCarrierConfiguration {
      * @memberof AbstractFacilityCarrierConfiguration
      */
     serviceUrl?: string;
+    /**
+     * 
+     * @type {ThresholdPriceValue}
+     * @memberof AbstractFacilityCarrierConfiguration
+     */
+    thresholdPriceValue?: ThresholdPriceValue;
 }
 /**
  * 
@@ -932,7 +938,11 @@ export namespace ArticleAttributeItem {
     export enum CategoryEnum {
         Descriptive = 'descriptive',
         Miscellaneous = 'miscellaneous',
-        PickingSequence = 'pickingSequence'
+        PickingSequence = 'pickingSequence',
+        Customs = 'customs',
+        Insurance = 'insurance',
+        Shop = 'shop',
+        Dimensions = 'dimensions'
     }
 }
 /**
@@ -2062,6 +2072,25 @@ export interface BasicDeliveryPromiseShipmentFacility {
 /**
  * 
  * @export
+ * @interface BasketItem
+ */
+export interface BasketItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof BasketItem
+     */
+    tenantArticleId: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof BasketItem
+     */
+    quantity: number;
+}
+/**
+ * 
+ * @export
  * @interface Brand
  */
 export interface Brand extends VersionedResource {
@@ -2545,11 +2574,23 @@ export interface CarrierConfiguration extends VersionedResource {
      */
     nonDeliveryDaysPerCountryAndProvince?: Array<NonDeliveryDaysPerCountryAndProvince>;
     /**
-     * 
+     * Deprecated - manual country service mapping is deprecated, please use the predefined staticCountryServiceMappings if available to see which fields are needed
      * @type {Array<CarrierCountryServiceMapping>}
      * @memberof CarrierConfiguration
      */
     countryServiceMappings?: Array<CarrierCountryServiceMapping>;
+    /**
+     * 
+     * @type {Array<StaticCarrierCountryServiceMapping>}
+     * @memberof CarrierConfiguration
+     */
+    staticCountryServiceMappings?: Array<StaticCarrierCountryServiceMapping>;
+    /**
+     * 
+     * @type {ThresholdPriceValue}
+     * @memberof CarrierConfiguration
+     */
+    thresholdPriceValue?: ThresholdPriceValue;
     /**
      * 
      * @type {string}
@@ -2562,7 +2603,7 @@ export interface CarrierConfiguration extends VersionedResource {
  * @export
  * @interface CarrierCountryServiceMapping
  */
-export interface CarrierCountryServiceMapping {
+export interface CarrierCountryServiceMapping extends StaticCarrierCountryServiceMapping {
     /**
      * unique identifier for a countryServiceMapping
      * @type {string}
@@ -2570,65 +2611,17 @@ export interface CarrierCountryServiceMapping {
      */
     id: string;
     /**
-     * 
-     * @type {RegionInformation}
-     * @memberof CarrierCountryServiceMapping
-     */
-    source: RegionInformation;
-    /**
-     * The destination regions this mapping should be applied to.
-     * @type {Array<RegionInformation>}
-     * @memberof CarrierCountryServiceMapping
-     */
-    destinations: Array<RegionInformation>;
-    /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use source instead.
+     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />Deprecated - Use source instead.
      * @type {string}
      * @memberof CarrierCountryServiceMapping
      */
     sourceCountry?: string;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use destination instead.
+     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />Deprecated - Use destination instead.
      * @type {Array<CountryCode>}
      * @memberof CarrierCountryServiceMapping
      */
     destinationCountries?: Array<CountryCode>;
-    /**
-     * 
-     * @type {Array<MandatoryShippingAttribute>}
-     * @memberof CarrierCountryServiceMapping
-     */
-    mandatoryShippingAttributes?: Array<MandatoryShippingAttribute>;
-    /**
-     * 
-     * @type {Array<MandatoryShippingItemAttribute>}
-     * @memberof CarrierCountryServiceMapping
-     */
-    mandatoryShippingItemAttributes?: Array<MandatoryShippingItemAttribute>;
-    /**
-     * 
-     * @type {string}
-     * @memberof CarrierCountryServiceMapping
-     */
-    product?: string;
-    /**
-     * 
-     * @type {CarrierProductCategory}
-     * @memberof CarrierCountryServiceMapping
-     */
-    carrierProductCategory?: CarrierProductCategory;
-    /**
-     * 
-     * @type {CarrierTransitTime}
-     * @memberof CarrierCountryServiceMapping
-     */
-    transitTime?: CarrierTransitTime;
-    /**
-     * 
-     * @type {Array<DeliveryCost>}
-     * @memberof CarrierCountryServiceMapping
-     */
-    deliveryCosts?: Array<DeliveryCost>;
 }
 /**
  * 
@@ -2969,7 +2962,9 @@ export enum CarrierProductCategory {
  * @enum {string}
  */
 export enum CarrierServices {
-    SIGNATURE = 'SIGNATURE'
+    SIGNATURE = 'SIGNATURE',
+    CUSTOMERSIGNATURE = 'CUSTOMER_SIGNATURE',
+    ADULTSIGNATURE = 'ADULT_SIGNATURE'
 }
 /**
  * It is taken into consideration for all carriers. Default: INACTIVE
@@ -3116,6 +3111,250 @@ export interface CheckoutOptionsCustomServices {
      * @memberof CheckoutOptionsCustomServices
      */
     name: string;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryEarliestRequest
+ */
+export interface CheckoutOptionsDeliveryEarliestRequest {
+    /**
+     * The date from which to search for the earliest potential delivery date. Defaults to \"now\" (timestamp of the request)
+     * @type {Date}
+     * @memberof CheckoutOptionsDeliveryEarliestRequest
+     */
+    earliestDeliveryDate?: Date;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CheckoutOptionsDeliveryEarliestRequest
+     */
+    tenantArticleIds: Array<string>;
+    /**
+     * 
+     * @type {CheckoutOptionsConsumerAddress}
+     * @memberof CheckoutOptionsDeliveryEarliestRequest
+     */
+    consumerAddress?: CheckoutOptionsConsumerAddress;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryEarliestResponse
+ */
+export interface CheckoutOptionsDeliveryEarliestResponse {
+    /**
+     * The results of the corresponding request containing information, if present, on when the items can supposingly be delivered earliest. Please note: When it was not possible to calculate the delivery information for a requested tenantArticleId there is no entry here.
+     * @type {Array<CheckoutOptionsDeliveryEarliestResponseItem>}
+     * @memberof CheckoutOptionsDeliveryEarliestResponse
+     */
+    checkoutOptions: Array<CheckoutOptionsDeliveryEarliestResponseItem>;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryEarliestResponseItem
+ */
+export interface CheckoutOptionsDeliveryEarliestResponseItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutOptionsDeliveryEarliestResponseItem
+     */
+    tenantArticleId: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CheckoutOptionsDeliveryEarliestResponseItem
+     */
+    earliestPredictedDeliveryDate?: Date;
+    /**
+     * List of available carriers.
+     * @type {Array<CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier>}
+     * @memberof CheckoutOptionsDeliveryEarliestResponseItem
+     */
+    availableCarriers?: Array<CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier>;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
+ */
+export interface CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier {
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
+     */
+    name?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
+     */
+    nonDeliveryDays?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryPreferences
+ */
+export interface CheckoutOptionsDeliveryPreferences {
+    /**
+     * DELIVERY: The parcel will reach the recipient according to the cycle time of the carrier, typically 1-3 days when shipping nationaly. EXPRESS: The parcel will reach the recipient using an express service level.
+     * @type {string}
+     * @memberof CheckoutOptionsDeliveryPreferences
+     */
+    serviceLevel?: CheckoutOptionsDeliveryPreferences.ServiceLevelEnum;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CheckoutOptionsDeliveryPreferences
+     */
+    preferredCarriers?: Array<string>;
+    /**
+     * 
+     * @type {CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct}
+     * @memberof CheckoutOptionsDeliveryPreferences
+     */
+    preferredCarriersWithProduct?: CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct;
+}
+
+/**
+ * @export
+ * @namespace CheckoutOptionsDeliveryPreferences
+ */
+export namespace CheckoutOptionsDeliveryPreferences {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ServiceLevelEnum {
+        DELIVERY = 'DELIVERY',
+        EXPRESS = 'EXPRESS'
+    }
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
+ */
+export interface CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct {
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
+     */
+    carrierKey?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
+     */
+    carrierProduct?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
+     */
+    carrierServices?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
+     */
+    carrierProductCategory?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryTimePeriodRequest
+ */
+export interface CheckoutOptionsDeliveryTimePeriodRequest {
+    /**
+     * The start of the evaluated time period. Defaults to \"now\" (timestamp of the request)
+     * @type {Date}
+     * @memberof CheckoutOptionsDeliveryTimePeriodRequest
+     */
+    startDate?: Date;
+    /**
+     * The end of the evaluated time period. Default is the start date + 60 days. Please note that the maximum time period can not exceed 60 days.
+     * @type {Date}
+     * @memberof CheckoutOptionsDeliveryTimePeriodRequest
+     */
+    endDate?: Date;
+    /**
+     * Items, that are considered to be delivered together.
+     * @type {Array<BasketItem>}
+     * @memberof CheckoutOptionsDeliveryTimePeriodRequest
+     */
+    basket: Array<BasketItem>;
+    /**
+     * 
+     * @type {CheckoutOptionsConsumerAddress}
+     * @memberof CheckoutOptionsDeliveryTimePeriodRequest
+     */
+    consumerAddress?: CheckoutOptionsConsumerAddress;
+    /**
+     * 
+     * @type {CheckoutOptionsDeliveryPreferences}
+     * @memberof CheckoutOptionsDeliveryTimePeriodRequest
+     */
+    deliveryPreferences?: CheckoutOptionsDeliveryPreferences;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryTimePeriodResponse
+ */
+export interface CheckoutOptionsDeliveryTimePeriodResponse {
+    /**
+     * 
+     * @type {Array<CheckoutOptionsDeliveryTimePeriodResponseItem>}
+     * @memberof CheckoutOptionsDeliveryTimePeriodResponse
+     */
+    checkoutOptions: Array<CheckoutOptionsDeliveryTimePeriodResponseItem>;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsDeliveryTimePeriodResponseItem
+ */
+export interface CheckoutOptionsDeliveryTimePeriodResponseItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutOptionsDeliveryTimePeriodResponseItem
+     */
+    overallStatus: CheckoutOptionsDeliveryTimePeriodResponseItem.OverallStatusEnum;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CheckoutOptionsDeliveryTimePeriodResponseItem
+     */
+    date: Date;
+    /**
+     * 
+     * @type {Array<CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier>}
+     * @memberof CheckoutOptionsDeliveryTimePeriodResponseItem
+     */
+    availableCarriers?: Array<CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier>;
+}
+
+/**
+ * @export
+ * @namespace CheckoutOptionsDeliveryTimePeriodResponseItem
+ */
+export namespace CheckoutOptionsDeliveryTimePeriodResponseItem {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum OverallStatusEnum {
+        ALL = 'ALL',
+        PARTIAL = 'PARTIAL',
+        NONE = 'NONE'
+    }
 }
 /**
  * 
@@ -3999,6 +4238,12 @@ export interface CustomServiceDefinition {
      * @memberof CustomServiceDefinition
      */
     isBundled?: boolean;
+    /**
+     * Attributes that can be added to the consumer. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof CustomServiceDefinition
+     */
+    customAttributes?: any;
     /**
      * Additional information necessary to fulfil the custom service
      * @type {Array<CustomServiceDefinitionAdditionalInformation>}
@@ -5013,7 +5258,8 @@ export interface DeliveryPromiseShipment extends BasicDeliveryPromiseShipment {
  */
 export enum DeliveryReservationMode {
     SCHEDULED = 'SCHEDULED',
-    ASAP = 'ASAP'
+    ASAP = 'ASAP',
+    ALAP = 'ALAP'
 }
 /**
  * 
@@ -5760,6 +6006,56 @@ export interface ExternalAction extends ExternalActionForReplacement {
      * @memberof ExternalAction
      */
     name: string;
+}
+/**
+ * 
+ * @export
+ * @interface ExternalActionExecutedWebHookEvent
+ */
+export interface ExternalActionExecutedWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ExternalActionExecutedWebHookEventPayload}
+     * @memberof ExternalActionExecutedWebHookEvent
+     */
+    payload: ExternalActionExecutedWebHookEventPayload;
+}
+/**
+ * 
+ * @export
+ * @interface ExternalActionExecutedWebHookEventPayload
+ */
+export interface ExternalActionExecutedWebHookEventPayload {
+    /**
+     * 
+     * @type {string}
+     * @memberof ExternalActionExecutedWebHookEventPayload
+     */
+    logId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ExternalActionExecutedWebHookEventPayload
+     */
+    externalActionRef: string;
+    /**
+     * 
+     * @type {ExternalActionType}
+     * @memberof ExternalActionExecutedWebHookEventPayload
+     */
+    type: ExternalActionType;
+    /**
+     * 
+     * @type {Editor}
+     * @memberof ExternalActionExecutedWebHookEventPayload
+     */
+    editor: Editor;
+    /**
+     * 
+     * @type {ExternalLinkActionLogPayload | ExternalFormActionLogPayload}
+     * @memberof ExternalActionExecutedWebHookEventPayload
+     */
+    actionPayload: ExternalLinkActionLogPayload | ExternalFormActionLogPayload;
 }
 /**
  * 
@@ -11050,6 +11346,12 @@ export interface ItemReturn {
     scannableCodes?: Array<string>;
     /**
      * 
+     * @type {Array<string>}
+     * @memberof ItemReturn
+     */
+    parcelRefs?: Array<string>;
+    /**
+     * 
      * @type {Array<ItemReturnLineItem>}
      * @memberof ItemReturn
      */
@@ -14275,17 +14577,35 @@ export interface ModifyParcelAction extends AbstractModificationAction {
      */
     customAttributes?: any;
     /**
-     * Only changable on status OPEN or FAILED of the existing Parcel
-     * @type {string}
+     * 
+     * @type {ParcelDimensions}
      * @memberof ModifyParcelAction
      */
-    carrierProduct?: string;
+    dimensions?: ParcelDimensions;
+    /**
+     * Monetary value of all goods in this parcel. Needed for sending cross border packages (customs) To be interpreted as money in the currency given under paymentInformation.currency
+     * @type {number}
+     * @memberof ModifyParcelAction
+     */
+    productValue?: number;
+    /**
+     * 
+     * @type {ParcelPickUpInformation}
+     * @memberof ModifyParcelAction
+     */
+    pickUpInformation?: ParcelPickUpInformation;
     /**
      * 
      * @type {ParcelServices}
      * @memberof ModifyParcelAction
      */
     services?: ParcelServices;
+    /**
+     * Only changable on status OPEN or FAILED of the existing Parcel
+     * @type {string}
+     * @memberof ModifyParcelAction
+     */
+    carrierProduct?: string;
 }
 
 /**
@@ -15698,7 +16018,8 @@ export enum OperativeEntityType {
     SERVICEJOB = 'SERVICE_JOB',
     RESTOWITEM = 'RESTOW_ITEM',
     ITEMRETURNJOB = 'ITEM_RETURN_JOB',
-    LINKEDSERVICEJOBS = 'LINKED_SERVICE_JOBS'
+    LINKEDSERVICEJOBS = 'LINKED_SERVICE_JOBS',
+    PACKINGTARGETCONTAINER = 'PACKING_TARGET_CONTAINER'
 }
 /**
  * 
@@ -17626,6 +17947,12 @@ export interface PackingTargetContainer extends VersionedResource {
      * @type {string}
      * @memberof PackingTargetContainer
      */
+    operativeProcessRef?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PackingTargetContainer
+     */
     iconUrl?: string;
     /**
      * 
@@ -17888,6 +18215,12 @@ export interface Parcel extends VersionedResource {
      * @type {string}
      * @memberof Parcel
      */
+    facilityRef?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Parcel
+     */
     operativeProcessRef?: string;
     /**
      * 
@@ -17924,7 +18257,7 @@ export interface Parcel extends VersionedResource {
      * @type {string}
      * @memberof Parcel
      */
-    shipmentRef: string;
+    shipmentRef?: string;
     /**
      * 
      * @type {ParcelStatus}
@@ -18045,6 +18378,12 @@ export interface ParcelForCreation {
      */
     carrierProduct?: string;
     /**
+     * references the carrier to be used for sending. Can not be set when creating a parcel for an existing shipment.
+     * @type {string}
+     * @memberof ParcelForCreation
+     */
+    carrierRef?: string;
+    /**
      * Attributes that can be added to the parcel. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
      * @type {any}
      * @memberof ParcelForCreation
@@ -18070,10 +18409,10 @@ export interface ParcelForCreation {
     loadUnitRefs?: Array<string>;
     /**
      * 
-     * @type {Array<ParcelItem>}
+     * @type {Array<ParcelItemForCreation>}
      * @memberof ParcelForCreation
      */
-    items?: Array<ParcelItem>;
+    items?: Array<ParcelItemForCreation>;
     /**
      * 
      * @type {ConsumerAddress}
@@ -18136,6 +18475,12 @@ export interface ParcelForCreation {
  */
 export interface ParcelItem {
     /**
+     * The id of this parcelItem.
+     * @type {string}
+     * @memberof ParcelItem
+     */
+    id: string;
+    /**
      * amount of the given items
      * @type {number}
      * @memberof ParcelItem
@@ -18190,6 +18535,80 @@ export interface ParcelItemArticle extends AbstractArticle {
      * @memberof ParcelItemArticle
      */
     attributes?: Array<ArticleAttributeItem>;
+}
+/**
+ * 
+ * @export
+ * @interface ParcelItemForCreation
+ */
+export interface ParcelItemForCreation {
+    /**
+     * amount of the given items
+     * @type {number}
+     * @memberof ParcelItemForCreation
+     */
+    quantity: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParcelItemForCreation
+     */
+    hsCode?: string;
+    /**
+     * Description of the given item/items
+     * @type {string}
+     * @memberof ParcelItemForCreation
+     */
+    description?: string;
+    /**
+     * Weight of a single item in gram
+     * @type {number}
+     * @memberof ParcelItemForCreation
+     */
+    weightInGram?: number;
+    /**
+     * 
+     * @type {ParcelItemValue}
+     * @memberof ParcelItemForCreation
+     */
+    parcelItemValue?: ParcelItemValue;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParcelItemForCreation
+     */
+    countryOfManufacture?: string;
+    /**
+     * 
+     * @type {ParcelItemArticle}
+     * @memberof ParcelItemForCreation
+     */
+    article?: ParcelItemArticle;
+}
+/**
+ * 
+ * @export
+ * @interface ParcelItemForUpdate
+ */
+export interface ParcelItemForUpdate {
+    /**
+     * The id of this parcelItem. It is generated during creation automatically and suits as the primary identifier of the described entity.
+     * @type {string}
+     * @memberof ParcelItemForUpdate
+     */
+    id: string;
+    /**
+     * 
+     * @type {ParcelItemValue}
+     * @memberof ParcelItemForUpdate
+     */
+    parcelItemValue?: ParcelItemValue;
+    /**
+     * Weight of a single item in gram
+     * @type {number}
+     * @memberof ParcelItemForUpdate
+     */
+    weightInGram?: number;
 }
 /**
  * 
@@ -18422,11 +18841,23 @@ export interface ParcelServices {
      */
     bulkyGoods?: boolean;
     /**
-     * 
+     * Signature from anyone needed
      * @type {boolean}
      * @memberof ParcelServices
      */
     signature?: boolean;
+    /**
+     * Signature from some adult
+     * @type {boolean}
+     * @memberof ParcelServices
+     */
+    adultSignature?: boolean;
+    /**
+     * Signature from the ordering customer needed
+     * @type {boolean}
+     * @memberof ParcelServices
+     */
+    customerSignature?: boolean;
 }
 /**
  * 
@@ -20626,6 +21057,25 @@ export interface PreselectedFacility {
 /**
  * 
  * @export
+ * @interface PriceRange
+ */
+export interface PriceRange {
+    /**
+     * 
+     * @type {number}
+     * @memberof PriceRange
+     */
+    from: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PriceRange
+     */
+    to: number;
+}
+/**
+ * 
+ * @export
  * @interface PrintableDocument
  */
 export interface PrintableDocument {
@@ -21072,6 +21522,12 @@ export interface PromiseCarrier {
      * @memberof PromiseCarrier
      */
     deliveryPromiseValidUntil?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof PromiseCarrier
+     */
+    latestPickingStart?: Date;
 }
 /**
  * 
@@ -25002,6 +25458,19 @@ export interface ServiceJobCancelledActionParameter {
 /**
  * 
  * @export
+ * @interface ServiceJobCreatedWebHookEvent
+ */
+export interface ServiceJobCreatedWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ServiceJob}
+     * @memberof ServiceJobCreatedWebHookEvent
+     */
+    payload: ServiceJob;
+}
+/**
+ * 
+ * @export
  * @enum {string}
  */
 export enum ServiceJobFilterChannel {
@@ -25040,6 +25509,19 @@ export interface ServiceJobFinishedActionParameter {
      * @memberof ServiceJobFinishedActionParameter
      */
     additionalInformation?: Array<ServiceJobAdditionalInformationForUpdate>;
+}
+/**
+ * 
+ * @export
+ * @interface ServiceJobFinishedWebHookEvent
+ */
+export interface ServiceJobFinishedWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ServiceJob}
+     * @memberof ServiceJobFinishedWebHookEvent
+     */
+    payload: ServiceJob;
 }
 /**
  * 
@@ -26011,6 +26493,61 @@ export namespace StartPickRunAction {
     export enum ActionEnum {
         StartPickRun = 'StartPickRun'
     }
+}
+/**
+ * 
+ * @export
+ * @interface StaticCarrierCountryServiceMapping
+ */
+export interface StaticCarrierCountryServiceMapping {
+    /**
+     * 
+     * @type {RegionInformation}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    source: RegionInformation;
+    /**
+     * The destination regions this mapping should be applied to.
+     * @type {Array<RegionInformation>}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    destinations: Array<RegionInformation>;
+    /**
+     * 
+     * @type {Array<MandatoryShippingAttribute>}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    mandatoryShippingAttributes?: Array<MandatoryShippingAttribute>;
+    /**
+     * 
+     * @type {Array<MandatoryShippingItemAttribute>}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    mandatoryShippingItemAttributes?: Array<MandatoryShippingItemAttribute>;
+    /**
+     * 
+     * @type {string}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    product?: string;
+    /**
+     * 
+     * @type {CarrierProductCategory}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    carrierProductCategory?: CarrierProductCategory;
+    /**
+     * 
+     * @type {CarrierTransitTime}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    transitTime?: CarrierTransitTime;
+    /**
+     * 
+     * @type {Array<DeliveryCost>}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    deliveryCosts?: Array<DeliveryCost>;
 }
 /**
  * 
@@ -28706,6 +29243,25 @@ export interface TenantConnectorConfigurations extends VersionedResource {
      * @memberof TenantConnectorConfigurations
      */
     connectApps: Array<TenantConnectorConfiguration>;
+}
+/**
+ * 
+ * @export
+ * @interface ThresholdPriceValue
+ */
+export interface ThresholdPriceValue {
+    /**
+     * 
+     * @type {number}
+     * @memberof ThresholdPriceValue
+     */
+    priority: number;
+    /**
+     * 
+     * @type {PriceRange}
+     * @memberof ThresholdPriceValue
+     */
+    priceRange: PriceRange;
 }
 /**
  * 
