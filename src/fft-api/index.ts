@@ -9,6 +9,7 @@ export * from './packjob';
 export * from './parcel';
 export * from './pickjob';
 export * from './process';
+export * from './project';
 export * from './routing-plan';
 export * from './shipment';
 export * from './stock';

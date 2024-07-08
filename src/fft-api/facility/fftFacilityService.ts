@@ -48,7 +48,6 @@ export class FftFacilityService {
       }
     } else {
       if (relaxed) {
-        this.logger.info(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
         return undefined;
       } else {
         this.logger.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
