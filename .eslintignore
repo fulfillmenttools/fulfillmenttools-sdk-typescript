@@ -2,4 +2,6 @@ node_modules
 dist/
 .nvmrc
 .eslintrc.cjs
+jest.config.cjs
+jest.setup.cjs
 src/fft-api/types/typescript-fetch-client/
