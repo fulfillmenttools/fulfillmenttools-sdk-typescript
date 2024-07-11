@@ -1,4 +1,5 @@
 export * from './auth';
+export * from './carrier';
 export * from './common';
 export * from './facility';
 export * from './handover';

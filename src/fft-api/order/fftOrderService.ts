@@ -19,7 +19,7 @@ export class FftOrderService {
   public async create(orderForCreation: OrderForCreation): Promise<Order> {
     try {
       const order = await this.apiClient.post<Order>(`${this.path}`, { ...orderForCreation });
-      this.logger.info(
+      this.logger.debug(
         `Successfully created order with tenantOrderId '${orderForCreation.tenantOrderId}' and order id '${order.id}'`
       );
 

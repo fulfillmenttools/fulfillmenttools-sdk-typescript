@@ -5,6 +5,7 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "lib": ["ESNext"],
+    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     // "noUncheckedIndexedAccess": true,
