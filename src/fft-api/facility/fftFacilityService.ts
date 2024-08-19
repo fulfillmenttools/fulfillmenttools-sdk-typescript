@@ -90,7 +90,7 @@ export class FftFacilityService {
         `${this.PATH}/${facilityId}/carriers/${carrierRef}`,
         { ...data }
       );
-      this.logger.info(
+      this.logger.debug(
         `Successfully connected FFT Facility '${facilityId}' with Carrier '${facilityCarrierConnection.key}' '${carrierRef}'`
       );
     } catch (err) {
@@ -132,7 +132,7 @@ export class FftFacilityService {
         await this.apiClient.delete(`${this.PATH}/${facilityId}`);
         FftFacilityService.facilityCache.delete(tenantFacilityId);
       } else {
-        this.logger.info(
+        this.logger.debug(
           `Not deleting FFT Facility '${facilityId}' for CT Channel '${tenantFacilityId}' because functionality is disabled`
         );
       }
