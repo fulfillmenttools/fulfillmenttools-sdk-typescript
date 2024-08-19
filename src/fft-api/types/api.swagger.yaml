@@ -11,52 +11,6 @@ info:
   title: fulfillmenttools - simplifying retail complexity
   version: VERSIONLESS
 paths:
-  /api/artifacts/{platform}:
-    get:
-      parameters:
-        - description: Platform for which to list artifacts
-          in: path
-          name: platform
-          required: true
-          schema:
-            enum:
-              - android
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ArtifactMetadataItems'
-          description: All available artifacts for the selected platform
-        '400':
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ApiError'
-          description: The given platform is invalid
-        '401':
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ApiError'
-          description: Your user is not allowed to operate against this API instance
-        '403':
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ApiError'
-          description: >-
-            Your user, although recognized, is not authorized to use this
-            endpoint
-      tags:
-        - Infrastructure - Artifacts
-      description: ''
-      operationId: getArtifacts
-      summary: Provides metadata for currently available artifacts for a platform
   /api/carriers:
     get:
       parameters:
@@ -667,6 +621,103 @@ paths:
       description: ''
       operationId: deleteCarrierCountryServiceMapping
       summary: Delete a carrierCountryServiceMapping for carrier with given ID
+  /api/configurations/transittime:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransitTimeConfiguration'
+          description: >-
+            Transit time configuration was found & you were allowed to access
+            it. The result is in the body.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Cutoff time configuration not found
+      tags:
+        - Last Mile Integration - Carriers
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      operationId: getTransitTimeConfiguration
+      summary: Get a tenant wide transit time time config
+    put:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransitTimeConfiguration'
+          description: Transit time configuration was written successfully
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Transit time configuration not found
+      tags:
+        - Last Mile Integration - Carriers
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      operationId: putTransitTimeConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransitTimeConfigurationForUpsert'
+        required: true
+      summary: Update transit time configuration of a tenant
   /api/configurations/cutofftime:
     get:
       responses:
@@ -10078,6 +10129,118 @@ paths:
       description: ''
       operationId: getPackJobDeliveryNote
       summary: Get a deliverynote for the pack job with the given ID
+  /api/packjobs/{packJobId}/targetcontainers/{targetcontainerId}/returnnote:
+    get:
+      parameters:
+        - description: ID of the pack job for which you want to get a deliverynote
+          in: path
+          name: packJobId
+          required: true
+          schema:
+            type: string
+        - description: ID of the PackingTargetContainer
+          in: path
+          name: targetcontainerId
+          required: true
+          schema:
+            type: string
+        - description: >-
+            Provide the localized values for the return note. If not provided
+            the default locale is used. For example de_DE.
+          in: query
+          name: locale
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/pdf: {}
+          description: Returns a return note for the PackingTargetContainer.
+        '401':
+          content:
+            application/pdf:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/pdf:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/pdf:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Entity not found
+      tags:
+        - Fulfillment Operations - Packing
+      description: ''
+      operationId: getReturnNotesForPackingTargetContainer
+      summary: Get the return note for the packingTargetContainer with the given ID
+  /api/packjobs/{packJobId}/targetcontainers/{targetcontainerId}/deliverynote:
+    get:
+      parameters:
+        - description: ID of the pack job for which you want to get a deliverynote
+          in: path
+          name: packJobId
+          required: true
+          schema:
+            type: string
+        - description: >-
+            ID of the packingTargetContainer for which you want to get a
+            deliverynote
+          in: path
+          name: targetcontainerId
+          required: true
+          schema:
+            type: string
+        - description: >-
+            Provide the localized values for the delivery note. If not provided
+            the default locale is used. For example de_DE.
+          in: query
+          name: locale
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/pdf: {}
+          description: The deliverynote for the given packingTargetContainer
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+        '404':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Entity not found
+      tags:
+        - Fulfillment Operations - Packing
+      description: ''
+      operationId: getPackingTargetContainerDeliveryNote
+      summary: Get a deliverynote for the packingTargetContainer with the given ID
   /api/packjobs/{packJobId}/targetcontainers/{targetcontainerId}:
     get:
       parameters:
@@ -12938,7 +13101,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: External action not found
       tags:
-        - Core - Processes - External Actions
+        - Core - External Actions
       description: >-
         <center><img
         src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
@@ -12982,7 +13145,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: External action not found
       tags:
-        - Core - Processes - External Actions
+        - Core - External Actions
       description: Creates a new external action for a process.
       operationId: postExternalAction
       requestBody:
@@ -13037,7 +13200,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: External action not found
       tags:
-        - Core - Processes - External Actions
+        - Core - External Actions
       description: >-
         <center><img
         src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
@@ -13084,7 +13247,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: External action not found
       tags:
-        - Core - Processes - External Actions
+        - Core - External Actions
       description: >-
         <center><img
         src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
@@ -13136,7 +13299,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: Facility not found
       tags:
-        - Core - Processes - External Actions
+        - Core - External Actions
       description: >-
         <center><img
         src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
@@ -13195,7 +13358,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: External action not found
       tags:
-        - Core - Processes - External Actions Logs
+        - Core - External Actions
       description: Creates a new external action log.
       operationId: postExternalActionLog
       requestBody:
@@ -13262,7 +13425,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: External action logs not found
       tags:
-        - Core - Processes - External Actions Logs
+        - Core - External Actions
       description: >-
         <center><img
         src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
@@ -15633,9 +15796,9 @@ paths:
               schema:
                 items:
                   $ref: '#/components/schemas/ApiError'
-          description: User not found
+          description: Cancelation reason not found
       tags:
-        - DOMS - Cancelation reasons
+        - DOMS - Orders
       description: |-
         <i><center>
           <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
@@ -15686,7 +15849,7 @@ paths:
             Your user, although recognized, is not authorized to use this
             endpoint
       tags:
-        - DOMS - Cancelation reasons
+        - DOMS - Orders
       operationId: postCancelationReason
       requestBody:
         content:
@@ -15746,9 +15909,9 @@ paths:
               schema:
                 items:
                   $ref: '#/components/schemas/ApiError'
-          description: User not found
+          description: Cancelation reason not found
       tags:
-        - DOMS - Cancelation reasons
+        - DOMS - Orders
       description: >-
         <center><img
         src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
@@ -15806,7 +15969,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: Cancelation reason not found
       tags:
-        - DOMS - Cancelation reasons
+        - DOMS - Orders
       description: |-
         <i><center>
           <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
@@ -15818,7 +15981,7 @@ paths:
           <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a>
           </i><br /><br />
       operationId: putCancelationReason
-      summary: Update a reroute description
+      summary: Update a cancelation reason
     delete:
       parameters:
         - description: ID of the cancelation reason you intend to delete
@@ -15856,7 +16019,7 @@ paths:
                   $ref: '#/components/schemas/ApiError'
           description: Cancelation reason not found
       tags:
-        - DOMS - Cancelation reasons
+        - DOMS - Orders
       description: |-
         <i><center>
           <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>
@@ -16811,6 +16974,53 @@ paths:
         - DOMS - Orders
       operationId: orderAction
       summary: Call a single action on a given order
+  /api/orders/{orderId}/orderlineitems/{orderLineItemId}/actions:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderLineItemActionsParameter'
+      parameters:
+        - description: Reference to the order you want to call the action for
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+        - description: Reference to the order line item you want to call the action for
+          in: path
+          name: orderLineItemId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Updated Order in the body.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - DOMS - Orders
+      operationId: orderLineItemAction
+      summary: Call a single action on a given order and line item
   /api/routing/commands/reroute:
     post:
       responses:
@@ -18293,6 +18503,93 @@ paths:
         description: Desired order routing configuration to create/update
         required: true
       summary: Change the tenant wide order routing configuration
+  /api/configurations/ordercancelation:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCancelationConfiguration'
+          description: The Order Cancelation Configuration can be found in the body.
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - DOMS - Routing Plans
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />
+      operationId: getOrderCancelationConfiguration
+      summary: Get the tenant wide order cancelation configuration
+    put:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCancelationConfiguration'
+          description: The order cancelation configuration was successfully updated.
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCancelationConfiguration'
+          description: The order cancelation configuration was successfully created.
+        '400':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Invalid input. See response for details
+        '401':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: Your user is not allowed to operate against this API instance
+        '403':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiError'
+          description: >-
+            Your user, although recognized, is not authorized to use this
+            endpoint
+      tags:
+        - DOMS - Routing Plans
+      description: ''
+      operationId: putOrderCancelationConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCancelationConfiguration'
+        description: Desired order cancelation configuration to create/update
+        required: true
+      summary: Change the tenant wide order cancelation configuration
   /api/articles:
     get:
       operationId: getArticles
@@ -18603,6 +18900,11 @@ paths:
             type: array
             items:
               type: string
+        - name: scannableCode
+          required: false
+          in: query
+          schema:
+            type: string
         - name: status
           required: false
           in: query
@@ -22383,9 +22685,9 @@ components:
           $ref: '#/components/schemas/NonDeliveryType'
           default: SINGLE
         nonDeliveryDay:
-          example: '2020-02-03T08:45:50.525Z'
-          format: date-time
           type: string
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          example: '2020-02-03'
       required:
         - nonDeliveryDay
     NonDeliveryType:
@@ -22607,6 +22909,33 @@ components:
       required:
         - clearName
         - version
+    TransitTimeConfiguration:
+      allOf:
+        - $ref: '#/components/schemas/VersionedResource'
+      properties:
+        calculationStrategy:
+          type: string
+          enum:
+            - EARLIEST
+            - LATEST
+        id:
+          type: string
+      required:
+        - id
+        - calculationStrategy
+      type: object
+    TransitTimeConfigurationForUpsert:
+      allOf:
+        - $ref: '#/components/schemas/VersionedResource'
+      properties:
+        calculationStrategy:
+          type: string
+          enum:
+            - EARLIEST
+            - LATEST
+      required:
+        - calculationStrategy
+      type: object
     CutoffTimeConfiguration:
       allOf:
         - $ref: '#/components/schemas/VersionedResource'
@@ -22925,6 +23254,7 @@ components:
         - SIGNATURE
         - CUSTOMER_SIGNATURE
         - ADULT_SIGNATURE
+        - SATURDAY_DELIVERY
       type: string
     DHLV2CarrierCredentials:
       allOf:
@@ -23990,7 +24320,20 @@ components:
         - version
       type: object
     HandoverLineItem:
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/HandoverLineItemForCreation'
       properties:
+        id:
+          type: string
+      required:
+        - id
+    HandoverLineItemForCreation:
+      properties:
+        refused:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefusedItem'
         article:
           $ref: '#/components/schemas/HandoverLineItemArticle'
         quantity:
@@ -24062,6 +24405,12 @@ components:
               format: int64
               minimum: 0
               type: integer
+            id:
+              type: string
+            refused:
+              type: array
+              items:
+                $ref: '#/components/schemas/RefusedItem'
       required:
         - quantity
         - article
@@ -24070,6 +24419,9 @@ components:
         - $ref: '#/components/schemas/VersionedResource'
         - $ref: '#/components/schemas/HandoverjobForCreation'
         - properties:
+            handoverJobLineItems:
+              items:
+                $ref: '#/components/schemas/HandoverLineItem'
             anonymized:
               description: Indicates if gdpr related data was anonymized
               example: false
@@ -24126,7 +24478,7 @@ components:
           type: string
         handoverJobLineItems:
           items:
-            $ref: '#/components/schemas/HandoverLineItem'
+            $ref: '#/components/schemas/HandoverLineItemForCreation'
           type: array
         loadUnitRefs:
           description: Reference to array of load unit Refs
@@ -26474,6 +26826,9 @@ components:
         customerSignature:
           description: Signature from the ordering customer needed
           type: boolean
+        saturdayDelivery:
+          description: Saturday Delivery
+          type: boolean
     Parcel:
       additionalProperties: false
       allOf:
@@ -26555,6 +26910,9 @@ components:
                 the currency given under paymentInformation.currency
               type: number
               example: 12.5
+            shortId:
+              type: string
+              example: AA12-1
             transfers:
               type: array
               minItems: 0
@@ -26614,6 +26972,9 @@ components:
           $ref: '#/components/schemas/PaymentInformation'
         pickUpInformation:
           $ref: '#/components/schemas/ParcelPickUpInformation'
+        shortId:
+          type: string
+          example: AA12-1
         productValue:
           description: >-
             Monetary value of all goods in this parcel. Needed for sending cross
@@ -26670,6 +27031,10 @@ components:
           type: string
         parcelItemValue:
           $ref: '#/components/schemas/ParcelItemValue'
+        parcelItemArticleAttributes:
+          items:
+            $ref: '#/components/schemas/ArticleAttributeItem'
+          type: array
         weightInGram:
           type: integer
           nullable: true
@@ -26678,6 +27043,14 @@ components:
       required:
         - id
       type: object
+    ParcelArticleAttributeItemForUpdate:
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/ArticleAttributeItem'
+      required:
+        - key
+        - value
+        - category
     ParcelPickUpInformation:
       additionalProperties: false
       nullable: true
@@ -26720,19 +27093,33 @@ components:
           description: amount of the given items
           example: 5
         hsCode:
+          deprecated: true
+          description: Deprecated - use article.attribute.hsCode instead
           type: string
           maxLength: 50
         description:
-          description: Description of the given item/items
+          deprecated: true
+          description: >-
+            Description - article.title will be used instead - of the given
+            item/items
           example: Item Description
           type: string
         weightInGram:
+          deprecated: true
           type: integer
-          description: Weight of a single item in gram
+          description: >-
+            Deprecated - use article.attribute.weightPerUnit instead - Weight of
+            a single item in gram
           example: 10000
         parcelItemValue:
+          deprecated: true
+          description: >-
+            Deprecated - use article.attribute.pricePerUnit and
+            article.attribute.currency instead
           $ref: '#/components/schemas/ParcelItemValue'
         countryOfManufacture:
+          deprecated: true
+          description: Deprecated - use article.attribute.countryOfManufacture instead
           type: string
         article:
           $ref: '#/components/schemas/ParcelItemArticle'
@@ -26985,6 +27372,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MandatoryShippingAttribute'
+        mandatoryShippingArticleAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/MandatoryShippingArticleAttribute'
         mandatoryShippingItemAttributes:
           type: array
           items:
@@ -27107,9 +27498,15 @@ components:
                 $ref: '#/components/schemas/ArticleAttributeItem'
               type: array
             prices:
+              deprecated: true
               items:
                 $ref: '#/components/schemas/ArticlePrice'
               type: array
+              description: >-
+                <center><img
+                src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center>
+                <br /> <i>This endpoint is deprecated and has been
+                replaced.</i><br /><br />
           type: object
       xml:
         name: PickLineItemArticle
@@ -27579,6 +27976,8 @@ components:
     HandoverJobActionsParameter:
       anyOf:
         - $ref: '#/components/schemas/HandoverJobCancelActionParameter'
+        - $ref: '#/components/schemas/HandoverJobLineItemUpdateActionParameter'
+        - $ref: '#/components/schemas/FinishHandoverJobActionParameter'
     HandoverJobCancelActionParameter:
       additionalProperties: false
       properties:
@@ -27599,9 +27998,128 @@ components:
         - name
         - version
         - payload
+    HandoverJobLineItemUpdateActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/HandoverJobLineItemUpdateActionEnum'
+        version:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+        lineItem:
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+            refused:
+              items:
+                $ref: '#/components/schemas/RefusedItemForUpdate'
+            substituteItems:
+              type: array
+              items:
+                $ref: '#/components/schemas/HandoverSubstituteLineItemForUpdate'
+          required:
+            - id
+      required:
+        - name
+        - version
+        - lineItem
+    FinishHandoverJobActionParameter:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/FinishHandoverJobActionEnum'
+        version:
+          description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+        lineItems:
+          additionalProperties: false
+          type: array
+          items:
+            $ref: '#/components/schemas/FinishHandoverJobLineItem'
+      required:
+        - name
+        - version
+        - lineItems
+    RefusedItem:
+      properties:
+        quantity:
+          type: integer
+          minimum: 0
+        reason:
+          type: string
+        reasonLocalized:
+          $ref: '#/components/schemas/LocaleString'
+        comment:
+          type: string
+      required:
+        - quantity
+    RefusedItemForUpdate:
+      properties:
+        quantity:
+          type: integer
+          minimum: 0
+        reasonLocalized:
+          $ref: '#/components/schemas/LocaleString'
+        comment:
+          type: string
+      required:
+        - quantity
+    HandoverSubstituteLineItemForUpdate:
+      properties:
+        id:
+          type: string
+        refused:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefusedItemForUpdate'
+      required:
+        - id
+    FinishHandoverJobLineItem:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        handedOverQuantity:
+          type: number
+        refused:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefusedItemForUpdate'
+        substituteLineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/FinishHandoverJobSubstituteLineItem'
+      required:
+        - id
+        - handedOverQuantity
+    FinishHandoverJobSubstituteLineItem:
+      properties:
+        id:
+          type: string
+        handedOverQuantity:
+          minimum: 0
+          type: integer
+        refused:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefusedItemForUpdate'
+      required:
+        - id
+        - handedOverQuantity
     HandoverJobCancelActionEnum:
       enum:
         - CANCEL
+      type: string
+    HandoverJobLineItemUpdateActionEnum:
+      enum:
+        - UPDATE_LINEITEM
+      type: string
+    FinishHandoverJobActionEnum:
+      enum:
+        - FINISH_HANDOVER_JOB
       type: string
     ModifyPickRunLineItemAction:
       allOf:
@@ -27727,10 +28245,12 @@ components:
               properties:
                 carrierKey:
                   type: string
+                carrierProductCategory:
+                  $ref: '#/components/schemas/CarrierProductCategory'
                 carrierProduct:
                   description: >-
                     Desired product of given carrier to choose when ordering a
-                    label
+                    label, this is specific to a carrier
                   type: string
                   example: EXPRESS
                 carrierServices:
@@ -28078,6 +28598,7 @@ components:
         - PICKJOB
         - HANDOVERJOB
         - PARCEL
+        - PACKING_TARGET_CONTAINER
       type: string
     DocumentType:
       enum:
@@ -29031,7 +29552,7 @@ components:
               type: array
           type: object
       xml:
-        name: PickLineItemArticle
+        name: ShipmentLineItemArticle
     ShipmentLineItemForCreation:
       properties:
         article:
@@ -29640,6 +30161,12 @@ components:
         - $ref: '#/components/schemas/ArticleAttributeItem'
     SubstituteLineItem:
       properties:
+        id:
+          type: string
+        refused:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefusedItem'
         article:
           $ref: '#/components/schemas/SubstituteLineItemArticle'
         priority:
@@ -29896,6 +30423,14 @@ components:
         - it_IT
         - nb_NO
         - es_ES
+        - cs_CZ
+        - sk_SK
+        - pt_PT
+        - sl_SI
+        - ro_RO
+        - bg_BG
+        - hr_HR
+        - hu_HU
       example: de_DE
       type: string
     SupportedLocales:
@@ -30379,19 +30914,34 @@ components:
             $ref: '#/components/schemas/RegionInformation'
           minItems: 1
           type: array
+        mandatoryShippingArticleAttributes:
+          items:
+            $ref: '#/components/schemas/MandatoryShippingArticleAttribute'
+          type: array
+          minItems: 0
         mandatoryShippingAttributes:
           items:
             $ref: '#/components/schemas/MandatoryShippingAttribute'
           type: array
           minItems: 0
         mandatoryShippingItemAttributes:
+          deprecated: true
+          description: Deprecated - use mandatoryShippingArticleAttributes instead
           items:
             $ref: '#/components/schemas/MandatoryShippingItemAttribute'
           type: array
           minItems: 0
-        product:
-          type: string
-          example: EXPRESS
+        products:
+          type: array
+          items:
+            type: string
+            example: EXPRESS
+          description: Array of products for the given mapping
+        carrierServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierServices'
+          description: Services which can be provided by the carrier
         carrierProductCategory:
           $ref: '#/components/schemas/CarrierProductCategory'
         transitTime:
@@ -30422,14 +30972,14 @@ components:
                 <center><img
                 src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center>
                 <br /> <i>This endpoint is deprecated and has been
-                replaced.</i><br /><br />Deprecated - Use source instead.
+                replaced.</i><br /><br />@deprecated - Use source instead.
               example: DE
             destinationCountries:
               description: >-
                 <center><img
                 src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center>
                 <br /> <i>This endpoint is deprecated and has been
-                replaced.</i><br /><br />Deprecated - Use destination instead.
+                replaced.</i><br /><br />@deprecated - Use destination instead.
               items:
                 $ref: '#/components/schemas/CountryCode'
               minItems: 1
@@ -30487,9 +31037,16 @@ components:
             $ref: '#/components/schemas/MandatoryShippingItemAttribute'
           type: array
           minItems: 0
-        product:
-          type: string
-          example: EXPRESS
+        mandatoryShippingArticleAttributes:
+          items:
+            $ref: '#/components/schemas/MandatoryShippingArticleAttribute'
+          type: array
+          minItems: 0
+        products:
+          type: array
+          items:
+            type: string
+            example: EXPRESS
         carrierProductCategory:
           $ref: '#/components/schemas/CarrierProductCategory'
         transitTime:
@@ -30555,9 +31112,17 @@ components:
             $ref: '#/components/schemas/MandatoryShippingItemAttribute'
           type: array
           minItems: 0
-        product:
-          type: string
-          example: EXPRESS
+        mandatoryShippingArticleAttributes:
+          items:
+            $ref: '#/components/schemas/MandatoryShippingArticleAttribute'
+          type: array
+          minItems: 0
+        products:
+          type: array
+          items:
+            type: string
+            example: EXPRESS
+          description: Array of products for the given mapping
         carrierProductCategory:
           $ref: '#/components/schemas/CarrierProductCategory'
         transitTime:
@@ -30571,6 +31136,9 @@ components:
       required:
         - carrierConfigurationVersion
     CarrierProductCategory:
+      description: >-
+        Desired product class to choose when ordering a label, this is not a
+        carrier specific value
       type: string
       enum:
         - STANDARD
@@ -30594,6 +31162,7 @@ components:
         - maxTransitDays
         - minTransitDays
     MandatoryShippingItemAttribute:
+      additionalProperties: false
       properties:
         referencedField:
           type: string
@@ -30605,7 +31174,15 @@ components:
             - parcelItemValue.currency
             - countryOfManufacture
             - tenantArticleId
-          description: 'Deprecated: quantity, this field is now mandatory in the item'
+          description: |-
+            Deprecated:
+              - description: article.title will be used instead
+              - weightInGram: use MandatoryShippingArticleAttribute.attributes.weightPerUnit
+              - quantity, this field is now mandatory in the item
+              - parcelItemValue.value: use MandatoryShippingArticleAttribute.attributes.pricePerUnit
+              - parcelItemValue.currency: use MandatoryShippingArticleAttribute.attributes.currency
+              - countryOfManufacture: use MandatoryShippingArticleAttribute.attributes.countryOfManufacture
+              - tenantArticleId: mandatory on line item article
         dataType:
           type: string
           enum:
@@ -30617,7 +31194,46 @@ components:
         descriptionLocalized:
           $ref: '#/components/schemas/LocaleString'
       type: object
+    MandatoryShippingArticleAttribute:
+      additionalProperties: false
+      properties:
+        referencedField:
+          $ref: >-
+            #/components/schemas/MandatoryShippingArticleAttributeReferencedField
+        dataType:
+          $ref: '#/components/schemas/MandatoryShippingArticleAttributeDataType'
+        category:
+          $ref: '#/components/schemas/MandatoryShippingArticleAttributeCategory'
+        description:
+          type: string
+        descriptionLocalized:
+          $ref: '#/components/schemas/LocaleString'
+      type: object
+      required:
+        - referencedField
+        - dataType
+        - category
+        - descriptionLocalized
+    MandatoryShippingArticleAttributeReferencedField:
+      enum:
+        - attributes.weightPerUnit
+        - attributes.hsCode
+        - attributes.currency
+        - attributes.valuePerUnit
+        - attributes.countryOfManufacture
+      type: string
+    MandatoryShippingArticleAttributeCategory:
+      enum:
+        - customs
+        - dimensions
+      type: string
+    MandatoryShippingArticleAttributeDataType:
+      enum:
+        - NUMBER
+        - STRING
+      type: string
     MandatoryShippingAttribute:
+      additionalProperties: false
       properties:
         referencedField:
           type: string
@@ -30626,6 +31242,13 @@ components:
             - productValue
             - pickUpInformation.startTime
             - pickUpInformation.endTime
+          description: >-
+            - dimensions.weight: will be calculated from
+            MandatoryShippingArticleAttribute.attributes.weightPerUnit if items
+            with weightPerUnit is set on all items - productValue: will be
+            calculated from
+            MandatoryShippingArticleAttribute.attributes.pricePerUnit if items
+            with pricePerUnit is set on all items
         dataType:
           type: string
           enum:
@@ -31479,6 +32102,9 @@ components:
         - $ref: '#/components/schemas/VersionedResource'
         - $ref: '#/components/schemas/PackingTargetContainerForCreation'
       properties:
+        documentsRef:
+          description: Reference to the documents collection from this entity
+          type: string
         description:
           type: string
         descriptionLocalized:
@@ -31490,6 +32116,8 @@ components:
           example: Esb20gpHBL94X5NdMp3C
           type: string
         packJobRef:
+          type: string
+        shortId:
           type: string
         operativeProcessRef:
           type: string
@@ -31511,6 +32139,10 @@ components:
         lineItems:
           items:
             $ref: '#/components/schemas/PackingTargetContainerLineItem'
+        parcels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parcel'
       required:
         - id
         - nameLocalized
@@ -32455,6 +33087,11 @@ components:
         returnable:
           type: number
           minimum: 0
+        notReturnableItemsExists:
+          type: boolean
+          description: >-
+            Marks if some of the items could be not refundable. E.g. through
+            altering via a ServiceJob via engraving.
       required:
         - id
         - article
@@ -32489,6 +33126,11 @@ components:
         delivered:
           type: number
           minimum: 1
+        notReturnableItemsExists:
+          type: boolean
+          description: >-
+            Marks if some of the items could be not refundable. E.g. through
+            altering via a ServiceJob via engraving.
         scannableCodes:
           items:
             type: string
@@ -33537,6 +34179,7 @@ components:
       enum:
         - BLANK_LINK
         - FORM
+        - COMMENT
     ExternalFormActionDefinition:
       additionalProperties: false
       properties:
@@ -33562,8 +34205,8 @@ components:
           $ref: '#/components/schemas/ExternalFormActionButton'
       required:
         - elements
-        - success
         - type
+        - cancel
       type: object
       xml:
         name: ExternalFormActionDefinition
@@ -33706,6 +34349,19 @@ components:
       type: object
       xml:
         name: ExternalLinkActionDefinition
+    ExternalCommentActionDefinition:
+      description: >-
+        This action provides a possibility to set comments. It also enables a
+        possibility to save action results for other actions.
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/ExternalActionType'
+      required:
+        - type
+      type: object
+      xml:
+        name: ExternalCommentActionDefinition
     ExternalActionForCreation:
       properties:
         processRef:
@@ -33724,6 +34380,7 @@ components:
           oneOf:
             - $ref: '#/components/schemas/ExternalFormActionDefinition'
             - $ref: '#/components/schemas/ExternalLinkActionDefinition'
+            - $ref: '#/components/schemas/ExternalCommentActionDefinition'
           discriminator:
             propertyName: type
             mapping:
@@ -33756,6 +34413,7 @@ components:
           oneOf:
             - $ref: '#/components/schemas/ExternalFormActionDefinition'
             - $ref: '#/components/schemas/ExternalLinkActionDefinition'
+            - $ref: '#/components/schemas/ExternalCommentActionDefinition'
           discriminator:
             propertyName: type
             mapping:
@@ -33860,6 +34518,27 @@ components:
       type: object
       xml:
         name: ExternalFormActionLogPayload
+    ExternalCommentActionLogPayload:
+      description: >-
+        This action payload provides a possibility to set comments. It also
+        enables a possibility to save action results for other actions.
+      additionalProperties: false
+      properties:
+        comment:
+          description: The actual comment.
+          type: string
+          minLength: 1
+        externalActionRef:
+          description: >-
+            An existing external action id you want to link with. The action
+            have to be in the same process.
+          type: string
+          minLength: 1
+      required:
+        - comment
+      type: object
+      xml:
+        name: ExternalCommentActionLogPayload
     ExternalActionLogForCreation:
       properties:
         requiresAnonymization:
@@ -33868,6 +34547,7 @@ components:
           oneOf:
             - $ref: '#/components/schemas/ExternalLinkActionLogPayload'
             - $ref: '#/components/schemas/ExternalFormActionLogPayload'
+            - $ref: '#/components/schemas/ExternalCommentActionLogPayload'
       required:
         - requiresAnonymization
         - actionPayload
@@ -34395,6 +35075,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AdditionalInformationForCreation'
+        customAttributes:
+          type: object
+          nullable: true
+          description: >-
+            Attributes that can be added to custom service. These attributes
+            cannot be used within fulfillment processes, but it could be useful
+            to have the information carried here.
       type: object
       required:
         - nameLocalized
@@ -35447,6 +36134,7 @@ components:
             - insurance
             - shop
             - dimensions
+            - carrierService
           description: |-
             This category is used by OCFF to customize implemented processes.
             Categorized attributes are used by various processes and tools
@@ -35490,6 +36178,15 @@ components:
             filled with a descriptive category
           allOf:
             - $ref: '#/components/schemas/LocaleString'
+        type:
+          type: string
+          description: The type of the attribute.
+          default: STRING
+          enum:
+            - STRING
+            - NUMBER
+            - CURRENCY
+            - BOOLEAN
       required:
         - key
         - value
@@ -35876,12 +36573,17 @@ components:
         name:
           type: string
           example: DHL
+        carrierRef:
+          type: string
         nonDeliveryDays:
           type: array
           items:
             description: ISO 3166-2 province code
             type: string
             example: DE-NW
+      required:
+        - name
+        - carrierRef
     CheckoutOptionsInput:
       additionalProperties: false
       properties:
@@ -35926,6 +36628,11 @@ components:
           type: string
         isBackOrderable:
           type: boolean
+        latestPickingStart:
+          format: date-time
+          type: string
+        carrier:
+          $ref: '#/components/schemas/CheckoutOptionsAvailabilityCarrier'
       required:
         - tenantArticleId
         - available
@@ -35933,9 +36640,23 @@ components:
       type: object
       xml:
         name: CheckoutOptionsAvailability
+    CheckoutOptionsAvailabilityCarrier:
+      additionalProperties: false
+      properties:
+        carrierRef:
+          type: string
+        carrierProductCategory:
+          $ref: '#/components/schemas/CarrierProductCategory'
+      required:
+        - carrierRef
+      type: object
+      xml:
+        name: CheckoutOptionsAvailabilityCarrier
     PromiseCarrier:
       additionalProperties: false
       properties:
+        carrierRef:
+          type: string
         carrierKey:
           type: string
         carrierName:
@@ -35947,11 +36668,8 @@ components:
         deliveryPromiseValidUntil:
           type: string
           format: date-time
-        latestPickingStart:
-          example: '2020-02-03T09:45:51.525Z'
-          format: date-time
-          type: string
       required:
+        - carrierRef
         - carrierKey
         - carrierName
         - products
@@ -36017,6 +36735,7 @@ components:
           $ref: '#/components/schemas/CheckoutOptionsConsumerAddress'
       required:
         - tenantArticleIds
+        - consumerAddress
     CheckoutOptionsDeliveryTimePeriodResponse:
       properties:
         checkoutOptions:
@@ -36949,6 +37668,9 @@ components:
           type: boolean
         isBestReassignmentCandidate:
           type: boolean
+        latestPickingStart:
+          type: string
+          format: date-time
       required:
         - facility
         - orderFences
@@ -38229,6 +38951,40 @@ components:
       type: object
       xml:
         name: DecisionLogRef
+    OrderCancelationConfiguration:
+      additionalProperties: false
+      description: >-
+        <center><img
+        src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'
+          /></center> <br /> <i>This part of the API is currently under development.
+          That means that this endpoint, model, etc. can contain breaking changes
+          and / or might not be available at all times in your API instance. It
+          could disappear also without warning. Thus, it currently does not fall
+          under our SLA regulations. For details on this topic please check our
+          <a href="https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle">documentation</a></i><br /><br />This configuration is to define specific rules for canceling orders such as the forced cancelation.
+      properties:
+        created:
+          description: >-
+            The date this order was created at the platform. This value is
+            generated by the service.
+          example: '2020-02-03T08:45:51.525Z'
+          format: date-time
+          type: string
+        id:
+          type: string
+        version:
+          description: >-
+            The version of the document to be used in optimistic locking
+            mechanisms.
+          example: 42
+          format: int64
+          type: integer
+        allowForceCancelOrder:
+          type: boolean
+      required:
+        - version
+        - allowForceCancelOrder
+      type: object
     RoutingConfiguration:
       additionalProperties: false
       description: >-
@@ -38258,9 +39014,13 @@ components:
           format: date-time
           type: string
         prioritizationRules:
+          deprecated: true
           description: >-
-            Contains the routing configuration for prioritization & routing for
-            the whole tenant
+            <center><img
+            src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center>
+            <br /> <i>This endpoint is deprecated and has been replaced.</i><br
+            /><br />@deprecated Contains the routing configuration for
+            prioritization & routing for the whole tenant
           items:
             $ref: '#/components/schemas/PrioritizationRule'
           type: array
@@ -38565,6 +39325,8 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/CustomServiceReference'
+        latestPickingStart:
+          $ref: '#/components/schemas/LatestPickingStart'
         provisioningTime:
           description: The point in time by which the order is supposed to be provisioned.
           example: '2020-02-03T08:45:50.525Z'
@@ -38585,6 +39347,23 @@ components:
         - finalizeRun
         - processId
       type: object
+    LatestPickingStart:
+      type: object
+      properties:
+        latestPickingStartDate:
+          example: '2020-02-03T08:45:50.525Z'
+          format: date-time
+          type: string
+        targetTime:
+          example: '2020-02-03T08:45:50.525Z'
+          format: date-time
+          type: string
+        carrierRef:
+          type: string
+      required:
+        - carrierRef
+        - latestPickingStartDate
+        - targetTime
     Transfer:
       properties:
         transferId:
@@ -38701,36 +39480,7 @@ components:
           maxItems: 1
           type: array
         shipping:
-          properties:
-            preferredCarriers:
-              items:
-                $ref: '#/components/schemas/PreferredCarrier'
-              type: array
-            preferredCarriersWithProduct:
-              items:
-                $ref: '#/components/schemas/PreferredCarrierWithProduct'
-              type: array
-            preselectedFacilities:
-              items:
-                $ref: '#/components/schemas/PreselectedFacility'
-              type: array
-            serviceLevel:
-              description: >-
-                DELIVERY: The parcel will reach the recipient according to the
-                cycle time of the carrier, typically 1-3 days when shipping
-                nationaly. SAMEDAY: The parcel will reach the recipient the same
-                day when ordering.
-              enum:
-                - DELIVERY
-                - SAMEDAY
-              type: string
-            carrierProductCategory:
-              $ref: '#/components/schemas/CarrierProductCategory'
-            desiredDeliveryTime:
-              example: '2020-02-03T09:45:51.525Z'
-              format: date-time
-              type: string
-          type: object
+          $ref: '#/components/schemas/DeliveryPreferencesShipping'
         supplyingFacilities:
           description: '@deprecated Use supplyingFacilities under collect'
           items:
@@ -38745,6 +39495,37 @@ components:
           type: string
         reservationPreferences:
           $ref: '#/components/schemas/DeliveryReservationPreferences'
+      type: object
+    DeliveryPreferencesShipping:
+      properties:
+        preferredCarriers:
+          items:
+            $ref: '#/components/schemas/PreferredCarrier'
+          type: array
+        preferredCarriersWithProduct:
+          items:
+            $ref: '#/components/schemas/PreferredCarrierWithProduct'
+          type: array
+        preselectedFacilities:
+          items:
+            $ref: '#/components/schemas/PreselectedFacility'
+          type: array
+        serviceLevel:
+          description: >-
+            DELIVERY: The parcel will reach the recipient according to the cycle
+            time of the carrier, typically 1-3 days when shipping nationaly.
+            SAMEDAY: The parcel will reach the recipient the same day when
+            ordering.
+          enum:
+            - DELIVERY
+            - SAMEDAY
+          type: string
+        carrierProductCategory:
+          $ref: '#/components/schemas/CarrierProductCategory'
+        desiredDeliveryTime:
+          example: '2020-02-03T09:45:51.525Z'
+          format: date-time
+          type: string
       type: object
     ArticleItem:
       additionalProperties: false
@@ -38762,6 +39543,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/OrderUnlockActionParameter'
         - $ref: '#/components/schemas/OrderCancelActionParameter'
+        - $ref: '#/components/schemas/OrderForceCancelActionParameter'
         - $ref: '#/components/schemas/PromiseConfirmActionParameter'
         - $ref: '#/components/schemas/PromiseExtendActionParameter'
         - $ref: '#/components/schemas/OrderConsumerAddressChangeActionParameter'
@@ -38774,6 +39556,22 @@ components:
           type: string
         version:
           description: Version of the entity to be changed
+          minimum: 0
+          type: integer
+      required:
+        - name
+        - version
+    OrderLineItemActionsParameter:
+      oneOf:
+        - $ref: '#/components/schemas/OrderLineItemCustomAttributesUpdateParameter'
+    AbstractOrderLineItemActionsParameter:
+      discriminator:
+        propertyName: name
+      properties:
+        name:
+          type: string
+        version:
+          description: Version of the order to be changed
           minimum: 0
           type: integer
       required:
@@ -38800,6 +39598,17 @@ components:
         name:
           enum:
             - CANCEL
+          type: string
+      required:
+        - name
+        - version
+    OrderForceCancelActionParameter:
+      allOf:
+        - $ref: '#/components/schemas/AbstractOrderActionsParameter'
+      properties:
+        name:
+          enum:
+            - FORCE_CANCEL
           type: string
       required:
         - name
@@ -38837,6 +39646,25 @@ components:
         - name
         - version
         - consumerAddresses
+    OrderLineItemCustomAttributesUpdateParameter:
+      allOf:
+        - $ref: '#/components/schemas/AbstractOrderLineItemActionsParameter'
+      properties:
+        name:
+          enum:
+            - UPDATE_CUSTOM_ATTRIBUTES
+          type: string
+        customAttributes:
+          description: >-
+            Attributes that can be added to the orderline. These attributes
+            cannot be used within fulfillment processes, but it could be useful
+            to have the informations carried here. If no customAttributes exist
+            yet, they will be created for this line item.
+          type: object
+      required:
+        - name
+        - version
+        - customAttributes
     PromiseConfirmActionParameter:
       allOf:
         - $ref: '#/components/schemas/AbstractOrderActionsParameter'
@@ -38945,6 +39773,13 @@ components:
           default: 1440
           minimum: 5
           description: The amount of minutes after which an automated reroute is executed
+        leadTimeBeforeTimeTriggeredReroute:
+          type: number
+          example: '480'
+          description: >-
+            How many minutes before a time triggered reroute a notification
+            should be sent. Should be smaller than rerouteAfterMinutes
+          minimum: 1
     CancelationReasonForCreation:
       allOf:
         - $ref: '#/components/schemas/AbstractReasonForCreation'
@@ -39037,7 +39872,7 @@ components:
           default: now
         endDate:
           type: string
-          example: 2024-07-013T00:00:00.000Z
+          example: '2024-07-13T00:00:00.000Z'
           format: date-time
           description: >-
             The end of the evaluated time period. Default is the start date + 60
@@ -39053,9 +39888,10 @@ components:
         consumerAddress:
           $ref: '#/components/schemas/CheckoutOptionsConsumerAddress'
         deliveryPreferences:
-          $ref: '#/components/schemas/CheckoutOptionsDeliveryPreferences'
+          $ref: '#/components/schemas/DeliveryPreferencesShipping'
       required:
         - basket
+        - consumerAddress
     CheckoutOptionsDeliveryTimePointRequest:
       properties:
         desiredDeliveryDate:
@@ -39106,27 +39942,6 @@ components:
         - tenantArticleId
         - available
         - facilityRef
-    CheckoutOptionsDeliveryPreferences:
-      properties:
-        serviceLevel:
-          description: >-
-            DELIVERY: The parcel will reach the recipient according to the cycle
-            time of the carrier, typically 1-3 days when shipping nationaly.
-
-            EXPRESS: The parcel will reach the recipient using an express
-            service level.
-          enum:
-            - DELIVERY
-            - EXPRESS
-          type: string
-        preferredCarriers:
-          type: array
-          example: DPD
-          items:
-            type: string
-        preferredCarriersWithProduct:
-          $ref: >-
-            #/components/schemas/CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
     BasketItem:
       properties:
         tenantArticleId:
@@ -39138,22 +39953,6 @@ components:
       required:
         - tenantArticleId
         - quantity
-    CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct:
-      properties:
-        carrierKey:
-          type: string
-          example: DPD
-        carrierProduct:
-          type: string
-          example: WORLDWIDE
-        carrierServices:
-          type: array
-          items:
-            type: string
-            example: SIGNATURE
-        carrierProductCategory:
-          type: string
-          example: STANDARD
     FacilityRefLatestPickingStartPair:
       properties:
         facilityRef:
@@ -40386,9 +41185,6 @@ components:
       properties:
         version:
           type: number
-        enableStorageLocationOverview:
-          type: boolean
-          deprecated: true
         isMixedStorage:
           type: boolean
           nullable: true
@@ -40399,14 +41195,10 @@ components:
       properties:
         version:
           type: number
-        enableStorageLocationOverview:
-          type: boolean
-          deprecated: true
         isMixedStorage:
           type: boolean
       required:
         - version
-        - enableStorageLocationOverview
     OutboundTagFilter:
       type: object
       properties:
@@ -41691,6 +42483,15 @@ components:
       required:
         - payload
       type: object
+    RefundTriggerWebHookEvent:
+      allOf:
+        - $ref: '#/components/schemas/WebHookEvent'
+      properties:
+        payload:
+          $ref: '#/components/schemas/ItemReturn'
+      required:
+        - payload
+      type: object
     EmailReceiver:
       type: object
       properties:
@@ -41720,6 +42521,7 @@ components:
             type: string
             enum:
               - PICK_JOB_CREATED
+              - UPCOMING_TIME_TRIGGERED_REROUTE
               - ROUTING_PLAN_NOT_ROUTABLE
               - ROUTING_PLAN_WAITING
         type:
@@ -41799,6 +42601,7 @@ components:
             type: string
             enum:
               - PICK_JOB_CREATED
+              - UPCOMING_TIME_TRIGGERED_REROUTE
               - ROUTING_PLAN_NOT_ROUTABLE
               - ROUTING_PLAN_WAITING
         type:
@@ -42076,8 +42879,12 @@ tags:
       Endpoints used by shops to get the current available pickup stores and
       available service levels like Same-Day delivery.
     name: DOMS - Checkout Options
+  - description: Get operative processes.
+    name: Fulfillment Operations - Operative Process
   - description: Endpoints to Create, Update and Read pickjobs.
     name: Fulfillment Operations - Picking
+  - description: Endpoints to Create, Update and Read Custom Service Jobs.
+    name: Fulfillment Operations - Custom Services
   - description: Endpoints to manipulate Restow Items.
     name: Fulfillment Operations - Restow
   - description: Endpoints to Create, Update and Read packjobs.
@@ -42094,14 +42901,26 @@ tags:
     name: Last Mile Integration - Carriers
   - description: Endpoints to Create, Update and Read Inbound Processes.
     name: Inventory Management - Inbound
+  - description: Endpoints to Configure and get Channel Availability.
+    name: Inventory Management - Channel Availability
   - description: Endpoints to Create, Update and Read Stocks.
     name: Inventory Management - Stocks
   - description: Endpoints to Read and configure Processes.
     name: Core - Processes
+  - description: >-
+      Endpoints to attach external actions to processes and append logs to
+      external actions.
+    name: Core - External Actions
+  - description: >-
+      Endpoints to Read and Modifiy Expires, e.g. by extending the
+      provisioningTime.
+    name: Core - Expiries
   - description: Endpoints to Create, Update and Read Document Sets.
     name: Core - Document Sets
   - description: Endpoints to Create, Update and Read Custom Services.
     name: Core - Custom Services
+  - description: Endpoints to Configure Notifications on FFT events.
+    name: Core - Notification Center
   - description: Endpoints to Create, Update and Read facilities.
     name: Core - Facilities
   - description: Endpoints to Create, Update and Read Facility Listings.
