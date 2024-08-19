@@ -282,6 +282,25 @@ export interface AbstractOrderActionsParameter {
     version: number;
 }
 /**
+ * 
+ * @export
+ * @interface AbstractOrderLineItemActionsParameter
+ */
+export interface AbstractOrderLineItemActionsParameter {
+    /**
+     * 
+     * @type {string}
+     * @memberof AbstractOrderLineItemActionsParameter
+     */
+    name: string;
+    /**
+     * Version of the order to be changed
+     * @type {number}
+     * @memberof AbstractOrderLineItemActionsParameter
+     */
+    version: number;
+}
+/**
  * Base Configuration for Ratings. See documentation for Details.
  * @export
  * @interface AbstractRatingConfiguration
@@ -924,6 +943,12 @@ export interface ArticleAttributeItem {
      * @memberof ArticleAttributeItem
      */
     valueLocalized?: LocaleString;
+    /**
+     * The type of the attribute.
+     * @type {string}
+     * @memberof ArticleAttributeItem
+     */
+    type?: ArticleAttributeItem.TypeEnum;
 }
 
 /**
@@ -942,7 +967,18 @@ export namespace ArticleAttributeItem {
         Customs = 'customs',
         Insurance = 'insurance',
         Shop = 'shop',
-        Dimensions = 'dimensions'
+        Dimensions = 'dimensions',
+        CarrierService = 'carrierService'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        STRING = 'STRING',
+        NUMBER = 'NUMBER',
+        CURRENCY = 'CURRENCY',
+        BOOLEAN = 'BOOLEAN'
     }
 }
 /**
@@ -2611,13 +2647,13 @@ export interface CarrierCountryServiceMapping extends StaticCarrierCountryServic
      */
     id: string;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />Deprecated - Use source instead.
+     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated - Use source instead.
      * @type {string}
      * @memberof CarrierCountryServiceMapping
      */
     sourceCountry?: string;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />Deprecated - Use destination instead.
+     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated - Use destination instead.
      * @type {Array<CountryCode>}
      * @memberof CarrierCountryServiceMapping
      */
@@ -2673,10 +2709,16 @@ export interface CarrierCountryServiceMappingForCreation {
     mandatoryShippingItemAttributes?: Array<MandatoryShippingItemAttribute>;
     /**
      * 
-     * @type {string}
+     * @type {Array<MandatoryShippingArticleAttribute>}
      * @memberof CarrierCountryServiceMappingForCreation
      */
-    product?: string;
+    mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CarrierCountryServiceMappingForCreation
+     */
+    products?: Array<string>;
     /**
      * 
      * @type {CarrierProductCategory}
@@ -2746,10 +2788,16 @@ export interface CarrierCountryServiceMappingForUpdate {
     mandatoryShippingItemAttributes?: Array<MandatoryShippingItemAttribute>;
     /**
      * 
-     * @type {string}
+     * @type {Array<MandatoryShippingArticleAttribute>}
      * @memberof CarrierCountryServiceMappingForUpdate
      */
-    product?: string;
+    mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
+    /**
+     * Array of products for the given mapping
+     * @type {Array<string>}
+     * @memberof CarrierCountryServiceMappingForUpdate
+     */
+    products?: Array<string>;
     /**
      * 
      * @type {CarrierProductCategory}
@@ -2946,7 +2994,7 @@ export interface CarrierPatchActions {
     version: number;
 }
 /**
- * 
+ * Desired product class to choose when ordering a label, this is not a carrier specific value
  * @export
  * @enum {string}
  */
@@ -2964,7 +3012,8 @@ export enum CarrierProductCategory {
 export enum CarrierServices {
     SIGNATURE = 'SIGNATURE',
     CUSTOMERSIGNATURE = 'CUSTOMER_SIGNATURE',
-    ADULTSIGNATURE = 'ADULT_SIGNATURE'
+    ADULTSIGNATURE = 'ADULT_SIGNATURE',
+    SATURDAYDELIVERY = 'SATURDAY_DELIVERY'
 }
 /**
  * It is taken into consideration for all carriers. Default: INACTIVE
@@ -3049,6 +3098,37 @@ export interface CheckoutOptionsAvailability {
      * @memberof CheckoutOptionsAvailability
      */
     isBackOrderable: boolean;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CheckoutOptionsAvailability
+     */
+    latestPickingStart?: Date;
+    /**
+     * 
+     * @type {CheckoutOptionsAvailabilityCarrier}
+     * @memberof CheckoutOptionsAvailability
+     */
+    carrier?: CheckoutOptionsAvailabilityCarrier;
+}
+/**
+ * 
+ * @export
+ * @interface CheckoutOptionsAvailabilityCarrier
+ */
+export interface CheckoutOptionsAvailabilityCarrier {
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutOptionsAvailabilityCarrier
+     */
+    carrierRef: string;
+    /**
+     * 
+     * @type {CarrierProductCategory}
+     * @memberof CheckoutOptionsAvailabilityCarrier
+     */
+    carrierProductCategory?: CarrierProductCategory;
 }
 /**
  * 
@@ -3135,7 +3215,7 @@ export interface CheckoutOptionsDeliveryEarliestRequest {
      * @type {CheckoutOptionsConsumerAddress}
      * @memberof CheckoutOptionsDeliveryEarliestRequest
      */
-    consumerAddress?: CheckoutOptionsConsumerAddress;
+    consumerAddress: CheckoutOptionsConsumerAddress;
 }
 /**
  * 
@@ -3186,84 +3266,19 @@ export interface CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier {
      * @type {string}
      * @memberof CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
      */
-    name?: string;
+    name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
+     */
+    carrierRef: string;
     /**
      * 
      * @type {Array<string>}
      * @memberof CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
      */
     nonDeliveryDays?: Array<string>;
-}
-/**
- * 
- * @export
- * @interface CheckoutOptionsDeliveryPreferences
- */
-export interface CheckoutOptionsDeliveryPreferences {
-    /**
-     * DELIVERY: The parcel will reach the recipient according to the cycle time of the carrier, typically 1-3 days when shipping nationaly. EXPRESS: The parcel will reach the recipient using an express service level.
-     * @type {string}
-     * @memberof CheckoutOptionsDeliveryPreferences
-     */
-    serviceLevel?: CheckoutOptionsDeliveryPreferences.ServiceLevelEnum;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof CheckoutOptionsDeliveryPreferences
-     */
-    preferredCarriers?: Array<string>;
-    /**
-     * 
-     * @type {CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct}
-     * @memberof CheckoutOptionsDeliveryPreferences
-     */
-    preferredCarriersWithProduct?: CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct;
-}
-
-/**
- * @export
- * @namespace CheckoutOptionsDeliveryPreferences
- */
-export namespace CheckoutOptionsDeliveryPreferences {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum ServiceLevelEnum {
-        DELIVERY = 'DELIVERY',
-        EXPRESS = 'EXPRESS'
-    }
-}
-/**
- * 
- * @export
- * @interface CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
- */
-export interface CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct {
-    /**
-     * 
-     * @type {string}
-     * @memberof CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
-     */
-    carrierKey?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
-     */
-    carrierProduct?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
-     */
-    carrierServices?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof CheckoutOptionsDeliveryPreferencesPreferredCarriersWithProduct
-     */
-    carrierProductCategory?: string;
 }
 /**
  * 
@@ -3294,13 +3309,13 @@ export interface CheckoutOptionsDeliveryTimePeriodRequest {
      * @type {CheckoutOptionsConsumerAddress}
      * @memberof CheckoutOptionsDeliveryTimePeriodRequest
      */
-    consumerAddress?: CheckoutOptionsConsumerAddress;
+    consumerAddress: CheckoutOptionsConsumerAddress;
     /**
      * 
-     * @type {CheckoutOptionsDeliveryPreferences}
+     * @type {DeliveryPreferencesShipping}
      * @memberof CheckoutOptionsDeliveryTimePeriodRequest
      */
-    deliveryPreferences?: CheckoutOptionsDeliveryPreferences;
+    deliveryPreferences?: DeliveryPreferencesShipping;
 }
 /**
  * 
@@ -4202,6 +4217,12 @@ export interface CustomService extends VersionedResource {
      */
     additionalInformation?: Array<AdditionalInformation>;
     /**
+     * Attributes that can be added to custom service. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof CustomService
+     */
+    customAttributes?: any;
+    /**
      * 
      * @type {string}
      * @memberof CustomService
@@ -4318,6 +4339,12 @@ export interface CustomServiceForCreation {
      * @memberof CustomServiceForCreation
      */
     additionalInformation?: Array<AdditionalInformationForCreation>;
+    /**
+     * Attributes that can be added to custom service. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof CustomServiceForCreation
+     */
+    customAttributes?: any;
 }
 /**
  * 
@@ -5628,6 +5655,7 @@ export namespace EmailNotificationChannel {
      */
     export enum EventsEnum {
         PICKJOBCREATED = 'PICK_JOB_CREATED',
+        UPCOMINGTIMETRIGGEREDREROUTE = 'UPCOMING_TIME_TRIGGERED_REROUTE',
         ROUTINGPLANNOTROUTABLE = 'ROUTING_PLAN_NOT_ROUTABLE',
         ROUTINGPLANWAITING = 'ROUTING_PLAN_WAITING'
     }
@@ -5675,6 +5703,7 @@ export namespace EmailNotificationChannelForCreation {
      */
     export enum EventsEnum {
         PICKJOBCREATED = 'PICK_JOB_CREATED',
+        UPCOMINGTIMETRIGGEREDREROUTE = 'UPCOMING_TIME_TRIGGERED_REROUTE',
         ROUTINGPLANNOTROUTABLE = 'ROUTING_PLAN_NOT_ROUTABLE',
         ROUTINGPLANWAITING = 'ROUTING_PLAN_WAITING'
     }
@@ -6083,10 +6112,10 @@ export interface ExternalActionForCreation {
     groups: Array<string>;
     /**
      * 
-     * @type {ExternalFormActionDefinition | ExternalLinkActionDefinition}
+     * @type {ExternalFormActionDefinition | ExternalLinkActionDefinition | ExternalCommentActionDefinition}
      * @memberof ExternalActionForCreation
      */
-    action: ExternalFormActionDefinition | ExternalLinkActionDefinition;
+    action: ExternalFormActionDefinition | ExternalLinkActionDefinition | ExternalCommentActionDefinition;
 }
 /**
  * 
@@ -6114,10 +6143,10 @@ export interface ExternalActionForReplacement {
     groups: Array<string>;
     /**
      * 
-     * @type {ExternalFormActionDefinition | ExternalLinkActionDefinition}
+     * @type {ExternalFormActionDefinition | ExternalLinkActionDefinition | ExternalCommentActionDefinition}
      * @memberof ExternalActionForReplacement
      */
-    action: ExternalFormActionDefinition | ExternalLinkActionDefinition;
+    action: ExternalFormActionDefinition | ExternalLinkActionDefinition | ExternalCommentActionDefinition;
 }
 /**
  * 
@@ -6164,10 +6193,10 @@ export interface ExternalActionLogForCreation {
     requiresAnonymization: boolean;
     /**
      * 
-     * @type {ExternalLinkActionLogPayload | ExternalFormActionLogPayload}
+     * @type {ExternalLinkActionLogPayload | ExternalFormActionLogPayload | ExternalCommentActionLogPayload}
      * @memberof ExternalActionLogForCreation
      */
-    actionPayload: ExternalLinkActionLogPayload | ExternalFormActionLogPayload;
+    actionPayload: ExternalLinkActionLogPayload | ExternalFormActionLogPayload | ExternalCommentActionLogPayload;
 }
 /**
  * 
@@ -6195,7 +6224,8 @@ export interface ExternalActionLogs {
  */
 export enum ExternalActionType {
     BLANKLINK = 'BLANK_LINK',
-    FORM = 'FORM'
+    FORM = 'FORM',
+    COMMENT = 'COMMENT'
 }
 /**
  * 
@@ -6215,6 +6245,38 @@ export interface ExternalActions {
      * @memberof ExternalActions
      */
     total: number;
+}
+/**
+ * This action provides a possibility to set comments. It also enables a possibility to save action results for other actions.
+ * @export
+ * @interface ExternalCommentActionDefinition
+ */
+export interface ExternalCommentActionDefinition {
+    /**
+     * 
+     * @type {ExternalActionType}
+     * @memberof ExternalCommentActionDefinition
+     */
+    type: ExternalActionType;
+}
+/**
+ * This action payload provides a possibility to set comments. It also enables a possibility to save action results for other actions.
+ * @export
+ * @interface ExternalCommentActionLogPayload
+ */
+export interface ExternalCommentActionLogPayload {
+    /**
+     * The actual comment.
+     * @type {string}
+     * @memberof ExternalCommentActionLogPayload
+     */
+    comment: string;
+    /**
+     * An existing external action id you want to link with. The action have to be in the same process.
+     * @type {string}
+     * @memberof ExternalCommentActionLogPayload
+     */
+    externalActionRef?: string;
 }
 /**
  * 
@@ -6389,13 +6451,13 @@ export interface ExternalFormActionDefinition {
      * @type {ExternalFormActionButton}
      * @memberof ExternalFormActionDefinition
      */
-    success: ExternalFormActionButton;
+    success?: ExternalFormActionButton;
     /**
      * 
      * @type {ExternalFormActionButton}
      * @memberof ExternalFormActionDefinition
      */
-    cancel?: ExternalFormActionButton;
+    cancel: ExternalFormActionButton;
 }
 /**
  * 
@@ -7143,6 +7205,12 @@ export interface FacilityDecision {
      * @memberof FacilityDecision
      */
     isBestReassignmentCandidate?: boolean;
+    /**
+     * 
+     * @type {Date}
+     * @memberof FacilityDecision
+     */
+    latestPickingStart?: Date;
 }
 /**
  * 
@@ -8061,6 +8129,95 @@ export interface FilterEntity {
  * @export
  * @enum {string}
  */
+export enum FinishHandoverJobActionEnum {
+    FINISHHANDOVERJOB = 'FINISH_HANDOVER_JOB'
+}
+/**
+ * 
+ * @export
+ * @interface FinishHandoverJobActionParameter
+ */
+export interface FinishHandoverJobActionParameter {
+    /**
+     * 
+     * @type {FinishHandoverJobActionEnum}
+     * @memberof FinishHandoverJobActionParameter
+     */
+    name: FinishHandoverJobActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof FinishHandoverJobActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<FinishHandoverJobLineItem>}
+     * @memberof FinishHandoverJobActionParameter
+     */
+    lineItems: Array<FinishHandoverJobLineItem>;
+}
+/**
+ * 
+ * @export
+ * @interface FinishHandoverJobLineItem
+ */
+export interface FinishHandoverJobLineItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinishHandoverJobLineItem
+     */
+    id: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FinishHandoverJobLineItem
+     */
+    handedOverQuantity: number;
+    /**
+     * 
+     * @type {Array<RefusedItemForUpdate>}
+     * @memberof FinishHandoverJobLineItem
+     */
+    refused?: Array<RefusedItemForUpdate>;
+    /**
+     * 
+     * @type {Array<FinishHandoverJobSubstituteLineItem>}
+     * @memberof FinishHandoverJobLineItem
+     */
+    substituteLineItems?: Array<FinishHandoverJobSubstituteLineItem>;
+}
+/**
+ * 
+ * @export
+ * @interface FinishHandoverJobSubstituteLineItem
+ */
+export interface FinishHandoverJobSubstituteLineItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinishHandoverJobSubstituteLineItem
+     */
+    id: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FinishHandoverJobSubstituteLineItem
+     */
+    handedOverQuantity: number;
+    /**
+     * 
+     * @type {Array<RefusedItemForUpdate>}
+     * @memberof FinishHandoverJobSubstituteLineItem
+     */
+    refused?: Array<RefusedItemForUpdate>;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
 export enum FinishItemReturnActionEnum {
     FinishItemReturn = 'FinishItemReturn'
 }
@@ -8907,6 +9064,64 @@ export interface HandoverJobHandedOverWebHookEvent extends WebHookEvent {
     payload: Handoverjob;
 }
 /**
+ * 
+ * @export
+ * @enum {string}
+ */
+export enum HandoverJobLineItemUpdateActionEnum {
+    UPDATELINEITEM = 'UPDATE_LINEITEM'
+}
+/**
+ * 
+ * @export
+ * @interface HandoverJobLineItemUpdateActionParameter
+ */
+export interface HandoverJobLineItemUpdateActionParameter {
+    /**
+     * 
+     * @type {HandoverJobLineItemUpdateActionEnum}
+     * @memberof HandoverJobLineItemUpdateActionParameter
+     */
+    name: HandoverJobLineItemUpdateActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof HandoverJobLineItemUpdateActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {HandoverJobLineItemUpdateActionParameterLineItem}
+     * @memberof HandoverJobLineItemUpdateActionParameter
+     */
+    lineItem: HandoverJobLineItemUpdateActionParameterLineItem;
+}
+/**
+ * 
+ * @export
+ * @interface HandoverJobLineItemUpdateActionParameterLineItem
+ */
+export interface HandoverJobLineItemUpdateActionParameterLineItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof HandoverJobLineItemUpdateActionParameterLineItem
+     */
+    id: string;
+    /**
+     * 
+     * @type {Array<RefusedItemForUpdate>}
+     * @memberof HandoverJobLineItemUpdateActionParameterLineItem
+     */
+    refused?: Array<RefusedItemForUpdate>;
+    /**
+     * 
+     * @type {Array<HandoverSubstituteLineItemForUpdate>}
+     * @memberof HandoverJobLineItemUpdateActionParameterLineItem
+     */
+    substituteItems?: Array<HandoverSubstituteLineItemForUpdate>;
+}
+/**
  * STATUS_TARGET_TIME_LAST_MODIFIED_DATE is deprecated
  * @export
  * @enum {string}
@@ -8958,43 +9173,13 @@ export interface HandoverJobTagConfiguration extends VersionedResource {
  * @export
  * @interface HandoverLineItem
  */
-export interface HandoverLineItem {
+export interface HandoverLineItem extends HandoverLineItemForCreation {
     /**
      * 
-     * @type {HandoverLineItemArticle}
+     * @type {string}
      * @memberof HandoverLineItem
      */
-    article: HandoverLineItemArticle;
-    /**
-     * quantity of the specific item that has been provided for handover
-     * @type {number}
-     * @memberof HandoverLineItem
-     */
-    quantity: number;
-    /**
-     * quantity of the specific item that has been handed over
-     * @type {number}
-     * @memberof HandoverLineItem
-     */
-    handedOverQuantity: number;
-    /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />
-     * @type {Array<HandoverSubstituteLineItem>}
-     * @memberof HandoverLineItem
-     */
-    substituteLineItems?: Array<HandoverSubstituteLineItem>;
-    /**
-     * 
-     * @type {Array<TagReference>}
-     * @memberof HandoverLineItem
-     */
-    tags?: Array<TagReference>;
-    /**
-     * 
-     * @type {Array<Sticker>}
-     * @memberof HandoverLineItem
-     */
-    stickers?: Array<Sticker>;
+    id: string;
 }
 /**
  * 
@@ -9008,6 +9193,55 @@ export interface HandoverLineItemArticle extends AbstractArticle {
      * @memberof HandoverLineItemArticle
      */
     attributes?: Array<ArticleAttributeItem>;
+}
+/**
+ * 
+ * @export
+ * @interface HandoverLineItemForCreation
+ */
+export interface HandoverLineItemForCreation {
+    /**
+     * 
+     * @type {Array<RefusedItem>}
+     * @memberof HandoverLineItemForCreation
+     */
+    refused?: Array<RefusedItem>;
+    /**
+     * 
+     * @type {HandoverLineItemArticle}
+     * @memberof HandoverLineItemForCreation
+     */
+    article: HandoverLineItemArticle;
+    /**
+     * quantity of the specific item that has been provided for handover
+     * @type {number}
+     * @memberof HandoverLineItemForCreation
+     */
+    quantity: number;
+    /**
+     * quantity of the specific item that has been handed over
+     * @type {number}
+     * @memberof HandoverLineItemForCreation
+     */
+    handedOverQuantity: number;
+    /**
+     * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />
+     * @type {Array<HandoverSubstituteLineItem>}
+     * @memberof HandoverLineItemForCreation
+     */
+    substituteLineItems?: Array<HandoverSubstituteLineItem>;
+    /**
+     * 
+     * @type {Array<TagReference>}
+     * @memberof HandoverLineItemForCreation
+     */
+    tags?: Array<TagReference>;
+    /**
+     * 
+     * @type {Array<Sticker>}
+     * @memberof HandoverLineItemForCreation
+     */
+    stickers?: Array<Sticker>;
 }
 /**
  * 
@@ -9027,6 +9261,37 @@ export interface HandoverSubstituteLineItem extends SubstituteLineItem {
      * @memberof HandoverSubstituteLineItem
      */
     handedOverQuantity?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof HandoverSubstituteLineItem
+     */
+    id?: string;
+    /**
+     * 
+     * @type {Array<RefusedItem>}
+     * @memberof HandoverSubstituteLineItem
+     */
+    refused?: Array<RefusedItem>;
+}
+/**
+ * 
+ * @export
+ * @interface HandoverSubstituteLineItemForUpdate
+ */
+export interface HandoverSubstituteLineItemForUpdate {
+    /**
+     * 
+     * @type {string}
+     * @memberof HandoverSubstituteLineItemForUpdate
+     */
+    id: string;
+    /**
+     * 
+     * @type {Array<RefusedItemForUpdate>}
+     * @memberof HandoverSubstituteLineItemForUpdate
+     */
+    refused?: Array<RefusedItemForUpdate>;
 }
 /**
  * 
@@ -9280,10 +9545,10 @@ export interface HandoverjobForCreation {
     facilityRef: string;
     /**
      * 
-     * @type {Array<HandoverLineItem>}
+     * @type {Array<HandoverLineItemForCreation>}
      * @memberof HandoverjobForCreation
      */
-    handoverJobLineItems?: Array<HandoverLineItem>;
+    handoverJobLineItems?: Array<HandoverLineItemForCreation>;
     /**
      * Reference to array of load unit Refs
      * @type {Array<string>}
@@ -10966,12 +11231,6 @@ export interface InventoryConfiguration {
      * @type {boolean}
      * @memberof InventoryConfiguration
      */
-    enableStorageLocationOverview: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InventoryConfiguration
-     */
     isMixedStorage?: boolean;
 }
 /**
@@ -10986,12 +11245,6 @@ export interface InventoryConfigurationForPatch {
      * @memberof InventoryConfigurationForPatch
      */
     version: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InventoryConfigurationForPatch
-     */
-    enableStorageLocationOverview?: boolean;
     /**
      * 
      * @type {boolean}
@@ -11560,6 +11813,12 @@ export interface ItemReturnJobLineItem extends ItemReturnJobLineItemForCreation 
      * @memberof ItemReturnJobLineItem
      */
     returnable: number;
+    /**
+     * Marks if some of the items could be not refundable. E.g. through altering via a ServiceJob via engraving.
+     * @type {boolean}
+     * @memberof ItemReturnJobLineItem
+     */
+    notReturnableItemsExists?: boolean;
 }
 /**
  * 
@@ -11598,6 +11857,12 @@ export interface ItemReturnJobLineItemForCreation {
      * @memberof ItemReturnJobLineItemForCreation
      */
     delivered: number;
+    /**
+     * Marks if some of the items could be not refundable. E.g. through altering via a ServiceJob via engraving.
+     * @type {boolean}
+     * @memberof ItemReturnJobLineItemForCreation
+     */
+    notReturnableItemsExists?: boolean;
     /**
      * 
      * @type {Array<string>}
@@ -11900,6 +12165,31 @@ export interface LastDomainEntityStatusItem {
      * @memberof LastDomainEntityStatusItem
      */
     entityId: string;
+}
+/**
+ * 
+ * @export
+ * @interface LatestPickingStart
+ */
+export interface LatestPickingStart {
+    /**
+     * 
+     * @type {Date}
+     * @memberof LatestPickingStart
+     */
+    latestPickingStartDate: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof LatestPickingStart
+     */
+    targetTime: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof LatestPickingStart
+     */
+    carrierRef: string;
 }
 /**
  * 
@@ -12994,11 +13284,78 @@ export interface Location {
 /**
  * 
  * @export
+ * @interface MandatoryShippingArticleAttribute
+ */
+export interface MandatoryShippingArticleAttribute {
+    /**
+     * 
+     * @type {MandatoryShippingArticleAttributeReferencedField}
+     * @memberof MandatoryShippingArticleAttribute
+     */
+    referencedField: MandatoryShippingArticleAttributeReferencedField;
+    /**
+     * 
+     * @type {MandatoryShippingArticleAttributeDataType}
+     * @memberof MandatoryShippingArticleAttribute
+     */
+    dataType: MandatoryShippingArticleAttributeDataType;
+    /**
+     * 
+     * @type {MandatoryShippingArticleAttributeCategory}
+     * @memberof MandatoryShippingArticleAttribute
+     */
+    category: MandatoryShippingArticleAttributeCategory;
+    /**
+     * 
+     * @type {string}
+     * @memberof MandatoryShippingArticleAttribute
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof MandatoryShippingArticleAttribute
+     */
+    descriptionLocalized: LocaleString;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+export enum MandatoryShippingArticleAttributeCategory {
+    Customs = 'customs',
+    Dimensions = 'dimensions'
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+export enum MandatoryShippingArticleAttributeDataType {
+    NUMBER = 'NUMBER',
+    STRING = 'STRING'
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+export enum MandatoryShippingArticleAttributeReferencedField {
+    WeightPerUnit = 'attributes.weightPerUnit',
+    HsCode = 'attributes.hsCode',
+    Currency = 'attributes.currency',
+    ValuePerUnit = 'attributes.valuePerUnit',
+    CountryOfManufacture = 'attributes.countryOfManufacture'
+}
+/**
+ * 
+ * @export
  * @interface MandatoryShippingAttribute
  */
 export interface MandatoryShippingAttribute {
     /**
-     * 
+     * - dimensions.weight: will be calculated from MandatoryShippingArticleAttribute.attributes.weightPerUnit if items with weightPerUnit is set on all items - productValue: will be calculated from MandatoryShippingArticleAttribute.attributes.pricePerUnit if items with pricePerUnit is set on all items
      * @type {string}
      * @memberof MandatoryShippingAttribute
      */
@@ -13055,7 +13412,7 @@ export namespace MandatoryShippingAttribute {
  */
 export interface MandatoryShippingItemAttribute {
     /**
-     * Deprecated: quantity, this field is now mandatory in the item
+     * Deprecated:   - description: article.title will be used instead   - weightInGram: use MandatoryShippingArticleAttribute.attributes.weightPerUnit   - quantity, this field is now mandatory in the item   - parcelItemValue.value: use MandatoryShippingArticleAttribute.attributes.pricePerUnit   - parcelItemValue.currency: use MandatoryShippingArticleAttribute.attributes.currency   - countryOfManufacture: use MandatoryShippingArticleAttribute.attributes.countryOfManufacture   - tenantArticleId: mandatory on line item article
      * @type {string}
      * @memberof MandatoryShippingItemAttribute
      */
@@ -15608,10 +15965,10 @@ export interface NonDeliveryDays {
     nonDeliveryType?: NonDeliveryType;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof NonDeliveryDays
      */
-    nonDeliveryDay: Date;
+    nonDeliveryDay: string;
 }
 /**
  * 
@@ -16230,6 +16587,37 @@ export namespace OrderCancelActionParameter {
     }
 }
 /**
+ * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />This configuration is to define specific rules for canceling orders such as the forced cancelation.
+ * @export
+ * @interface OrderCancelationConfiguration
+ */
+export interface OrderCancelationConfiguration {
+    /**
+     * The date this order was created at the platform. This value is generated by the service.
+     * @type {Date}
+     * @memberof OrderCancelationConfiguration
+     */
+    created?: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderCancelationConfiguration
+     */
+    id?: string;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof OrderCancelationConfiguration
+     */
+    version: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof OrderCancelationConfiguration
+     */
+    allowForceCancelOrder: boolean;
+}
+/**
  * 
  * @export
  * @interface OrderCancelledWebHookEvent
@@ -16496,6 +16884,33 @@ export interface OrderForCreationConsumer {
 /**
  * 
  * @export
+ * @interface OrderForceCancelActionParameter
+ */
+export interface OrderForceCancelActionParameter extends AbstractOrderActionsParameter {
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderForceCancelActionParameter
+     */
+    name: OrderForceCancelActionParameter.NameEnum;
+}
+
+/**
+ * @export
+ * @namespace OrderForceCancelActionParameter
+ */
+export namespace OrderForceCancelActionParameter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        FORCECANCEL = 'FORCE_CANCEL'
+    }
+}
+/**
+ * 
+ * @export
  * @interface OrderIdCancelBody
  */
 export interface OrderIdCancelBody {
@@ -16541,6 +16956,13 @@ export interface OrderLineItem extends OrderLineItemForCreation {
 /**
  * 
  * @export
+ * @interface OrderLineItemActionsParameter
+ */
+export interface OrderLineItemActionsParameter {
+}
+/**
+ * 
+ * @export
  * @interface OrderLineItemArticle
  */
 export interface OrderLineItemArticle extends AbstractArticle {
@@ -16550,6 +16972,39 @@ export interface OrderLineItemArticle extends AbstractArticle {
      * @memberof OrderLineItemArticle
      */
     attributes?: Array<OrderArticleAttributeItem>;
+}
+/**
+ * 
+ * @export
+ * @interface OrderLineItemCustomAttributesUpdateParameter
+ */
+export interface OrderLineItemCustomAttributesUpdateParameter extends AbstractOrderLineItemActionsParameter {
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderLineItemCustomAttributesUpdateParameter
+     */
+    name: OrderLineItemCustomAttributesUpdateParameter.NameEnum;
+    /**
+     * Attributes that can be added to the orderline. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here. If no customAttributes exist yet, they will be created for this line item.
+     * @type {any}
+     * @memberof OrderLineItemCustomAttributesUpdateParameter
+     */
+    customAttributes: any;
+}
+
+/**
+ * @export
+ * @namespace OrderLineItemCustomAttributesUpdateParameter
+ */
+export namespace OrderLineItemCustomAttributesUpdateParameter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        UPDATECUSTOMATTRIBUTES = 'UPDATE_CUSTOM_ATTRIBUTES'
+    }
 }
 /**
  * 
@@ -17919,6 +18374,12 @@ export interface PackingTargetContainer extends VersionedResource {
      */
     packingContainerTypeRef: string;
     /**
+     * Reference to the documents collection from this entity
+     * @type {string}
+     * @memberof PackingTargetContainer
+     */
+    documentsRef?: string;
+    /**
      * 
      * @type {string}
      * @memberof PackingTargetContainer
@@ -17942,6 +18403,12 @@ export interface PackingTargetContainer extends VersionedResource {
      * @memberof PackingTargetContainer
      */
     packJobRef: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PackingTargetContainer
+     */
+    shortId?: string;
     /**
      * 
      * @type {string}
@@ -17984,6 +18451,12 @@ export interface PackingTargetContainer extends VersionedResource {
      * @memberof PackingTargetContainer
      */
     nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {Array<Parcel>}
+     * @memberof PackingTargetContainer
+     */
+    parcels?: Array<Parcel>;
 }
 /**
  * 
@@ -18284,10 +18757,30 @@ export interface Parcel extends VersionedResource {
     productValue?: number;
     /**
      * 
+     * @type {string}
+     * @memberof Parcel
+     */
+    shortId?: string;
+    /**
+     * 
      * @type {Array<OperativeTransfer>}
      * @memberof Parcel
      */
     transfers?: Array<OperativeTransfer>;
+}
+/**
+ * 
+ * @export
+ * @interface ParcelArticleAttributeItemForUpdate
+ */
+export interface ParcelArticleAttributeItemForUpdate extends ArticleAttributeItem {
+}
+
+/**
+ * @export
+ * @namespace ParcelArticleAttributeItemForUpdate
+ */
+export namespace ParcelArticleAttributeItemForUpdate {
 }
 /**
  * 
@@ -18450,6 +18943,12 @@ export interface ParcelForCreation {
      */
     pickUpInformation?: ParcelPickUpInformation;
     /**
+     * 
+     * @type {string}
+     * @memberof ParcelForCreation
+     */
+    shortId?: string;
+    /**
      * Monetary value of all goods in this parcel. Needed for sending cross border packages (customs) To be interpreted as money in the currency given under paymentInformation.currency
      * @type {number}
      * @memberof ParcelForCreation
@@ -18487,19 +18986,19 @@ export interface ParcelItem {
      */
     quantity: number;
     /**
-     * 
+     * Deprecated - use article.attribute.hsCode instead
      * @type {string}
      * @memberof ParcelItem
      */
     hsCode?: string;
     /**
-     * Description of the given item/items
+     * Description - article.title will be used instead - of the given item/items
      * @type {string}
      * @memberof ParcelItem
      */
     description?: string;
     /**
-     * Weight of a single item in gram
+     * Deprecated - use article.attribute.weightPerUnit instead - Weight of a single item in gram
      * @type {number}
      * @memberof ParcelItem
      */
@@ -18511,7 +19010,7 @@ export interface ParcelItem {
      */
     parcelItemValue?: ParcelItemValue;
     /**
-     * 
+     * Deprecated - use article.attribute.countryOfManufacture instead
      * @type {string}
      * @memberof ParcelItem
      */
@@ -18603,6 +19102,12 @@ export interface ParcelItemForUpdate {
      * @memberof ParcelItemForUpdate
      */
     parcelItemValue?: ParcelItemValue;
+    /**
+     * 
+     * @type {Array<ArticleAttributeItem>}
+     * @memberof ParcelItemForUpdate
+     */
+    parcelItemArticleAttributes?: Array<ArticleAttributeItem>;
     /**
      * Weight of a single item in gram
      * @type {number}
@@ -18858,6 +19363,12 @@ export interface ParcelServices {
      * @memberof ParcelServices
      */
     customerSignature?: boolean;
+    /**
+     * Saturday Delivery
+     * @type {boolean}
+     * @memberof ParcelServices
+     */
+    saturdayDelivery?: boolean;
 }
 /**
  * 
@@ -19739,7 +20250,7 @@ export interface PickLineItemArticle extends AbstractArticle {
      */
     attributes?: Array<ArticleAttributeItem>;
     /**
-     * 
+     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />
      * @type {Array<ArticlePrice>}
      * @memberof PickLineItemArticle
      */
@@ -20788,7 +21299,13 @@ export interface PickjobDeliveryInformationForCreationDetailsShipping {
      */
     carrierKey?: string;
     /**
-     * Desired product of given carrier to choose when ordering a label
+     * 
+     * @type {CarrierProductCategory}
+     * @memberof PickjobDeliveryInformationForCreationDetailsShipping
+     */
+    carrierProductCategory?: CarrierProductCategory;
+    /**
+     * Desired product of given carrier to choose when ordering a label, this is specific to a carrier
      * @type {string}
      * @memberof PickjobDeliveryInformationForCreationDetailsShipping
      */
@@ -21487,6 +22004,12 @@ export interface ProductInformation {
     mandatoryShippingAttributes?: Array<MandatoryShippingAttribute>;
     /**
      * 
+     * @type {Array<MandatoryShippingArticleAttribute>}
+     * @memberof ProductInformation
+     */
+    mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
+    /**
+     * 
      * @type {Array<MandatoryShippingItemAttribute>}
      * @memberof ProductInformation
      */
@@ -21498,6 +22021,12 @@ export interface ProductInformation {
  * @interface PromiseCarrier
  */
 export interface PromiseCarrier {
+    /**
+     * 
+     * @type {string}
+     * @memberof PromiseCarrier
+     */
+    carrierRef: string;
     /**
      * 
      * @type {string}
@@ -21522,12 +22051,6 @@ export interface PromiseCarrier {
      * @memberof PromiseCarrier
      */
     deliveryPromiseValidUntil?: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof PromiseCarrier
-     */
-    latestPickingStart?: Date;
 }
 /**
  * 
@@ -22266,6 +22789,75 @@ export namespace ReceiptForCreation {
 /**
  * 
  * @export
+ * @interface RefundTriggerWebHookEvent
+ */
+export interface RefundTriggerWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ItemReturn}
+     * @memberof RefundTriggerWebHookEvent
+     */
+    payload: ItemReturn;
+}
+/**
+ * 
+ * @export
+ * @interface RefusedItem
+ */
+export interface RefusedItem {
+    /**
+     * 
+     * @type {number}
+     * @memberof RefusedItem
+     */
+    quantity: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RefusedItem
+     */
+    reason?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RefusedItem
+     */
+    reasonLocalized?: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RefusedItem
+     */
+    comment?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RefusedItemForUpdate
+ */
+export interface RefusedItemForUpdate {
+    /**
+     * 
+     * @type {number}
+     * @memberof RefusedItemForUpdate
+     */
+    quantity: number;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RefusedItemForUpdate
+     */
+    reasonLocalized?: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RefusedItemForUpdate
+     */
+    comment?: string;
+}
+/**
+ * 
+ * @export
  * @interface RegionInformation
  */
 export interface RegionInformation {
@@ -22849,6 +23441,12 @@ export interface RerouteConfiguration {
      * @memberof RerouteConfiguration
      */
     rerouteAfterMinutes: number;
+    /**
+     * How many minutes before a time triggered reroute a notification should be sent. Should be smaller than rerouteAfterMinutes
+     * @type {number}
+     * @memberof RerouteConfiguration
+     */
+    leadTimeBeforeTimeTriggeredReroute?: number;
 }
 /**
  * 
@@ -24198,7 +24796,7 @@ export interface RoutingConfiguration {
      */
     lastModified?: Date;
     /**
-     * Contains the routing configuration for prioritization & routing for the whole tenant
+     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Contains the routing configuration for prioritization & routing for the whole tenant
      * @type {Array<PrioritizationRule>}
      * @memberof RoutingConfiguration
      */
@@ -24500,6 +25098,12 @@ export interface RoutingPlan extends VersionedResource {
      * @memberof RoutingPlan
      */
     customServices?: Array<CustomServiceReference>;
+    /**
+     * 
+     * @type {LatestPickingStart}
+     * @memberof RoutingPlan
+     */
+    latestPickingStart?: LatestPickingStart;
     /**
      * The point in time by which the order is supposed to be provisioned.
      * @type {Date}
@@ -25229,7 +25833,8 @@ export enum Section {
     PACKJOB = 'PACKJOB',
     PICKJOB = 'PICKJOB',
     HANDOVERJOB = 'HANDOVERJOB',
-    PARCEL = 'PARCEL'
+    PARCEL = 'PARCEL',
+    PACKINGTARGETCONTAINER = 'PACKING_TARGET_CONTAINER'
 }
 /**
  * 
@@ -26514,22 +27119,34 @@ export interface StaticCarrierCountryServiceMapping {
     destinations: Array<RegionInformation>;
     /**
      * 
+     * @type {Array<MandatoryShippingArticleAttribute>}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
+    /**
+     * 
      * @type {Array<MandatoryShippingAttribute>}
      * @memberof StaticCarrierCountryServiceMapping
      */
     mandatoryShippingAttributes?: Array<MandatoryShippingAttribute>;
     /**
-     * 
+     * Deprecated - use mandatoryShippingArticleAttributes instead
      * @type {Array<MandatoryShippingItemAttribute>}
      * @memberof StaticCarrierCountryServiceMapping
      */
     mandatoryShippingItemAttributes?: Array<MandatoryShippingItemAttribute>;
     /**
-     * 
-     * @type {string}
+     * Array of products for the given mapping
+     * @type {Array<string>}
      * @memberof StaticCarrierCountryServiceMapping
      */
-    product?: string;
+    products?: Array<string>;
+    /**
+     * Services which can be provided by the carrier
+     * @type {Array<CarrierServices>}
+     * @memberof StaticCarrierCountryServiceMapping
+     */
+    carrierServices?: Array<CarrierServices>;
     /**
      * 
      * @type {CarrierProductCategory}
@@ -28787,6 +29404,18 @@ export namespace SubstituteAttributeItem {
 export interface SubstituteLineItem {
     /**
      * 
+     * @type {string}
+     * @memberof SubstituteLineItem
+     */
+    id?: string;
+    /**
+     * 
+     * @type {Array<RefusedItem>}
+     * @memberof SubstituteLineItem
+     */
+    refused?: Array<RefusedItem>;
+    /**
+     * 
      * @type {SubstituteLineItemArticle}
      * @memberof SubstituteLineItem
      */
@@ -29015,7 +29644,15 @@ export enum SupportedLocale {
     FrFR = 'fr_FR',
     ItIT = 'it_IT',
     NbNO = 'nb_NO',
-    EsES = 'es_ES'
+    EsES = 'es_ES',
+    CsCZ = 'cs_CZ',
+    SkSK = 'sk_SK',
+    PtPT = 'pt_PT',
+    SlSI = 'sl_SI',
+    RoRO = 'ro_RO',
+    BgBG = 'bg_BG',
+    HrHR = 'hr_HR',
+    HuHU = 'hu_HU'
 }
 /**
  * 
@@ -30089,6 +30726,68 @@ export namespace Transfer {
     export enum TransferTypeEnum {
         SUPPLIER = 'SUPPLIER',
         RECEIVER = 'RECEIVER'
+    }
+}
+/**
+ * 
+ * @export
+ * @interface TransitTimeConfiguration
+ */
+export interface TransitTimeConfiguration extends VersionedResource {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransitTimeConfiguration
+     */
+    calculationStrategy: TransitTimeConfiguration.CalculationStrategyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransitTimeConfiguration
+     */
+    id: string;
+}
+
+/**
+ * @export
+ * @namespace TransitTimeConfiguration
+ */
+export namespace TransitTimeConfiguration {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CalculationStrategyEnum {
+        EARLIEST = 'EARLIEST',
+        LATEST = 'LATEST'
+    }
+}
+/**
+ * 
+ * @export
+ * @interface TransitTimeConfigurationForUpsert
+ */
+export interface TransitTimeConfigurationForUpsert extends VersionedResource {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransitTimeConfigurationForUpsert
+     */
+    calculationStrategy: TransitTimeConfigurationForUpsert.CalculationStrategyEnum;
+}
+
+/**
+ * @export
+ * @namespace TransitTimeConfigurationForUpsert
+ */
+export namespace TransitTimeConfigurationForUpsert {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CalculationStrategyEnum {
+        EARLIEST = 'EARLIEST',
+        LATEST = 'LATEST'
     }
 }
 /**
