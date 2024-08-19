@@ -1,6 +1,6 @@
 {
   "name": "@fulfillmenttools/fulfillmenttools-sdk-typescript",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
