@@ -4454,13 +4454,15 @@ export interface CustomServiceReferenceForCreation {
     customServiceItems: Array<CustomServiceItemForCreation>;
 }
 /**
- * 
+ * Deprecated values: ENABLED and DISABLED, use INACTIVE and ACTIVE instead
  * @export
  * @enum {string}
  */
 export enum CustomServiceStatus {
     ENABLED = 'ENABLED',
-    DISABLED = 'DISABLED'
+    DISABLED = 'DISABLED',
+    INACTIVE = 'INACTIVE',
+    ACTIVE = 'ACTIVE'
 }
 /**
  * 
@@ -6116,6 +6118,12 @@ export interface ExternalActionForCreation {
      * @memberof ExternalActionForCreation
      */
     action: ExternalFormActionDefinition | ExternalLinkActionDefinition | ExternalCommentActionDefinition;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof ExternalActionForCreation
+     */
+    customAttributes?: any;
 }
 /**
  * 
@@ -6147,6 +6155,12 @@ export interface ExternalActionForReplacement {
      * @memberof ExternalActionForReplacement
      */
     action: ExternalFormActionDefinition | ExternalLinkActionDefinition | ExternalCommentActionDefinition;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof ExternalActionForReplacement
+     */
+    customAttributes?: any;
 }
 /**
  * 
@@ -16863,6 +16877,12 @@ export interface OrderForCreation {
  */
 export interface OrderForCreationConsumer {
     /**
+     * The id of the consumer.
+     * @type {string}
+     * @memberof OrderForCreationConsumer
+     */
+    consumerId?: string;
+    /**
      * 
      * @type {Array<ConsumerAddress>}
      * @memberof OrderForCreationConsumer
@@ -19884,6 +19904,12 @@ export interface PickJobForCreation {
      * @memberof PickJobForCreation
      */
     transfers?: Array<OperativeTransfer>;
+    /**
+     * 
+     * @type {PickJobPickingTimes}
+     * @memberof PickJobForCreation
+     */
+    pickingTimes?: PickJobPickingTimes;
 }
 /**
  * 
@@ -19903,6 +19929,18 @@ export interface PickJobLineItemPartialStockLocation extends PickJobLineItemPart
      * @memberof PickJobLineItemPartialStockLocation
      */
     stockEmptied?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof PickJobLineItemPartialStockLocation
+     */
+    zoneRef?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PickJobLineItemPartialStockLocation
+     */
+    zoneName?: string;
 }
 /**
  * 
@@ -20019,6 +20057,19 @@ export enum PickJobOrderBy {
     ORDERDATEASC = 'ORDER_DATE_ASC',
     LASTMODIFIEDBYUSERDESC = 'LAST_MODIFIED_BY_USER_DESC',
     LASTMODIFIEDBYUSERASC = 'LAST_MODIFIED_BY_USER_ASC'
+}
+/**
+ * 
+ * @export
+ * @interface PickJobPickingTimes
+ */
+export interface PickJobPickingTimes {
+    /**
+     * The date this pickJob should be started at last.
+     * @type {Date}
+     * @memberof PickJobPickingTimes
+     */
+    startLatestAt?: Date;
 }
 /**
  * 
@@ -27385,7 +27436,8 @@ export namespace Stock {
     export enum TraitsEnum {
         PICKABLE = 'PICKABLE',
         ACCESSIBLE = 'ACCESSIBLE',
-        KEEPONZERO = 'KEEP_ON_ZERO'
+        KEEPONZERO = 'KEEP_ON_ZERO',
+        OUTBOUND = 'OUTBOUND'
     }
 }
 /**
@@ -28349,14 +28401,15 @@ export enum StorageLocationSequenceType {
     RESTOWSEQUENCE = 'RESTOW_SEQUENCE'
 }
 /**
- * Describes what kind of actions this stock is available for   * `PICKABLE`- The stock is available for picking   * `ACCESSIBLE`- The stock is available for stock movements (stowing, inbound, etc)   * `KEEP_ON_ZERO`- The stock will not be deleted when emptied
+ * Describes what kind of actions this stock is available for   * `PICKABLE`- The stock is available for picking   * `ACCESSIBLE`- The stock is available for stock movements (stowing, inbound, etc)   * `KEEP_ON_ZERO`- The stock will not be deleted when emptied   * `OUTBOUND`- The stock is intended for outbound processes
  * @export
  * @enum {string}
  */
 export enum StorageLocationTrait {
     PICKABLE = 'PICKABLE',
     ACCESSIBLE = 'ACCESSIBLE',
-    KEEPONZERO = 'KEEP_ON_ZERO'
+    KEEPONZERO = 'KEEP_ON_ZERO',
+    OUTBOUND = 'OUTBOUND'
 }
 /**
  * The configuration of the traits of this storage location
