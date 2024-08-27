@@ -135,7 +135,7 @@ export class FftPickJobService {
     orderRef?: string,
     facilityRef?: string,
     status?: PickJobStatus[],
-    zoneRefs?: string,
+    zoneRefs?: string[],
     tenantOrderId?: string,
     channel?: ChannelEnum,
     consumerName?: string,
