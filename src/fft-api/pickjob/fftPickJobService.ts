@@ -127,115 +127,93 @@ export class FftPickJobService {
     }
   }
 
-  public async getAll(
-    searchTerm?: string,
-    carrierKeys?: string[],
-    startOrderDate?: string,
-    endOrderDate?: string,
-    orderRef?: string,
-    facilityRef?: string,
-    status?: PickJobStatus[],
-    zoneRefs?: string[],
-    tenantOrderId?: string,
-    channel?: ChannelEnum,
-    consumerName?: string,
-    shortId?: string,
-    articleTitle?: string,
-    anonymized?: boolean,
-    startAfterId?: string,
-    size?: number,
-    orderBy?: string,
-    startTargetTime?: string,
-    endTargetTime?: string,
-    pickJobRefs?: string[],
-    modifiedByUsername?: string
-  ): Promise<StrippedPickJobs> {
+  public async getAll(parameters: PickJobsQueryParameters): Promise<StrippedPickJobs> {
     try {
       const queryParams: QueryParams = {};
 
-      if (searchTerm) {
-        queryParams['searchTerm'] = searchTerm;
+      if (parameters.searchTerm) {
+        queryParams['searchTerm'] = parameters.searchTerm;
       }
 
-      if (carrierKeys) {
-        carrierKeys = carrierKeys.slice(0, MAX_ARRAY_SIZE);
-        queryParams['carrierKeys'] = carrierKeys;
+      if (parameters.carrierKeys) {
+        parameters.carrierKeys = parameters.carrierKeys.slice(0, MAX_ARRAY_SIZE);
+        queryParams['carrierKeys'] = parameters.carrierKeys;
       }
 
-      if (startOrderDate) {
-        queryParams['startOrderDate'] = startOrderDate;
+      if (parameters.startOrderDate) {
+        queryParams['startOrderDate'] = parameters.startOrderDate;
       }
 
-      if (endOrderDate) {
-        queryParams['endOrderDate'] = endOrderDate;
+      if (parameters.endOrderDate) {
+        queryParams['endOrderDate'] = parameters.endOrderDate;
       }
 
-      if (orderRef) {
-        queryParams['orderRef'] = orderRef;
+      if (parameters.orderRef) {
+        queryParams['orderRef'] = parameters.orderRef;
       }
 
-      if (facilityRef) {
-        queryParams['facilityRef'] = facilityRef;
+      if (parameters.facilityRef) {
+        queryParams['facilityRef'] = parameters.facilityRef;
       }
 
-      if (status) {
-        queryParams['status'] = status;
+      if (parameters.status) {
+        queryParams['status'] = parameters.status;
       }
 
-      if (zoneRefs) {
-        queryParams['zoneRefs'] = zoneRefs;
+      if (parameters.zoneRefs) {
+        queryParams['zoneRefs'] = parameters.zoneRefs;
       }
 
-      if (tenantOrderId) {
-        queryParams['tenantOrderId'] = tenantOrderId;
+      if (parameters.tenantOrderId) {
+        queryParams['tenantOrderId'] = parameters.tenantOrderId;
       }
 
-      if (channel) {
-        queryParams['channel'] = channel;
+      if (parameters.channel) {
+        queryParams['channel'] = parameters.channel;
       }
 
-      if (consumerName) {
-        queryParams['consumerName'] = consumerName;
+      if (parameters.consumerName) {
+        queryParams['consumerName'] = parameters.consumerName;
       }
 
-      if (shortId) {
-        queryParams['shortId'] = shortId;
+      if (parameters.shortId) {
+        queryParams['shortId'] = parameters.shortId;
       }
 
-      if (articleTitle) {
-        queryParams['articleTitle'] = articleTitle;
+      if (parameters.articleTitle) {
+        queryParams['articleTitle'] = parameters.articleTitle;
       }
 
-      if (anonymized) {
-        queryParams['anonymized'] = anonymized.toString();
+      if (parameters.anonymized) {
+        queryParams['anonymized'] = parameters.anonymized.toString();
       }
 
-      if (startAfterId) {
-        queryParams['startAfterId'] = startAfterId;
+      if (parameters.startAfterId) {
+        queryParams['startAfterId'] = parameters.startAfterId;
       }
 
-      if (size) {
-        queryParams['size'] = size.toString();
+      if (parameters.size) {
+        queryParams['size'] = parameters.size.toString();
       }
 
-      if (orderBy) {
-        queryParams['orderBy'] = orderBy;
+      if (parameters.orderBy) {
+        queryParams['orderBy'] = parameters.orderBy;
       }
 
-      if (startTargetTime) {
-        queryParams['startTargetTime'] = startTargetTime;
+      if (parameters.startTargetTime) {
+        queryParams['startTargetTime'] = parameters.startTargetTime;
       }
 
-      if (endTargetTime) {
-        queryParams['endTargetTime'] = endTargetTime;
+      if (parameters.endTargetTime) {
+        queryParams['endTargetTime'] = parameters.endTargetTime;
       }
 
-      if (pickJobRefs) {
-        queryParams['pickJobRefs'] = pickJobRefs;
+      if (parameters.pickJobRefs) {
+        queryParams['pickJobRefs'] = parameters.pickJobRefs;
       }
 
-      if (modifiedByUsername) {
-        queryParams['modifiedByUsername'] = modifiedByUsername;
+      if (parameters.modifiedByUsername) {
+        queryParams['modifiedByUsername'] = parameters.modifiedByUsername;
       }
 
       return await this.apiClient.get<StrippedPickJobs>(this.path, queryParams);
@@ -250,4 +228,28 @@ export class FftPickJobService {
       throw error;
     }
   }
+}
+
+export interface PickJobsQueryParameters {
+  searchTerm?: string;
+  carrierKeys?: string[];
+  startOrderDate?: string;
+  endOrderDate?: string;
+  orderRef?: string;
+  facilityRef?: string;
+  status?: PickJobStatus[];
+  zoneRefs?: string[];
+  tenantOrderId?: string;
+  channel?: ChannelEnum;
+  consumerName?: string;
+  shortId?: string;
+  articleTitle?: string;
+  anonymized?: boolean;
+  startAfterId?: string;
+  size?: number;
+  orderBy?: string;
+  startTargetTime?: string;
+  endTargetTime?: string;
+  pickJobRefs?: string[];
+  modifiedByUsername?: string;
 }
