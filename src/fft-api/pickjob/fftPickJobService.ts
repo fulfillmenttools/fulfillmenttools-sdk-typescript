@@ -127,92 +127,92 @@ export class FftPickJobService {
     }
   }
 
-  public async getAll(parameters: PickJobsQueryParameters): Promise<StrippedPickJobs> {
+  public async getAll(parameters?: PickJobsQueryParameters): Promise<StrippedPickJobs> {
     try {
       const queryParams: QueryParams = {};
 
-      if (parameters.searchTerm) {
+      if (parameters?.searchTerm) {
         queryParams['searchTerm'] = parameters.searchTerm;
       }
 
-      if (parameters.carrierKeys) {
+      if (parameters?.carrierKeys) {
         parameters.carrierKeys = parameters.carrierKeys.slice(0, MAX_ARRAY_SIZE);
         queryParams['carrierKeys'] = parameters.carrierKeys;
       }
 
-      if (parameters.startOrderDate) {
+      if (parameters?.startOrderDate) {
         queryParams['startOrderDate'] = parameters.startOrderDate;
       }
 
-      if (parameters.endOrderDate) {
+      if (parameters?.endOrderDate) {
         queryParams['endOrderDate'] = parameters.endOrderDate;
       }
 
-      if (parameters.orderRef) {
+      if (parameters?.orderRef) {
         queryParams['orderRef'] = parameters.orderRef;
       }
 
-      if (parameters.facilityRef) {
+      if (parameters?.facilityRef) {
         queryParams['facilityRef'] = parameters.facilityRef;
       }
 
-      if (parameters.status) {
+      if (parameters?.status) {
         queryParams['status'] = parameters.status;
       }
 
-      if (parameters.zoneRefs) {
+      if (parameters?.zoneRefs) {
         queryParams['zoneRefs'] = parameters.zoneRefs;
       }
 
-      if (parameters.tenantOrderId) {
+      if (parameters?.tenantOrderId) {
         queryParams['tenantOrderId'] = parameters.tenantOrderId;
       }
 
-      if (parameters.channel) {
+      if (parameters?.channel) {
         queryParams['channel'] = parameters.channel;
       }
 
-      if (parameters.consumerName) {
+      if (parameters?.consumerName) {
         queryParams['consumerName'] = parameters.consumerName;
       }
 
-      if (parameters.shortId) {
+      if (parameters?.shortId) {
         queryParams['shortId'] = parameters.shortId;
       }
 
-      if (parameters.articleTitle) {
+      if (parameters?.articleTitle) {
         queryParams['articleTitle'] = parameters.articleTitle;
       }
 
-      if (parameters.anonymized) {
+      if (parameters?.anonymized) {
         queryParams['anonymized'] = parameters.anonymized.toString();
       }
 
-      if (parameters.startAfterId) {
+      if (parameters?.startAfterId) {
         queryParams['startAfterId'] = parameters.startAfterId;
       }
 
-      if (parameters.size) {
+      if (parameters?.size) {
         queryParams['size'] = parameters.size.toString();
       }
 
-      if (parameters.orderBy) {
+      if (parameters?.orderBy) {
         queryParams['orderBy'] = parameters.orderBy;
       }
 
-      if (parameters.startTargetTime) {
+      if (parameters?.startTargetTime) {
         queryParams['startTargetTime'] = parameters.startTargetTime;
       }
 
-      if (parameters.endTargetTime) {
+      if (parameters?.endTargetTime) {
         queryParams['endTargetTime'] = parameters.endTargetTime;
       }
 
-      if (parameters.pickJobRefs) {
+      if (parameters?.pickJobRefs) {
         queryParams['pickJobRefs'] = parameters.pickJobRefs;
       }
 
-      if (parameters.modifiedByUsername) {
+      if (parameters?.modifiedByUsername) {
         queryParams['modifiedByUsername'] = parameters.modifiedByUsername;
       }
 
