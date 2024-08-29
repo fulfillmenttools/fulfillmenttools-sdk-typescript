@@ -27340,6 +27340,8 @@ components:
           minItems: 0
           items:
             $ref: '#/components/schemas/OperativeTransfer'
+        pickingTimes:
+          $ref: '#/components/schemas/PickJobPickingTimes'
       required:
         - orderDate
         - facilityRef
@@ -27443,6 +27445,10 @@ components:
         stockEmptied:
           example: true
           type: boolean
+        zoneRef:
+          type: string
+        zoneName:
+          type: string
       required:
         - tenantPartialStockId
       type: object
@@ -30012,6 +30018,15 @@ components:
           example: 42
           type: integer
       type: object
+    PickJobPickingTimes:
+      type: object
+      additionalProperties: false
+      properties:
+        startLatestAt:
+          description: The date this pickJob should be started at last.
+          example: '2024-02-03T09:45:51.525Z'
+          format: date-time
+          type: string
     PickRunForCreation:
       properties:
         pickJobRefs:
@@ -33854,10 +33869,12 @@ components:
           * `PICKABLE`- The stock is available for picking
           * `ACCESSIBLE`- The stock is available for stock movements (stowing, inbound, etc)
           * `KEEP_ON_ZERO`- The stock will not be deleted when emptied
+          * `OUTBOUND`- The stock is intended for outbound processes
       enum:
         - PICKABLE
         - ACCESSIBLE
         - KEEP_ON_ZERO
+        - OUTBOUND
       xml:
         name: StorageLocationTrait
     StorageLocationSequenceType:
@@ -34386,6 +34403,13 @@ components:
             mapping:
               BLANK_LINK: '#/components/schemas/ExternalLinkActionDefinition'
               FORM: '#/components/schemas/ExternalFormActionDefinition'
+        customAttributes:
+          nullable: true
+          description: >-
+            Attributes that can be added to this entity. These attributes
+            **cannot** be used within fulfillment processes, but enable you to
+            attach custom data from your systems to fulfillmenttools entities.
+          type: object
       required:
         - processRef
         - nameLocalized
@@ -34419,6 +34443,13 @@ components:
             mapping:
               BLANK_LINK: '#/components/schemas/ExternalLinkActionDefinition'
               FORM: '#/components/schemas/ExternalFormActionDefinition'
+        customAttributes:
+          nullable: true
+          description: >-
+            Attributes that can be added to this entity. These attributes
+            **cannot** be used within fulfillment processes, but enable you to
+            attach custom data from your systems to fulfillmenttools entities.
+          type: object
       required:
         - version
         - nameLocalized
@@ -35125,9 +35156,12 @@ components:
         - NONE
     CustomServiceStatus:
       type: string
+      description: 'Deprecated values: ENABLED and DISABLED, use INACTIVE and ACTIVE instead'
       enum:
         - ENABLED
         - DISABLED
+        - INACTIVE
+        - ACTIVE
     ServiceJobStatus:
       type: string
       enum:
@@ -36417,6 +36451,10 @@ components:
       properties:
         consumer:
           properties:
+            consumerId:
+              description: The id of the consumer.
+              example: e4213a07-f563-46a3-b1ba-4dfeb6abe82a
+              type: string
             addresses:
               items:
                 $ref: '#/components/schemas/ConsumerAddress'
@@ -39562,6 +39600,7 @@ components:
         - name
         - version
     OrderLineItemActionsParameter:
+      type: object
       oneOf:
         - $ref: '#/components/schemas/OrderLineItemCustomAttributesUpdateParameter'
     AbstractOrderLineItemActionsParameter:
@@ -41672,6 +41711,7 @@ components:
               - PICKABLE
               - ACCESSIBLE
               - KEEP_ON_ZERO
+              - OUTBOUND
         scores:
           type: array
           items:

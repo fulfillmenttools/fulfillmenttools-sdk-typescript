@@ -3,19 +3,23 @@ import {
   AbstractModificationAction,
   PickJob,
   PickJobAbortActionEnum,
+  PickjobDeliveryInformationForCreation,
   PickJobObsoleteActionEnum,
   PickJobResetActionEnum,
   PickJobRestartActionEnum,
+  PickJobStatus,
   StrippedPickJobs,
 } from '../types';
-import { FftApiClient } from '../common';
+import { FftApiClient, MAX_ARRAY_SIZE } from '../common';
 import { ResponseError } from 'superagent';
 import { CustomLogger, QueryParams } from '../../common';
 import { Logger } from 'tslog';
+import ChannelEnum = PickjobDeliveryInformationForCreation.ChannelEnum;
 
 export class FftPickJobService {
   private readonly path = 'pickjobs';
   private readonly logger: Logger<FftPickJobService> = new CustomLogger<FftPickJobService>();
+
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async getByTenantOrderId(tenantOrderId: string): Promise<StrippedPickJobs> {
@@ -122,4 +126,130 @@ export class FftPickJobService {
       throw err;
     }
   }
+
+  public async getAll(parameters?: PickJobsQueryParameters): Promise<StrippedPickJobs> {
+    try {
+      const queryParams: QueryParams = {};
+
+      if (parameters?.searchTerm) {
+        queryParams['searchTerm'] = parameters.searchTerm;
+      }
+
+      if (parameters?.carrierKeys) {
+        parameters.carrierKeys = parameters.carrierKeys.slice(0, MAX_ARRAY_SIZE);
+        queryParams['carrierKeys'] = parameters.carrierKeys;
+      }
+
+      if (parameters?.startOrderDate) {
+        queryParams['startOrderDate'] = parameters.startOrderDate;
+      }
+
+      if (parameters?.endOrderDate) {
+        queryParams['endOrderDate'] = parameters.endOrderDate;
+      }
+
+      if (parameters?.orderRef) {
+        queryParams['orderRef'] = parameters.orderRef;
+      }
+
+      if (parameters?.facilityRef) {
+        queryParams['facilityRef'] = parameters.facilityRef;
+      }
+
+      if (parameters?.status) {
+        queryParams['status'] = parameters.status;
+      }
+
+      if (parameters?.zoneRefs) {
+        queryParams['zoneRefs'] = parameters.zoneRefs;
+      }
+
+      if (parameters?.tenantOrderId) {
+        queryParams['tenantOrderId'] = parameters.tenantOrderId;
+      }
+
+      if (parameters?.channel) {
+        queryParams['channel'] = parameters.channel;
+      }
+
+      if (parameters?.consumerName) {
+        queryParams['consumerName'] = parameters.consumerName;
+      }
+
+      if (parameters?.shortId) {
+        queryParams['shortId'] = parameters.shortId;
+      }
+
+      if (parameters?.articleTitle) {
+        queryParams['articleTitle'] = parameters.articleTitle;
+      }
+
+      if (parameters?.anonymized) {
+        queryParams['anonymized'] = parameters.anonymized.toString();
+      }
+
+      if (parameters?.startAfterId) {
+        queryParams['startAfterId'] = parameters.startAfterId;
+      }
+
+      if (parameters?.size) {
+        queryParams['size'] = parameters.size.toString();
+      }
+
+      if (parameters?.orderBy) {
+        queryParams['orderBy'] = parameters.orderBy;
+      }
+
+      if (parameters?.startTargetTime) {
+        queryParams['startTargetTime'] = parameters.startTargetTime;
+      }
+
+      if (parameters?.endTargetTime) {
+        queryParams['endTargetTime'] = parameters.endTargetTime;
+      }
+
+      if (parameters?.pickJobRefs) {
+        queryParams['pickJobRefs'] = parameters.pickJobRefs;
+      }
+
+      if (parameters?.modifiedByUsername) {
+        queryParams['modifiedByUsername'] = parameters.modifiedByUsername;
+      }
+
+      return await this.apiClient.get<StrippedPickJobs>(this.path, queryParams);
+    } catch (error) {
+      const httpError = error as ResponseError;
+      this.logger.error(
+        `Fetching all pickjobs failed with status code ${httpError.status}, error: ${
+          httpError.response ? JSON.stringify(httpError.response.body) : ''
+        }`
+      );
+
+      throw error;
+    }
+  }
+}
+
+export interface PickJobsQueryParameters {
+  searchTerm?: string;
+  carrierKeys?: string[];
+  startOrderDate?: string;
+  endOrderDate?: string;
+  orderRef?: string;
+  facilityRef?: string;
+  status?: PickJobStatus[];
+  zoneRefs?: string[];
+  tenantOrderId?: string;
+  channel?: ChannelEnum;
+  consumerName?: string;
+  shortId?: string;
+  articleTitle?: string;
+  anonymized?: boolean;
+  startAfterId?: string;
+  size?: number;
+  orderBy?: string;
+  startTargetTime?: string;
+  endTargetTime?: string;
+  pickJobRefs?: string[];
+  modifiedByUsername?: string;
 }
