@@ -10,8 +10,8 @@ export class FftCarrierService {
 
   constructor(private readonly apiClient: FftApiClient) {}
 
-  public async getAll(): Promise<StrippedCarriers[]> {
-    return await this.apiClient.get<StrippedCarriers[]>(this.path);
+  public async getAll(): Promise<StrippedCarriers> {
+    return await this.apiClient.get<StrippedCarriers>(this.path);
   }
 
   public async get(carrierId: string): Promise<Carrier> {
