@@ -48,7 +48,7 @@ export class FftOrderPromisingService {
     } catch (err) {
       const httpError = err as ResponseError;
       this.logger.error(
-        `FFT Checkoutoptions TimePeriod POST failed with status ${httpError.status}, errpr: ${
+        `FFT Checkoutoptions TimePeriod POST failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
       );
