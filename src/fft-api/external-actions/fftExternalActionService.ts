@@ -11,9 +11,9 @@ import {
 } from '../types';
 import { ResponseError } from 'superagent';
 
-export class FftExternalActionsService {
+export class FftExternalActionService {
   private readonly path = 'externalactions';
-  private readonly logger: Logger<FftExternalActionsService> = new CustomLogger<FftExternalActionsService>();
+  private readonly logger: Logger<FftExternalActionService> = new CustomLogger<FftExternalActionService>();
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async create(request: ExternalActionForCreation): Promise<ExternalAction> {
@@ -61,7 +61,7 @@ export class FftExternalActionsService {
     }
   }
 
-  public async replace(externalActionId: string, replacement: ExternalActionForReplacement): Promise<ExternalAction> {
+  public async update(externalActionId: string, replacement: ExternalActionForReplacement): Promise<ExternalAction> {
     try {
       return await this.apiClient.put<ExternalAction>(`${this.path}/${externalActionId}`, { ...replacement });
     } catch (err) {
@@ -110,7 +110,7 @@ export class FftExternalActionsService {
     } catch (err) {
       const httpError = err as ResponseError;
       this.logger.error(
-        `FFT ExternalActions GET Logs for ID ${externalActionId} failed with status ${httpError.status}, errpr: ${
+        `FFT ExternalActions GET Logs for ID ${externalActionId} failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
       );
