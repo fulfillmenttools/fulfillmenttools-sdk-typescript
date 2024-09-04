@@ -19,4 +19,4 @@ export * from './tag';
 export * from './types';
 export * from './zone';
 export * from './promising';
-export * from './external-actions';
+export * from './external-action';
