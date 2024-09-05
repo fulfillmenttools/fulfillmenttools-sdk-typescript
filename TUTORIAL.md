@@ -5,10 +5,9 @@ This tutorial will guide you through the first steps to get started with the ful
 ## Requirements
 
 To follow this tutorial, you will need to:
+* have [access](https://docs.fulfillmenttools.com/api-docs/getting-started/setup-your-access-to-fulfillmenttools) to a fulfillmenttools project
 * have a basic understanding of [TypeScript](https://www.typescriptlang.org/)
-* have access to a fulfillmenttools project
-* have [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) LTS or later installed
-* have a JavaScript package manager such as npm or yarn installed
+* have [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and npm installed
 
 If you're new to Node.js development, start with one of the many tutorials on the web, e.g. [this one from MDN](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment).
 
@@ -45,7 +44,6 @@ cd hello-fft
 Next, run the following commands to initialize the project:
 
 ```bash
-git init
 npm init -y
 ```
 
@@ -95,7 +93,7 @@ This command adds the TypeScript SDK to your project and lists it as a necessary
 
 ### Add environment variables
 
-You can store your credentials in an `.env` file, but make sure not to check it into your GitHub repository:
+You can store your credentials in an `.env` file, but make sure not to check it into your code repository:
 
 ```INI
 FFT_PROJECT_ID={projectId}
@@ -123,7 +121,6 @@ Your `hello-fft` directory should now look like this:
 
 ```
 .env
-.git
 node_modules/
 package-lock.json
 package.json
@@ -164,6 +161,9 @@ const fftApiClient = new FftApiClient(
 const fftFacilityService = new FftFacilityService(fftApiClient);
 ```
 
+> [!NOTE]
+> The `FftApiClient` will handle the autorization process, so you do not have to obtain/renew API tokens explicitly.
+
 ### Make an API call
 
 Now you are ready to actually make a call to the fulfillmenttools REST API using your client.
@@ -201,6 +201,7 @@ You are now ready to use the fulfillmenttools TypeScript SDK in your Node.js pro
 
 You can explore the other functions offered by the SDK, e.g. to create an order using `FftOrderService`, work with pick jobs using `FftPickJobService`, or try out the checkout options using `FftOrderPromisingService`, ...
 
-If you find anything missing or spot anything unusual, please use the [GitHub issues](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/issues) to get in touch. Feel free to reach out to us at [opensource@fulfillmenttools.com](mailto:opensource@fulfillmenttools.com) if you have any questions about the TypeScript SDK or our other open source projects.
+> [!TIP]
+> If you find anything missing or spot anything unusual, please use the [GitHub issues](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/issues) to get in touch. Feel free to reach out to us at [opensource@fulfillmenttools.com](mailto:opensource@fulfillmenttools.com) if you have any questions about the TypeScript SDK or our other open source projects.
 
 Happy coding!
