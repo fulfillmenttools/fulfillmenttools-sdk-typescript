@@ -16,7 +16,23 @@
 
 # 🤖 Introduction
 
-This is a JavaScript/TypeScript SDK for the [fulfillmenttools API](https://docs.fulfillmenttools.com/api-docs/).
+This is a JavaScript/TypeScript SDK for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/api-docs/).
+
+## 👉 Get started
+
+The TypeScript SDK is fully open source and is available on [GitHub](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript).
+The package is published on [npmjs.com](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript).
+It contains both an ESM and a CommonJS build, so you can use it in the browser and in the backend.
+
+```bash
+$ npm install @fulfillmenttools/fulfillmenttools-sdk-typescript
+```
+
+Learn how to set up and use the TypeScript SDK with our [tutorial](./TUTORIAL.md).
+
+## 📖 Documentation
+
+The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/api-docs/), and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/).
 
 ## 👨‍💻 Development
 
@@ -50,50 +66,6 @@ $ npm run test
 ```bash
 $ npm run lint
 ```
-
-## 👉 Usage
-
-This software is published on [npmjs.com](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript).
-The package contains both an ESM and a CommonJS build.
-
-```bash
-$ npm install @fulfillmenttools/fulfillmenttools-sdk-typescript`
-```
-
-Here's a little example how to create a client instance in TypeScript:
-
-```typescript
-import { FftApiClient, FftOrderService, OrderForCreation } from '@fulfillmenttools/fulfillmenttools-sdk-typescript';
-
-const fftApiClient = new FftApiClient(
-  process.env.FFT_PROJECT_ID || '',
-  process.env.FFT_API_USER || '',
-  process.env.FFT_API_PASSWORD || '',
-  process.env.FFT_API_KEY || ''
-);
-
-const fftOrderService = new FftOrderService(fftApiClient);
-
-const fftOrder = {} as OrderForCreation;
-await fftOrderService.create(fftOrder);
-```
-
-By default, HTTP request logging is disabled. If you wish to have it logging enabled, just add a boolean to your `FftApiClient`:
-```typescript
-import { FftApiClient, FftOrderService, OrderForCreation } from '@fulfillmenttools/fulfillmenttools-sdk-typescript';
-
-const fftApiClient = new FftApiClient(
-  process.env.FFT_PROJECT_ID || '',
-  process.env.FFT_API_USER || '',
-  process.env.FFT_API_PASSWORD || '',
-  process.env.FFT_API_KEY || '',
-  process.env.FFT_LOGGING_ENABLED || true
-);
-```
-
-## 📖 Documentation
-
-The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/api-docs/), and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/).
 
 ## 📜 License
 
