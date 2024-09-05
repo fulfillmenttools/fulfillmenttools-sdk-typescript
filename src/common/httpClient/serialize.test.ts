@@ -1,4 +1,4 @@
-import { serializeWithDatesAsIsoString } from './serialize';
+import { serializeWithDatesAsIsoString, isDate } from './serialize';
 
 describe('serializeWithDatesAsIsoString', () => {
   const now = new Date();
@@ -17,5 +17,14 @@ describe('serializeWithDatesAsIsoString', () => {
     expect(parsed.bar).toEqual(now.toISOString());
     expect(parsed.inner.bar).toEqual(now.toISOString());
     expect(parsed.inner.innerInner).toEqual(innerInner);
+  });
+  it('accepts only a Date', () => {
+    expect(isDate(new Date())).toBeTruthy();
+    expect(isDate(new String())).toBeFalsy();
+    expect(isDate(undefined)).toBeFalsy();
+    expect(isDate(null)).toBeFalsy();
+    expect(isDate(0)).toBeFalsy();
+    expect(isDate('')).toBeFalsy();
+    expect(isDate({})).toBeFalsy();
   });
 });

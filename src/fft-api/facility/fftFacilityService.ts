@@ -1,4 +1,3 @@
-import { setTimeout } from 'timers/promises';
 import {
   CarrierStatus,
   DefaultPickingTimesConfiguration,
@@ -19,6 +18,10 @@ import { FftApiClient } from '../common';
 import ActionEnum = ModifyShortpickAction.ActionEnum;
 import { Logger } from 'tslog';
 import { CustomLogger, QueryParams } from '../../common';
+
+const sleep = async (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
 export class FftFacilityService {
   private static readonly facilityCache = new Map<string, string>();
@@ -224,7 +227,7 @@ export class FftFacilityService {
             delay / 1000
           } seconds`
         );
-        await setTimeout(delay);
+        await sleep(delay);
         return this.disableShortPick(facilityId, retries - 1, delay * 2);
       }
       this.logger.error(`Disabling ShortPick for Facility '${facilityId}' failed ${err},`);
