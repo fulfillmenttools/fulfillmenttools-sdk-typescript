@@ -1,7 +1,8 @@
 # Add files here to ignore them from prettier formatting
 
-/dist
 /coverage
+/dist
+/lib
 /node_modules
 package-lock.json
 /src/fft-api/types/typescript-fetch-client/

@@ -16,16 +16,16 @@
     "lib": [
       "ESNext"
     ],
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     // "noUncheckedIndexedAccess": true,
-    "outDir": "lib/cjs",
+    "outDir": "lib/esm",
     "removeComments": false,
     "resolveJsonModule": true,
     "rootDir": "./src",
     "sourceMap": true,
-    "target": "ES2020"
+    "target": "ESNext"
   }
 }

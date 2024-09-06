@@ -14,7 +14,6 @@ import { FftApiClient, MAX_ARRAY_SIZE } from '../common';
 import { ResponseError } from 'superagent';
 import { CustomLogger, QueryParams } from '../../common';
 import { Logger } from 'tslog';
-import ChannelEnum = PickjobDeliveryInformationForCreation.ChannelEnum;
 
 export class FftPickJobService {
   private readonly path = 'pickjobs';
@@ -240,7 +239,7 @@ export interface PickJobsQueryParameters {
   status?: PickJobStatus[];
   zoneRefs?: string[];
   tenantOrderId?: string;
-  channel?: ChannelEnum;
+  channel?: PickjobDeliveryInformationForCreation.ChannelEnum;
   consumerName?: string;
   shortId?: string;
   articleTitle?: string;

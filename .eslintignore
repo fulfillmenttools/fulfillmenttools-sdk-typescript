@@ -1,7 +1,9 @@
 node_modules
 dist/
+lib/
 .nvmrc
 .eslintrc.cjs
 jest.config.cjs
 jest.setup.cjs
 src/fft-api/types/typescript-fetch-client/
+*.config.js

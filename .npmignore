@@ -129,3 +129,7 @@ out
 .pnp.*
 
 .github/
+.vscode/
+src/
+tsconfig.json
+tsconfig.*.json
