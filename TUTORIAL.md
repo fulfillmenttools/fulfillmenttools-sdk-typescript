@@ -157,8 +157,6 @@ const fftApiClient = new FftApiClient(
   process.env.FFT_API_PASSWORD || '',
   process.env.FFT_API_KEY || ''
 );
-
-const fftFacilityService = new FftFacilityService(fftApiClient);
 ```
 
 > [!NOTE]
@@ -172,7 +170,10 @@ Remove the `test()` function and replace it with the following code:
 ```typescript
 async function getAllFacilities(): Promise<void> {
   console.log(`Getting facilities in ${process.env.FFT_PROJECT_ID}...`);
+
+  const fftFacilityService = new FftFacilityService(fftApiClient);
   const facilitiesResult = await fftFacilityService.get();
+
   facilitiesResult.facilities?.forEach((facility) => { console.log(facility.name); });
 }
 

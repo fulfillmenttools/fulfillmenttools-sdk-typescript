@@ -1,5 +1,7 @@
 # fulfillmenttools TypeScript SDK
 
+This is a JavaScript/TypeScript SDK for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/api-docs/).
+
 <p align="center">
   <a href="https://fulfillmenttools.com/">
     <img alt="fulfillmenttools logo" src="./.github/images/fft-mach-alliance.svg">
@@ -14,18 +16,31 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 [![TypeScript](https://img.shields.io/badge/Made%20with-TypeScript-1f425f.svg?color=3178c6)](https://www.typescriptlang.org/)
 
-# 🤖 Introduction
+## What is fulfillmenttools?
 
-This is a JavaScript/TypeScript SDK for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/api-docs/).
+[fulfillmenttools](https://fulfillmenttools.com) is a next generation order management system that helps retailers and brands to serve their customers faster and more reliably. Its MACH based architecture enables an easy and quick integration.
+
+## Table of contents
+
+- [Get started](#-get-started)
+- [Documentation](#-documentation)
+- [Development](#-development)
+- [License](#-license)
+- [Contributing](#-contributing)
 
 ## 👉 Get started
 
 The TypeScript SDK is fully open source and is available on [GitHub](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript).
 The package is published on [npmjs.com](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript).
 It contains both an ESM and a CommonJS build, so you can use it in the browser and in the backend.
+You can install it with the command below:
 
 ```bash
-$ npm install @fulfillmenttools/fulfillmenttools-sdk-typescript
+npm install @fulfillmenttools/fulfillmenttools-sdk-typescript
+
+// or
+
+yarn add @fulfillmenttools/fulfillmenttools-sdk-typescript
 ```
 
 Learn how to set up and use the TypeScript SDK with our [tutorial](./TUTORIAL.md).
