@@ -1,5 +1,3 @@
-import HttpStatus from 'http-status-enum';
-
 export enum HttpMethod {
   GET = 'GET',
   POST = 'POST',
@@ -23,7 +21,7 @@ export interface HttpRequestConfiguration {
 
 export interface HttpResult<TDto> {
   body: TDto;
-  statusCode: HttpStatus;
+  statusCode: number;
 }
 
 export interface BasicHttpClient {

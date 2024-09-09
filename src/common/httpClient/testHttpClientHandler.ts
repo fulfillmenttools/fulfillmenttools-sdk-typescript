@@ -1,5 +1,4 @@
 import { HttpMethod, QueryParams } from './models';
-import HttpStatus from 'http-status-enum';
 interface BasicTestHttpRequest {
   method: HttpMethod;
   url: string;
@@ -12,9 +11,9 @@ export interface ResolvedTestHttpRequest<Dto = unknown> extends BasicTestHttpReq
   resolveTo: Dto;
 
   /**
-   * if empty resolves to HttpStatus.OK
+   * if empty resolves to HttpStatus 200/OK
    */
-  resolveStatusCode?: HttpStatus;
+  resolveStatusCode?: number;
 }
 
 export interface RejectedTestHttpRequest<TError extends Error = Error> extends BasicTestHttpRequest {
