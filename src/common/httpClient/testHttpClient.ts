@@ -1,6 +1,5 @@
 import { BasicHttpClient, HttpRequestConfiguration, HttpResult } from './models';
 import { RejectedTestHttpRequest, ResolvedTestHttpRequest, TestHttpClientHandler } from './testHttpClientHandler';
-import HttpStatus from 'http-status-enum';
 export class HttpRequestNotMockedError extends Error {}
 
 export class TestHttpClient implements BasicHttpClient {
@@ -21,7 +20,7 @@ export class TestHttpClient implements BasicHttpClient {
     if (resolvedObj) {
       const httpResult: HttpResult<TDto> = {
         body: resolvedObj as TDto,
-        statusCode: resolvedHttpRequest.resolveStatusCode ?? HttpStatus.OK,
+        statusCode: resolvedHttpRequest.resolveStatusCode ?? 200,
       };
       return Promise.resolve(httpResult);
     }

@@ -1,4 +1,3 @@
-import { isDate } from 'date-fns';
 import {
   AbstractModificationAction,
   PickJob,
@@ -12,7 +11,7 @@ import {
 } from '../types';
 import { FftApiClient, MAX_ARRAY_SIZE } from '../common';
 import { ResponseError } from 'superagent';
-import { CustomLogger, QueryParams } from '../../common';
+import { isDate, CustomLogger, QueryParams } from '../../common';
 import { Logger } from 'tslog';
 
 export class FftPickJobService {
