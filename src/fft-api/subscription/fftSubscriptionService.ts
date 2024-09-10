@@ -1,6 +1,6 @@
 import { Logger } from 'tslog';
-import { FftApiClient } from '../common';
 import { CustomLogger } from '../../common';
+import { FftApiClient } from '../common';
 import { Subscription, SubscriptionForCreation, Subscriptions } from '../types';
 
 export class FftSubscriptionService {
@@ -14,7 +14,7 @@ export class FftSubscriptionService {
     try {
       return await this.apiClient.get<Subscriptions>(this.PATH, { ...(size && { size: size.toString() }) });
     } catch (err) {
-      this.logger.error(`Getting FFT Subscriptions failed: ${err}`);
+      this.logger.error(`Getting FFT Subscriptions failed.`, err);
       throw err;
     }
   }
@@ -23,7 +23,7 @@ export class FftSubscriptionService {
     try {
       return await this.apiClient.post<Subscription>(this.PATH, { ...subscriptionForCreation });
     } catch (err) {
-      this.logger.error(`Creating FFT Subscription '${subscriptionForCreation.name}' failed: ${err}`);
+      this.logger.error(`Creating FFT Subscription '${subscriptionForCreation.name}' failed.`, err);
       throw err;
     }
   }
@@ -32,7 +32,7 @@ export class FftSubscriptionService {
     try {
       await this.apiClient.delete(`${this.PATH}/${subscriptionId}`);
     } catch (err) {
-      this.logger.error(`Deleting FFT Subscription '${subscriptionId}' failed: ${err}`);
+      this.logger.error(`Deleting FFT Subscription '${subscriptionId}' failed.`, err);
       throw err;
     }
   }

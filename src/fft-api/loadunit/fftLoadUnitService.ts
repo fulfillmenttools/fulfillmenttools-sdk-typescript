@@ -1,9 +1,8 @@
 import { Logger } from 'tslog';
 
-import { FftApiClient } from '../common';
 import { CustomLogger } from '../../common';
+import { FftApiClient } from '../common';
 import { LoadUnit, LoadUnits } from '../types';
-import { ResponseError } from 'superagent';
 
 export class FftLoadUnitService {
   private readonly path = 'loadunits';
@@ -16,13 +15,7 @@ export class FftLoadUnitService {
       const loadunits = await this.apiClient.get<LoadUnits>(this.path, { pickJobRef });
       return loadunits.loadUnits || [];
     } catch (err) {
-      const httpError = err as ResponseError;
-      this.logger.error(
-        `Could not get load units for pickjob id '${pickJobRef}'. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      this.logger.error(`Could not get load units for pickjob id '${pickJobRef}'.`, err);
       throw err;
     }
   }

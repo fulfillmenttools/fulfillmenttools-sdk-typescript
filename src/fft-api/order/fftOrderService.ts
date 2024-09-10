@@ -1,4 +1,6 @@
-import { ResponseError } from 'superagent';
+import { Logger } from 'tslog';
+import { CustomLogger } from '../../common';
+import { FftApiClient } from '../common';
 import {
   Order,
   OrderCancelActionParameter,
@@ -7,13 +9,11 @@ import {
   StrippedOrder,
   StrippedOrders,
 } from '../types';
-import { FftApiClient } from '../common';
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 
 export class FftOrderService {
   private readonly path = 'orders';
   private readonly logger: Logger<FftOrderService> = new CustomLogger<FftOrderService>();
+
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async create(orderForCreation: OrderForCreation): Promise<Order> {
@@ -25,13 +25,7 @@ export class FftOrderService {
 
       return order;
     } catch (err) {
-      const httpError = err as ResponseError;
-      this.logger.error(
-        `FFT Order POST with for tenantOrderId '${orderForCreation.tenantOrderId}' failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      this.logger.error(`FFT Order POST with for tenantOrderId '${orderForCreation.tenantOrderId}'.`, err);
       throw err;
     }
   }
@@ -45,13 +39,7 @@ export class FftOrderService {
 
       return order;
     } catch (err) {
-      const httpError = err as ResponseError;
-      this.logger.error(
-        `Could not cancel order with id '${orderId}' and version ${version}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      this.logger.error(`Could not cancel order with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }
@@ -65,13 +53,7 @@ export class FftOrderService {
 
       return order;
     } catch (err) {
-      const httpError = err as ResponseError;
-      this.logger.error(
-        `Could not unlock order with id '${orderId}' and version ${version}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      this.logger.error(`Could not unlock order with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }

@@ -1,7 +1,6 @@
-import { ResponseError } from 'superagent';
 import { Logger } from 'tslog';
-import { FftApiClient } from '../common';
 import { CustomLogger } from '../../common';
+import { FftApiClient } from '../common';
 import { Zone, ZoneForCreation, ZoneForReplacement } from '../types';
 
 export class FftZoneService {
@@ -19,12 +18,7 @@ export class FftZoneService {
     try {
       return await this.apiClient.post<Zone>(`facilities/${facilityId}/${this.PATH}`, { ...zoneForCreation });
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not create zone. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not create zone for facility ${facilityId}.`, error);
       throw error;
     }
   }
@@ -35,12 +29,7 @@ export class FftZoneService {
         ...(size && { size: size.toString() }),
       });
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not get zones. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not get zones for facility ${facilityId}.`, error);
       throw error;
     }
   }
@@ -49,12 +38,7 @@ export class FftZoneService {
     try {
       return await this.apiClient.get<Zone>(`facilities/${facilityId}/${this.PATH}/${zoneId}`);
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not get zone ${zoneId}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not get zone ${zoneId} for facility ${facilityId}.`, error);
       throw error;
     }
   }
@@ -71,12 +55,7 @@ export class FftZoneService {
         ...zoneForReplacement,
       });
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not update zone ${zoneId}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not update zone ${zoneId} for facility ${facilityId}.`, error);
       throw error;
     }
   }
@@ -85,12 +64,7 @@ export class FftZoneService {
     try {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.PATH}/${zoneId}`);
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not delete zone ${zoneId}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not delete zone ${zoneId} for facility ${facilityId}.`, error);
       throw error;
     }
   }

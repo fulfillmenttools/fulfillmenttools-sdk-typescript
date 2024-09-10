@@ -1,7 +1,6 @@
-import { ResponseError } from 'superagent';
 import { Logger } from 'tslog';
-import { FftApiClient } from '../common';
 import { CustomLogger } from '../../common';
+import { FftApiClient } from '../common';
 import { AddAllowedValueToTagAction, StrippedTags, Tag, TagForCreation, TagPatchActions } from '../types';
 
 export class FftTagService {
@@ -19,12 +18,7 @@ export class FftTagService {
     try {
       return await this.apiClient.post<Tag>(this.PATH, { ...tagForCreation });
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not create tag. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not create tag.`, error);
       throw error;
     }
   }
@@ -33,12 +27,7 @@ export class FftTagService {
     try {
       return await this.apiClient.get<Tag>(`${this.PATH}/${id}`);
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not get tag. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not get tag ${id}.`, error);
       throw error;
     }
   }
@@ -47,12 +36,7 @@ export class FftTagService {
     try {
       return await this.apiClient.get<StrippedTags>(this.PATH, { ...(size && { size: size.toString() }) });
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not get tags. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not get tags.`, error);
       throw error;
     }
   }
@@ -73,12 +57,7 @@ export class FftTagService {
       };
       return await this.apiClient.patch<Tag>(`${this.PATH}/${id}`, { ...tagPatchActions });
     } catch (error) {
-      const httpError = error as ResponseError;
-      this.logger.error(
-        `Could not update tag ${id}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      this.logger.error(`Could not update tag ${id}.`, error);
       throw error;
     }
   }
