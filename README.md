@@ -61,14 +61,14 @@ The official fulfillmenttools API documentation can be found [here](https://docs
 ### 🛫 Setup
 
 ```bash
-$ nvm use
+nvm use
 ```
 
 ### 🤸 Building
 
 ```bash
-$ npm install
-$ npm run build
+npm install
+npm run build
 ```
 
 ### 🕵️ Running unit tests
@@ -76,13 +76,13 @@ $ npm run build
 When running unit tests the `.env.local` file will be used with dummy settings.
 
 ```bash
-$ npm run test
+npm run test
 ```
 
 ### 🕵️‍♀️ Linting
 
 ```bash
-$ npm run lint
+npm run lint
 ```
 
 ## 📜 License
