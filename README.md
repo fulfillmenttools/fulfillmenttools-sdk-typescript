@@ -30,7 +30,7 @@ This is a JavaScript/TypeScript SDK for the [fulfillmenttools REST API](https://
 
 ## 👉 Get started
 
-The TypeScript SDK is fully open source and is available on [GitHub](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript).
+The **TypeScript SDK** is fully open source and is available on [GitHub](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript).
 The package is published on [npmjs.com](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript).
 It contains both an ESM and a CommonJS build, so you can use it in the browser and in the backend.
 You can install it with the command below:
@@ -48,6 +48,9 @@ Learn how to set up and use the TypeScript SDK with our [tutorial](./TUTORIAL.md
 ## 📖 Documentation
 
 The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/api-docs/), and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/).
+
+> [!NOTE]
+> Currently, the SDK is still in _beta_ status. It does not provide access to all of the features of our API but we are continuously extending it and pushing out new versions. We hope you will find it easy to use and are looking forward to your feedback.
 
 ## 👨‍💻 Development
 
