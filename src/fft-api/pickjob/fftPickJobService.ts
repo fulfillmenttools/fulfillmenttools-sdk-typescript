@@ -11,12 +11,10 @@ import {
 } from '../types';
 import { FftApiClient, MAX_ARRAY_SIZE } from '../common';
 import { ResponseError } from 'superagent';
-import { isDate, CustomLogger, QueryParams } from '../../common';
-import { Logger } from 'tslog';
+import { isDate, QueryParams } from '../../common';
 
 export class FftPickJobService {
   private readonly path = 'pickjobs';
-  private readonly logger: Logger<FftPickJobService> = new CustomLogger<FftPickJobService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -25,7 +23,7 @@ export class FftPickJobService {
       return await this.apiClient.get<StrippedPickJobs>(this.path, { tenantOrderId });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get pick jobs with tenant order id '${tenantOrderId}'. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -59,7 +57,7 @@ export class FftPickJobService {
       });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not update pick job with id '${pickJobId}' and version ${version}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -74,7 +72,7 @@ export class FftPickJobService {
       return await this.apiClient.get<PickJob>(`${this.path}/${pickJobId}`);
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get pick job with id '${pickJobId}'. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -101,7 +99,7 @@ export class FftPickJobService {
       return await this.apiClient.get<StrippedPickJobs>(this.path, params);
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get pick jobs for facility '${id}'. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -115,7 +113,7 @@ export class FftPickJobService {
       return await this.apiClient.patch<PickJob>(`${this.path}/${pickJob.id}`, { version: pickJob.version, actions });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not update pick job with id '${pickJob.id}'. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -217,7 +215,7 @@ export class FftPickJobService {
       return await this.apiClient.get<StrippedPickJobs>(this.path, queryParams);
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Fetching all pickjobs failed with status code ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`

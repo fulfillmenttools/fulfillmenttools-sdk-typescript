@@ -1,14 +1,11 @@
 import { ResponseError } from 'superagent';
 import { Parcel } from '../types';
 import { FftApiClient } from '../common';
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 import { ResponseType } from '../../common/httpClient/models';
 import { LabelDocument } from './labelDocument';
 
 export class FftParcelService {
   private readonly path = 'parcels';
-  private readonly logger: Logger<FftParcelService> = new CustomLogger<FftParcelService>();
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async findById(parcelId: string): Promise<Parcel> {
@@ -16,7 +13,7 @@ export class FftParcelService {
       return await this.apiClient.get<Parcel>(`${this.path}/${parcelId}`);
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get parcel with id '${parcelId}'. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -39,7 +36,7 @@ export class FftParcelService {
       );
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get label ${labelDocument} for parcel with id '${parcelId}'. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`

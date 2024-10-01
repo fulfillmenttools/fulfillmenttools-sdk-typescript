@@ -1,13 +1,9 @@
 import { ResponseError } from 'superagent';
-import { Logger } from 'tslog';
 import { FftApiClient } from '../common';
-import { CustomLogger } from '../../common';
 import { AddAllowedValueToTagAction, StrippedTags, Tag, TagForCreation, TagPatchActions } from '../types';
 
 export class FftTagService {
   private readonly PATH = 'tags';
-
-  private readonly logger: Logger<FftTagService> = new CustomLogger<FftTagService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -20,7 +16,7 @@ export class FftTagService {
       return await this.apiClient.post<Tag>(this.PATH, { ...tagForCreation });
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not create tag. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -34,7 +30,7 @@ export class FftTagService {
       return await this.apiClient.get<Tag>(`${this.PATH}/${id}`);
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get tag. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -48,7 +44,7 @@ export class FftTagService {
       return await this.apiClient.get<StrippedTags>(this.PATH, { ...(size && { size: size.toString() }) });
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get tags. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -74,7 +70,7 @@ export class FftTagService {
       return await this.apiClient.patch<Tag>(`${this.PATH}/${id}`, { ...tagPatchActions });
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not update tag ${id}. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`

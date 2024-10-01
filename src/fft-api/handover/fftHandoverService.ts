@@ -10,12 +10,9 @@ import {
 } from '../types';
 import { FftApiClient } from '../common';
 import ActionEnum = ModifyHandoverjobAction.ActionEnum;
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 
 export class FftHandoverService {
   private readonly path = 'handoverjobs';
-  private readonly logger: Logger<FftHandoverService> = new CustomLogger<FftHandoverService>();
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async findByPickJobRef(pickJobId: string): Promise<StrippedHandoverjobs> {
@@ -25,7 +22,7 @@ export class FftHandoverService {
       });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get handover jobs for pickjob id '${pickJobId}'. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -40,7 +37,7 @@ export class FftHandoverService {
       return await this.apiClient.get<Handoverjob>(`${this.path}/${handoverJobId}`);
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get handover job with id '${handoverJobId}'. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -65,7 +62,7 @@ export class FftHandoverService {
       return await this.apiClient.patch<Handoverjob>(`${this.path}/${handoverJobId}`, { ...patchObject });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not mark handover job with id '${handoverJobId}' as delivered. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -88,7 +85,7 @@ export class FftHandoverService {
       return handoverJob;
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not cancel handover job with id '${handoverJobId}' and version ${version}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`

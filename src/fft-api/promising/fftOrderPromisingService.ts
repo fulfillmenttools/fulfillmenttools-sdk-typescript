@@ -1,5 +1,3 @@
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 import { FftApiClient } from '../common';
 import {
   CheckoutOptionsDeliveryEarliestRequest,
@@ -16,7 +14,6 @@ import { ResponseError } from 'superagent';
 
 export class FftOrderPromisingService {
   private readonly path = 'promises/checkoutoptions';
-  private readonly logger: Logger<FftOrderPromisingService> = new CustomLogger<FftOrderPromisingService>();
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async earliestDelivery(
@@ -28,7 +25,7 @@ export class FftOrderPromisingService {
       });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `FFT Checkoutoptions Earliest POST failed with status ${httpError.status},  error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -47,7 +44,7 @@ export class FftOrderPromisingService {
       });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `FFT Checkoutoptions TimePeriod POST failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -66,7 +63,7 @@ export class FftOrderPromisingService {
       });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `FFT Checkoutoptions TimePoint POST failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -85,7 +82,7 @@ export class FftOrderPromisingService {
       });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `FFT CheckoutOptions POST failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`

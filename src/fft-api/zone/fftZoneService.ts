@@ -1,13 +1,9 @@
 import { ResponseError } from 'superagent';
-import { Logger } from 'tslog';
 import { FftApiClient } from '../common';
-import { CustomLogger } from '../../common';
 import { Zone, ZoneForCreation, ZoneForReplacement } from '../types';
 
 export class FftZoneService {
   private readonly PATH = 'zones';
-
-  private readonly logger: Logger<FftZoneService> = new CustomLogger<FftZoneService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -20,7 +16,7 @@ export class FftZoneService {
       return await this.apiClient.post<Zone>(`facilities/${facilityId}/${this.PATH}`, { ...zoneForCreation });
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not create zone. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -36,7 +32,7 @@ export class FftZoneService {
       });
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get zones. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -50,7 +46,7 @@ export class FftZoneService {
       return await this.apiClient.get<Zone>(`facilities/${facilityId}/${this.PATH}/${zoneId}`);
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get zone ${zoneId}. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -72,7 +68,7 @@ export class FftZoneService {
       });
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not update zone ${zoneId}. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -86,7 +82,7 @@ export class FftZoneService {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.PATH}/${zoneId}`);
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not delete zone ${zoneId}. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
