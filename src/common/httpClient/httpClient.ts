@@ -23,7 +23,7 @@ export class HttpClient implements BasicHttpClient {
     }
 
     if (this.shouldLogHttpRequestAndResponse) {
-      console.log(
+      console.debug(
         `Sending request. Url: ${request.url}, Method: ${request.method}. Params: ${JSON.stringify(
           config.params
         )}, Body: ${JSON.stringify(config.body)}`
@@ -35,7 +35,7 @@ export class HttpClient implements BasicHttpClient {
       .serialize((body) => JSON.stringify(body, serializeWithDatesAsIsoString));
 
     if (this.shouldLogHttpRequestAndResponse) {
-      console.log(
+      console.debug(
         `Received response. Url: ${request.url}, Method: ${request.method} - Response Status: ${
           response.statusCode
         }. Body: ${JSON.stringify(response.body)}`
