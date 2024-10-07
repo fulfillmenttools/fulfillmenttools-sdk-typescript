@@ -17,7 +17,6 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
     'no-undef': 'error',
-    'no-console': 'error',
     'no-const-assign': 'error',
   },
   env: {

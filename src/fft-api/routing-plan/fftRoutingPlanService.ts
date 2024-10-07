@@ -1,11 +1,8 @@
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
-import { FftApiClient } from '../common';
 import { DecisionLog, RoutingPlan, RoutingPlans } from '../types';
+import { FftApiClient } from '../common';
 
 export class FftRoutingPlanService {
   private readonly path = 'routingplans';
-  private readonly logger: Logger<FftRoutingPlanService> = new CustomLogger<FftRoutingPlanService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -13,7 +10,7 @@ export class FftRoutingPlanService {
     try {
       return await this.apiClient.get<RoutingPlans>(this.path, { orderRef });
     } catch (err) {
-      this.logger.error(`Could not get routing plans for order ref '${orderRef}'.`, err);
+      console.error(`Could not get routing plans for order ref '${orderRef}'.`, err);
       throw err;
     }
   }
@@ -22,7 +19,7 @@ export class FftRoutingPlanService {
     try {
       return await this.apiClient.get<RoutingPlan>(`${this.path}/${routingPlanId}`);
     } catch (err) {
-      this.logger.error(`Could not get routing plan for ID '${routingPlanId}'.`, err);
+      console.error(`Could not get routing plan for ID '${routingPlanId}'.`, err);
       throw err;
     }
   }
@@ -31,7 +28,7 @@ export class FftRoutingPlanService {
     try {
       return await this.apiClient.get<DecisionLog>(`${this.path}/${routingPlanId}/decisionlogs/${routingRun}`);
     } catch (err) {
-      this.logger.error(`Could not get decision log for routing plan '${routingPlanId}'.`, err);
+      console.error(`Could not get decision log for routing plan '${routingPlanId}'.`, err);
       throw err;
     }
   }

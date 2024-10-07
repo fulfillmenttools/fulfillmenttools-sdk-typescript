@@ -1,12 +1,9 @@
-import { Logger } from 'tslog';
-
-import { CustomLogger, FftApiError } from '../../common';
+import { FftApiError } from '../../common';
 import { FftApiClient } from '../common';
 import { Listing, ListingForReplacement, ModifyListingAction, StrippedListings } from '../types';
 
 export class FftListingService {
   private readonly path = 'listings';
-  private readonly logger: Logger<FftListingService> = new CustomLogger<FftListingService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -17,7 +14,7 @@ export class FftListingService {
         ...listingsForReplacement,
       });
     } catch (err) {
-      this.logger.error(`Could not create listing ${listing.tenantArticleId} for facility ${facilityId}.`, err);
+      console.error(`Could not create listing ${listing.tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -29,7 +26,7 @@ export class FftListingService {
       if (relaxed && FftApiError.isApiError(err) && err.status === 404) {
         return undefined;
       }
-      this.logger.error(`Could not fetch listing ${tenantArticleId} for facility ${facilityId}.`, err);
+      console.error(`Could not fetch listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -40,7 +37,7 @@ export class FftListingService {
         ...(size && { size: size.toString() }),
       });
     } catch (err) {
-      this.logger.error(`Could not get listings for facility ${facilityId}.`, err);
+      console.error(`Could not get listings for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -57,7 +54,7 @@ export class FftListingService {
         ...listingPatchActions,
       });
     } catch (err) {
-      this.logger.error(`Could not update listing ${tenantArticleId} for facility ${facilityId}.`, err);
+      console.error(`Could not update listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -66,7 +63,7 @@ export class FftListingService {
     try {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.path}/${tenantArticleId}`);
     } catch (err) {
-      this.logger.error(`Could not delete listing ${tenantArticleId} for facility ${facilityId}.`, err);
+      console.error(`Could not delete listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -75,7 +72,7 @@ export class FftListingService {
     try {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.path}`);
     } catch (err) {
-      this.logger.error(`Could not delete listings for facility ${facilityId}.`, err);
+      console.error(`Could not delete listings for facility ${facilityId}.`, err);
       throw err;
     }
   }

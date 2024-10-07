@@ -1,12 +1,8 @@
-import { Logger } from 'tslog';
-
-import { CustomLogger } from '../../common';
 import { FftApiClient } from '../common';
 import { Carrier, CarrierConfiguration, StrippedCarriers } from '../types';
 
 export class FftCarrierService {
   private readonly path = 'carriers';
-  private readonly logger: Logger<FftCarrierService> = new CustomLogger<FftCarrierService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 

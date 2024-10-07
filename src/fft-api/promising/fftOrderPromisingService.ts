@@ -1,5 +1,3 @@
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 import { FftApiClient } from '../common';
 import {
   CheckoutOptionsDeliveryEarliestRequest,
@@ -15,7 +13,6 @@ import {
 
 export class FftOrderPromisingService {
   private readonly path = 'promises/checkoutoptions';
-  private readonly logger: Logger<FftOrderPromisingService> = new CustomLogger<FftOrderPromisingService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -27,7 +24,7 @@ export class FftOrderPromisingService {
         ...request,
       });
     } catch (err) {
-      this.logger.error(`FFT Checkoutoptions Earliest POST failed.`, err);
+      console.error(`FFT Checkoutoptions Earliest POST failed.`, err);
       throw err;
     }
   }
@@ -40,7 +37,7 @@ export class FftOrderPromisingService {
         ...request,
       });
     } catch (err) {
-      this.logger.error(`FFT Checkoutoptions TimePeriod POST failed.`, err);
+      console.error(`FFT Checkoutoptions TimePeriod POST failed.`, err);
       throw err;
     }
   }
@@ -53,7 +50,7 @@ export class FftOrderPromisingService {
         ...request,
       });
     } catch (err) {
-      this.logger.error(`FFT Checkoutoptions TimePoint POST failed.`, err);
+      console.error(`FFT Checkoutoptions TimePoint POST failed.`, err);
       throw err;
     }
   }
@@ -66,7 +63,7 @@ export class FftOrderPromisingService {
         ...request,
       });
     } catch (err) {
-      this.logger.error(`FFT CheckoutOptions POST failed.`, err);
+      console.error(`FFT CheckoutOptions POST failed.`, err);
       throw err;
     }
   }

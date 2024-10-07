@@ -1,12 +1,8 @@
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 import { FftApiClient } from '../common';
 import { AddAllowedValueToTagAction, StrippedTags, Tag, TagForCreation, TagPatchActions } from '../types';
 
 export class FftTagService {
   private readonly PATH = 'tags';
-
-  private readonly logger: Logger<FftTagService> = new CustomLogger<FftTagService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -18,7 +14,7 @@ export class FftTagService {
     try {
       return await this.apiClient.post<Tag>(this.PATH, { ...tagForCreation });
     } catch (error) {
-      this.logger.error(`Could not create tag.`, error);
+      console.error(`Could not create tag.`, error);
       throw error;
     }
   }
@@ -27,7 +23,7 @@ export class FftTagService {
     try {
       return await this.apiClient.get<Tag>(`${this.PATH}/${id}`);
     } catch (error) {
-      this.logger.error(`Could not get tag ${id}.`, error);
+      console.error(`Could not get tag ${id}.`, error);
       throw error;
     }
   }
@@ -36,7 +32,7 @@ export class FftTagService {
     try {
       return await this.apiClient.get<StrippedTags>(this.PATH, { ...(size && { size: size.toString() }) });
     } catch (error) {
-      this.logger.error(`Could not get tags.`, error);
+      console.error(`Could not get tags.`, error);
       throw error;
     }
   }
@@ -57,7 +53,7 @@ export class FftTagService {
       };
       return await this.apiClient.patch<Tag>(`${this.PATH}/${id}`, { ...tagPatchActions });
     } catch (error) {
-      this.logger.error(`Could not update tag ${id}.`, error);
+      console.error(`Could not update tag ${id}.`, error);
       throw error;
     }
   }

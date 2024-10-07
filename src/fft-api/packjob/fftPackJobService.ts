@@ -1,11 +1,9 @@
-import { Logger } from 'tslog';
-import { CustomLogger, QueryParams } from '../../common';
+import { QueryParams } from '../../common';
 import { FftApiClient } from '../common';
 import { AbstractModificationAction, PackJob, PackJobForCreation } from '../types';
 
 export class FftPackJobService {
   private readonly path = 'packjobs';
-  private readonly logger: Logger<FftPackJobService> = new CustomLogger<FftPackJobService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -13,7 +11,7 @@ export class FftPackJobService {
     try {
       return await this.apiClient.post<PackJob>(`${this.path}`, packJob);
     } catch (err) {
-      this.logger.error(`Could not create pack job.`, err);
+      console.error(`Could not create pack job.`, err);
       throw err;
     }
   }
@@ -22,7 +20,7 @@ export class FftPackJobService {
     try {
       return await this.apiClient.patch<PackJob>(`${this.path}/${packJob.id}`, { version: packJob.version, actions });
     } catch (err) {
-      this.logger.error(`Could not update pack job with id '${packJob.id}'.`, err);
+      console.error(`Could not update pack job with id '${packJob.id}'.`, err);
       throw err;
     }
   }
@@ -31,7 +29,7 @@ export class FftPackJobService {
     try {
       return await this.apiClient.get<PackJob>(`${this.path}/${packJobId}`);
     } catch (err) {
-      this.logger.error(`Could not get pack job with id '${packJobId}'.`, err);
+      console.error(`Could not get pack job with id '${packJobId}'.`, err);
       throw err;
     }
   }
@@ -39,7 +37,7 @@ export class FftPackJobService {
     try {
       return await this.apiClient.get<{ packJobs: PackJob[] }>(`${this.path}`, params);
     } catch (err) {
-      this.logger.error(`Could not get pack jobs.`, err);
+      console.error(`Could not get pack jobs.`, err);
       throw err;
     }
   }

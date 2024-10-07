@@ -1,5 +1,3 @@
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 import { FftApiClient } from '../common';
 import {
   Order,
@@ -12,20 +10,19 @@ import {
 
 export class FftOrderService {
   private readonly path = 'orders';
-  private readonly logger: Logger<FftOrderService> = new CustomLogger<FftOrderService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async create(orderForCreation: OrderForCreation): Promise<Order> {
     try {
       const order = await this.apiClient.post<Order>(`${this.path}`, { ...orderForCreation });
-      this.logger.debug(
+      console.debug(
         `Successfully created order with tenantOrderId '${orderForCreation.tenantOrderId}' and order id '${order.id}'`
       );
 
       return order;
     } catch (err) {
-      this.logger.error(`FFT Order POST with for tenantOrderId '${orderForCreation.tenantOrderId}'.`, err);
+      console.error(`FFT Order POST with for tenantOrderId '${orderForCreation.tenantOrderId}'.`, err);
       throw err;
     }
   }
@@ -39,7 +36,7 @@ export class FftOrderService {
 
       return order;
     } catch (err) {
-      this.logger.error(`Could not cancel order with id '${orderId}' and version ${version}.`, err);
+      console.error(`Could not cancel order with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }
@@ -53,7 +50,7 @@ export class FftOrderService {
 
       return order;
     } catch (err) {
-      this.logger.error(`Could not unlock order with id '${orderId}' and version ${version}.`, err);
+      console.error(`Could not unlock order with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }
@@ -76,7 +73,7 @@ export class FftOrderService {
       return firstOrder;
     }
 
-    this.logger.warn(
+    console.warn(
       `Did not find exactly 1 order with tenantOrderId '${tenantOrderId}' but ${length}, returning first one with id '${firstOrder.id}'`
     );
     return firstOrder;

@@ -1,5 +1,3 @@
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 import { FftApiClient } from '../common';
 import {
   ExternalAction,
@@ -12,15 +10,13 @@ import {
 
 export class FftExternalActionService {
   private readonly path = 'externalactions';
-  private readonly logger: Logger<FftExternalActionService> = new CustomLogger<FftExternalActionService>();
-
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async create(request: ExternalActionForCreation): Promise<ExternalAction> {
     try {
       return await this.apiClient.post<ExternalAction>(this.path, { ...request });
     } catch (err) {
-      this.logger.error(`FFT ExternalActions POST failed.`, err);
+      console.error(`FFT ExternalActions POST failed.`, err);
       throw err;
     }
   }
@@ -29,7 +25,7 @@ export class FftExternalActionService {
     try {
       return await this.apiClient.get<ExternalAction>(`${this.path}/${externalActionId}`);
     } catch (err) {
-      this.logger.error(`FFT ExternalActions get id ${externalActionId} failed.`, err);
+      console.error(`FFT ExternalActions get id ${externalActionId} failed.`, err);
       throw err;
     }
   }
@@ -38,7 +34,7 @@ export class FftExternalActionService {
     try {
       return await this.apiClient.post<ExternalActionLog>(`${this.path}/${externalActionId}/logs`, { ...logEntry });
     } catch (err) {
-      this.logger.error(`FFT ExternalActions POST Log for ID ${externalActionId} failed.`, err);
+      console.error(`FFT ExternalActions POST Log for ID ${externalActionId} failed.`, err);
       throw err;
     }
   }
@@ -47,7 +43,7 @@ export class FftExternalActionService {
     try {
       return await this.apiClient.put<ExternalAction>(`${this.path}/${externalActionId}`, { ...replacement });
     } catch (err) {
-      this.logger.error(`FFT ExternalActions PUT replacement for ID ${externalActionId} failed.`, err);
+      console.error(`FFT ExternalActions PUT replacement for ID ${externalActionId} failed.`, err);
       throw err;
     }
   }
@@ -56,7 +52,7 @@ export class FftExternalActionService {
     try {
       await this.apiClient.delete(`${this.path}/${externalActionId}`);
     } catch (err) {
-      this.logger.error(`FFT ExternalActions DELETE ID ${externalActionId} failed.`, err);
+      console.error(`FFT ExternalActions DELETE ID ${externalActionId} failed.`, err);
       throw err;
     }
   }
@@ -78,7 +74,7 @@ export class FftExternalActionService {
 
       return await this.apiClient.get(`${this.path}/${externalActionId}/logs`, params);
     } catch (err) {
-      this.logger.error(`FFT ExternalActions GET Logs for ID ${externalActionId} failed.`, err);
+      console.error(`FFT ExternalActions GET Logs for ID ${externalActionId} failed.`, err);
       throw err;
     }
   }

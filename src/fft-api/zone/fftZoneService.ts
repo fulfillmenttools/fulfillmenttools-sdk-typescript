@@ -1,12 +1,8 @@
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 import { FftApiClient } from '../common';
 import { Zone, ZoneForCreation, ZoneForReplacement } from '../types';
 
 export class FftZoneService {
   private readonly PATH = 'zones';
-
-  private readonly logger: Logger<FftZoneService> = new CustomLogger<FftZoneService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -18,7 +14,7 @@ export class FftZoneService {
     try {
       return await this.apiClient.post<Zone>(`facilities/${facilityId}/${this.PATH}`, { ...zoneForCreation });
     } catch (error) {
-      this.logger.error(`Could not create zone for facility ${facilityId}.`, error);
+      console.error(`Could not create zone for facility ${facilityId}.`, error);
       throw error;
     }
   }
@@ -29,7 +25,7 @@ export class FftZoneService {
         ...(size && { size: size.toString() }),
       });
     } catch (error) {
-      this.logger.error(`Could not get zones for facility ${facilityId}.`, error);
+      console.error(`Could not get zones for facility ${facilityId}.`, error);
       throw error;
     }
   }
@@ -38,7 +34,7 @@ export class FftZoneService {
     try {
       return await this.apiClient.get<Zone>(`facilities/${facilityId}/${this.PATH}/${zoneId}`);
     } catch (error) {
-      this.logger.error(`Could not get zone ${zoneId} for facility ${facilityId}.`, error);
+      console.error(`Could not get zone ${zoneId} for facility ${facilityId}.`, error);
       throw error;
     }
   }
@@ -55,7 +51,7 @@ export class FftZoneService {
         ...zoneForReplacement,
       });
     } catch (error) {
-      this.logger.error(`Could not update zone ${zoneId} for facility ${facilityId}.`, error);
+      console.error(`Could not update zone ${zoneId} for facility ${facilityId}.`, error);
       throw error;
     }
   }
@@ -64,7 +60,7 @@ export class FftZoneService {
     try {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.PATH}/${zoneId}`);
     } catch (error) {
-      this.logger.error(`Could not delete zone ${zoneId} for facility ${facilityId}.`, error);
+      console.error(`Could not delete zone ${zoneId} for facility ${facilityId}.`, error);
       throw error;
     }
   }

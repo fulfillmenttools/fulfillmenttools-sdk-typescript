@@ -2,12 +2,9 @@ import { HTTP_TIMEOUT_MS } from './constants';
 import { USER_AGENT } from '../projectConstants';
 import { BasicHttpClient, HttpRequestConfiguration, HttpResult } from './models';
 import { serializeWithDatesAsIsoString } from './serialize';
-import { Logger } from 'tslog';
-import { CustomLogger } from '../logging';
 import { ErrorType, FetchError, FftSdkError } from './error';
 
 export class HttpClient implements BasicHttpClient {
-  private readonly logger: Logger<HttpClient> = new CustomLogger<HttpClient>();
   private shouldLogHttpRequestAndResponse: boolean;
 
   constructor(shouldLogHttpRequestAndResponse?: boolean) {
@@ -19,8 +16,6 @@ export class HttpClient implements BasicHttpClient {
     const requestHeaders = new Headers();
     requestHeaders.set('Content-Type', 'application/json');
     requestHeaders.set('User-Agent', USER_AGENT);
-
-    // TODO retries with 'fetch-retry'
 
     if (config.customHeaders) {
       Object.entries(config?.customHeaders).forEach(([key, value]) => {
@@ -46,7 +41,7 @@ export class HttpClient implements BasicHttpClient {
     }
 
     if (this.shouldLogHttpRequestAndResponse) {
-      this.logger.debug(`Sending request. Url: ${config.url}, Method: ${config.method}`, [
+      console.debug(`Sending request. Url: ${config.url}, Method: ${config.method}`, [
         {
           params: url.searchParams,
           body: requestOptions.body,
@@ -69,14 +64,11 @@ export class HttpClient implements BasicHttpClient {
         : undefined;
 
     if (this.shouldLogHttpRequestAndResponse) {
-      this.logger.debug(
-        `Received response. Url: ${url}, Method: ${config.method} - Response Status: ${response.status}`,
-        [
-          {
-            body: responseBody,
-          },
-        ]
-      );
+      console.debug(`Received response. Url: ${url}, Method: ${config.method} - Response Status: ${response.status}`, [
+        {
+          body: responseBody,
+        },
+      ]);
     }
 
     if (!response.ok) {

@@ -1,13 +1,10 @@
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
-import { ResponseType } from '../../common/httpClient/models';
-import { FftApiClient } from '../common';
 import { Parcel } from '../types';
+import { FftApiClient } from '../common';
 import { LabelDocument } from './labelDocument';
+import { ResponseType } from '../../common/httpClient/models';
 
 export class FftParcelService {
   private readonly path = 'parcels';
-  private readonly logger: Logger<FftParcelService> = new CustomLogger<FftParcelService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -15,7 +12,7 @@ export class FftParcelService {
     try {
       return await this.apiClient.get<Parcel>(`${this.path}/${parcelId}`);
     } catch (err) {
-      this.logger.error(`Could not get parcel with id '${parcelId}'.`, err);
+      console.error(`Could not get parcel with id '${parcelId}'.`, err);
       throw err;
     }
   }
@@ -32,7 +29,7 @@ export class FftParcelService {
         ResponseType.BLOB
       );
     } catch (err) {
-      this.logger.error(`Could not get label ${labelDocument} for parcel with id '${parcelId}'.`, err);
+      console.error(`Could not get label ${labelDocument} for parcel with id '${parcelId}'.`, err);
       throw err;
     }
   }
