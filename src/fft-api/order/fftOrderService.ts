@@ -8,25 +8,22 @@ import {
   StrippedOrders,
 } from '../types';
 import { FftApiClient } from '../common';
-import { Logger } from 'tslog';
-import { CustomLogger } from '../../common';
 
 export class FftOrderService {
   private readonly path = 'orders';
-  private readonly logger: Logger<FftOrderService> = new CustomLogger<FftOrderService>();
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async create(orderForCreation: OrderForCreation): Promise<Order> {
     try {
       const order = await this.apiClient.post<Order>(`${this.path}`, { ...orderForCreation });
-      this.logger.debug(
+      console.debug(
         `Successfully created order with tenantOrderId '${orderForCreation.tenantOrderId}' and order id '${order.id}'`
       );
 
       return order;
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `FFT Order POST with for tenantOrderId '${orderForCreation.tenantOrderId}' failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -46,7 +43,7 @@ export class FftOrderService {
       return order;
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not cancel order with id '${orderId}' and version ${version}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -66,7 +63,7 @@ export class FftOrderService {
       return order;
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not unlock order with id '${orderId}' and version ${version}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -94,7 +91,7 @@ export class FftOrderService {
       return firstOrder;
     }
 
-    this.logger.warn(
+    console.warn(
       `Did not find exactly 1 order with tenantOrderId '${tenantOrderId}' but ${length}, returning first one with id '${firstOrder.id}'`
     );
     return firstOrder;

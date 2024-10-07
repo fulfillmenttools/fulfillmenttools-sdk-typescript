@@ -3,11 +3,8 @@ import { HTTP_TIMEOUT_MS } from './constants';
 import { USER_AGENT } from '../projectConstants';
 import { BasicHttpClient, HttpRequestConfiguration, HttpResult, ResponseType } from './models';
 import { serializeWithDatesAsIsoString } from './serialize';
-import { Logger } from 'tslog';
-import { CustomLogger } from '../logging';
 
 export class HttpClient implements BasicHttpClient {
-  private readonly logger: Logger<HttpClient> = new CustomLogger<HttpClient>();
   private shouldLogHttpRequestAndResponse: boolean;
   public async request<TDto>(config: HttpRequestConfiguration): Promise<HttpResult<TDto>> {
     const request = superagent(config.method, config.url)
@@ -26,12 +23,11 @@ export class HttpClient implements BasicHttpClient {
     }
 
     if (this.shouldLogHttpRequestAndResponse) {
-      this.logger.debug(`Sending request. Url: ${request.url}, Method: ${request.method}`, [
-        {
-          params: config.params,
-          body: config.body,
-        },
-      ]);
+      console.debug(
+        `Sending request. Url: ${request.url}, Method: ${request.method}. Params: ${JSON.stringify(
+          config.params
+        )}, Body: ${JSON.stringify(config.body)}`
+      );
     }
 
     const response = await request
@@ -39,13 +35,10 @@ export class HttpClient implements BasicHttpClient {
       .serialize((body) => JSON.stringify(body, serializeWithDatesAsIsoString));
 
     if (this.shouldLogHttpRequestAndResponse) {
-      this.logger.debug(
-        `Received response. Url: ${request.url}, Method: ${request.method} - Response Status: ${response.statusCode}`,
-        [
-          {
-            body: response.body,
-          },
-        ]
+      console.debug(
+        `Received response. Url: ${request.url}, Method: ${request.method} - Response Status: ${
+          response.statusCode
+        }. Body: ${JSON.stringify(response.body)}`
       );
     }
 

@@ -1,12 +1,7 @@
-import { Logger } from 'tslog';
-
-import { CustomLogger } from '../../common';
 import { FftApiClient } from '../common';
 import { SupportedEvents, SupportedLocales } from '../types';
 
 export class FftProjectService {
-  private readonly logger: Logger<FftProjectService> = new CustomLogger<FftProjectService>();
-
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async getSupportedLocales(): Promise<string[]> {

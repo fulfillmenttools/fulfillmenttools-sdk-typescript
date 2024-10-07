@@ -1,6 +1,5 @@
 import { RefreshTokenResponse, TokenResponse } from './models';
-import { HttpClient, HttpMethod, MS_PER_SECOND, CustomLogger } from '../../common';
-import { Logger } from 'tslog';
+import { HttpClient, HttpMethod, MS_PER_SECOND } from '../../common';
 
 export interface FftAuthConfig {
   authUrl: string;
@@ -23,7 +22,6 @@ export class AuthService {
   private readonly authRefreshUrl: string;
 
   private static readonly EXPIRY_TOLERANCE_MS = 5000;
-  private readonly logger: Logger<AuthService> = new CustomLogger<AuthService>();
   constructor(private readonly authConfig: FftAuthConfig, private readonly httpClient: HttpClient) {
     this.authLoginUrl = this.authConfig.authUrl;
     this.authRefreshUrl = this.authConfig.refreshUrl;
@@ -51,7 +49,7 @@ export class AuthService {
         this.refreshToken = tokenResponse.body.refreshToken;
         this.expiresAt = this.calcExpiresAt(tokenResponse.body.expiresIn);
       } catch (err) {
-        this.logger.error(`Could not obtain token for '${this.username}': ${err}`);
+        console.error(`Could not obtain token for '${this.username}': ${err}`);
         throw err;
       }
     } else if (new Date().getTime() > this.expiresAt.getTime() - AuthService.EXPIRY_TOLERANCE_MS) {
@@ -69,7 +67,7 @@ export class AuthService {
         this.refreshToken = refreshTokenResponse.body.refresh_token;
         this.expiresAt = this.calcExpiresAt(refreshTokenResponse.body.expires_in);
       } catch (err) {
-        this.logger.error(`Could not refresh token for '${this.username}': ${err}`);
+        console.error(`Could not refresh token for '${this.username}': ${err}`);
         throw err;
       }
     }

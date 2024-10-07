@@ -1,13 +1,9 @@
-import { Logger } from 'tslog';
 import { ResponseError } from 'superagent';
-
 import { FftApiClient } from '../common';
-import { CustomLogger } from '../../common';
 import { Listing, ListingForReplacement, ModifyListingAction, StrippedListings } from '../types';
 
 export class FftListingService {
   private readonly path = 'listings';
-  private readonly logger: Logger<FftListingService> = new CustomLogger<FftListingService>();
 
   constructor(private readonly apiClient: FftApiClient) {}
 
@@ -19,7 +15,7 @@ export class FftListingService {
       });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not create listing ${listing.tenantArticleId} for facility ${facilityId}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -37,7 +33,7 @@ export class FftListingService {
       if (httpError.status === 404 && relaxed) {
         return undefined;
       }
-      this.logger.error(
+      console.error(
         `Could not fetch listing ${tenantArticleId} for facility ${facilityId}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -54,7 +50,7 @@ export class FftListingService {
       });
     } catch (error) {
       const httpError = error as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not get listings for facility ${facilityId}. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`
@@ -76,7 +72,7 @@ export class FftListingService {
       });
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not update listing ${tenantArticleId} for facility ${facilityId}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -91,7 +87,7 @@ export class FftListingService {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.path}/${tenantArticleId}`);
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not delete listing ${tenantArticleId} for facility ${facilityId}. Failed with status ${
           httpError.status
         }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
@@ -106,7 +102,7 @@ export class FftListingService {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.path}`);
     } catch (err) {
       const httpError = err as ResponseError;
-      this.logger.error(
+      console.error(
         `Could not delete listings for facility ${facilityId}. Failed with status ${httpError.status}, error: ${
           httpError.response ? JSON.stringify(httpError.response.body) : ''
         }`

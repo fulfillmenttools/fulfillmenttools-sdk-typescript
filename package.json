@@ -69,8 +69,7 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "superagent": "9.0.2",
-    "tslog": "4.9.3"
+    "superagent": "9.0.2"
   },
   "engines": {
     "node": ">=20"
