@@ -1,4 +1,4 @@
-import { ResponseError } from 'superagent';
+import { FftApiClient } from '../common';
 import {
   HandoverJobCancelActionEnum,
   HandoverJobCancelReason,
@@ -8,11 +8,11 @@ import {
   ModifyHandoverjobAction,
   StrippedHandoverjobs,
 } from '../types';
-import { FftApiClient } from '../common';
 import ActionEnum = ModifyHandoverjobAction.ActionEnum;
 
 export class FftHandoverService {
   private readonly path = 'handoverjobs';
+
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async findByPickJobRef(pickJobId: string): Promise<StrippedHandoverjobs> {
@@ -21,13 +21,7 @@ export class FftHandoverService {
         pickJobRef: pickJobId,
       });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not get handover jobs for pickjob id '${pickJobId}'. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not get handover jobs for pickjob id '${pickJobId}'`, err);
       throw err;
     }
   }
@@ -36,13 +30,7 @@ export class FftHandoverService {
     try {
       return await this.apiClient.get<Handoverjob>(`${this.path}/${handoverJobId}`);
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not get handover job with id '${handoverJobId}'. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not get handover job with id '${handoverJobId}'`, err);
       throw err;
     }
   }
@@ -61,13 +49,7 @@ export class FftHandoverService {
     try {
       return await this.apiClient.patch<Handoverjob>(`${this.path}/${handoverJobId}`, { ...patchObject });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not mark handover job with id '${handoverJobId}' as delivered. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not mark handover job with id '${handoverJobId}' as delivered.`, err);
       throw err;
     }
   }
@@ -84,13 +66,7 @@ export class FftHandoverService {
 
       return handoverJob;
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not cancel handover job with id '${handoverJobId}' and version ${version}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not cancel handover job with id '${handoverJobId}' and version ${version}.`, err);
       throw err;
     }
   }

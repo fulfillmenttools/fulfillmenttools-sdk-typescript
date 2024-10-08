@@ -1,11 +1,12 @@
-import { AuthService } from '../auth';
-import { HttpClient, HttpMethod, MAX_RETRIES, QueryParams } from '../../common';
+import { handleError, HttpClient, HttpMethod, MAX_RETRIES, QueryParams } from '../../common';
 import { ResponseType } from '../../common/httpClient/models';
+import { AuthService } from '../auth';
 
 export class FftApiClient {
   private readonly baseUrl: string;
   private readonly authService: AuthService;
   private readonly httpClient: HttpClient;
+
   constructor(projectId: string, username: string, password: string, apiKey: string, shouldEnableHttpLogging = false) {
     this.baseUrl = `https://${projectId}.api.fulfillmenttools.com/api`;
     this.httpClient = new HttpClient(shouldEnableHttpLogging);
@@ -63,17 +64,22 @@ export class FftApiClient {
     params?: QueryParams,
     responseType?: ResponseType
   ): Promise<T> {
-    const token = await this.authService.getToken();
-    const customHeaders = { Authorization: `Bearer ${token}` };
-    const result = await this.httpClient.request<T>({
-      method,
-      url: `${this.baseUrl}/${path}`,
-      body: data,
-      params,
-      customHeaders,
-      retries: method === HttpMethod.GET ? MAX_RETRIES : 0,
-      responseType,
-    });
-    return result.body as T;
+    try {
+      const token = await this.authService.getToken();
+      const customHeaders = { Authorization: `Bearer ${token}` };
+      const result = await this.httpClient.request<T>({
+        method,
+        url: `${this.baseUrl}/${path}`,
+        body: data,
+        params,
+        customHeaders,
+        retries: method === HttpMethod.GET ? MAX_RETRIES : 0,
+        responseType,
+      });
+      return result.body as T;
+    } catch (error) {
+      handleError(error);
+    }
+    return undefined as T;
   }
 }

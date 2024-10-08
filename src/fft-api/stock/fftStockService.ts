@@ -1,3 +1,4 @@
+import { ErrorType, FftSdkError, QueryParams } from '../../common';
 import { FftApiClient, MAX_ARRAY_SIZE } from '../common';
 import {
   FacilityServiceType,
@@ -12,8 +13,6 @@ import {
   StockSummaries,
   StockUpsertOperationResult,
 } from '../types';
-import { QueryParams } from '../../common';
-import { ResponseError } from 'superagent';
 
 export class FftStockService {
   private readonly path: string = 'stocks';
@@ -23,13 +22,7 @@ export class FftStockService {
     try {
       return await this.apiClient.post<Stock>(this.path, { ...stockForCreation });
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not create stock. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not create stock.`, error);
       throw error;
     }
   }
@@ -68,13 +61,7 @@ export class FftStockService {
 
       return await this.apiClient.get<StockPaginatedResult>(this.path, queryParams);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Fetching all stock failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Fetching all stock failed.`, error);
       throw error;
     }
   }
@@ -83,13 +70,7 @@ export class FftStockService {
     try {
       return await this.apiClient.put<StockUpsertOperationResult>(this.path, { ...stocksForUpsert });
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not upsert stock. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not upsert stock.`, error);
       throw error;
     }
   }
@@ -98,13 +79,7 @@ export class FftStockService {
     try {
       return await this.apiClient.put<Stock>(`${this.path}/${stockId}`, { ...stockForUpdate });
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not update stock. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not update stock ${stockId}.`, error);
       throw error;
     }
   }
@@ -113,13 +88,7 @@ export class FftStockService {
     try {
       return await this.apiClient.delete(`${this.path}/${stockId}`);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not delete stock with id ${stockId}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not delete stock with id ${stockId}.`, error);
       throw error;
     }
   }
@@ -145,13 +114,7 @@ export class FftStockService {
     try {
       return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not delete stocks with ids ${stockIds.join()}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not delete stocks with ids ${stockIds.join()}.`, error);
       throw error;
     }
   }
@@ -178,13 +141,7 @@ export class FftStockService {
     try {
       return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not delete stocks in facility ${facilityId} for ${tenantArticleIds.join()}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not delete stocks in facility ${facilityId} for ${tenantArticleIds.join()}.`, error);
       throw error;
     }
   }
@@ -210,13 +167,7 @@ export class FftStockService {
     try {
       return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not delete stocks for locations ${locationIds.join()}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not delete stocks for locations ${locationIds.join()}.`, error);
       throw error;
     }
   }
@@ -241,13 +192,7 @@ export class FftStockService {
     try {
       return await this.apiClient.post<StockActionResult>(`${this.path}/actions`, action);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not move stock ${fromStockId} to location ${toLocationId}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not move stock ${fromStockId} to location ${toLocationId}.`, error);
       throw error;
     }
   }
@@ -256,13 +201,7 @@ export class FftStockService {
     try {
       return await this.apiClient.get<Stock>(`${this.path}/${stockId}`);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not get stock with id '${stockId}'. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not get stock with id '${stockId}'.`, error);
       throw error;
     }
   }
@@ -316,13 +255,7 @@ export class FftStockService {
       }
       return await this.apiClient.get<StockSummaries>(`${this.path}/summaries`, queryParams);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Fetching stock summaries failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Fetching stock summaries failed.`, error);
       throw error;
     }
   }
@@ -336,7 +269,7 @@ export class FftStockService {
     channelRefs?: string[]
   ): Promise<StockDistribution> {
     if (!tenantArticleId) {
-      throw new Error('tenantArticleId is missing.');
+      throw new FftSdkError({ message: 'tenantArticleId is missing.', type: ErrorType.REQUEST });
     }
 
     try {
@@ -366,13 +299,7 @@ export class FftStockService {
 
       return await this.apiClient.get<StockDistribution>(`articles/${tenantArticleId}/stockdistribution`, queryParams);
     } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Fetching stock distribution for tenantArticleId ${tenantArticleId} failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Fetching stock distribution for tenantArticleId ${tenantArticleId} failed.`, error);
       throw error;
     }
   }

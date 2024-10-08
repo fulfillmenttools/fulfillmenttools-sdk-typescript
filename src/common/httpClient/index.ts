@@ -1,4 +1,5 @@
 export * from './constants';
+export * from './error';
 export * from './httpClient';
 export type { HttpResult } from './models';
 export type { HttpRequestConfiguration } from './models';

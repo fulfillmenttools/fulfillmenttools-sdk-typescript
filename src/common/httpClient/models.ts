@@ -9,6 +9,9 @@ export enum HttpMethod {
 
 export type QueryParams = Record<string, string | string[]>;
 
+// eslint-disable-next-line no-undef
+export type Fetch = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
+
 export interface HttpRequestConfiguration {
   method: HttpMethod;
   url: string;
@@ -17,6 +20,7 @@ export interface HttpRequestConfiguration {
   body?: Record<string, unknown> | string;
   retries?: number;
   responseType?: ResponseType;
+  fetch?: Fetch;
 }
 
 export interface HttpResult<TDto> {

@@ -10,10 +10,10 @@ import {
   ResponseForCNCCheckoutOptions,
   ResponseForSFSCheckoutOptions,
 } from '../types';
-import { ResponseError } from 'superagent';
 
 export class FftOrderPromisingService {
   private readonly path = 'promises/checkoutoptions';
+
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async earliestDelivery(
@@ -24,13 +24,7 @@ export class FftOrderPromisingService {
         ...request,
       });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `FFT Checkoutoptions Earliest POST failed with status ${httpError.status},  error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`FFT Checkoutoptions Earliest POST failed.`, err);
       throw err;
     }
   }
@@ -43,13 +37,7 @@ export class FftOrderPromisingService {
         ...request,
       });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `FFT Checkoutoptions TimePeriod POST failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`FFT Checkoutoptions TimePeriod POST failed.`, err);
       throw err;
     }
   }
@@ -62,13 +50,7 @@ export class FftOrderPromisingService {
         ...request,
       });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `FFT Checkoutoptions TimePoint POST failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`FFT Checkoutoptions TimePoint POST failed.`, err);
       throw err;
     }
   }
@@ -81,13 +63,7 @@ export class FftOrderPromisingService {
         ...request,
       });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `FFT CheckoutOptions POST failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`FFT CheckoutOptions POST failed.`, err);
       throw err;
     }
   }
