@@ -72,7 +72,7 @@ export class HttpClient implements BasicHttpClient {
     }
 
     if (!response.ok) {
-      throw new FetchError(response.status, response.statusText, responseBody);
+      throw new FetchError(response.status, response.statusText);
     }
 
     return {

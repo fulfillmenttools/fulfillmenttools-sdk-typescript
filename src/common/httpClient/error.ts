@@ -14,19 +14,15 @@ export class FetchError extends Error {
   };
 
   type: ErrorType;
-  errors?: any[];
   status: number;
   statusText: string;
 
-  constructor(status: number, statusText: string, body?: any) {
+  constructor(status: number, statusText: string) {
     super(statusText);
     this.name = FetchError.NAME;
     this.type = ErrorType.HTTP;
     this.status = status;
     this.statusText = statusText;
-    if (body) {
-      this.errors = body.errors;
-    }
   }
 }
 
@@ -61,7 +57,6 @@ export class FftApiError extends FftSdkError {
     return FftSdkError.isSdkError(error) && error.name === FftApiError.NAME && error.type === ErrorType.RESPONSE;
   }
 
-  errors: any[] = [];
   status?: number;
   statusText?: string;
 
@@ -93,7 +88,6 @@ export const handleError = (error: unknown): never => {
     apiError.type = ErrorType.RESPONSE;
     apiError.status = error.status;
     apiError.statusText = error.statusText;
-    apiError.errors = error.errors || [];
     if (!apiError.message && apiError.statusText) {
       apiError.message = apiError.statusText;
     }
