@@ -1,4 +1,4 @@
-import { ResponseError } from 'superagent';
+import { FftApiClient } from '../common';
 import {
   Order,
   OrderCancelActionParameter,
@@ -7,10 +7,10 @@ import {
   StrippedOrder,
   StrippedOrders,
 } from '../types';
-import { FftApiClient } from '../common';
 
 export class FftOrderService {
   private readonly path = 'orders';
+
   constructor(private readonly apiClient: FftApiClient) {}
 
   public async create(orderForCreation: OrderForCreation): Promise<Order> {
@@ -22,13 +22,7 @@ export class FftOrderService {
 
       return order;
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `FFT Order POST with for tenantOrderId '${orderForCreation.tenantOrderId}' failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`FFT Order POST with for tenantOrderId '${orderForCreation.tenantOrderId}'.`, err);
       throw err;
     }
   }
@@ -42,13 +36,7 @@ export class FftOrderService {
 
       return order;
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not cancel order with id '${orderId}' and version ${version}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not cancel order with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }
@@ -62,13 +50,7 @@ export class FftOrderService {
 
       return order;
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not unlock order with id '${orderId}' and version ${version}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not unlock order with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }

@@ -1,3 +1,5 @@
+import { FftApiError, QueryParams } from '../../common';
+import { FftApiClient } from '../common';
 import {
   CarrierStatus,
   DefaultPickingTimesConfiguration,
@@ -14,9 +16,7 @@ import {
   StrippedFacilities,
   StrippedFacility,
 } from '../types';
-import { FftApiClient } from '../common';
 import ActionEnum = ModifyShortpickAction.ActionEnum;
-import { QueryParams } from '../../common';
 
 const sleep = async (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -51,7 +51,9 @@ export class FftFacilityService {
         return undefined;
       } else {
         console.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
-        throw new Error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
+        throw new FftApiError({
+          message: `Did not find facility with tenantFacilityId '${tenantFacilityId}'`,
+        });
       }
     }
 
@@ -62,7 +64,7 @@ export class FftFacilityService {
     try {
       return await this.apiClient.get<StrippedFacilities>(this.PATH, params);
     } catch (err) {
-      console.error(`Getting Facilities failed: ${err}`);
+      console.error(`Getting all facilities failed.`, err);
       throw err;
     }
   }
@@ -71,7 +73,7 @@ export class FftFacilityService {
     try {
       return await this.apiClient.post<Facility>(this.PATH, facilityForCreation);
     } catch (err) {
-      console.error(`Creating FFT Facility '${facilityForCreation.tenantFacilityId}' failed: ${err}`);
+      console.error(`Creating FFT Facility '${facilityForCreation.tenantFacilityId}' failed.`, err);
       throw err;
     }
   }
@@ -94,9 +96,7 @@ export class FftFacilityService {
         `Successfully connected FFT Facility '${facilityId}' with Carrier '${facilityCarrierConnection.key}' '${carrierRef}'`
       );
     } catch (err) {
-      console.error(
-        `Connecting FFT Facility '${facilityId}' with Carrier '${carrierRef}' failed with status  error: ${err}`
-      );
+      console.error(`Connecting FFT Facility '${facilityId}' with Carrier '${carrierRef}' failed.`, err);
       throw err;
     }
   }
@@ -138,7 +138,7 @@ export class FftFacilityService {
       }
       return facility.id;
     } catch (err) {
-      console.error(`Deleting FFT Facility '${facilityId}' from CT Channel '${tenantFacilityId}' failed: ${err}`);
+      console.error(`Deleting FFT Facility '${facilityId}' from CT Channel '${tenantFacilityId}' failed.`, err);
       throw err;
     }
   }
@@ -146,8 +146,10 @@ export class FftFacilityService {
   public async getFacility(facilityId: string): Promise<Facility> {
     const facility = await this.apiClient.get<Facility>(this.PATH.concat(`/${facilityId}`));
     if (!facility) {
-      console.error(`Did not find facility with facilityId '${facilityId}'`);
-      throw new Error(`Did not find facility with facilityId '${facilityId}'`);
+      console.error(`Did not find facility with facilityId '${facilityId}'.`);
+      throw new FftApiError({
+        message: `Did not find facility with facilityId '${facilityId}'`,
+      });
     }
     return facility;
   }
@@ -155,8 +157,10 @@ export class FftFacilityService {
   public async getStrippedFacility(tenantFacilityId: string): Promise<StrippedFacility> {
     const strippedFacilities = await this.apiClient.get<StrippedFacilities>(this.PATH, { tenantFacilityId });
     if (!strippedFacilities.facilities || strippedFacilities.facilities.length === 0) {
-      console.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
-      throw new Error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
+      console.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'.`);
+      throw new FftApiError({
+        message: `Did not find facility with tenantFacilityId '${tenantFacilityId}'`,
+      });
     }
 
     if (strippedFacilities.facilities.length > 1) {
@@ -179,9 +183,7 @@ export class FftFacilityService {
       facility = await this.apiClient.patch<Facility>(`${this.PATH}/${facilityId}`, { ...data });
       return facility;
     } catch (err) {
-      console.error(
-        `Updating FFT Facility '${facilityId}' from CT Channel '${action.tenantFacilityId}' failed: ${err}`
-      );
+      console.error(`Updating FFT Facility '${facilityId}' from CT Channel '${action.tenantFacilityId}' failed.`, err);
       throw err;
     }
   }
@@ -227,7 +229,7 @@ export class FftFacilityService {
         await sleep(delay);
         return this.disableShortPick(facilityId, retries - 1, delay * 2);
       }
-      console.error(`Disabling ShortPick for Facility '${facilityId}' failed ${err},`);
+      console.error(`Disabling ShortPick for Facility '${facilityId}' failed.`, err);
       throw err;
     }
   }

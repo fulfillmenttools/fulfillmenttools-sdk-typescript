@@ -10,7 +10,6 @@ import {
   StrippedPickJobs,
 } from '../types';
 import { FftApiClient, MAX_ARRAY_SIZE } from '../common';
-import { ResponseError } from 'superagent';
 import { isDate, QueryParams } from '../../common';
 
 export class FftPickJobService {
@@ -22,13 +21,7 @@ export class FftPickJobService {
     try {
       return await this.apiClient.get<StrippedPickJobs>(this.path, { tenantOrderId });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not get pick jobs with tenant order id '${tenantOrderId}'. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not get pick jobs with tenant order id '${tenantOrderId}'.`, err);
       throw err;
     }
   }
@@ -56,13 +49,7 @@ export class FftPickJobService {
         version,
       });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not update pick job with id '${pickJobId}' and version ${version}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not update pick job with id '${pickJobId}' and version ${version}.`, err);
       throw err;
     }
   }
@@ -71,12 +58,7 @@ export class FftPickJobService {
     try {
       return await this.apiClient.get<PickJob>(`${this.path}/${pickJobId}`);
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not get pick job with id '${pickJobId}'. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      console.error(`Could not get pick job with id '${pickJobId}'.`, err);
       throw err;
     }
   }
@@ -98,12 +80,7 @@ export class FftPickJobService {
     try {
       return await this.apiClient.get<StrippedPickJobs>(this.path, params);
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not get pick jobs for facility '${id}'. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
+      console.error(`Could not get pick jobs for facility '${id}'.`, err);
       throw err;
     }
   }
@@ -112,13 +89,7 @@ export class FftPickJobService {
     try {
       return await this.apiClient.patch<PickJob>(`${this.path}/${pickJob.id}`, { version: pickJob.version, actions });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not update pick job with id '${pickJob.id}'. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not update pick job with id '${pickJob.id}'.`, err);
       throw err;
     }
   }
@@ -213,15 +184,9 @@ export class FftPickJobService {
       }
 
       return await this.apiClient.get<StrippedPickJobs>(this.path, queryParams);
-    } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Fetching all pickjobs failed with status code ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
-      throw error;
+    } catch (err) {
+      console.error(`Fetching all pick jobs failed.`, err);
+      throw err;
     }
   }
 }

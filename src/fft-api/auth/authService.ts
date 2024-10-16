@@ -22,6 +22,7 @@ export class AuthService {
   private readonly authRefreshUrl: string;
 
   private static readonly EXPIRY_TOLERANCE_MS = 5000;
+
   constructor(private readonly authConfig: FftAuthConfig, private readonly httpClient: HttpClient) {
     this.authLoginUrl = this.authConfig.authUrl;
     this.authRefreshUrl = this.authConfig.refreshUrl;
@@ -31,8 +32,6 @@ export class AuthService {
   }
 
   public async getToken(): Promise<string> {
-    // this.log.debug(`Getting token for '${this.username}'`);
-
     if (!this.idToken || !this.refreshToken || !this.expiresAt) {
       try {
         const tokenResponse = await this.httpClient.request<TokenResponse>({
@@ -49,7 +48,7 @@ export class AuthService {
         this.refreshToken = tokenResponse.body.refreshToken;
         this.expiresAt = this.calcExpiresAt(tokenResponse.body.expiresIn);
       } catch (err) {
-        console.error(`Could not obtain token for '${this.username}': ${err}`);
+        console.error(`Could not obtain token for '${this.username}'.`, err);
         throw err;
       }
     } else if (new Date().getTime() > this.expiresAt.getTime() - AuthService.EXPIRY_TOLERANCE_MS) {
@@ -67,7 +66,7 @@ export class AuthService {
         this.refreshToken = refreshTokenResponse.body.refresh_token;
         this.expiresAt = this.calcExpiresAt(refreshTokenResponse.body.expires_in);
       } catch (err) {
-        console.error(`Could not refresh token for '${this.username}': ${err}`);
+        console.error(`Could not refresh token for '${this.username}'.`, err);
         throw err;
       }
     }

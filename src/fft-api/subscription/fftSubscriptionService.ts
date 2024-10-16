@@ -10,7 +10,7 @@ export class FftSubscriptionService {
     try {
       return await this.apiClient.get<Subscriptions>(this.PATH, { ...(size && { size: size.toString() }) });
     } catch (err) {
-      console.error(`Getting FFT Subscriptions failed: ${err}`);
+      console.error(`Getting FFT Subscriptions failed.`, err);
       throw err;
     }
   }
@@ -19,7 +19,7 @@ export class FftSubscriptionService {
     try {
       return await this.apiClient.post<Subscription>(this.PATH, { ...subscriptionForCreation });
     } catch (err) {
-      console.error(`Creating FFT Subscription '${subscriptionForCreation.name}' failed: ${err}`);
+      console.error(`Creating FFT Subscription '${subscriptionForCreation.name}' failed.`, err);
       throw err;
     }
   }
@@ -28,7 +28,7 @@ export class FftSubscriptionService {
     try {
       await this.apiClient.delete(`${this.PATH}/${subscriptionId}`);
     } catch (err) {
-      console.error(`Deleting FFT Subscription '${subscriptionId}' failed: ${err}`);
+      console.error(`Deleting FFT Subscription '${subscriptionId}' failed.`, err);
       throw err;
     }
   }

@@ -1,4 +1,4 @@
-import { ResponseError } from 'superagent';
+import { FftApiError } from '../../common';
 import { FftApiClient } from '../common';
 import { Listing, ListingForReplacement, ModifyListingAction, StrippedListings } from '../types';
 
@@ -14,13 +14,7 @@ export class FftListingService {
         ...listingsForReplacement,
       });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not create listing ${listing.tenantArticleId} for facility ${facilityId}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not create listing ${listing.tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -29,16 +23,10 @@ export class FftListingService {
     try {
       return await this.apiClient.get<Listing>(`facilities/${facilityId}/${this.path}/${tenantArticleId}`);
     } catch (err) {
-      const httpError = err as ResponseError;
-      if (httpError.status === 404 && relaxed) {
+      if (relaxed && FftApiError.isApiError(err) && err.status === 404) {
         return undefined;
       }
-      console.error(
-        `Could not fetch listing ${tenantArticleId} for facility ${facilityId}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not fetch listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -48,14 +36,9 @@ export class FftListingService {
       return await this.apiClient.get<StrippedListings>(`facilities/${facilityId}/${this.path}`, {
         ...(size && { size: size.toString() }),
       });
-    } catch (error) {
-      const httpError = error as ResponseError;
-      console.error(
-        `Could not get listings for facility ${facilityId}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-      throw error;
+    } catch (err) {
+      console.error(`Could not get listings for facility ${facilityId}.`, err);
+      throw err;
     }
   }
 
@@ -71,13 +54,7 @@ export class FftListingService {
         ...listingPatchActions,
       });
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not update listing ${tenantArticleId} for facility ${facilityId}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not update listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -86,13 +63,7 @@ export class FftListingService {
     try {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.path}/${tenantArticleId}`);
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not delete listing ${tenantArticleId} for facility ${facilityId}. Failed with status ${
-          httpError.status
-        }, error: ${httpError.response ? JSON.stringify(httpError.response.body) : ''}`
-      );
-
+      console.error(`Could not delete listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -101,13 +72,7 @@ export class FftListingService {
     try {
       return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.path}`);
     } catch (err) {
-      const httpError = err as ResponseError;
-      console.error(
-        `Could not delete listings for facility ${facilityId}. Failed with status ${httpError.status}, error: ${
-          httpError.response ? JSON.stringify(httpError.response.body) : ''
-        }`
-      );
-
+      console.error(`Could not delete listings for facility ${facilityId}.`, err);
       throw err;
     }
   }
