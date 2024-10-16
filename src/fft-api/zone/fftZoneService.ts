@@ -56,9 +56,9 @@ export class FftZoneService {
     }
   }
 
-  public async delete(facilityId: string, zoneId: string): Promise<void> {
+  public async delete(facilityId: string, zoneId: string): Promise<null> {
     try {
-      return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.PATH}/${zoneId}`);
+      return await this.apiClient.delete<null>(`facilities/${facilityId}/${this.PATH}/${zoneId}`);
     } catch (error) {
       console.error(`Could not delete zone ${zoneId} for facility ${facilityId}.`, error);
       throw error;
