@@ -23,7 +23,10 @@ export class AuthService {
 
   private static readonly EXPIRY_TOLERANCE_MS = 5000;
 
-  constructor(private readonly authConfig: FftAuthConfig, private readonly httpClient: HttpClient) {
+  constructor(
+    private readonly authConfig: FftAuthConfig,
+    private readonly httpClient: HttpClient
+  ) {
     this.authLoginUrl = this.authConfig.authUrl;
     this.authRefreshUrl = this.authConfig.refreshUrl;
     this.apiKey = this.authConfig.apiKey;

@@ -59,18 +59,18 @@ export class FftListingService {
     }
   }
 
-  public async delete(facilityId: string, tenantArticleId: string): Promise<void> {
+  public async delete(facilityId: string, tenantArticleId: string): Promise<null> {
     try {
-      return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.path}/${tenantArticleId}`);
+      return await this.apiClient.delete<null>(`facilities/${facilityId}/${this.path}/${tenantArticleId}`);
     } catch (err) {
       console.error(`Could not delete listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
 
-  public async deleteAll(facilityId: string): Promise<void> {
+  public async deleteAll(facilityId: string): Promise<null> {
     try {
-      return await this.apiClient.delete<void>(`facilities/${facilityId}/${this.path}`);
+      return await this.apiClient.delete<null>(`facilities/${facilityId}/${this.path}`);
     } catch (err) {
       console.error(`Could not delete listings for facility ${facilityId}.`, err);
       throw err;
