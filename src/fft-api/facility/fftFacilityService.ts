@@ -31,7 +31,7 @@ export class FftFacilityService {
 
   public async getFacilityId(tenantFacilityId: string, relaxed = false): Promise<string | undefined> {
     if (FftFacilityService.facilityCache.has(tenantFacilityId)) {
-      return FftFacilityService.facilityCache.get(tenantFacilityId) as string;
+      return FftFacilityService.facilityCache.get(tenantFacilityId);
     }
 
     const strippedFacilities = await this.apiClient.get<StrippedFacilities>(this.PATH, { tenantFacilityId });
@@ -46,15 +46,13 @@ export class FftFacilityService {
           `Did not find exactly 1 facility with tenantFacilityId '${tenantFacilityId}' but ${length}, returning first one with id '${facility.id}'`
         );
       }
+    } else if (relaxed) {
+      return undefined;
     } else {
-      if (relaxed) {
-        return undefined;
-      } else {
-        console.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
-        throw new FftApiError({
-          message: `Did not find facility with tenantFacilityId '${tenantFacilityId}'`,
-        });
-      }
+      console.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
+      throw new FftApiError({
+        message: `Did not find facility with tenantFacilityId '${tenantFacilityId}'`,
+      });
     }
 
     return facility.id;
