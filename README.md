@@ -4,7 +4,7 @@ This is a JavaScript/TypeScript SDK for the [fulfillmenttools REST API](https://
 
 <p align="center">
   <a href="https://fulfillmenttools.com/">
-    <img alt="fulfillmenttools logo" src="./.github/images/fft-mach-alliance.svg">
+    <img alt="fulfillmenttools logo" src="./.github/images/Github-banner-1240x620.png">
   </a><br />
 </p>
 
