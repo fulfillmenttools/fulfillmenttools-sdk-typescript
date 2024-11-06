@@ -1,7 +1,7 @@
 import { FftApiClient } from '../common';
 import {
   Order,
-  OrderCancelActionParameter,
+  OrderCancelActionParameter, OrderForceCancelActionParameter,
   OrderForCreation,
   OrderUnlockActionParameter,
   StrippedOrder,
@@ -27,9 +27,20 @@ export class FftOrderService {
     }
   }
 
-  public async cancel(orderId: string, version: number): Promise<Order> {
+  public async cancel(orderId: string, version: number, force = false): Promise<Order> {
     try {
-      const order = await this.apiClient.post<Order>(`${this.path}/${orderId}/actions`, {
+      let order: Order;
+
+      if (force) {
+        order = await this.apiClient.post<Order>(`${this.path}/${orderId}/actions`, {
+          name: OrderForceCancelActionParameter.NameEnum.FORCECANCEL,
+          version,
+        });
+
+        return order;
+      }
+
+      order = await this.apiClient.post<Order>(`${this.path}/${orderId}/actions`, {
         name: OrderCancelActionParameter.NameEnum.CANCEL,
         version,
       });
