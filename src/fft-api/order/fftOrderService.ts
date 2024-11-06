@@ -27,11 +27,11 @@ export class FftOrderService {
     }
   }
 
-  public async cancel(orderId: string, version: number, force = false): Promise<Order> {
+  public async cancel(orderId: string, version: number, shouldForceCancellation = false): Promise<Order> {
     try {
       let order: Order;
 
-      if (force) {
+      if (shouldForceCancellation) {
         order = await this.apiClient.post<Order>(`${this.path}/${orderId}/actions`, {
           name: OrderForceCancelActionParameter.NameEnum.FORCECANCEL,
           version,
