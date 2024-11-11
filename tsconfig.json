@@ -6,7 +6,8 @@
   "exclude": [
     "node_modules",
     "tmp",
-    "lib"
+    "lib",
+    "examples"
   ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,

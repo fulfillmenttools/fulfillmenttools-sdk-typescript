@@ -12,6 +12,7 @@ export default tseslint.config(
       '**/dist/',
       '**/lib/',
       '**/.nvmrc',
+      '**/examples/',
       'src/fft-api/types/typescript-fetch-client/',
       'babel.config.js',
       'jest.config.cjs',
