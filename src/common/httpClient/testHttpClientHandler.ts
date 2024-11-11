@@ -114,9 +114,7 @@ export class TestHttpClientHandler {
     if (!a || !b) {
       return false;
     }
-    const equal = this.aEntriesPresentInB(a, b, ignoreKeys) && this.aEntriesPresentInB(b, a, ignoreKeys);
-    // console.log(`${Object.entries(a)} : ${Object.entries(b)} => equal: ${equal}`);
-    return equal;
+    return this.aEntriesPresentInB(a, b, ignoreKeys) && this.aEntriesPresentInB(b, a, ignoreKeys);
   }
 
   private aEntriesPresentInB(a: QueryParams, b: QueryParams, ignoreKeys: string[] | undefined) {

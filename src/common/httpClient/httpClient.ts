@@ -1,14 +1,18 @@
-import { HTTP_TIMEOUT_MS } from './constants';
 import { USER_AGENT } from '../projectConstants';
+import { FftApiConfig } from '../utils/config';
+import { getDefaultLogger, Logger } from '../utils/logger';
+import { HTTP_TIMEOUT_MS } from './constants';
+import { ErrorType, FetchError, FftSdkError } from './error';
 import { BasicHttpClient, HttpRequestConfiguration, HttpResult } from './models';
 import { serializeWithDatesAsIsoString } from './serialize';
-import { ErrorType, FetchError, FftSdkError } from './error';
 
 export class HttpClient implements BasicHttpClient {
-  private shouldLogHttpRequestAndResponse: boolean;
+  private readonly log: Logger;
+  private readonly shouldLogHttpRequestAndResponse: boolean;
 
-  constructor(shouldLogHttpRequestAndResponse?: boolean) {
-    this.shouldLogHttpRequestAndResponse = shouldLogHttpRequestAndResponse ?? false;
+  constructor(config: FftApiConfig = {}) {
+    this.shouldLogHttpRequestAndResponse = config.enableHttpLogging ?? false;
+    this.log = config.getLogger?.() ?? getDefaultLogger();
   }
 
   public async request<TDto>(config: HttpRequestConfiguration): Promise<HttpResult<TDto>> {
@@ -41,7 +45,7 @@ export class HttpClient implements BasicHttpClient {
     }
 
     if (this.shouldLogHttpRequestAndResponse) {
-      console.debug(`Sending request. Url: ${config.url}, Method: ${config.method}`, [
+      this.log.debug(`Sending request. Url: ${config.url}, Method: ${config.method}`, [
         {
           params: url.searchParams,
           body: requestOptions.body,
@@ -64,7 +68,7 @@ export class HttpClient implements BasicHttpClient {
         : undefined;
 
     if (this.shouldLogHttpRequestAndResponse) {
-      console.debug(`Received response. Url: ${url}, Method: ${config.method} - Response Status: ${response.status}`, [
+      this.log.debug(`Received response. Url: ${url}, Method: ${config.method} - Response Status: ${response.status}`, [
         {
           body: responseBody,
         },
