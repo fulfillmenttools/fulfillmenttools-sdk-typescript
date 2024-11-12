@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Logger {
@@ -19,14 +18,19 @@ export class ConsoleLogger implements Logger {
 
 export class NullLogger implements Logger {
   debug(_message?: any, ..._optionalParams: any[]): void {
+    // does nothing
   }
   error(_message?: any, ..._optionalParams: any[]): void {
+    // does nothing
   }
   info(_message?: any, ..._optionalParams: any[]): void {
+    // does nothing
   }
   log(_message?: any, ..._optionalParams: any[]): void {
+    // does nothing
   }
   warn(_message?: any, ..._optionalParams: any[]): void {
+    // does nothing
   }
 }
 
