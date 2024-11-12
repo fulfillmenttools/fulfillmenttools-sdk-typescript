@@ -17,4 +17,8 @@ export default defineConfig(() => ({
   splitting: false,
   shims: true,
   cjsInterop: true,
+  env: {
+    APP_NAME: process.env.npm_package_name,
+    APP_VERSION: process.env.npm_package_version,
+  },
 }));
