@@ -66,9 +66,9 @@ export class FftStockService {
     }
   }
 
-  public async upsertStocks(stocksForUpsert: StocksForUpsert): Promise<StockUpsertOperationResult> {
+  public async upsertStocks(stocksForUpsert: StocksForUpsert): Promise<StockUpsertOperationResult[]> {
     try {
-      return await this.apiClient.put<StockUpsertOperationResult>(this.path, { ...stocksForUpsert });
+      return await this.apiClient.put<StockUpsertOperationResult[]>(this.path, { ...stocksForUpsert });
     } catch (error) {
       console.error(`Could not upsert stock.`, error);
       throw error;

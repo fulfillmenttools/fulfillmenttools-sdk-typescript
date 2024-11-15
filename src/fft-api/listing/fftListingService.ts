@@ -31,10 +31,11 @@ export class FftListingService {
     }
   }
 
-  public async getAll(facilityId: string, size = 25): Promise<StrippedListings> {
+  public async getAll(facilityId: string, size = 25, startAfterId?: string): Promise<StrippedListings> {
     try {
       return await this.apiClient.get<StrippedListings>(`facilities/${facilityId}/${this.path}`, {
         ...(size && { size: size.toString() }),
+        ...(startAfterId && { startAfterId }),
       });
     } catch (err) {
       console.error(`Could not get listings for facility ${facilityId}.`, err);
