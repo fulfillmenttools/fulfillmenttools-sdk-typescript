@@ -71,7 +71,7 @@ Finally, open `package.json` and make the following modifications:
   "license": "ISL",
   "description": "",
   "devDependencies": {
-    "@types/node": "^22.5.4",
+    "@types/node": "^22.9.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },

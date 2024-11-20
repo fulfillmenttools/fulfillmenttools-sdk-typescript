@@ -1,0 +1,30 @@
+{
+  "name": "fft-sdk-examples",
+  "version": "0.0.1",
+  "description": "Examples for the fulfillmenttools TypeScript SDK",
+  "author": "OC fulfillment GmbH (https://fulfillmenttools.com/)",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "example": "node dist/index.js",
+    "prettier": "prettier --write 'src/*.ts'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/node": "22.9.0",
+    "prettier": "3.3.3",
+    "ts-node": "10.9.2",
+    "typescript": "5.5.4"
+  },
+  "dependencies": {
+    "@faker-js/faker": "9.2.0",
+    "@fulfillmenttools/fulfillmenttools-sdk-typescript": "^0.3.1",
+    "cli-table3": "0.6.5",
+    "dotenv": "16.4.5"
+  },
+  "engines": {
+    "node": ">=20.11.0 <21",
+    "npm": ">=10.2.4"
+  }
+}
