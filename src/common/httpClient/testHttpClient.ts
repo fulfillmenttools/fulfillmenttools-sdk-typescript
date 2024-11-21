@@ -19,7 +19,7 @@ export class TestHttpClient implements BasicHttpClient {
     const resolvedObj = resolvedHttpRequest.resolveTo;
     if (resolvedObj) {
       const httpResult: HttpResult<TDto> = {
-        body: resolvedObj as TDto,
+        body: resolvedObj,
         statusCode: resolvedHttpRequest.resolveStatusCode ?? 200,
       };
       return Promise.resolve(httpResult);
