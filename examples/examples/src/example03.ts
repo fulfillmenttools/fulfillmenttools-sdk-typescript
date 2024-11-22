@@ -9,6 +9,7 @@ import {
 } from '@fulfillmenttools/fulfillmenttools-sdk-typescript';
 import { error, log } from 'node:console';
 
+// Ex 3: Create listings and stocks
 export async function runExample(fftApiClient: FftApiClient, ...args: string[]): Promise<void> {
   if (args.length < 2) {
     error('Missing required parameters');
@@ -23,6 +24,7 @@ export async function runExample(fftApiClient: FftApiClient, ...args: string[]):
   log(`Creating ${numberOfSamples} listings with stocks for facility ${facilityId}...`);
 
   try {
+    // create instance of listing service and stock service
     const fftListingService = new FftListingService(fftApiClient);
     const fftStockService = new FftStockService(fftApiClient);
 
@@ -30,7 +32,9 @@ export async function runExample(fftApiClient: FftApiClient, ...args: string[]):
     const stocks: StockForCreation[] = [];
 
     for (let count = 1; count <= numberOfSamples; count++) {
+      // construct a unique tenant article id (SKU)
       const tenantArticleId = `PRODUCT-${count.toString().padStart(4, '0')}`;
+      // construct listing with product attributes
       const listing: ListingForReplacement = {
         tenantArticleId,
         title: faker.commerce.productName(),
@@ -44,6 +48,7 @@ export async function runExample(fftApiClient: FftApiClient, ...args: string[]):
           {
             category: ArticleAttributeItem.CategoryEnum.Shop,
             key: 'valuePerUnit',
+            // shop price is in cents
             value: '' + faker.number.float({ min: 10, max: 200, fractionDigits: 2 }) * 100,
             type: ArticleAttributeItem.TypeEnum.NUMBER,
           },
@@ -57,6 +62,7 @@ export async function runExample(fftApiClient: FftApiClient, ...args: string[]):
       };
       listings.push(listing);
 
+      // construct stock for listing
       const stock: StockForCreation = {
         facilityRef: facilityId,
         tenantArticleId,
@@ -65,8 +71,10 @@ export async function runExample(fftApiClient: FftApiClient, ...args: string[]):
       stocks.push(stock);
     }
 
+    // create all listings
     await Promise.all(listings.map(async (listing) => await fftListingService.create(facilityId, listing)));
 
+    // create all stocks
     await Promise.all(stocks.map(async (stock) => await fftStockService.createStock(stock)));
   } catch (err) {
     error('Something bad happened', err);

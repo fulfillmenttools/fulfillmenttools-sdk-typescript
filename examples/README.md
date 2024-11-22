@@ -2,7 +2,7 @@
 
 In this section, you can see some practical examples how to use the fulfillmenttools SDK in your TypeScript application.
 
-* [Included Examples](./examples/README.de)
+* [Included Examples](./examples/README.md)
   * [01 - Retrieve all facilities](./examples/example01.md)
   * [02 - Retrieve all listings of a facility](./examples/example02.md)
   * [03 - Create listings and stocks](./examples/example03.md)

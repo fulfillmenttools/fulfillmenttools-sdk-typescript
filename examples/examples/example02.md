@@ -28,13 +28,13 @@ try {
   do {
     // make API request to fetch listings for given facility
     const listings = await fftListingService.getAll(facilityId, pageSize, startAfterId);
-    repeat = false;
-    if (listings.listings !== undefined && listings.listings.length > 0) {
+    repeat = listings.listings !== undefined && listings.listings.length > 0;
+    if (repeat) {
       startAfterId = listings.listings?.[listings.listings.length - 1].id;
-      for (const listing of listings.listings) {
+      listings.listings?.map((listing) => {
         // do something the listing object
-      }
-      repeat = true;
+        table.push([listing.tenantArticleId, listing.id, listing.version]);
+      });
     }
   } while (repeat);
 }

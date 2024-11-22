@@ -2,6 +2,7 @@ import { FftApiClient, FftListingService } from '@fulfillmenttools/fulfillmentto
 import Table from 'cli-table3';
 import { error, log } from 'node:console';
 
+// Ex 2: Retrieve all listings of a facility
 export async function runExample(fftApiClient: FftApiClient, ...args: string[]): Promise<void> {
   if (args.length < 1) {
     error('Missing required parameters');
@@ -10,6 +11,7 @@ export async function runExample(fftApiClient: FftApiClient, ...args: string[]):
   const facilityId = args[0];
   log(`Getting all listings for facility ${facilityId}...`);
   try {
+    // create instance of listing service
     const fftListingService = new FftListingService(fftApiClient);
     const table = new Table({
       head: ['TenantArticleId', 'Id', 'Version'],
@@ -18,14 +20,15 @@ export async function runExample(fftApiClient: FftApiClient, ...args: string[]):
     let repeat = false;
     let startAfterId: string | undefined;
     do {
+      // make API request to fetch listings for given facility
       const listings = await fftListingService.getAll(facilityId, pageSize, startAfterId);
-      repeat = false;
-      if (listings.listings !== undefined && listings.listings.length > 0) {
+      repeat = listings.listings !== undefined && listings.listings.length > 0;
+      if (repeat) {
         startAfterId = listings.listings?.[listings.listings.length - 1].id;
-        for (const listing of listings.listings) {
+        listings.listings?.map((listing) => {
+          // do something the listing object
           table.push([listing.tenantArticleId, listing.id, listing.version]);
-        }
-        repeat = true;
+        });
       }
     } while (repeat);
     log(table.toString());
