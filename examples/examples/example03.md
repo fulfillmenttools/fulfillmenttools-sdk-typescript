@@ -80,4 +80,4 @@ See the [example03.ts](./src/example03.ts) file for the full example that shows 
 ## Reference
 
 This example is using the `PUT /api/listings` and `POST /api/stocks` endpoint. 
-See the OpenAPI specification [for listings](https://fulfillmenttools.github.io/api-reference-ui/#/Core%20-%20Listings/putFacilityListing) and [for stocks](https://fulfillmenttools.github.io/api-reference-ui/#/Inventory%20Management%20-%20Stocks/createStock) for further details on those operations.
+See the OpenAPI specification for [listings](https://fulfillmenttools.github.io/api-reference-ui/#/Core%20-%20Listings/putFacilityListing) and [stocks](https://fulfillmenttools.github.io/api-reference-ui/#/Inventory%20Management%20-%20Stocks/createStock) for further details on those operations.

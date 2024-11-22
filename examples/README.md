@@ -6,6 +6,7 @@ In this section, you can see some practical examples how to use the fulfillmentt
   * [01 - Retrieve all facilities](./examples/example01.md)
   * [02 - Retrieve all listings of a facility](./examples/example02.md)
   * [03 - Create listings and stocks](./examples/example03.md)
+  * [04 - Create and confirm an order promise](./examples/example04.md)
 * [Using the SDK in the browser](./browser/README.md)
 
 > [!NOTE]

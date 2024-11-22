@@ -62,8 +62,8 @@ function getCount(): string {
 }
 
 // Ex 1: Retrieve all facilities
-import { runExample } from './example01';
-runExample(fftApiClient);
+// import { runExample } from './example01';
+// runExample(fftApiClient);
 
 // Ex 2: Retrieve all listings of a facility
 // import { runExample } from './example02';
@@ -77,3 +77,9 @@ runExample(fftApiClient);
 // const facilityId = getFacilityId();
 // const count = getCount();
 // runExample(fftApiClient, facilityId, count);
+
+// Ex 4: Create and confirm order promise
+// import { runExample } from './example04';
+// get required arguments and run example
+// const tenantArticleId = getTenantArticleId();
+// runExample(fftApiClient, tenantArticleId);
