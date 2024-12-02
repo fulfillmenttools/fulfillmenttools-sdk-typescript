@@ -71,7 +71,7 @@ export class FftOrderService {
         ...orderForCreation,
       });
     } catch (err) {
-      console.error(`Could not create order promise with tenantOrderId '${orderForCreation.tenantOrderId}'.`, err);
+      this.log.error(`Could not create order promise with tenantOrderId '${orderForCreation.tenantOrderId}'.`, err);
       throw err;
     }
   }
@@ -83,7 +83,7 @@ export class FftOrderService {
         version,
       });
     } catch (err) {
-      console.error(`Could not confirm order promise with id '${orderId}' and version ${version}.`, err);
+      this.log.error(`Could not confirm order promise with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }
@@ -95,7 +95,7 @@ export class FftOrderService {
         version,
       });
     } catch (err) {
-      console.error(`Could not extend order promise with id '${orderId}' and version ${version}.`, err);
+      this.log.error(`Could not extend order promise with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }
