@@ -3,8 +3,12 @@ import { FftApiClient } from '../common';
 import {
   Order,
   OrderCancelActionParameter,
+  OrderForceCancelActionParameter,
   OrderForCreation,
   OrderUnlockActionParameter,
+  PromiseConfirmActionParameter,
+  PromiseExtendActionParameter,
+  ResponseForDeliveryPromise,
   StrippedOrder,
   StrippedOrders,
 } from '../types';
@@ -31,10 +35,12 @@ export class FftOrderService {
     }
   }
 
-  public async cancel(orderId: string, version: number): Promise<Order> {
+  public async cancel(orderId: string, version: number, shouldForceCancellation = false): Promise<Order> {
     try {
       const order = await this.apiClient.post<Order>(`${this.path}/${orderId}/actions`, {
-        name: OrderCancelActionParameter.NameEnum.CANCEL,
+        name: shouldForceCancellation
+          ? OrderForceCancelActionParameter.NameEnum.FORCECANCEL
+          : OrderCancelActionParameter.NameEnum.CANCEL,
         version,
       });
 
@@ -55,6 +61,41 @@ export class FftOrderService {
       return order;
     } catch (err) {
       this.log.error(`Could not unlock order with id '${orderId}' and version ${version}.`, err);
+      throw err;
+    }
+  }
+
+  public async createPromise(orderForCreation: OrderForCreation): Promise<ResponseForDeliveryPromise> {
+    try {
+      return await this.apiClient.post<ResponseForDeliveryPromise>(`promises/deliverypromise`, {
+        ...orderForCreation,
+      });
+    } catch (err) {
+      console.error(`Could not create order promise with tenantOrderId '${orderForCreation.tenantOrderId}'.`, err);
+      throw err;
+    }
+  }
+
+  public async confirmPromise(orderId: string, version: number): Promise<Order> {
+    try {
+      return await this.apiClient.post<Order>(`${this.path}/${orderId}/actions`, {
+        name: PromiseConfirmActionParameter.NameEnum.CONFIRMPROMISE,
+        version,
+      });
+    } catch (err) {
+      console.error(`Could not confirm order promise with id '${orderId}' and version ${version}.`, err);
+      throw err;
+    }
+  }
+
+  public async extendPromise(orderId: string, version: number): Promise<Order> {
+    try {
+      return await this.apiClient.post<Order>(`${this.path}/${orderId}/actions`, {
+        name: PromiseExtendActionParameter.NameEnum.EXTENDPROMISE,
+        version,
+      });
+    } catch (err) {
+      console.error(`Could not extend order promise with id '${orderId}' and version ${version}.`, err);
       throw err;
     }
   }

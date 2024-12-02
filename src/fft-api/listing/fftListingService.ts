@@ -1,6 +1,6 @@
 import { FftApiError, Logger } from '../../common';
 import { FftApiClient } from '../common';
-import { Listing, ListingForReplacement, ModifyListingAction, StrippedListings } from '../types';
+import { Listing, ListingBulkOperationResult, ListingForReplacement, ModifyListingAction, StrippedListings } from '../types';
 
 export class FftListingService {
   private readonly path = 'listings';
@@ -13,9 +13,20 @@ export class FftListingService {
   public async create(facilityId: string, listing: ListingForReplacement): Promise<Listing> {
     try {
       const listingsForReplacement = { listings: [listing] };
-      return await this.apiClient.put<Listing>(`facilities/${facilityId}/${this.path}`, {
+      const results = await this.apiClient.put<ListingBulkOperationResult[]>(`facilities/${facilityId}/${this.path}`, {
         ...listingsForReplacement,
       });
+      if (
+        results !== undefined &&
+        results.length > 0 &&
+        (results[0].status === 'CREATED' || results[0].status === 'UPDATED')
+      ) {
+        return results[0].listing;
+      } else {
+        throw new FftApiError({
+          message: `Could not create listing ${listing.tenantArticleId}.`,
+        });
+      }
     } catch (err) {
       this.log.error(`Could not create listing ${listing.tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
@@ -34,10 +45,11 @@ export class FftListingService {
     }
   }
 
-  public async getAll(facilityId: string, size = 25): Promise<StrippedListings> {
+  public async getAll(facilityId: string, size = 25, startAfterId?: string): Promise<StrippedListings> {
     try {
       return await this.apiClient.get<StrippedListings>(`facilities/${facilityId}/${this.path}`, {
         ...(size && { size: size.toString() }),
+        ...(startAfterId && { startAfterId }),
       });
     } catch (err) {
       this.log.error(`Could not get listings for facility ${facilityId}.`, err);

@@ -45,8 +45,10 @@ export class HttpClient implements BasicHttpClient {
     }
 
     if (this.shouldLogHttpRequestAndResponse) {
-      this.log.debug(`Sending request. Url: ${config.url}, Method: ${config.method}`, [
+      this.log.debug(`Sending API request.`, [
         {
+          method: config.method,
+          url: config.url,
           params: url.searchParams,
           body: requestOptions.body,
           headers: requestOptions.headers,
@@ -58,18 +60,26 @@ export class HttpClient implements BasicHttpClient {
 
     const response = await fetchClient(url, requestOptions);
 
-    const responseBody =
-      response.body && response.status !== 204
-        ? await response.json().catch(() => {
-            if (response.ok) {
-              throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
-            }
-          })
-        : undefined;
+    // handle empty response body for DELETE requests
+    let shouldParseJson = response.body && response.status !== 204;
+    if (requestOptions.method === 'DELETE' && response.headers.has('content-length')) {
+      const length = parseInt(response.headers.get('content-length') ?? '');
+      shouldParseJson &&= !Number.isNaN(length) && length > 0;
+    }
+    const responseBody = shouldParseJson
+      ? await response.json().catch(() => {
+          if (response.ok) {
+            throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
+          }
+        })
+      : undefined;
 
     if (this.shouldLogHttpRequestAndResponse) {
-      this.log.debug(`Received response. Url: ${url}, Method: ${config.method} - Response Status: ${response.status}`, [
+      this.log.debug(`Received API response.`, [
         {
+          method: config.method,
+          url: url.toString(),
+          status: response.status,
           body: responseBody,
         },
       ]);
