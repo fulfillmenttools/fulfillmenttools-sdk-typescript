@@ -1,15 +1,19 @@
 import { handleError, HttpClient, HttpMethod, MAX_RETRIES, QueryParams } from '../../common';
 import { ResponseType } from '../../common/httpClient/models';
+import { defaultConfig, FftApiConfig } from '../../common/utils/config';
+import { getDefaultLogger, Logger } from '../../common/utils/logger';
 import { AuthService } from '../auth';
 
 export class FftApiClient {
   private readonly baseUrl: string;
   private readonly authService: AuthService;
   private readonly httpClient: HttpClient;
+  private readonly config: FftApiConfig;
 
-  constructor(projectId: string, username: string, password: string, apiKey: string, shouldEnableHttpLogging = false) {
+  constructor(projectId: string, username: string, password: string, apiKey: string, config: FftApiConfig = {}) {
+    this.config = { ...defaultConfig, ...config };
     this.baseUrl = `https://${projectId}.api.fulfillmenttools.com/api`;
-    this.httpClient = new HttpClient(shouldEnableHttpLogging);
+    this.httpClient = new HttpClient(this.config);
     this.authService = new AuthService(
       {
         apiKey,
@@ -20,6 +24,10 @@ export class FftApiClient {
       },
       this.httpClient
     );
+  }
+
+  public getLogger(): Logger {
+    return this.config.getLogger?.() ?? getDefaultLogger();
   }
 
   public async post<T>(

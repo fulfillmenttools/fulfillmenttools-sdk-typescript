@@ -1,3 +1,4 @@
+import { Logger } from '../../common/utils/logger';
 import { FftApiClient } from '../common';
 import {
   CustomService,
@@ -12,13 +13,17 @@ import {
 
 export class FftCustomServiceService {
   private readonly path = 'customservices';
-  constructor(private readonly apiClient: FftApiClient) {}
+  private readonly log: Logger;
+
+  constructor(private readonly apiClient: FftApiClient) {
+    this.log = apiClient.getLogger();
+  }
 
   public async create(customServiceForCreation: CustomServiceForCreation): Promise<CustomService> {
     try {
       return await this.apiClient.post<CustomService>(`${this.path}`, { ...customServiceForCreation });
     } catch (err) {
-      console.error(`Could not create custom service.`, err);
+      this.log.error(`Could not create custom service.`, err);
       throw err;
     }
   }
@@ -27,7 +32,7 @@ export class FftCustomServiceService {
     try {
       return await this.apiClient.get<CustomService>(`${this.path}/${customServiceId}`);
     } catch (err) {
-      console.error(`Could not get custom service ${customServiceId}.`, err);
+      this.log.error(`Could not get custom service ${customServiceId}.`, err);
       throw err;
     }
   }
@@ -44,7 +49,7 @@ export class FftCustomServiceService {
         ...actions,
       });
     } catch (err) {
-      console.error(`Could not update custom service ${customServiceId}.`, err);
+      this.log.error(`Could not update custom service ${customServiceId}.`, err);
       throw err;
     }
   }
@@ -61,7 +66,7 @@ export class FftCustomServiceService {
         ...(startAfterId && { startAfterId }),
       });
     } catch (err) {
-      console.error(`Could not get custom services.`, err);
+      this.log.error(`Could not get custom services.`, err);
       throw err;
     }
   }
@@ -80,7 +85,7 @@ export class FftCustomServiceService {
         }
       );
     } catch (err) {
-      console.error(`Could not get custom service connections for facility ${facilityId}.`, err);
+      this.log.error(`Could not get custom service connections for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -96,7 +101,7 @@ export class FftCustomServiceService {
         { ...facilityCustomServiceConnection }
       );
     } catch (err) {
-      console.error(
+      this.log.error(
         `Could not create custom service connection for service ${customServiceId} and facility ${facilityId}.`,
         err
       );
@@ -113,7 +118,7 @@ export class FftCustomServiceService {
         `facilities/${facilityId}/${this.path}/${customServiceId}`
       );
     } catch (err) {
-      console.error(
+      this.log.error(
         `Could not get custom service connection for service ${customServiceId} and facility ${facilityId}.`,
         err
       );
@@ -132,7 +137,7 @@ export class FftCustomServiceService {
         { ...facilityCustomServiceConnection }
       );
     } catch (err) {
-      console.error(
+      this.log.error(
         `Could not update custom service connection for service ${customServiceId} and facility ${facilityId}.`,
         err
       );
@@ -144,7 +149,7 @@ export class FftCustomServiceService {
     try {
       return await this.apiClient.delete<null>(`facilities/${facilityId}/${this.path}/${customServiceId}`);
     } catch (err) {
-      console.error(
+      this.log.error(
         `Could not delete custom service connection for service ${customServiceId} and facility ${facilityId}.`,
         err
       );

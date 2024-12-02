@@ -9,11 +9,15 @@ import {
   StrippedHandoverjobs,
 } from '../types';
 import ActionEnum = ModifyHandoverjobAction.ActionEnum;
+import { Logger } from '../../common/utils/logger';
 
 export class FftHandoverService {
   private readonly path = 'handoverjobs';
+  private readonly log: Logger;
 
-  constructor(private readonly apiClient: FftApiClient) {}
+  constructor(private readonly apiClient: FftApiClient) {
+    this.log = apiClient.getLogger();
+  }
 
   public async findByPickJobRef(pickJobId: string): Promise<StrippedHandoverjobs> {
     try {
@@ -21,7 +25,7 @@ export class FftHandoverService {
         pickJobRef: pickJobId,
       });
     } catch (err) {
-      console.error(`Could not get handover jobs for pickjob id '${pickJobId}'`, err);
+      this.log.error(`Could not get handover jobs for pickjob id '${pickJobId}'`, err);
       throw err;
     }
   }
@@ -30,7 +34,7 @@ export class FftHandoverService {
     try {
       return await this.apiClient.get<Handoverjob>(`${this.path}/${handoverJobId}`);
     } catch (err) {
-      console.error(`Could not get handover job with id '${handoverJobId}'`, err);
+      this.log.error(`Could not get handover job with id '${handoverJobId}'`, err);
       throw err;
     }
   }
@@ -49,7 +53,7 @@ export class FftHandoverService {
     try {
       return await this.apiClient.patch<Handoverjob>(`${this.path}/${handoverJobId}`, { ...patchObject });
     } catch (err) {
-      console.error(`Could not mark handover job with id '${handoverJobId}' as delivered.`, err);
+      this.log.error(`Could not mark handover job with id '${handoverJobId}' as delivered.`, err);
       throw err;
     }
   }
@@ -66,7 +70,7 @@ export class FftHandoverService {
 
       return handoverJob;
     } catch (err) {
-      console.error(`Could not cancel handover job with id '${handoverJobId}' and version ${version}.`, err);
+      this.log.error(`Could not cancel handover job with id '${handoverJobId}' and version ${version}.`, err);
       throw err;
     }
   }
