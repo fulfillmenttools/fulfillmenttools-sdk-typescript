@@ -1,6 +1,5 @@
 import { USER_AGENT } from '../projectConstants';
-import { FftApiConfig } from '../utils';
-import { getDefaultLogger, Logger } from '../utils';
+import { FftApiConfig, getDefaultLogger, Logger } from '../utils';
 import { HTTP_TIMEOUT_MS } from './constants';
 import { ErrorType, FetchError, FftSdkError } from './error';
 import { BasicHttpClient, HttpRequestConfiguration, HttpResult, ResponseType } from './models';
@@ -120,4 +119,3 @@ export class HttpClient implements BasicHttpClient {
     }
   }
 }
-
