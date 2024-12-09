@@ -1,20 +1,34 @@
-import { FftApiError } from '../../common';
+import { FftApiError, Logger } from '../../common';
 import { FftApiClient } from '../common';
-import { Listing, ListingForReplacement, ModifyListingAction, StrippedListings } from '../types';
+import { Listing, ListingBulkOperationResult, ListingForReplacement, ModifyListingAction, StrippedListings } from '../types';
 
 export class FftListingService {
   private readonly path = 'listings';
+  private readonly log: Logger;
 
-  constructor(private readonly apiClient: FftApiClient) {}
+  constructor(private readonly apiClient: FftApiClient) {
+    this.log = apiClient.getLogger();
+  }
 
   public async create(facilityId: string, listing: ListingForReplacement): Promise<Listing> {
     try {
       const listingsForReplacement = { listings: [listing] };
-      return await this.apiClient.put<Listing>(`facilities/${facilityId}/${this.path}`, {
+      const results = await this.apiClient.put<ListingBulkOperationResult[]>(`facilities/${facilityId}/${this.path}`, {
         ...listingsForReplacement,
       });
+      if (
+        results !== undefined &&
+        results.length > 0 &&
+        (results[0].status === 'CREATED' || results[0].status === 'UPDATED')
+      ) {
+        return results[0].listing;
+      } else {
+        throw new FftApiError({
+          message: `Could not create listing ${listing.tenantArticleId}.`,
+        });
+      }
     } catch (err) {
-      console.error(`Could not create listing ${listing.tenantArticleId} for facility ${facilityId}.`, err);
+      this.log.error(`Could not create listing ${listing.tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -26,7 +40,7 @@ export class FftListingService {
       if (relaxed && FftApiError.isApiError(err) && err.status === 404) {
         return undefined;
       }
-      console.error(`Could not fetch listing ${tenantArticleId} for facility ${facilityId}.`, err);
+      this.log.error(`Could not fetch listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -38,7 +52,7 @@ export class FftListingService {
         ...(startAfterId && { startAfterId }),
       });
     } catch (err) {
-      console.error(`Could not get listings for facility ${facilityId}.`, err);
+      this.log.error(`Could not get listings for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -55,7 +69,7 @@ export class FftListingService {
         ...listingPatchActions,
       });
     } catch (err) {
-      console.error(`Could not update listing ${tenantArticleId} for facility ${facilityId}.`, err);
+      this.log.error(`Could not update listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -64,7 +78,7 @@ export class FftListingService {
     try {
       return await this.apiClient.delete<null>(`facilities/${facilityId}/${this.path}/${tenantArticleId}`);
     } catch (err) {
-      console.error(`Could not delete listing ${tenantArticleId} for facility ${facilityId}.`, err);
+      this.log.error(`Could not delete listing ${tenantArticleId} for facility ${facilityId}.`, err);
       throw err;
     }
   }
@@ -73,7 +87,7 @@ export class FftListingService {
     try {
       return await this.apiClient.delete<null>(`facilities/${facilityId}/${this.path}`);
     } catch (err) {
-      console.error(`Could not delete listings for facility ${facilityId}.`, err);
+      this.log.error(`Could not delete listings for facility ${facilityId}.`, err);
       throw err;
     }
   }

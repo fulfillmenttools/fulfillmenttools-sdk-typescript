@@ -1,16 +1,20 @@
 import { DecisionLog, RoutingPlan, RoutingPlans } from '../types';
 import { FftApiClient } from '../common';
+import { Logger } from '../../common/utils/logger';
 
 export class FftRoutingPlanService {
   private readonly path = 'routingplans';
+  private readonly log: Logger;
 
-  constructor(private readonly apiClient: FftApiClient) {}
+  constructor(private readonly apiClient: FftApiClient) {
+    this.log = apiClient.getLogger();
+  }
 
   public async getByOrderRef(orderRef: string): Promise<RoutingPlans> {
     try {
       return await this.apiClient.get<RoutingPlans>(this.path, { orderRef });
     } catch (err) {
-      console.error(`Could not get routing plans for order ref '${orderRef}'.`, err);
+      this.log.error(`Could not get routing plans for order ref '${orderRef}'.`, err);
       throw err;
     }
   }
@@ -19,7 +23,7 @@ export class FftRoutingPlanService {
     try {
       return await this.apiClient.get<RoutingPlan>(`${this.path}/${routingPlanId}`);
     } catch (err) {
-      console.error(`Could not get routing plan for ID '${routingPlanId}'.`, err);
+      this.log.error(`Could not get routing plan for ID '${routingPlanId}'.`, err);
       throw err;
     }
   }
@@ -28,7 +32,7 @@ export class FftRoutingPlanService {
     try {
       return await this.apiClient.get<DecisionLog>(`${this.path}/${routingPlanId}/decisionlogs/${routingRun}`);
     } catch (err) {
-      console.error(`Could not get decision log for routing plan '${routingPlanId}'.`, err);
+      this.log.error(`Could not get decision log for routing plan '${routingPlanId}'.`, err);
       throw err;
     }
   }
