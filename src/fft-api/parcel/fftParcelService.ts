@@ -27,11 +27,12 @@ export class FftParcelService {
 
   public async getLabel(parcelId: string, labelDocument: LabelDocument): Promise<Buffer> {
     try {
-      return await this.apiClient.get<Buffer>(
+      const blob = await this.apiClient.get<Blob>(
         `${this.path}/${parcelId}/labels/${labelDocument}`,
         undefined,
         ResponseType.BLOB
       );
+      return Buffer.from(await blob.arrayBuffer());
     } catch (err) {
       this.log.error(`Could not get label ${labelDocument} for parcel with id '${parcelId}'.`, err);
       throw err;
