@@ -1,9 +1,8 @@
 import { USER_AGENT } from '../projectConstants';
-import { FftApiConfig } from '../utils/config';
-import { getDefaultLogger, Logger } from '../utils/logger';
+import { FftApiConfig, getDefaultLogger, Logger } from '../utils';
 import { HTTP_TIMEOUT_MS } from './constants';
 import { ErrorType, FetchError, FftSdkError } from './error';
-import { BasicHttpClient, HttpRequestConfiguration, HttpResult } from './models';
+import { BasicHttpClient, HttpRequestConfiguration, HttpResult, ResponseType } from './models';
 import { serializeWithDatesAsIsoString } from './serialize';
 
 export class HttpClient implements BasicHttpClient {
@@ -61,18 +60,13 @@ export class HttpClient implements BasicHttpClient {
     const response = await fetchClient(url, requestOptions);
 
     // handle empty response body for DELETE requests
-    let shouldParseJson = response.body && response.status !== 204;
+    let shouldParseBody = response.body && response.status !== 204;
     if (requestOptions.method === 'DELETE' && response.headers.has('content-length')) {
       const length = parseInt(response.headers.get('content-length') ?? '');
-      shouldParseJson &&= !Number.isNaN(length) && length > 0;
+      shouldParseBody &&= !Number.isNaN(length) && length > 0;
     }
-    const responseBody = shouldParseJson
-      ? await response.json().catch(() => {
-          if (response.ok) {
-            throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
-          }
-        })
-      : undefined;
+
+    const responseBody = await this.handleResponse(response, config, shouldParseBody);
 
     if (this.shouldLogHttpRequestAndResponse) {
       this.log.debug(`Received API response.`, [
@@ -93,5 +87,35 @@ export class HttpClient implements BasicHttpClient {
       statusCode: response.status,
       body: responseBody as TDto,
     };
+  }
+
+  private async handleResponse(response: Response, config: HttpRequestConfiguration, shouldParseBody: boolean | null) {
+    if (!shouldParseBody) {
+      return undefined;
+    }
+
+    switch (config.responseType) {
+      case ResponseType.BLOB: {
+        return await response.blob().catch(() => {
+          if (response.ok) {
+            throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
+          }
+        });
+      }
+      case ResponseType.ARRAY_BUFFER: {
+        return await response.arrayBuffer().catch(() => {
+          if (response.ok) {
+            throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
+          }
+        });
+      }
+      default: {
+        return await response.json().catch(() => {
+          if (response.ok) {
+            throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
+          }
+        });
+      }
+    }
   }
 }
