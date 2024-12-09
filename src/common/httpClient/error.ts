@@ -51,7 +51,7 @@ export class FftSdkError extends Error {
 }
 
 export class FftApiError extends FftSdkError {
-  static NAME = 'ApiError';
+  static override NAME = 'ApiError';
 
   static isApiError(error: unknown): error is FftApiError {
     return FftSdkError.isSdkError(error) && error.name === FftApiError.NAME && error.type === ErrorType.RESPONSE;

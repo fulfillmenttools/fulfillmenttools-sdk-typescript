@@ -10,6 +10,6 @@ export function isDate(date: unknown): date is Date {
   return isObject(date) && objectToString(date) === '[object Date]';
 }
 
-export function serializeWithDatesAsIsoString(key: string, value: unknown): unknown {
+export function serializeWithDatesAsIsoString(_key: string, value: unknown): unknown {
   return isDate(value) ? value.toISOString() : value;
 }

@@ -52,7 +52,7 @@ export class FftProcessService {
         throw new FftSdkError({ message: 'At least one query parameter is required.', type: ErrorType.REQUEST });
       }
 
-      return await this.apiClient.get<Process>(this.path, queryParams);
+      return await this.apiClient.get<Process>('process', queryParams);
     } catch (err) {
       this.log.error(`Could not get process.`, err);
       throw err;
