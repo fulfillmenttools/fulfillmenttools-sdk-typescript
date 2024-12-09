@@ -31,6 +31,7 @@ export class FftOrderService {
     }
   }
 
+  // TODO cancelationReasonId
   public async cancel(orderId: string, version: number, shouldForceCancellation = false): Promise<Order> {
     try {
       const order = await this.apiClient.post<Order>(`${this.path}/${orderId}/actions`, {
