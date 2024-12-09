@@ -60,13 +60,13 @@ export class HttpClient implements BasicHttpClient {
     const response = await fetchClient(url, requestOptions);
 
     // handle empty response body for DELETE requests
-    let shouldParseJson = response.body && response.status !== 204;
+    let shouldParseBody = response.body && response.status !== 204;
     if (requestOptions.method === 'DELETE' && response.headers.has('content-length')) {
       const length = parseInt(response.headers.get('content-length') ?? '');
-      shouldParseJson &&= !Number.isNaN(length) && length > 0;
+      shouldParseBody &&= !Number.isNaN(length) && length > 0;
     }
 
-    const responseBody = await this.handleResponse(response, config, shouldParseJson);
+    const responseBody = await this.handleResponse(response, config, shouldParseBody);
 
     if (this.shouldLogHttpRequestAndResponse) {
       this.log.debug(`Received API response.`, [
@@ -89,8 +89,8 @@ export class HttpClient implements BasicHttpClient {
     };
   }
 
-  private async handleResponse(response: Response, config: HttpRequestConfiguration, shouldParseJson: boolean | null) {
-    if (!shouldParseJson) {
+  private async handleResponse(response: Response, config: HttpRequestConfiguration, shouldParseBody: boolean | null) {
+    if (!shouldParseBody) {
       return undefined;
     }
 
