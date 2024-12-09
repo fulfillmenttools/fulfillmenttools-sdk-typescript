@@ -1,98 +1,93 @@
-import { fakerDE as faker } from '@faker-js/faker';
 import {
-  AddressPhoneNumbers,
-  AddressType,
-  DeliveryPreferencesShipping,
   FftApiClient,
+  FftHandoverService,
   FftOrderService,
-  OrderForCreation,
-  OrderLineItemForCreation,
+  FftPackJobService,
+  FftParcelService,
+  FftPickJobService,
+  FftProcessService,
+  FftShipmentService,
+  Process,
 } from '@fulfillmenttools/fulfillmenttools-sdk-typescript';
-import { add, format } from 'date-fns';
 import { error, log } from 'node:console';
 
-// Ex 5: TODO
+// Ex 5: Retrieve process and related entities
 export async function runExample(fftApiClient: FftApiClient, ...args: string[]): Promise<void> {
   if (args.length < 1) {
     error('Missing required parameters');
     return;
   }
-  const tenantArticleId = args[0];
-  log(`Creating Order Promise...`);
+  const tenantOrderId = args[0];
+  log(`Retrieving Process ${tenantOrderId}...`);
 
   try {
-    // create instance of listing service and stock service
+    // create instance of services
+    const fftProcessService = new FftProcessService(fftApiClient);
     const fftOrderService = new FftOrderService(fftApiClient);
+    const fftPickJobService = new FftPickJobService(fftApiClient);
+    const fftShipmentService = new FftShipmentService(fftApiClient);
+    const fftParcelService = new FftParcelService(fftApiClient);
+    const fftPackJobService = new FftPackJobService(fftApiClient);
+    const fftHandoverService = new FftHandoverService(fftApiClient);
 
-    // construct order line item with random data
-    const orderLineItems: OrderLineItemForCreation[] = [];
-    orderLineItems.push({
-      article: {
-        tenantArticleId,
-        title: faker.food.fruit(),
-      },
-      quantity: faker.number.int({ min: 1, max: 10 }),
-    });
-    // construct order
-    const orderForCreation: OrderForCreation = {
-      consumer: {
-        addresses: [
-          {
-            addressType: AddressType.POSTALADDRESS,
-            firstName: faker.person.firstName(),
-            lastName: faker.person.lastName(),
-            street: faker.location.street(),
-            houseNumber: '' + faker.number.int({ min: 1, max: 50 }),
-            postalCode: faker.location.zipCode(),
-            city: faker.location.city(),
-            country: 'DE',
-            email: 'noreply@noemail.com',
-            phoneNumbers: [
-              {
-                type: AddressPhoneNumbers.TypeEnum.MOBILE,
-                value: faker.phone.number(),
-              },
-            ],
-          },
-        ],
-      },
-      orderDate: new Date(),
-      tenantOrderId: `FFT-${currentDateFormatted()}`,
-      orderLineItems,
-      deliveryPreferences: {
-        shipping: {
-          serviceLevel: DeliveryPreferencesShipping.ServiceLevelEnum.DELIVERY,
-        },
-      },
-      promisesOptions: {
-        validUntil: add(new Date(), { minutes: 5 }),
-      },
-    };
+    // look up the process
+    const process = await fftProcessService.getById(tenantOrderId);
 
-    // create delivery promise
-    const deliveryPromise = await fftOrderService.createPromise(orderForCreation);
-    log(`Created Order Promise ${deliveryPromise.orderRef} ${deliveryPromise.promisesOptions?.validUntil}`);
-
-    // lookup order
-    let order = await fftOrderService.findBy(deliveryPromise.orderRef);
     log(
-      `Retrieved Order ${order.tenantOrderId} ${order.id} ${order.version} ${order.status} ${order.promisesOptions?.validUntil}`
+      `Process ${process.id} status=${process.status}, operativeStatus=${process.operativeStatus}, domsStatus=${process.domsStatus}`
     );
 
-    if (Math.random() > 0.5) {
-      // confirm order promise
-      order = await fftOrderService.confirmPromise(order.id, order.version);
-      log(`Confirmed Order Promise ${order.tenantOrderId} ${order.id} ${order.version} ${order.status}`);
-    } else {
-      // cancel order
-      order = await fftOrderService.cancel(order.id, order.version, true);
-      log(`Cancelled Order ${order.tenantOrderId} ${order.id} ${order.version} ${order.status}`);
+    // look up referenced order
+    if (process.orderRef) {
+      const order = await fftOrderService.findBy(process.orderRef);
+      log(`Order ${order.tenantOrderId} (${order.id}) status=${order.status}`);
+    }
+
+    // look up referenced pick jobs
+    if (process.pickJobRefs && process.pickJobRefs.length > 0) {
+      const pickJobs = await Promise.all(process.pickJobRefs.map(async (id) => await fftPickJobService.getById(id)));
+      for (const pickJob of pickJobs) {
+        log(`PickJob ${pickJob.id} status=${pickJob.status}`);
+      }
+    }
+
+    // look up referenced shipments
+    if (process.shipmentRefs && process.shipmentRefs.length > 0) {
+      const shipments = await Promise.all(
+        process.shipmentRefs.map(async (id) => await fftShipmentService.findById(id))
+      );
+      for (const shipment of shipments) {
+        log(`Shipment ${shipment.id} status=${shipment.status}`);
+        // look up referenced parcels
+        if (shipment.parcels && shipment.parcels.length > 0) {
+          const parcels = await Promise.all(
+            shipment.parcels.map(async (parcel) => await fftParcelService.findById(parcel.parcelRef))
+          );
+          for (const parcel of parcels) {
+            log(`  Parcel ${parcel.id} status=${parcel.status}`);
+          }
+        }
+      }
+    }
+
+    // look up referenced pack jobs
+    if (process.packJobRefs && process.packJobRefs.length > 0) {
+      const packJobs = await Promise.all(process.packJobRefs.map(async (id) => await fftPackJobService.getById(id)));
+      for (const packJob of packJobs) {
+        log(`PackJob ${packJob.id} status=${packJob.status}`);
+      }
+    }
+
+    // look up handover jobs
+    if (process.handoverJobRefs && process.handoverJobRefs.length > 0) {
+      const handoverJobs = await Promise.all(
+        process.handoverJobRefs.map(async (id) => await fftHandoverService.findById(id))
+      );
+      for (const handoverJob of handoverJobs) {
+        log(`HandoverJob ${handoverJob.id} status=${handoverJob.status}`);
+      }
     }
   } catch (err) {
     error('Something bad happened', err);
   }
-}
-
-function currentDateFormatted() {
-  return format(new Date(), 'yyyyMMdd-kkmmss');
 }

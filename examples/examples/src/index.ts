@@ -20,6 +20,10 @@ const options: ParseArgsConfig = {
     },
     tenantArticleId: {
       type: 'string',
+      short: 'a',
+    },
+    tenantOrderId: {
+      type: 'string',
       short: 't',
     },
     count: {
@@ -48,9 +52,18 @@ function getFacilityId(): string {
 function getTenantArticleId(): string {
   const { values } = parseArgs(options);
   if (!values.tenantArticleId) {
-    die('Missing required parameter tenantArticleId: --tenantArticleId|-t');
+    die('Missing required parameter tenantArticleId: --tenantArticleId|-a');
   }
   return values.tenantArticleId as string;
+}
+
+// get tenant order id from cmd line args
+function getTenantOrderId(): string {
+  const { values } = parseArgs(options);
+  if (!values.tenantOrderId) {
+    die('Missing required parameter tenantOrderId: --tenantOrderId|-t');
+  }
+  return values.tenantOrderId as string;
 }
 
 function getCount(): string {
@@ -83,3 +96,9 @@ function getCount(): string {
 // get required arguments and run example
 // const tenantArticleId = getTenantArticleId();
 // runExample(fftApiClient, tenantArticleId);
+
+// Ex 5: Retrieve process and related entities
+// import { runExample } from './example05';
+// get required arguments and run example
+// const tenantOrderId = getTenantOrderId();
+// runExample(fftApiClient, tenantOrderId);

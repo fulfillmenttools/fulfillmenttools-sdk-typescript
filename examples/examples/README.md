@@ -106,4 +106,4 @@ Have a look at the included examples:
 * [02 - Retrieve all listings of a facility](./example02.md)
 * [03 - Create listings and stocks](./example03.md)
 * [04 - Create and confirm an order promise](./example04.md)
-* [05 - TODO](./example05.md)
+* [05 - Retrieve process and related entities](./example05.md)

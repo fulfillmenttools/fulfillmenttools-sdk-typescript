@@ -13,16 +13,16 @@
   },
   "devDependencies": {
     "@types/node": "22.9.0",
-    "prettier": "3.3.3",
+    "prettier": "3.4.2",
     "ts-node": "10.9.2",
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@faker-js/faker": "9.2.0",
+    "@faker-js/faker": "9.3.0",
     "@fulfillmenttools/fulfillmenttools-sdk-typescript": "^0.3.1",
     "cli-table3": "0.6.5",
     "date-fns": "4.1.0",
-    "dotenv": "16.4.5"
+    "dotenv": "16.4.7"
   },
   "engines": {
     "node": ">=20.11.0 <21",
