@@ -43,4 +43,4 @@ See the [example05.ts](./src/example05.ts) file ...
 ## Reference
 
 This example is using the `GET /api/processes` and `GET /api/processes/{processId}` endpoints. 
-See the OpenAPI specification for [processes](https://fulfillmenttools.github.io/api-reference-ui/#/Core%20-%20Processes/getAllProcesses) for details.
+See the OpenAPI specification for [processes](https://fulfillmenttools.github.io/fulfillmenttools-api-reference-ui/#get-/api/processes) for details.

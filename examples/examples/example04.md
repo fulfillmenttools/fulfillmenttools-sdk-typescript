@@ -85,4 +85,4 @@ See the [example04.ts](./src/example04.ts) file for the full example that shows 
 ## Reference
 
 This example is using the `POST /api/promises/deliverypromise` and `POST /api/orders/{orderId}/actions` endpoints. 
-See the OpenAPI specification for [promises](https://fulfillmenttools.github.io/api-reference-ui/#/DOMS%20-%20Orders/postDeliveryPromise) and [orders](https://fulfillmenttools.github.io/api-reference-ui/#/DOMS%20-%20Orders/orderAction) for further details on those operations.
+See the OpenAPI specification for [promises](https://fulfillmenttools.github.io/fulfillmenttools-api-reference-ui/#post-/api/promises/deliverypromise) and [orders](https://fulfillmenttools.github.io/fulfillmenttools-api-reference-ui/#post-/api/orders) for further details on those operations.

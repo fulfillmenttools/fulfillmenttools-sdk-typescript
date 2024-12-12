@@ -35,4 +35,4 @@ See the [example01.ts](./src/example01.ts) file for the full example that shows 
 
 ## Reference
 
-This example is using the `GET /api/facilities` endpoint. See the [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/#/Core%20-%20Facilities/getAllFacilities) for details.
+This example is using the `GET /api/facilities` endpoint. See the [OpenAPI specification](https://fulfillmenttools.github.io/fulfillmenttools-api-reference-ui/#get-/api/facilities) for details.

@@ -5,7 +5,7 @@ Here are some examples that show how to use the `FftApiClient` in your TypeScrip
 ## Requirements
 
 To follow this tutorial, you will need to:
-* have [access](https://docs.fulfillmenttools.com/api-docs/getting-started/setup-your-access-to-fulfillmenttools) to a fulfillmenttools project
+* have [access](https://docs.fulfillmenttools.com/documentation/developer-docs/technical-basics/access-to-fulfillmenttools) to a fulfillmenttools project
 * have a basic understanding of [TypeScript](https://www.typescriptlang.org/)
 * have [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and npm installed
 

@@ -45,4 +45,4 @@ The [example02.ts](./src/example02.ts) file shows how to fetch all listings of a
 
 ## Reference
 
-This example is using the `GET /api/facilities/{facilityId}/listings` endpoint. See the [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/#/Core%20-%20Listings/getFacilityListing) for details.
+This example is using the `GET /api/facilities/{facilityId}/listings` endpoint. See the [OpenAPI specification](https://fulfillmenttools.github.io/fulfillmenttools-api-reference-ui/#get-/api/facilities/-facilityId-/listings) for details.
