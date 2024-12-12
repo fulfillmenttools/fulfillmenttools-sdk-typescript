@@ -1,6 +1,6 @@
 # fulfillmenttools TypeScript SDK
 
-This is a JavaScript/TypeScript SDK for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/documentation/developer-docs).
+This is a JavaScript/TypeScript SDK (beta) for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/documentation/developer-docs).
 
 <p align="center">
   <a href="https://fulfillmenttools.com/">
