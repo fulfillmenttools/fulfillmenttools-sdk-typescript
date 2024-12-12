@@ -6,10 +6,12 @@
   "exclude": [
     "node_modules",
     "tmp",
-    "lib"
+    "lib",
+    "examples"
   ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": false,
@@ -19,8 +21,11 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
     "noImplicitReturns": true,
-    // "noUncheckedIndexedAccess": true,
+    //"noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "lib/esm",
     "removeComments": false,
     "resolveJsonModule": true,

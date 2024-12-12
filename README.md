@@ -1,6 +1,6 @@
 # fulfillmenttools TypeScript SDK
 
-This is a JavaScript/TypeScript SDK for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/api-docs/).
+This is a JavaScript/TypeScript SDK (beta) for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/documentation/developer-docs).
 
 <p align="center">
   <a href="https://fulfillmenttools.com/">
@@ -47,7 +47,7 @@ Learn how to set up and use the TypeScript SDK with our [tutorial](./TUTORIAL.md
 
 ## 📖 Documentation
 
-The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/api-docs/), and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/api-reference-ui/).
+The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/documentation/developer-docs), and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/fulfillmenttools-api-reference-ui/).
 
 > [!NOTE]
 > Currently, the SDK is still in _beta_ status. It does not provide access to all of the features of our API but we are continuously extending it and pushing out new versions.
