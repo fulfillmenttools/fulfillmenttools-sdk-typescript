@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 export interface Logger {
   debug(message?: any, ...optionalParams: any[]): void;
   error(message?: any, ...optionalParams: any[]): void;

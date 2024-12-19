@@ -48,6 +48,7 @@ export default tseslint.config(
 
     rules: {
       '@typescript-eslint/no-unused-vars': 'error',
+      'no-console': 'error',
       'no-undef': 'error',
       'no-const-assign': 'error',
     },
