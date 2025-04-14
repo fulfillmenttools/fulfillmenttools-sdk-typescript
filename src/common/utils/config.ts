@@ -8,4 +8,4 @@ export interface FftApiConfig {
 export const defaultConfig: FftApiConfig = {
   enableHttpLogging: false,
   getLogger: () => getDefaultLogger(),
-}
+};
