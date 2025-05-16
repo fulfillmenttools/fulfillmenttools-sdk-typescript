@@ -1,6 +1,12 @@
 import { FftApiError, Logger } from '../../common';
 import { FftApiClient } from '../common';
-import { Listing, ListingBulkOperationResult, ListingForReplacement, ModifyListingAction, StrippedListings } from '../types';
+import {
+  Listing,
+  ListingBulkOperationResult,
+  ListingForReplacement,
+  ModifyListingAction,
+  StrippedListings,
+} from '../types';
 
 export class FftListingService {
   private readonly path = 'listings';
