@@ -22,11 +22,12 @@ export class FftApiClient {
         authUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword',
         refreshUrl: 'https://securetoken.googleapis.com/v1/token',
       },
-      this.httpClient,
-      {
-        initializeWithToken: config.initializeWithToken
-      }
+      this.httpClient
     );
+  }
+
+  public async getToken() {
+    return await this.authService.getToken();
   }
 
   public getLogger(): Logger {
