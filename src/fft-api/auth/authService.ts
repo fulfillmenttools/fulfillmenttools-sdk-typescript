@@ -36,6 +36,10 @@ export class AuthService {
     this.username = this.authConfig.apiUser;
     this.password = this.authConfig.apiPassword;
     this.log = this.config.getLogger?.() ?? getDefaultLogger();
+
+    if (this.config.initializeWithToken) {
+      this.getToken();
+    }
   }
 
   public async getToken(): Promise<string> {
