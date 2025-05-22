@@ -30,10 +30,7 @@ export class FftShipmentService {
 
   public async createParcel(shipmentId: string, parcel: ParcelForCreation): Promise<Parcel> {
     try {
-      return await this.apiClient.post<Parcel>(
-        `${this.path}/${shipmentId}/parcels`,
-        parcel as unknown as Record<string, unknown>
-      );
+      return await this.apiClient.post<Parcel>(`${this.path}/${shipmentId}/parcels`, { ...parcel });
     } catch (err) {
       this.log.error(`Could not create parcel for shipment '${shipmentId}'.`, err);
       throw err;

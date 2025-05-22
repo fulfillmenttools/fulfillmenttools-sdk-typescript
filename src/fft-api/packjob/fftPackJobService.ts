@@ -12,7 +12,7 @@ export class FftPackJobService {
 
   public async create(packJob: PackJobForCreation): Promise<PackJob> {
     try {
-      return await this.apiClient.post<PackJob>(`${this.path}`, packJob);
+      return await this.apiClient.post<PackJob>(`${this.path}`, { ...packJob });
     } catch (err) {
       this.log.error(`Could not create pack job.`, err);
       throw err;
