@@ -14,13 +14,16 @@ import {
   PickingTimes,
   StockConfigurationPatchActions,
   StrippedFacilities,
-  StrippedFacility,
+  StrippedManagedFacility,
+  Supplier,
 } from '../types';
 import ActionEnum = ModifyShortpickAction.ActionEnum;
 
 const sleep = async (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
+
+export type StrippedFacility = StrippedManagedFacility | Supplier;
 
 export class FftFacilityService {
   private static readonly facilityCache = new Map<string, string>();
@@ -77,7 +80,7 @@ export class FftFacilityService {
 
   public async createFacility(facilityForCreation: FacilityForCreation): Promise<Facility> {
     try {
-      return await this.apiClient.post<Facility>(this.PATH, facilityForCreation);
+      return await this.apiClient.post<Facility>(this.PATH, { ...facilityForCreation });
     } catch (err) {
       this.log.error(`Creating FFT Facility '${facilityForCreation.tenantFacilityId}' failed.`, err);
       throw err;
