@@ -15,6 +15,7 @@ This is a JavaScript/TypeScript SDK (beta) for the [fulfillmenttools REST API](h
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 [![TypeScript](https://img.shields.io/badge/Made%20with-TypeScript-1f425f.svg?color=3178c6)](https://www.typescriptlang.org/)
+[![Examples](https://img.shields.io/badge/%F0%9F%92%A1-Examples-ff615b.svg?style=flat-square)](./examples/README.md)
 
 ## What is fulfillmenttools?
 
