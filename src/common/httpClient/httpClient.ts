@@ -1,14 +1,17 @@
-import { HTTP_TIMEOUT_MS } from './constants';
 import { USER_AGENT } from '../projectConstants';
-import { BasicHttpClient, HttpRequestConfiguration, HttpResult } from './models';
-import { serializeWithDatesAsIsoString } from './serialize';
+import { FftApiConfig, getDefaultLogger, Logger } from '../utils';
+import { HTTP_TIMEOUT_MS } from './constants';
 import { ErrorType, FetchError, FftSdkError } from './error';
+import { BasicHttpClient, HttpRequestConfiguration, HttpResult, ResponseType } from './models';
+import { serializeWithDatesAsIsoString } from './serialize';
 
 export class HttpClient implements BasicHttpClient {
-  private shouldLogHttpRequestAndResponse: boolean;
+  private readonly log: Logger;
+  private readonly shouldLogHttpRequestAndResponse: boolean;
 
-  constructor(shouldLogHttpRequestAndResponse?: boolean) {
-    this.shouldLogHttpRequestAndResponse = shouldLogHttpRequestAndResponse ?? false;
+  constructor(config: FftApiConfig = {}) {
+    this.shouldLogHttpRequestAndResponse = config.enableHttpLogging ?? false;
+    this.log = config.getLogger?.() ?? getDefaultLogger();
   }
 
   public async request<TDto>(config: HttpRequestConfiguration): Promise<HttpResult<TDto>> {
@@ -41,8 +44,10 @@ export class HttpClient implements BasicHttpClient {
     }
 
     if (this.shouldLogHttpRequestAndResponse) {
-      console.debug(`Sending request. Url: ${config.url}, Method: ${config.method}`, [
+      this.log.debug(`Sending API request.`, [
         {
+          method: config.method,
+          url: config.url,
           params: url.searchParams,
           body: requestOptions.body,
           headers: requestOptions.headers,
@@ -54,18 +59,21 @@ export class HttpClient implements BasicHttpClient {
 
     const response = await fetchClient(url, requestOptions);
 
-    const responseBody =
-      response.body && response.status !== 204
-        ? await response.json().catch(() => {
-            if (response.ok) {
-              throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
-            }
-          })
-        : undefined;
+    // handle empty response body for DELETE requests
+    let shouldParseBody = response.body && response.status !== 204;
+    if (requestOptions.method === 'DELETE' && response.headers.has('content-length')) {
+      const length = parseInt(response.headers.get('content-length') ?? '');
+      shouldParseBody &&= !Number.isNaN(length) && length > 0;
+    }
+
+    const responseBody = await this.handleResponse(response, config, shouldParseBody);
 
     if (this.shouldLogHttpRequestAndResponse) {
-      console.debug(`Received response. Url: ${url}, Method: ${config.method} - Response Status: ${response.status}`, [
+      this.log.debug(`Received API response.`, [
         {
+          method: config.method,
+          url: url.toString(),
+          status: response.status,
           body: responseBody,
         },
       ]);
@@ -79,5 +87,35 @@ export class HttpClient implements BasicHttpClient {
       statusCode: response.status,
       body: responseBody as TDto,
     };
+  }
+
+  private async handleResponse(response: Response, config: HttpRequestConfiguration, shouldParseBody: boolean | null) {
+    if (!shouldParseBody) {
+      return undefined;
+    }
+
+    switch (config.responseType) {
+      case ResponseType.BLOB: {
+        return await response.blob().catch(() => {
+          if (response.ok) {
+            throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
+          }
+        });
+      }
+      case ResponseType.ARRAY_BUFFER: {
+        return await response.arrayBuffer().catch(() => {
+          if (response.ok) {
+            throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
+          }
+        });
+      }
+      default: {
+        return await response.json().catch(() => {
+          if (response.ok) {
+            throw new FftSdkError({ message: 'Error parsing API response body', type: ErrorType.PARSE });
+          }
+        });
+      }
+    }
   }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fulfillmenttools TypeScript SDK Example</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@fulfillmenttools/fulfillmenttools-sdk-typescript": "https://esm.sh/@fulfillmenttools/fulfillmenttools-sdk-typescript"
+        }
+      }
+    </script>
+    <script src="./main.mjs" type="module"></script>
+  </head>
+  <body>
+    <p>
+      <!-- Enter the facility ID in this input field -->
+      <input type="text" id="facilityInput" placeholder="Enter facility ID">
+      <!-- Click this button to return the facility details -->
+      <button id="myButton" onclick="getFacilityDetails()">Get Facility Information</button>
+    </p>
+
+    <!-- This text is overwritten when getFacilityDetails() finishes -->
+    <p id="facilityDetails">
+      Click the above button to display the Facility information.
+    </p>
+
+    <p id="instructions">
+      Open the developer console with <code>Cmd + Option + J</code> (on a Mac) or <code>Ctrl + Shift + J</code> (on Windows) and check the log.
+      You may need to refresh the page.
+    </p>
+  </body>
+</html>
+

@@ -12,7 +12,7 @@
  */
 
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use api/pickjobs/:id/actions instead
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use api/pickjobs/:id/actions instead
  * @export
  * @interface AbortPickJobAction
  */
@@ -39,7 +39,7 @@ export namespace AbortPickJobAction {
     }
 }
 /**
- * 
+ * AbstractArticle
  * @export
  * @interface AbstractArticle
  */
@@ -82,7 +82,7 @@ export interface AbstractArticle {
     weight?: number;
 }
 /**
- * 
+ * AbstractCarrierCredentials
  * @export
  * @interface AbstractCarrierCredentials
  */
@@ -95,7 +95,7 @@ export interface AbstractCarrierCredentials {
     key: string;
 }
 /**
- * 
+ * AbstractFacilityActionsParameter
  * @export
  * @interface AbstractFacilityActionsParameter
  */
@@ -114,7 +114,7 @@ export interface AbstractFacilityActionsParameter {
     version: number;
 }
 /**
- * 
+ * AbstractFacilityCarrierConfiguration
  * @export
  * @interface AbstractFacilityCarrierConfiguration
  */
@@ -137,9 +137,21 @@ export interface AbstractFacilityCarrierConfiguration {
      * @memberof AbstractFacilityCarrierConfiguration
      */
     thresholdPriceValue?: ThresholdPriceValue;
+    /**
+     * 
+     * @type {FacilityAddress}
+     * @memberof AbstractFacilityCarrierConfiguration
+     */
+    alternativeReturnAddress?: FacilityAddress;
+    /**
+     * 
+     * @type {FacilityAddress}
+     * @memberof AbstractFacilityCarrierConfiguration
+     */
+    alternativeSendAddress?: FacilityAddress;
 }
 /**
- * 
+ * AbstractFulfillabilityConstraintType
  * @export
  * @interface AbstractFulfillabilityConstraintType
  */
@@ -172,7 +184,7 @@ export namespace AbstractFulfillabilityConstraintType {
     }
 }
 /**
- * 
+ * AbstractModificationAction
  * @export
  * @interface AbstractModificationAction
  */
@@ -210,6 +222,7 @@ export namespace AbstractModificationAction {
         ModifyPackJob = 'ModifyPackJob',
         PausePackJob = 'PausePackJob',
         ModifyPackLineItem = 'ModifyPackLineItem',
+        SplitLineItemsPackJob = 'SplitLineItemsPackJob',
         ModifyFacility = 'ModifyFacility',
         ModifyListing = 'ModifyListing',
         ModifyRetainedOfflineStock = 'ModifyRetainedOfflineStock',
@@ -245,12 +258,13 @@ export namespace AbstractModificationAction {
         AddLineItemToPackingTargetContainer = 'AddLineItemToPackingTargetContainer',
         RemoveLineItemFromPackingTargetContainer = 'RemoveLineItemFromPackingTargetContainer',
         UpdateLineItemOnPackingTargetContainer = 'UpdateLineItemOnPackingTargetContainer',
+        UpdateRecordableAttributesPackingTargetContainer = 'UpdateRecordableAttributesPackingTargetContainer',
         ModifyCustomService = 'ModifyCustomService',
         UnlockOrder = 'UnlockOrder'
     }
 }
 /**
- * 
+ * AbstractModifyCarrierCredentials
  * @export
  * @interface AbstractModifyCarrierCredentials
  */
@@ -263,7 +277,7 @@ export interface AbstractModifyCarrierCredentials {
     key: string;
 }
 /**
- * 
+ * AbstractOrderActionsParameter
  * @export
  * @interface AbstractOrderActionsParameter
  */
@@ -282,7 +296,7 @@ export interface AbstractOrderActionsParameter {
     version: number;
 }
 /**
- * 
+ * AbstractOrderLineItemActionsParameter
  * @export
  * @interface AbstractOrderLineItemActionsParameter
  */
@@ -308,7 +322,7 @@ export interface AbstractOrderLineItemActionsParameter {
 export interface AbstractRatingConfiguration {
 }
 /**
- * 
+ * AbstractReason
  * @export
  * @interface AbstractReason
  */
@@ -345,7 +359,7 @@ export interface AbstractReason extends AbstractReasonForCreation {
     action: string;
 }
 /**
- * 
+ * AbstractReasonForCreation
  * @export
  * @interface AbstractReasonForCreation
  */
@@ -364,7 +378,7 @@ export interface AbstractReasonForCreation {
     reasonLocalized: LocaleString;
 }
 /**
- * 
+ * AbstractReasonForModification
  * @export
  * @interface AbstractReasonForModification
  */
@@ -389,7 +403,7 @@ export interface AbstractReasonForModification {
     version: number;
 }
 /**
- * 
+ * AbstractReasons
  * @export
  * @interface AbstractReasons
  */
@@ -414,7 +428,60 @@ export interface AbstractReasons {
     total: number;
 }
 /**
- * 
+ * AbstractRoutingStrategyActionsParameter
+ * @export
+ * @interface AbstractRoutingStrategyActionsParameter
+ */
+export interface AbstractRoutingStrategyActionsParameter {
+    /**
+     * 
+     * @type {string}
+     * @memberof AbstractRoutingStrategyActionsParameter
+     */
+    name: string;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof AbstractRoutingStrategyActionsParameter
+     */
+    version: number;
+}
+/**
+ * ActivationTimeFrame
+ * @export
+ * @interface ActivationTimeFrame
+ */
+export interface ActivationTimeFrame {
+    /**
+     * Sets a date before which the associated entity does not become active
+     * @type {Date}
+     * @memberof ActivationTimeFrame
+     */
+    activeFrom?: Date;
+    /**
+     * Sets a date after which the associated entity becomes active
+     * @type {Date}
+     * @memberof ActivationTimeFrame
+     */
+    activeUntil?: Date;
+    /**
+     * 
+     * @type {ActivationTimeFrameRecurrenceType}
+     * @memberof ActivationTimeFrame
+     */
+    recurrence: ActivationTimeFrameRecurrenceType;
+}
+/**
+ * ActivationTimeFrameRecurrenceType
+ * @export
+ * @enum {string}
+ */
+export enum ActivationTimeFrameRecurrenceType {
+    YEARLY = 'YEARLY',
+    NONRECURRING = 'NONRECURRING'
+}
+/**
+ * Action to add allowed values to a tag
  * @export
  * @interface AddAllowedValueToTagAction
  */
@@ -447,23 +514,23 @@ export namespace AddAllowedValueToTagAction {
     }
 }
 /**
- * 
+ * AddChannelAction
  * @export
  * @interface AddChannelAction
  */
 export interface AddChannelAction {
     /**
      * 
-     * @type {string}
-     * @memberof AddChannelAction
-     */
-    name: AddChannelAction.NameEnum;
-    /**
-     * 
      * @type {EmailNotificationChannelForCreation}
      * @memberof AddChannelAction
      */
     channel: EmailNotificationChannelForCreation;
+    /**
+     * 
+     * @type {string}
+     * @memberof AddChannelAction
+     */
+    name: AddChannelAction.NameEnum;
     /**
      * 
      * @type {number}
@@ -486,7 +553,7 @@ export namespace AddChannelAction {
     }
 }
 /**
- * 
+ * AddItemReturnToItemReturnJob
  * @export
  * @interface AddItemReturnToItemReturnJob
  */
@@ -505,7 +572,7 @@ export interface AddItemReturnToItemReturnJob {
     itemReturnJobVersion: number;
 }
 /**
- * 
+ * Action to a line item to a packing target container.
  * @export
  * @interface AddLineItemToPackingTargetContainerAction
  */
@@ -538,7 +605,7 @@ export namespace AddLineItemToPackingTargetContainerAction {
     }
 }
 /**
- * 
+ * AddRefuseReasonParameter
  * @export
  * @interface AddRefuseReasonParameter
  */
@@ -557,7 +624,7 @@ export interface AddRefuseReasonParameter {
     availableRefuseReasonForCreation: AvailableRefuseReasonForCreation;
 }
 /**
- * 
+ * AddRemoteConfigurationScopeParameter
  * @export
  * @interface AddRemoteConfigurationScopeParameter
  */
@@ -576,7 +643,7 @@ export interface AddRemoteConfigurationScopeParameter {
     remoteConfigVersion: number;
 }
 /**
- * 
+ * Action to add tags to a Process
  * @export
  * @interface AddTagsToProcessAction
  */
@@ -609,7 +676,7 @@ export namespace AddTagsToProcessAction {
     }
 }
 /**
- * 
+ * AdditionalInformation
  * @export
  * @interface AdditionalInformation
  */
@@ -634,7 +701,7 @@ export interface AdditionalInformation extends AdditionalInformationForCreation 
     description?: string;
 }
 /**
- * 
+ * AdditionalInformationForCreation
  * @export
  * @interface AdditionalInformationForCreation
  */
@@ -663,9 +730,15 @@ export interface AdditionalInformationForCreation {
      * @memberof AdditionalInformationForCreation
      */
     isMandatory?: boolean;
+    /**
+     * Id to identifiy the additional information on an external system. Must be unique per CustomService.
+     * @type {string}
+     * @memberof AdditionalInformationForCreation
+     */
+    tenantAdditionalInformationId?: string;
 }
 /**
- * 
+ * AdditionalInformationValueType
  * @export
  * @enum {string}
  */
@@ -677,7 +750,28 @@ export enum AdditionalInformationValueType {
     INPUTMULTILINESTRING = 'INPUT_MULTILINE_STRING'
 }
 /**
- * 
+ * AdditionalShippingArticleAttribute
+ * @export
+ * @interface AdditionalShippingArticleAttribute
+ */
+export interface AdditionalShippingArticleAttribute extends CountryServiceMappingShippingArticleAttribute {
+}
+/**
+ * AdditionalShippingAttribute
+ * @export
+ * @interface AdditionalShippingAttribute
+ */
+export interface AdditionalShippingAttribute extends CountryServiceMappingShippingAttribute {
+}
+
+/**
+ * @export
+ * @namespace AdditionalShippingAttribute
+ */
+export namespace AdditionalShippingAttribute {
+}
+/**
+ * Address
  * @export
  * @interface Address
  */
@@ -794,7 +888,7 @@ export enum AddressType {
     INVOICEADDRESS = 'INVOICE_ADDRESS'
 }
 /**
- * 
+ * AlternativeReturnAddressConfiguration
  * @export
  * @interface AlternativeReturnAddressConfiguration
  */
@@ -807,7 +901,7 @@ export interface AlternativeReturnAddressConfiguration {
     alternativeReturnAddressPerTag: Array<AlternativeReturnAddressPerTag>;
 }
 /**
- * 
+ * AlternativeReturnAddressPerTag
  * @export
  * @interface AlternativeReturnAddressPerTag
  */
@@ -832,7 +926,7 @@ export interface AlternativeReturnAddressPerTag {
     alternativeReturnAddress: FacilityAddress;
 }
 /**
- * 
+ * Angel Carrier Credentials
  * @export
  * @interface AngelCarrierCredentials
  */
@@ -857,7 +951,7 @@ export interface AngelCarrierCredentials extends AbstractCarrierCredentials {
     authToken?: string;
 }
 /**
- * 
+ * Angel Facility Carrier Configuration.
  * @export
  * @interface AngelFacilityCarrierConfiguration
  */
@@ -870,7 +964,7 @@ export interface AngelFacilityCarrierConfiguration extends AbstractFacilityCarri
     pickupLocationId?: string;
 }
 /**
- * 
+ * AnnounceItemReturnActionEnum
  * @export
  * @enum {string}
  */
@@ -878,7 +972,7 @@ export enum AnnounceItemReturnActionEnum {
     AnnounceItemReturn = 'AnnounceItemReturn'
 }
 /**
- * 
+ * Action to announce an ItemReturn.
  * @export
  * @interface AnnounceItemReturnActionParameter
  */
@@ -897,12 +991,19 @@ export interface AnnounceItemReturnActionParameter {
     itemReturnJobVersion: number;
 }
 /**
- * 
+ * ApiError
  * @export
  */
 export type ApiError = Array<ErrorInner>
 /**
  * 
+ * @export
+ * @interface ApiFacilitiesBody
+ */
+export interface ApiFacilitiesBody {
+}
+/**
+ * ArticleAttributeItem
  * @export
  * @interface ArticleAttributeItem
  */
@@ -932,6 +1033,12 @@ export interface ArticleAttributeItem {
      */
     priority?: number;
     /**
+     * The type of the attribute.
+     * @type {string}
+     * @memberof ArticleAttributeItem
+     */
+    type?: ArticleAttributeItem.TypeEnum;
+    /**
      * 
      * @type {string}
      * @memberof ArticleAttributeItem
@@ -943,12 +1050,6 @@ export interface ArticleAttributeItem {
      * @memberof ArticleAttributeItem
      */
     valueLocalized?: LocaleString;
-    /**
-     * The type of the attribute.
-     * @type {string}
-     * @memberof ArticleAttributeItem
-     */
-    type?: ArticleAttributeItem.TypeEnum;
 }
 
 /**
@@ -982,7 +1083,7 @@ export namespace ArticleAttributeItem {
     }
 }
 /**
- * 
+ * ArticleAvailability
  * @export
  * @interface ArticleAvailability
  */
@@ -1001,10 +1102,10 @@ export interface ArticleAvailability {
     availableStock: number;
     /**
      * 
-     * @type {string}
+     * @type {OutOfStockBehaviour}
      * @memberof ArticleAvailability
      */
-    outOfStockBehaviour?: ArticleAvailability.OutOfStockBehaviourEnum;
+    outOfStockBehaviour?: OutOfStockBehaviour;
     /**
      * 
      * @type {AvailabilityTimeframe}
@@ -1012,22 +1113,8 @@ export interface ArticleAvailability {
      */
     availabilityTimeframe?: AvailabilityTimeframe;
 }
-
 /**
- * @export
- * @namespace ArticleAvailability
- */
-export namespace ArticleAvailability {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum OutOfStockBehaviourEnum {
-        BACKORDER = 'BACKORDER'
-    }
-}
-/**
- * 
+ * ArticleItem
  * @export
  * @interface ArticleItem
  */
@@ -1046,7 +1133,7 @@ export interface ArticleItem {
     quantity: number;
 }
 /**
- * 
+ * ArticlePrice
  * @export
  * @interface ArticlePrice
  */
@@ -1065,53 +1152,17 @@ export interface ArticlePrice {
     currency: CurrencyCode;
 }
 /**
- * 
+ * ArticleStockForecast
  * @export
  * @interface ArticleStockForecast
  */
 export interface ArticleStockForecast {
     /**
      * 
-     * @type {string}
-     * @memberof ArticleStockForecast
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ArticleStockForecast
-     */
-    tenantArticleId: string;
-    /**
-     * 
      * @type {Date}
      * @memberof ArticleStockForecast
      */
     created: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ArticleStockForecast
-     */
-    lastModified: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ArticleStockForecast
-     */
-    sourceDate: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ArticleStockForecast
-     */
-    targetDate: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ArticleStockForecast
-     */
-    loadTime: Date;
     /**
      * 
      * @type {number}
@@ -1132,16 +1183,28 @@ export interface ArticleStockForecast {
     cumulatedUpperBounds: Array<number>;
     /**
      * 
-     * @type {Array<number>}
+     * @type {string}
      * @memberof ArticleStockForecast
      */
-    lowerBounds: Array<number>;
+    id: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof ArticleStockForecast
+     */
+    lastModified: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof ArticleStockForecast
+     */
+    loadTime: Date;
     /**
      * 
      * @type {Array<number>}
      * @memberof ArticleStockForecast
      */
-    upperBounds: Array<number>;
+    lowerBounds: Array<number>;
     /**
      * 
      * @type {string}
@@ -1154,6 +1217,30 @@ export interface ArticleStockForecast {
      * @memberof ArticleStockForecast
      */
     point: number;
+    /**
+     * 
+     * @type {Date}
+     * @memberof ArticleStockForecast
+     */
+    sourceDate: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof ArticleStockForecast
+     */
+    targetDate: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof ArticleStockForecast
+     */
+    tenantArticleId: string;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof ArticleStockForecast
+     */
+    upperBounds: Array<number>;
 }
 
 /**
@@ -1170,7 +1257,7 @@ export namespace ArticleStockForecast {
     }
 }
 /**
- * 
+ * ArtifactMetadataItem
  * @export
  * @interface ArtifactMetadataItem
  */
@@ -1220,7 +1307,7 @@ export interface ArtifactMetadataItemDownload {
     url?: string;
 }
 /**
- * 
+ * ArtifactMetadataItems
  * @export
  * @interface ArtifactMetadataItems
  */
@@ -1239,7 +1326,7 @@ export interface ArtifactMetadataItems {
     platform: string;
 }
 /**
- * 
+ * Action to assign a process to a facility.
  * @export
  * @interface AssignFacilityToProcessAction
  */
@@ -1278,7 +1365,7 @@ export namespace AssignFacilityToProcessAction {
     }
 }
 /**
- * 
+ * AssignedGroup
  * @export
  * @interface AssignedGroup
  */
@@ -1297,7 +1384,71 @@ export interface AssignedGroup {
     facilityRefs: Array<string>;
 }
 /**
- * 
+ * AssignedRoles
+ * @export
+ * @interface AssignedRoles
+ */
+export interface AssignedRoles {
+    /**
+     * The context limitations of the assigned role
+     * @type {Array<ContextLimitation>}
+     * @memberof AssignedRoles
+     */
+    contextLimitations?: Array<ContextLimitation>;
+    /**
+     * The id of the assigned role
+     * @type {string}
+     * @memberof AssignedRoles
+     */
+    ref: string;
+}
+/**
+ * AssignedUser
+ * @export
+ * @interface AssignedUser
+ */
+export interface AssignedUser {
+    /**
+     * ID of the user who is assigned
+     * @type {string}
+     * @memberof AssignedUser
+     */
+    userId: string;
+    /**
+     * username of the user who is assigned
+     * @type {string}
+     * @memberof AssignedUser
+     */
+    username: string;
+}
+/**
+ * Create a assigned user by giving a valid id
+ * @export
+ * @interface AssignedUserForCreationById
+ */
+export interface AssignedUserForCreationById {
+    /**
+     * userId of the user should be assigned
+     * @type {string}
+     * @memberof AssignedUserForCreationById
+     */
+    userId: string;
+}
+/**
+ * Create a assigned user by giving a valid name
+ * @export
+ * @interface AssignedUserForCreationByName
+ */
+export interface AssignedUserForCreationByName {
+    /**
+     * username of the user should be assigned
+     * @type {string}
+     * @memberof AssignedUserForCreationByName
+     */
+    username: string;
+}
+/**
+ * AssignmentItem
  * @export
  * @interface AssignmentItem
  */
@@ -1322,35 +1473,268 @@ export interface AssignmentItem {
     quantity: number;
 }
 /**
- * 
+ * Audit
+ * @export
+ * @interface Audit
+ */
+export interface Audit {
+    /**
+     * 
+     * @type {AuditActor}
+     * @memberof Audit
+     */
+    actor: AuditActor;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Audit
+     */
+    anonymizationDate: Date;
+    /**
+     * 
+     * @type {AuditClient}
+     * @memberof Audit
+     */
+    client: AuditClient;
+    /**
+     * Creation date of the entity, auto-generated if not provided
+     * @type {Date}
+     * @memberof Audit
+     */
+    created?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Audit
+     */
+    deletionDate: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Audit
+     */
+    entityCreated: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audit
+     */
+    entityRef: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audit
+     */
+    entityType: Audit.EntityTypeEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof Audit
+     */
+    entityVersion: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audit
+     */
+    eventId: string;
+    /**
+     * 
+     * @type {AuditActor}
+     * @memberof Audit
+     */
+    globalActor: AuditActor;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audit
+     */
+    id: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Audit
+     */
+    isAnonymized: boolean;
+    /**
+     * Service-generated last modification date of the entity
+     * @type {Date}
+     * @memberof Audit
+     */
+    lastModified?: Date;
+    /**
+     * 
+     * @type {AuditOperation}
+     * @memberof Audit
+     */
+    operation: AuditOperation;
+    /**
+     * 
+     * @type {string}
+     * @memberof Audit
+     */
+    trace: string;
+    /**
+     * The version of the entity, used for optimistic locking mechanisms
+     * @type {number}
+     * @memberof Audit
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace Audit
+ */
+export namespace Audit {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EntityTypeEnum {
+        PACKJOB = 'PACK_JOB',
+        PICKJOB = 'PICK_JOB',
+        PICKRUN = 'PICK_RUN',
+        HANDOVERJOB = 'HANDOVER_JOB',
+        SHIPMENT = 'SHIPMENT',
+        PARCEL = 'PARCEL',
+        CUSTOMSERVICE = 'CUSTOM_SERVICE',
+        SERVICEJOB = 'SERVICE_JOB',
+        LINKEDSERVICEJOBS = 'LINKED_SERVICE_JOBS',
+        ORDER = 'ORDER',
+        ROUTINGPLAN = 'ROUTING_PLAN',
+        FACILITY = 'FACILITY',
+        FACILITYCARRIERCONNECTION = 'FACILITY_CARRIER_CONNECTION',
+        FACILITYCUSTOMSERVICE = 'FACILITY_CUSTOM_SERVICE',
+        ROUTINGSTRATEGY = 'ROUTING_STRATEGY',
+        STOWJOB = 'STOW_JOB'
+    }
+}
+/**
+ * AuditActor
+ * @export
+ * @interface AuditActor
+ */
+export interface AuditActor {
+    /**
+     * 
+     * @type {AuditActorDetails}
+     * @memberof AuditActor
+     */
+    details: AuditActorDetails;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuditActor
+     */
+    id: string;
+}
+/**
+ * AuditActorDetails
+ * @export
+ * @interface AuditActorDetails
+ */
+export interface AuditActorDetails {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuditActorDetails
+     */
+    topic: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuditActorDetails
+     */
+    username: string;
+}
+/**
+ * AuditClient
+ * @export
+ * @interface AuditClient
+ */
+export interface AuditClient {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuditClient
+     */
+    api: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuditClient
+     */
+    rawInfo: string;
+}
+/**
+ * AuditOperation
+ * @export
+ * @interface AuditOperation
+ */
+export interface AuditOperation {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuditOperation
+     */
+    name: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof AuditOperation
+     */
+    start: Date;
+}
+/**
+ * AuditsResult
+ * @export
+ * @interface AuditsResult
+ */
+export interface AuditsResult {
+    /**
+     * The audits that match the filter criteria
+     * @type {Array<Audit>}
+     * @memberof AuditsResult
+     */
+    audits: Array<Audit>;
+    /**
+     * The total number of audits that match the filter criteria
+     * @type {number}
+     * @memberof AuditsResult
+     */
+    total: number;
+}
+/**
+ * AuthenticationProvider
  * @export
  * @interface AuthenticationProvider
  */
 export interface AuthenticationProvider {
     /**
-     * 
-     * @type {AuthenticationProviderType}
-     * @memberof AuthenticationProvider
-     */
-    type: AuthenticationProviderType;
-    /**
-     * 
+     * The id of the authentication provider
      * @type {string}
      * @memberof AuthenticationProvider
      */
     id?: string;
+    /**
+     * 
+     * @type {AuthenticationProviderTypeEnum}
+     * @memberof AuthenticationProvider
+     */
+    type: AuthenticationProviderTypeEnum;
 }
 /**
- * 
+ * The type of the authentication provider
  * @export
  * @enum {string}
  */
-export enum AuthenticationProviderType {
+export enum AuthenticationProviderTypeEnum {
     EMAILPASSWORD = 'EMAIL_PASSWORD',
     OIDC = 'OIDC'
 }
 /**
- * 
+ * AvailabilityAllocation
  * @export
  * @interface AvailabilityAllocation
  */
@@ -1360,13 +1744,19 @@ export interface AvailabilityAllocation {
      * @type {string}
      * @memberof AvailabilityAllocation
      */
-    facilityRef: string;
+    channelRef: string;
     /**
      * 
-     * @type {number}
+     * @type {Date}
      * @memberof AvailabilityAllocation
      */
-    initialStockQuantity: number;
+    created: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof AvailabilityAllocation
+     */
+    facilityRef: string;
     /**
      * 
      * @type {string}
@@ -1378,34 +1768,28 @@ export interface AvailabilityAllocation {
      * @type {string}
      * @memberof AvailabilityAllocation
      */
-    channelRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AvailabilityAllocation
-     */
     id: string;
     /**
      * 
      * @type {number}
      * @memberof AvailabilityAllocation
      */
-    version: number;
-    /**
-     * 
-     * @type {Date}
-     * @memberof AvailabilityAllocation
-     */
-    created: Date;
+    initialStockQuantity: number;
     /**
      * 
      * @type {Date}
      * @memberof AvailabilityAllocation
      */
     lastModified: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof AvailabilityAllocation
+     */
+    version: number;
 }
 /**
- * 
+ * AvailabilityAllocationForCreationUnderGroup
  * @export
  * @interface AvailabilityAllocationForCreationUnderGroup
  */
@@ -1424,17 +1808,17 @@ export interface AvailabilityAllocationForCreationUnderGroup {
     initialStockQuantity: number;
 }
 /**
- * 
+ * AvailabilityAllocationForReplacement
  * @export
  * @interface AvailabilityAllocationForReplacement
  */
 export interface AvailabilityAllocationForReplacement {
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof AvailabilityAllocationForReplacement
      */
-    version: number;
+    groupId?: string;
     /**
      * 
      * @type {number}
@@ -1443,23 +1827,17 @@ export interface AvailabilityAllocationForReplacement {
     initialStockQuantity: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof AvailabilityAllocationForReplacement
      */
-    groupId?: string;
+    version: number;
 }
 /**
- * 
+ * AvailabilityAllocationGroup
  * @export
  * @interface AvailabilityAllocationGroup
  */
 export interface AvailabilityAllocationGroup {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof AvailabilityAllocationGroup
-     */
-    tenantArticleIds: Array<string>;
     /**
      * 
      * @type {boolean}
@@ -1480,43 +1858,43 @@ export interface AvailabilityAllocationGroup {
     channelRef: string;
     /**
      * 
-     * @type {string}
-     * @memberof AvailabilityAllocationGroup
-     */
-    id: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof AvailabilityAllocationGroup
-     */
-    version: number;
-    /**
-     * 
      * @type {Date}
      * @memberof AvailabilityAllocationGroup
      */
     created: Date;
     /**
      * 
+     * @type {string}
+     * @memberof AvailabilityAllocationGroup
+     */
+    id: string;
+    /**
+     * 
      * @type {Date}
      * @memberof AvailabilityAllocationGroup
      */
     lastModified: Date;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AvailabilityAllocationGroup
+     */
+    tenantArticleIds: Array<string>;
+    /**
+     * 
+     * @type {number}
+     * @memberof AvailabilityAllocationGroup
+     */
+    version: number;
 }
 /**
- * 
+ * AvailabilityAllocationGroupForCreationUnderChannel
  * @export
  * @interface AvailabilityAllocationGroupForCreationUnderChannel
  */
 export interface AvailabilityAllocationGroupForCreationUnderChannel {
     /**
      * 
-     * @type {Array<string>}
-     * @memberof AvailabilityAllocationGroupForCreationUnderChannel
-     */
-    tenantArticleIds: Array<string>;
-    /**
-     * 
      * @type {boolean}
      * @memberof AvailabilityAllocationGroupForCreationUnderChannel
      */
@@ -1527,21 +1905,21 @@ export interface AvailabilityAllocationGroupForCreationUnderChannel {
      * @memberof AvailabilityAllocationGroupForCreationUnderChannel
      */
     activePeriod?: AvailabilityAllocationPeriod;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AvailabilityAllocationGroupForCreationUnderChannel
+     */
+    tenantArticleIds: Array<string>;
 }
 /**
- * 
+ * AvailabilityAllocationGroupForReplacement
  * @export
  * @interface AvailabilityAllocationGroupForReplacement
  */
 export interface AvailabilityAllocationGroupForReplacement {
     /**
      * 
-     * @type {number}
-     * @memberof AvailabilityAllocationGroupForReplacement
-     */
-    version: number;
-    /**
-     * 
      * @type {boolean}
      * @memberof AvailabilityAllocationGroupForReplacement
      */
@@ -1552,47 +1930,53 @@ export interface AvailabilityAllocationGroupForReplacement {
      * @memberof AvailabilityAllocationGroupForReplacement
      */
     activePeriod?: AvailabilityAllocationPeriod;
+    /**
+     * 
+     * @type {number}
+     * @memberof AvailabilityAllocationGroupForReplacement
+     */
+    version: number;
 }
 /**
- * 
+ * AvailabilityAllocationGroupPaginatedResult
  * @export
  * @interface AvailabilityAllocationGroupPaginatedResult
  */
 export interface AvailabilityAllocationGroupPaginatedResult {
     /**
      * 
-     * @type {number}
-     * @memberof AvailabilityAllocationGroupPaginatedResult
-     */
-    total: number;
-    /**
-     * 
      * @type {Array<AvailabilityAllocationGroup>}
      * @memberof AvailabilityAllocationGroupPaginatedResult
      */
     groups: Array<AvailabilityAllocationGroup>;
+    /**
+     * 
+     * @type {number}
+     * @memberof AvailabilityAllocationGroupPaginatedResult
+     */
+    total: number;
 }
 /**
- * 
+ * AvailabilityAllocationPaginatedResult
  * @export
  * @interface AvailabilityAllocationPaginatedResult
  */
 export interface AvailabilityAllocationPaginatedResult {
     /**
      * 
-     * @type {number}
-     * @memberof AvailabilityAllocationPaginatedResult
-     */
-    total: number;
-    /**
-     * 
      * @type {Array<AvailabilityChannel>}
      * @memberof AvailabilityAllocationPaginatedResult
      */
     allocations: Array<AvailabilityChannel>;
+    /**
+     * 
+     * @type {number}
+     * @memberof AvailabilityAllocationPaginatedResult
+     */
+    total: number;
 }
 /**
- * 
+ * AvailabilityAllocationPeriod
  * @export
  * @interface AvailabilityAllocationPeriod
  */
@@ -1602,20 +1986,38 @@ export interface AvailabilityAllocationPeriod {
      * @type {Date}
      * @memberof AvailabilityAllocationPeriod
      */
-    start?: Date;
+    end?: Date;
     /**
      * 
      * @type {Date}
      * @memberof AvailabilityAllocationPeriod
      */
-    end?: Date;
+    start?: Date;
 }
 /**
- * 
+ * AvailabilityChannel
  * @export
  * @interface AvailabilityChannel
  */
 export interface AvailabilityChannel {
+    /**
+     * 
+     * @type {Date}
+     * @memberof AvailabilityChannel
+     */
+    created: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof AvailabilityChannel
+     */
+    id: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof AvailabilityChannel
+     */
+    lastModified: Date;
     /**
      * 
      * @type {string}
@@ -1634,24 +2036,6 @@ export interface AvailabilityChannel {
      * @memberof AvailabilityChannel
      */
     version: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof AvailabilityChannel
-     */
-    id: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof AvailabilityChannel
-     */
-    created: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof AvailabilityChannel
-     */
-    lastModified: Date;
 }
 
 /**
@@ -1670,7 +2054,7 @@ export namespace AvailabilityChannel {
     }
 }
 /**
- * 
+ * AvailabilityChannelForCreation
  * @export
  * @interface AvailabilityChannelForCreation
  */
@@ -1705,7 +2089,7 @@ export namespace AvailabilityChannelForCreation {
     }
 }
 /**
- * 
+ * AvailabilityChannelForReplacement
  * @export
  * @interface AvailabilityChannelForReplacement
  */
@@ -1746,26 +2130,26 @@ export namespace AvailabilityChannelForReplacement {
     }
 }
 /**
- * 
+ * AvailabilityChannelPaginatedResult
  * @export
  * @interface AvailabilityChannelPaginatedResult
  */
 export interface AvailabilityChannelPaginatedResult {
     /**
      * 
-     * @type {number}
-     * @memberof AvailabilityChannelPaginatedResult
-     */
-    total: number;
-    /**
-     * 
      * @type {Array<AvailabilityChannel>}
      * @memberof AvailabilityChannelPaginatedResult
      */
     channels: Array<AvailabilityChannel>;
+    /**
+     * 
+     * @type {number}
+     * @memberof AvailabilityChannelPaginatedResult
+     */
+    total: number;
 }
 /**
- * 
+ * AvailabilityDuringRerouteStock
  * @export
  * @interface AvailabilityDuringRerouteStock
  */
@@ -1784,7 +2168,7 @@ export interface AvailabilityDuringRerouteStock {
     pickedQuantity?: number;
 }
 /**
- * 
+ * AvailabilityDuringRouting
  * @export
  * @interface AvailabilityDuringRouting
  */
@@ -1809,10 +2193,22 @@ export interface AvailabilityDuringRouting {
     requestedQuantity: number;
     /**
      * 
-     * @type {AvailabilityDuringRoutingStock}
+     * @type {number}
      * @memberof AvailabilityDuringRouting
      */
-    stockInformation: AvailabilityDuringRoutingStock;
+    available: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AvailabilityDuringRouting
+     */
+    isBackOrderable: boolean;
+    /**
+     * 
+     * @type {Date}
+     * @memberof AvailabilityDuringRouting
+     */
+    preOrderDate?: Date;
     /**
      * 
      * @type {AvailabilityDuringRerouteStock}
@@ -1821,10 +2217,10 @@ export interface AvailabilityDuringRouting {
     rerouteInformation?: AvailabilityDuringRerouteStock;
     /**
      * 
-     * @type {AvailabilityDuringRoutingStock}
+     * @type {number}
      * @memberof AvailabilityDuringRouting
      */
-    stockInformationPostRerouteAdjustment?: AvailabilityDuringRoutingStock;
+    availablePostRerouteAdjustment?: number;
     /**
      * 
      * @type {Array<BundleInformation>}
@@ -1833,38 +2229,7 @@ export interface AvailabilityDuringRouting {
     bundleInformation?: Array<BundleInformation>;
 }
 /**
- * 
- * @export
- * @interface AvailabilityDuringRoutingStock
- */
-export interface AvailabilityDuringRoutingStock {
-    /**
-     * 
-     * @type {number}
-     * @memberof AvailabilityDuringRoutingStock
-     */
-    stock: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AvailabilityDuringRoutingStock
-     */
-    stockConsideringOfflineStock: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AvailabilityDuringRoutingStock
-     */
-    reserved: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AvailabilityDuringRoutingStock
-     */
-    available: number;
-}
-/**
- * 
+ * AvailabilityTimeframe
  * @export
  * @interface AvailabilityTimeframe
  */
@@ -1877,7 +2242,20 @@ export interface AvailabilityTimeframe {
     start?: Date;
 }
 /**
- * 
+ * AvailableForPickingDetails
+ * @export
+ * @interface AvailableForPickingDetails
+ */
+export interface AvailableForPickingDetails {
+    /**
+     * 
+     * @type {number}
+     * @memberof AvailableForPickingDetails
+     */
+    total: number;
+}
+/**
+ * AvailableItemCondition
  * @export
  * @interface AvailableItemCondition
  */
@@ -1890,7 +2268,7 @@ export interface AvailableItemCondition {
     conditionLocalized?: LocaleString;
 }
 /**
- * 
+ * AvailableRefuseReasonForCreation
  * @export
  * @interface AvailableRefuseReasonForCreation
  */
@@ -1909,7 +2287,7 @@ export interface AvailableRefuseReasonForCreation {
     refusedReasonLocalized: LocaleString;
 }
 /**
- * 
+ * AvailableRefuseReasonForUpdate
  * @export
  * @interface AvailableRefuseReasonForUpdate
  */
@@ -1934,7 +2312,7 @@ export interface AvailableRefuseReasonForUpdate {
     refusedReasonLocalized: LocaleString;
 }
 /**
- * 
+ * AvailableRefusedReason
  * @export
  * @interface AvailableRefusedReason
  */
@@ -1959,7 +2337,7 @@ export interface AvailableRefusedReason {
     refusedReason?: string;
 }
 /**
- * 
+ * AvailableReturnReason
  * @export
  * @interface AvailableReturnReason
  */
@@ -1970,6 +2348,12 @@ export interface AvailableReturnReason {
      * @memberof AvailableReturnReason
      */
     reasonLocalized: LocaleString;
+    /**
+     * Small identifier to be displayed and printed. Allowed values are 1-99 and A-Z. Needs to be unique respecting all other reasons. If not set, an ascending will be chosen automatically
+     * @type {string}
+     * @memberof AvailableReturnReason
+     */
+    identifier?: string;
 }
 /**
  * The base for the calculation of the available until date. If it can't be resolved into a valid date (i.e. missing expiry value), an undefined \"availableUntil\" is the result
@@ -1981,7 +2365,7 @@ export enum AvailableUntilCalculationBase {
     CREATION = 'CREATION'
 }
 /**
- * 
+ * AvailableUntilDefinition
  * @export
  * @interface AvailableUntilDefinition
  */
@@ -2013,7 +2397,7 @@ export interface BackofficePickingConfiguration {
     active: boolean;
 }
 /**
- * 
+ * Backordered
  * @export
  * @interface Backordered
  */
@@ -2026,7 +2410,7 @@ export interface Backordered {
     lineItems: Array<DeliveryPromiseLineItem>;
 }
 /**
- * 
+ * BaseDecisionDetail
  * @export
  * @interface BaseDecisionDetail
  */
@@ -2039,7 +2423,7 @@ export interface BaseDecisionDetail {
     decisionType: DecisionType;
 }
 /**
- * 
+ * BaseValidation
  * @export
  * @interface BaseValidation
  */
@@ -2068,7 +2452,7 @@ export namespace BaseValidation {
     }
 }
 /**
- * 
+ * BasicDeliveryPromiseShipment
  * @export
  * @interface BasicDeliveryPromiseShipment
  */
@@ -2087,7 +2471,7 @@ export interface BasicDeliveryPromiseShipment {
     facility: BasicDeliveryPromiseShipmentFacility;
 }
 /**
- * 
+ * BasicDeliveryPromiseShipmentFacility
  * @export
  * @interface BasicDeliveryPromiseShipmentFacility
  */
@@ -2106,7 +2490,7 @@ export interface BasicDeliveryPromiseShipmentFacility {
     facilityName: string;
 }
 /**
- * 
+ * BasketItem
  * @export
  * @interface BasketItem
  */
@@ -2125,7 +2509,26 @@ export interface BasketItem {
     quantity: number;
 }
 /**
- * 
+ * BooleanFilter
+ * @export
+ * @interface BooleanFilter
+ */
+export interface BooleanFilter {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BooleanFilter
+     */
+    eq?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BooleanFilter
+     */
+    notEq?: boolean;
+}
+/**
+ * Brand
  * @export
  * @interface Brand
  */
@@ -2144,7 +2547,7 @@ export interface Brand extends VersionedResource {
     id: string;
 }
 /**
- * 
+ * BrandForCreation
  * @export
  * @interface BrandForCreation
  */
@@ -2157,26 +2560,7 @@ export interface BrandForCreation {
     name: string;
 }
 /**
- * 
- * @export
- * @interface Branding
- */
-export interface Branding {
-    /**
-     * The logo URL for the tenant
-     * @type {string}
-     * @memberof Branding
-     */
-    logoUrl: string;
-    /**
-     * The hexcode representation of the desired primary color.
-     * @type {string}
-     * @memberof Branding
-     */
-    primaryColor: string;
-}
-/**
- * 
+ * Configuration of Bring Carrier
  * @export
  * @interface BringCarrierConfiguration
  */
@@ -2219,7 +2603,7 @@ export interface BringCarrierConfiguration extends CarrierConfiguration {
     webhookFftHost?: string;
 }
 /**
- * 
+ * Bring Credentials.
  * @export
  * @interface BringCarrierCredentials
  */
@@ -2250,7 +2634,7 @@ export interface BringCarrierCredentials extends AbstractCarrierCredentials {
     authToken?: string;
 }
 /**
- * 
+ * Bring Facility Carrier Configuration.
  * @export
  * @interface BringFacilityCarrierConfiguration
  */
@@ -2269,7 +2653,7 @@ export interface BringFacilityCarrierConfiguration extends AbstractFacilityCarri
     webhookFftHost?: string;
 }
 /**
- * 
+ * BulkOperationError
  * @export
  * @interface BulkOperationError
  */
@@ -2279,13 +2663,13 @@ export interface BulkOperationError {
      * @type {string}
      * @memberof BulkOperationError
      */
-    type: BulkOperationError.TypeEnum;
+    message: string;
     /**
      * 
      * @type {string}
      * @memberof BulkOperationError
      */
-    message: string;
+    type: BulkOperationError.TypeEnum;
 }
 
 /**
@@ -2303,7 +2687,7 @@ export namespace BulkOperationError {
     }
 }
 /**
- * 
+ * BulkOperationResultStatus
  * @export
  * @enum {string}
  */
@@ -2313,7 +2697,7 @@ export enum BulkOperationResultStatus {
     FAILED = 'FAILED'
 }
 /**
- * 
+ * BundleInformation
  * @export
  * @interface BundleInformation
  */
@@ -2332,7 +2716,7 @@ export interface BundleInformation {
     requestedQuantity: number;
 }
 /**
- * 
+ * ByTrait
  * @export
  * @interface ByTrait
  */
@@ -2342,16 +2726,16 @@ export interface ByTrait {
      * @type {number}
      * @memberof ByTrait
      */
-    PICKABLE: number;
+    ACCESSIBLE: number;
     /**
      * 
      * @type {number}
      * @memberof ByTrait
      */
-    ACCESSIBLE: number;
+    PICKABLE: number;
 }
 /**
- * 
+ * Header for the Webhook call.
  * @export
  * @interface CallbackHeader
  */
@@ -2370,7 +2754,7 @@ export interface CallbackHeader {
     value: string;
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use api/handoverjobs/:id/actions instead
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use api/handoverjobs/:id/actions instead
  * @export
  * @interface CancelHandoverjobAction
  */
@@ -2403,7 +2787,7 @@ export namespace CancelHandoverjobAction {
     }
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use api/pickruns/:id/actions instead
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use api/pickruns/:id/actions instead
  * @export
  * @interface CancelPickRunAction
  */
@@ -2430,7 +2814,40 @@ export namespace CancelPickRunAction {
     }
 }
 /**
- * 
+ * Sets the status of the stowjob to CANCELED
+ * @export
+ * @interface CancelStowJobAction
+ */
+export interface CancelStowJobAction {
+    /**
+     * The name of the action that should be performed
+     * @type {string}
+     * @memberof CancelStowJobAction
+     */
+    name: CancelStowJobAction.NameEnum;
+    /**
+     * The current version of the stow job that should be modified
+     * @type {number}
+     * @memberof CancelStowJobAction
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace CancelStowJobAction
+ */
+export namespace CancelStowJobAction {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        CANCELSTOWJOB = 'CANCEL_STOW_JOB'
+    }
+}
+/**
+ * CancelationReason
  * @export
  * @interface CancelationReason
  */
@@ -2457,21 +2874,21 @@ export namespace CancelationReason {
     }
 }
 /**
- * 
+ * CancelationReasonForCreation
  * @export
  * @interface CancelationReasonForCreation
  */
 export interface CancelationReasonForCreation extends AbstractReasonForCreation {
 }
 /**
- * 
+ * CancelationReasonForModification
  * @export
  * @interface CancelationReasonForModification
  */
 export interface CancelationReasonForModification extends AbstractReasonForModification {
 }
 /**
- * 
+ * CancelationReasons
  * @export
  * @interface CancelationReasons
  */
@@ -2484,7 +2901,7 @@ export interface CancelationReasons extends AbstractReasons {
     reasons: Array<CancelationReason>;
 }
 /**
- * 
+ * CapabilityStatus
  * @export
  * @enum {string}
  */
@@ -2494,7 +2911,7 @@ export enum CapabilityStatus {
     Disabled = 'disabled'
 }
 /**
- * 
+ * CapacityPlanningTimeframeConfiguration
  * @export
  * @interface CapacityPlanningTimeframeConfiguration
  */
@@ -2513,7 +2930,7 @@ export interface CapacityPlanningTimeframeConfiguration extends VersionedResourc
     id?: string;
 }
 /**
- * 
+ * Carrier
  * @export
  * @interface Carrier
  */
@@ -2560,9 +2977,27 @@ export interface Carrier extends CarrierForCreation {
      * @memberof Carrier
      */
     parcelLabelClassifications?: Array<ParcelLabelClassification>;
+    /**
+     * Default width in cm
+     * @type {number}
+     * @memberof Carrier
+     */
+    defaultParcelWidthInCm: number;
+    /**
+     * Default length in cm
+     * @type {number}
+     * @memberof Carrier
+     */
+    defaultParcelLengthInCm: number;
+    /**
+     * Default height in cm
+     * @type {number}
+     * @memberof Carrier
+     */
+    defaultParcelHeightInCm: number;
 }
 /**
- * 
+ * Configuration of a Carrier
  * @export
  * @interface CarrierConfiguration
  */
@@ -2610,17 +3045,11 @@ export interface CarrierConfiguration extends VersionedResource {
      */
     nonDeliveryDaysPerCountryAndProvince?: Array<NonDeliveryDaysPerCountryAndProvince>;
     /**
-     * Deprecated - manual country service mapping is deprecated, please use the predefined staticCountryServiceMappings if available to see which fields are needed
+     * 
      * @type {Array<CarrierCountryServiceMapping>}
      * @memberof CarrierConfiguration
      */
     countryServiceMappings?: Array<CarrierCountryServiceMapping>;
-    /**
-     * 
-     * @type {Array<StaticCarrierCountryServiceMapping>}
-     * @memberof CarrierConfiguration
-     */
-    staticCountryServiceMappings?: Array<StaticCarrierCountryServiceMapping>;
     /**
      * 
      * @type {ThresholdPriceValue}
@@ -2633,13 +3062,25 @@ export interface CarrierConfiguration extends VersionedResource {
      * @memberof CarrierConfiguration
      */
     serviceUrl?: string;
+    /**
+     * 
+     * @type {FacilityAddress}
+     * @memberof CarrierConfiguration
+     */
+    alternativeSendAddress?: FacilityAddress;
+    /**
+     * 
+     * @type {FacilityAddress}
+     * @memberof CarrierConfiguration
+     */
+    alternativeReturnAddress?: FacilityAddress;
 }
 /**
- * 
+ * CarrierCountryServiceMapping
  * @export
  * @interface CarrierCountryServiceMapping
  */
-export interface CarrierCountryServiceMapping extends StaticCarrierCountryServiceMapping {
+export interface CarrierCountryServiceMapping {
     /**
      * unique identifier for a countryServiceMapping
      * @type {string}
@@ -2647,20 +3088,104 @@ export interface CarrierCountryServiceMapping extends StaticCarrierCountryServic
      */
     id: string;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated - Use source instead.
+     * 
+     * @type {RegionInformation}
+     * @memberof CarrierCountryServiceMapping
+     */
+    source: RegionInformation;
+    /**
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated - Use source instead.
      * @type {string}
      * @memberof CarrierCountryServiceMapping
      */
     sourceCountry?: string;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated - Use destination instead.
+     * The destination regions this mapping should be applied to.
+     * @type {Array<RegionInformation>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    destinations: Array<RegionInformation>;
+    /**
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated - Use destination instead.
      * @type {Array<CountryCode>}
      * @memberof CarrierCountryServiceMapping
      */
     destinationCountries?: Array<CountryCode>;
+    /**
+     * 
+     * @type {Array<MandatoryShippingArticleAttribute>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
+    /**
+     * 
+     * @type {Array<MandatoryShippingAttribute>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    mandatoryShippingAttributes?: Array<MandatoryShippingAttribute>;
+    /**
+     * Article Attributes that will be displayed in the client as additional. They are not mandatory but could benefit the process. Mandatory fields can not be additional. If duplicates found, the additional values will be removed on read.
+     * @type {Array<AdditionalShippingArticleAttribute>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    additionalShippingArticleAttributes?: Array<AdditionalShippingArticleAttribute>;
+    /**
+     * Shipping Attributes that will be displayed in the client as additional. They are not mandatory but could benefit the process. Mandatory fields can not be additional If duplicates found, the additional values will be removed on read.
+     * @type {Array<AdditionalShippingAttribute>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    additionalShippingAttributes?: Array<AdditionalShippingAttribute>;
+    /**
+     * Deprecated - use mandatoryShippingArticleAttributes instead
+     * @type {Array<MandatoryShippingItemAttribute>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    mandatoryShippingItemAttributes?: Array<MandatoryShippingItemAttribute>;
+    /**
+     * Array of products for the given mapping
+     * @type {Array<string>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    products?: Array<string>;
+    /**
+     * Services which can be provided by the carrier
+     * @type {Array<CarrierServices>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    carrierServices?: Array<CarrierServices>;
+    /**
+     * 
+     * @type {CarrierProductCategory}
+     * @memberof CarrierCountryServiceMapping
+     */
+    carrierProductCategory?: CarrierProductCategory;
+    /**
+     * 
+     * @type {CarrierTransitTime}
+     * @memberof CarrierCountryServiceMapping
+     */
+    transitTime?: CarrierTransitTime;
+    /**
+     * 
+     * @type {Array<DeliveryCost>}
+     * @memberof CarrierCountryServiceMapping
+     */
+    deliveryCosts?: Array<DeliveryCost>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CarrierCountryServiceMapping
+     */
+    staticCCSMRef?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CarrierCountryServiceMapping
+     */
+    countAsTransitDayBefore?: string;
 }
 /**
- * 
+ * CarrierCountryServiceMappingForCreation
  * @export
  * @interface CarrierCountryServiceMappingForCreation
  */
@@ -2684,13 +3209,13 @@ export interface CarrierCountryServiceMappingForCreation {
      */
     destinations: Array<RegionInformation>;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use source instead.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use source instead.
      * @type {string}
      * @memberof CarrierCountryServiceMappingForCreation
      */
     sourceCountry?: string;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use destination instead.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use destination instead.
      * @type {Array<CountryCode>}
      * @memberof CarrierCountryServiceMappingForCreation
      */
@@ -2702,7 +3227,7 @@ export interface CarrierCountryServiceMappingForCreation {
      */
     mandatoryShippingAttributes?: Array<MandatoryShippingAttribute>;
     /**
-     * 
+     * Deprecated - use mandatoryShippingArticleAttributes instead
      * @type {Array<MandatoryShippingItemAttribute>}
      * @memberof CarrierCountryServiceMappingForCreation
      */
@@ -2713,6 +3238,18 @@ export interface CarrierCountryServiceMappingForCreation {
      * @memberof CarrierCountryServiceMappingForCreation
      */
     mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
+    /**
+     * Article Attributes that will be displayed in the client as additional. They are not mandatory but could benefit the process. Mandatory fields can not be additional. If duplicates found, the additional values will be removed on read.
+     * @type {Array<AdditionalShippingArticleAttribute>}
+     * @memberof CarrierCountryServiceMappingForCreation
+     */
+    additionalShippingArticleAttributes?: Array<AdditionalShippingArticleAttribute>;
+    /**
+     * Shipping Attributes that will be displayed in the client as additional. They are not mandatory but could benefit the process. Mandatory fields can not be additional If duplicates found, the additional values will be removed on read.
+     * @type {Array<AdditionalShippingAttribute>}
+     * @memberof CarrierCountryServiceMappingForCreation
+     */
+    additionalShippingAttributes?: Array<AdditionalShippingAttribute>;
     /**
      * 
      * @type {Array<string>}
@@ -2737,9 +3274,15 @@ export interface CarrierCountryServiceMappingForCreation {
      * @memberof CarrierCountryServiceMappingForCreation
      */
     deliveryCosts?: Array<DeliveryCost>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CarrierCountryServiceMappingForCreation
+     */
+    countAsTransitDayBefore?: string;
 }
 /**
- * 
+ * CarrierCountryServiceMappingForUpdate
  * @export
  * @interface CarrierCountryServiceMappingForUpdate
  */
@@ -2763,13 +3306,13 @@ export interface CarrierCountryServiceMappingForUpdate {
      */
     destinations?: Array<RegionInformation>;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use source instead.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use source instead.
      * @type {string}
      * @memberof CarrierCountryServiceMappingForUpdate
      */
     sourceCountry?: string;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use destination instead.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use destination instead.
      * @type {Array<CountryCode>}
      * @memberof CarrierCountryServiceMappingForUpdate
      */
@@ -2781,7 +3324,7 @@ export interface CarrierCountryServiceMappingForUpdate {
      */
     mandatoryShippingAttributes?: Array<MandatoryShippingAttribute>;
     /**
-     * 
+     * Deprecated - use mandatoryShippingArticleAttributes instead
      * @type {Array<MandatoryShippingItemAttribute>}
      * @memberof CarrierCountryServiceMappingForUpdate
      */
@@ -2792,6 +3335,18 @@ export interface CarrierCountryServiceMappingForUpdate {
      * @memberof CarrierCountryServiceMappingForUpdate
      */
     mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
+    /**
+     * Article Attributes that will be displayed in the client as additional. They are not mandatory but could benefit the process. Mandatory fields can not be additional. If duplicates found, the additional values will be removed on read.
+     * @type {Array<AdditionalShippingArticleAttribute>}
+     * @memberof CarrierCountryServiceMappingForUpdate
+     */
+    additionalShippingArticleAttributes?: Array<AdditionalShippingArticleAttribute>;
+    /**
+     * Shipping Attributes that will be displayed in the client as additional. They are not mandatory but could benefit the process. Mandatory fields can not be additional If duplicates found, the additional values will be removed on read.
+     * @type {Array<AdditionalShippingAttribute>}
+     * @memberof CarrierCountryServiceMappingForUpdate
+     */
+    additionalShippingAttributes?: Array<AdditionalShippingAttribute>;
     /**
      * Array of products for the given mapping
      * @type {Array<string>}
@@ -2816,9 +3371,15 @@ export interface CarrierCountryServiceMappingForUpdate {
      * @memberof CarrierCountryServiceMappingForUpdate
      */
     deliveryCosts?: Array<DeliveryCost>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CarrierCountryServiceMappingForUpdate
+     */
+    countAsTransitDayBefore?: string;
 }
 /**
- * 
+ * CarrierCutoffConfiguration
  * @export
  * @interface CarrierCutoffConfiguration
  */
@@ -2837,7 +3398,7 @@ export interface CarrierCutoffConfiguration {
     capacity?: number;
 }
 /**
- * 
+ * CarrierCutoffTimes
  * @export
  * @interface CarrierCutoffTimes
  */
@@ -2856,7 +3417,7 @@ export interface CarrierCutoffTimes {
     overwrites: Array<CarrierCutoffTimesOverwrite>;
 }
 /**
- * 
+ * CarrierCutoffTimesOverwrite
  * @export
  * @interface CarrierCutoffTimesOverwrite
  */
@@ -2875,7 +3436,7 @@ export interface CarrierCutoffTimesOverwrite {
     cutoffConfigurations: Array<CarrierCutoffConfiguration>;
 }
 /**
- * 
+ * CarrierCutoffTimesWeekDay
  * @export
  * @interface CarrierCutoffTimesWeekDay
  */
@@ -2903,7 +3464,7 @@ export enum CarrierDeliveryType {
     DELIVERY = 'DELIVERY'
 }
 /**
- * 
+ * CarrierForCreation
  * @export
  * @interface CarrierForCreation
  */
@@ -2915,7 +3476,7 @@ export interface CarrierForCreation {
      */
     credentials?: AbstractCarrierCredentials;
     /**
-     * References the KEP. Currently allowed values are DHL_V2, DPD_CH, ANGEL, GLS, FEDEX, POSTNL, BRING, UPS, POST_NORD, DHL_EXPRESS, CUSTOM and to distinct between multiple custom carriers one can use CUSTOM_ combined with a unique name.
+     * References the KEP. Currently allowed values are DHL_V2, DPD_CH, DPD_CH_VCE, ANGEL, GLS, FEDEX, POSTNL, BRING, UPS, POST_NORD, DHL_EXPRESS,  CUSTOM and to distinct between multiple custom carriers one can use CUSTOM_ combined with a unique name.
      * @type {string}
      * @memberof CarrierForCreation
      */
@@ -2944,6 +3505,24 @@ export interface CarrierForCreation {
      * @memberof CarrierForCreation
      */
     defaultParcelWeightInGram?: number;
+    /**
+     * Default width in cm
+     * @type {number}
+     * @memberof CarrierForCreation
+     */
+    defaultParcelWidthInCm?: number;
+    /**
+     * Default length in cm
+     * @type {number}
+     * @memberof CarrierForCreation
+     */
+    defaultParcelLengthInCm?: number;
+    /**
+     * Default height in cm
+     * @type {number}
+     * @memberof CarrierForCreation
+     */
+    defaultParcelHeightInCm?: number;
     /**
      * 
      * @type {Array<ParcelLabelClassificationForCreation>}
@@ -2975,7 +3554,7 @@ export enum CarrierLifecycle {
     ALPHA = 'ALPHA'
 }
 /**
- * 
+ * CarrierPatchActions
  * @export
  * @interface CarrierPatchActions
  */
@@ -2994,6 +3573,38 @@ export interface CarrierPatchActions {
     version: number;
 }
 /**
+ * CarrierPriorityCalculationRequest
+ * @export
+ * @interface CarrierPriorityCalculationRequest
+ */
+export interface CarrierPriorityCalculationRequest {
+    /**
+     * 
+     * @type {ParcelProductValue}
+     * @memberof CarrierPriorityCalculationRequest
+     */
+    productValue?: ParcelProductValue;
+}
+/**
+ * CarrierPriorityResult
+ * @export
+ * @interface CarrierPriorityResult
+ */
+export interface CarrierPriorityResult {
+    /**
+     * 
+     * @type {Array<CarrierRecommendationResult>}
+     * @memberof CarrierPriorityResult
+     */
+    recommendedCarriers: Array<CarrierRecommendationResult>;
+    /**
+     * 
+     * @type {Array<CarrierRecommendationResult>}
+     * @memberof CarrierPriorityResult
+     */
+    otherCarriers: Array<CarrierRecommendationResult>;
+}
+/**
  * Desired product class to choose when ordering a label, this is not a carrier specific value
  * @export
  * @enum {string}
@@ -3003,6 +3614,31 @@ export enum CarrierProductCategory {
     EXPRESS = 'EXPRESS',
     VALUE = 'VALUE',
     FORWARDING = 'FORWARDING'
+}
+/**
+ * CarrierRecommendationResult
+ * @export
+ * @interface CarrierRecommendationResult
+ */
+export interface CarrierRecommendationResult {
+    /**
+     * The lower the value the higher is the priority, e.g. priority 1 is higher than priority 10. The priority is used when comparing multiple carriers.
+     * @type {number}
+     * @memberof CarrierRecommendationResult
+     */
+    priority: number;
+    /**
+     * 
+     * @type {Carrier}
+     * @memberof CarrierRecommendationResult
+     */
+    carrier: Carrier;
+    /**
+     * 
+     * @type {PriceRange}
+     * @memberof CarrierRecommendationResult
+     */
+    threshold?: PriceRange;
 }
 /**
  * Services which should be booked from carrier
@@ -3025,7 +3661,32 @@ export enum CarrierStatus {
     INACTIVE = 'INACTIVE'
 }
 /**
- * 
+ * Native trackingStatus provided by carrier
+ * @export
+ * @interface CarrierTrackingStatus
+ */
+export interface CarrierTrackingStatus {
+    /**
+     * Timestamp this status was set by the carrier
+     * @type {Date}
+     * @memberof CarrierTrackingStatus
+     */
+    timestamp?: Date;
+    /**
+     * Status of the parcel as provided by carrier
+     * @type {string}
+     * @memberof CarrierTrackingStatus
+     */
+    status: string;
+    /**
+     * Description of the status
+     * @type {string}
+     * @memberof CarrierTrackingStatus
+     */
+    description?: string;
+}
+/**
+ * CarrierTransitTime
  * @export
  * @interface CarrierTransitTime
  */
@@ -3044,17 +3705,126 @@ export interface CarrierTransitTime {
     maxTransitDays: number;
 }
 /**
- * 
+ * Category
+ * @export
+ * @interface Category
+ */
+export interface Category {
+    /**
+     * 
+     * @type {Date}
+     * @memberof Category
+     */
+    created: Date;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof Category
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof Category
+     */
+    id?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Category
+     */
+    lastModified: Date;
+    /**
+     * 
+     * @type {LocaleStringConstrained}
+     * @memberof Category
+     */
+    nameLocalized: LocaleStringConstrained;
+    /**
+     * unique identifier for categories used in the customer systems
+     * @type {string}
+     * @memberof Category
+     */
+    tenantCategoryId?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Category
+     */
+    version: number;
+}
+/**
+ * ChangeLineItemsToNotReturnableInItemReturnJobActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum ChangeLineItemsToNotReturnableInItemReturnJobActionEnum {
+    CHANGELINEITEMSTONOTRETURNABLEINITEMRETURNJOB = 'CHANGE_LINE_ITEMS_TO_NOT_RETURNABLE_IN_ITEM_RETURN_JOB'
+}
+/**
+ * Action to move line items from returnableLineItems to notReturnableLineItems.
+ * @export
+ * @interface ChangeLineItemsToNotReturnableInItemReturnJobActionParameter
+ */
+export interface ChangeLineItemsToNotReturnableInItemReturnJobActionParameter {
+    /**
+     * 
+     * @type {ChangeLineItemsToNotReturnableInItemReturnJobActionEnum}
+     * @memberof ChangeLineItemsToNotReturnableInItemReturnJobActionParameter
+     */
+    name: ChangeLineItemsToNotReturnableInItemReturnJobActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof ChangeLineItemsToNotReturnableInItemReturnJobActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ChangeLineItemsToNotReturnableInItemReturnJobActionParameter
+     */
+    lineItemIds: Array<string>;
+}
+/**
+ * ChangeLineItemsToReturnableInItemReturnJobActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum ChangeLineItemsToReturnableInItemReturnJobActionEnum {
+    CHANGELINEITEMSTORETURNABLEINITEMRETURNJOB = 'CHANGE_LINE_ITEMS_TO_RETURNABLE_IN_ITEM_RETURN_JOB'
+}
+/**
+ * Action to move line items from notReturnableLineItems to returnableLineItems.
+ * @export
+ * @interface ChangeLineItemsToReturnableInItemReturnJobActionParameter
+ */
+export interface ChangeLineItemsToReturnableInItemReturnJobActionParameter {
+    /**
+     * 
+     * @type {ChangeLineItemsToReturnableInItemReturnJobActionEnum}
+     * @memberof ChangeLineItemsToReturnableInItemReturnJobActionParameter
+     */
+    name: ChangeLineItemsToReturnableInItemReturnJobActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof ChangeLineItemsToReturnableInItemReturnJobActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ChangeLineItemsToReturnableInItemReturnJobActionParameter
+     */
+    lineItemIds: Array<string>;
+}
+/**
+ * ChannelStockAvailability
  * @export
  * @interface ChannelStockAvailability
  */
 export interface ChannelStockAvailability {
-    /**
-     * 
-     * @type {string}
-     * @memberof ChannelStockAvailability
-     */
-    channelRef: string;
     /**
      * 
      * @type {number}
@@ -3067,9 +3837,15 @@ export interface ChannelStockAvailability {
      * @memberof ChannelStockAvailability
      */
     availableOnStock: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChannelStockAvailability
+     */
+    channelRef: string;
 }
 /**
- * 
+ * CheckoutOptionsAvailability
  * @export
  * @interface CheckoutOptionsAvailability
  */
@@ -3112,7 +3888,7 @@ export interface CheckoutOptionsAvailability {
     carrier?: CheckoutOptionsAvailabilityCarrier;
 }
 /**
- * 
+ * CheckoutOptionsAvailabilityCarrier
  * @export
  * @interface CheckoutOptionsAvailabilityCarrier
  */
@@ -3131,7 +3907,7 @@ export interface CheckoutOptionsAvailabilityCarrier {
     carrierProductCategory?: CarrierProductCategory;
 }
 /**
- * 
+ * CheckoutOptionsConsumerAddress
  * @export
  * @interface CheckoutOptionsConsumerAddress
  */
@@ -3172,9 +3948,15 @@ export interface CheckoutOptionsConsumerAddress {
      * @memberof CheckoutOptionsConsumerAddress
      */
     street?: string;
+    /**
+     * 
+     * @type {AddressType}
+     * @memberof CheckoutOptionsConsumerAddress
+     */
+    addressType?: AddressType;
 }
 /**
- * 
+ * CheckoutOptionsCustomServices
  * @export
  * @interface CheckoutOptionsCustomServices
  */
@@ -3193,7 +3975,7 @@ export interface CheckoutOptionsCustomServices {
     name: string;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryEarliestRequest
  * @export
  * @interface CheckoutOptionsDeliveryEarliestRequest
  */
@@ -3216,9 +3998,15 @@ export interface CheckoutOptionsDeliveryEarliestRequest {
      * @memberof CheckoutOptionsDeliveryEarliestRequest
      */
     consumerAddress: CheckoutOptionsConsumerAddress;
+    /**
+     * Set this flag to true to get additional information about the availability of the requested articles
+     * @type {boolean}
+     * @memberof CheckoutOptionsDeliveryEarliestRequest
+     */
+    includeCalculationHints?: boolean;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryEarliestResponse
  * @export
  * @interface CheckoutOptionsDeliveryEarliestResponse
  */
@@ -3229,9 +4017,15 @@ export interface CheckoutOptionsDeliveryEarliestResponse {
      * @memberof CheckoutOptionsDeliveryEarliestResponse
      */
     checkoutOptions: Array<CheckoutOptionsDeliveryEarliestResponseItem>;
+    /**
+     * Hints generated during the calculation of the earliest delivery date. These are only returned if the includeCalculationHints flag was provided when performing the request.
+     * @type {Array<string>}
+     * @memberof CheckoutOptionsDeliveryEarliestResponse
+     */
+    calculationHints?: Array<string>;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryEarliestResponseItem
  * @export
  * @interface CheckoutOptionsDeliveryEarliestResponseItem
  */
@@ -3256,7 +4050,7 @@ export interface CheckoutOptionsDeliveryEarliestResponseItem {
     availableCarriers?: Array<CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier>;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
  * @export
  * @interface CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
  */
@@ -3279,9 +4073,15 @@ export interface CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier {
      * @memberof CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
      */
     nonDeliveryDays?: Array<string>;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier
+     */
+    latestPickingStartDate?: Date;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryTimePeriodRequest
  * @export
  * @interface CheckoutOptionsDeliveryTimePeriodRequest
  */
@@ -3293,7 +4093,7 @@ export interface CheckoutOptionsDeliveryTimePeriodRequest {
      */
     startDate?: Date;
     /**
-     * The end of the evaluated time period. Default is the start date + 60 days. Please note that the maximum time period can not exceed 60 days.
+     * The end of the evaluated time period. Default is the start date + 30 days. Please note that the maximum time period can not exceed 45 days.
      * @type {Date}
      * @memberof CheckoutOptionsDeliveryTimePeriodRequest
      */
@@ -3316,9 +4116,15 @@ export interface CheckoutOptionsDeliveryTimePeriodRequest {
      * @memberof CheckoutOptionsDeliveryTimePeriodRequest
      */
     deliveryPreferences?: DeliveryPreferencesShipping;
+    /**
+     * Set this flag to true to get additional information about the availability of the requested articles
+     * @type {boolean}
+     * @memberof CheckoutOptionsDeliveryTimePeriodRequest
+     */
+    includeCalculationHints?: boolean;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryTimePeriodResponse
  * @export
  * @interface CheckoutOptionsDeliveryTimePeriodResponse
  */
@@ -3329,9 +4135,15 @@ export interface CheckoutOptionsDeliveryTimePeriodResponse {
      * @memberof CheckoutOptionsDeliveryTimePeriodResponse
      */
     checkoutOptions: Array<CheckoutOptionsDeliveryTimePeriodResponseItem>;
+    /**
+     * Hints generated during the calculation of the earliest delivery date. These are only returned if the includeCalculationHints flag was provided when performing the request.
+     * @type {Array<string>}
+     * @memberof CheckoutOptionsDeliveryTimePeriodResponse
+     */
+    calculationHints?: Array<string>;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryTimePeriodResponseItem
  * @export
  * @interface CheckoutOptionsDeliveryTimePeriodResponseItem
  */
@@ -3350,10 +4162,10 @@ export interface CheckoutOptionsDeliveryTimePeriodResponseItem {
     date: Date;
     /**
      * 
-     * @type {Array<CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier>}
+     * @type {Array<CheckoutOptionsDeliveryTimePeriodResponseItemAvailableCarrier>}
      * @memberof CheckoutOptionsDeliveryTimePeriodResponseItem
      */
-    availableCarriers?: Array<CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier>;
+    availableCarriers?: Array<CheckoutOptionsDeliveryTimePeriodResponseItemAvailableCarrier>;
 }
 
 /**
@@ -3372,7 +4184,20 @@ export namespace CheckoutOptionsDeliveryTimePeriodResponseItem {
     }
 }
 /**
- * 
+ * CheckoutOptionsDeliveryTimePeriodResponseItemAvailableCarrier
+ * @export
+ * @interface CheckoutOptionsDeliveryTimePeriodResponseItemAvailableCarrier
+ */
+export interface CheckoutOptionsDeliveryTimePeriodResponseItemAvailableCarrier extends CheckoutOptionsDeliveryEarliestResponseItemAvailableCarrier {
+    /**
+     * 
+     * @type {Date}
+     * @memberof CheckoutOptionsDeliveryTimePeriodResponseItemAvailableCarrier
+     */
+    latestPickingStartDate?: Date;
+}
+/**
+ * CheckoutOptionsDeliveryTimePointRequest
  * @export
  * @interface CheckoutOptionsDeliveryTimePointRequest
  */
@@ -3397,7 +4222,7 @@ export interface CheckoutOptionsDeliveryTimePointRequest {
     facilities: Array<FacilityRefLatestPickingStartPair>;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryTimePointResponse
  * @export
  * @interface CheckoutOptionsDeliveryTimePointResponse
  */
@@ -3410,7 +4235,7 @@ export interface CheckoutOptionsDeliveryTimePointResponse {
     items: Array<CheckoutOptionsDeliveryTimePointResponseItem>;
 }
 /**
- * 
+ * CheckoutOptionsDeliveryTimePointResponseItem
  * @export
  * @interface CheckoutOptionsDeliveryTimePointResponseItem
  */
@@ -3433,9 +4258,15 @@ export interface CheckoutOptionsDeliveryTimePointResponseItem {
      * @memberof CheckoutOptionsDeliveryTimePointResponseItem
      */
     facilityRef: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CheckoutOptionsDeliveryTimePointResponseItem
+     */
+    latestPickingStart?: Date;
 }
 /**
- * 
+ * CheckoutOptionsFacilityForCNC
  * @export
  * @interface CheckoutOptionsFacilityForCNC
  */
@@ -3490,7 +4321,7 @@ export interface CheckoutOptionsFacilityForCNC {
     targetTime: Date;
 }
 /**
- * 
+ * CheckoutOptionsFacilityForSFS
  * @export
  * @interface CheckoutOptionsFacilityForSFS
  */
@@ -3527,7 +4358,7 @@ export interface CheckoutOptionsFacilityForSFS {
     customServices: Array<CheckoutOptionsCustomServices>;
 }
 /**
- * 
+ * CheckoutOptionsInput
  * @export
  * @interface CheckoutOptionsInput
  */
@@ -3576,7 +4407,7 @@ export interface CheckoutOptionsInput {
     filterDuplicates?: boolean;
 }
 /**
- * 
+ * ClickAndCollectRerouteConfiguration
  * @export
  * @interface ClickAndCollectRerouteConfiguration
  */
@@ -3593,6 +4424,39 @@ export interface ClickAndCollectRerouteConfiguration {
      * @memberof ClickAndCollectRerouteConfiguration
      */
     rerouteType?: RerouteType;
+}
+/**
+ * Sets the status of the stowjob to CLOSED
+ * @export
+ * @interface CloseStowJobAction
+ */
+export interface CloseStowJobAction {
+    /**
+     * The name of the action that should be performed
+     * @type {string}
+     * @memberof CloseStowJobAction
+     */
+    name: CloseStowJobAction.NameEnum;
+    /**
+     * The current version of the stow job that should be modified
+     * @type {number}
+     * @memberof CloseStowJobAction
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace CloseStowJobAction
+ */
+export namespace CloseStowJobAction {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        CLOSESTOWJOB = 'CLOSE_STOW_JOB'
+    }
 }
 /**
  * At this day the facility is closed and does not do picking
@@ -3635,7 +4499,7 @@ export namespace ClosingDay {
     }
 }
 /**
- * 
+ * CollectDelivery
  * @export
  * @interface CollectDelivery
  */
@@ -3672,7 +4536,7 @@ export interface CollectDelivery {
     provisioningTime?: Date;
 }
 /**
- * 
+ * CompanyAddress
  * @export
  * @interface CompanyAddress
  */
@@ -3740,11 +4604,30 @@ export enum ConnectAppTypeEnum {
     OPERATIONSIOS = 'OPERATIONS_IOS'
 }
 /**
+ * ConnectionType
+ * @export
+ * @enum {string}
+ */
+export enum ConnectionType {
+    SUPPLIER = 'SUPPLIER',
+    MANAGEDFACILITY = 'MANAGED_FACILITY',
+    CUSTOMER = 'CUSTOMER'
+}
+/**
+ * 
+ * @export
+ * @interface ConnectionsConnectionIdBody
+ */
+export interface ConnectionsConnectionIdBody {
+}
+/**
  * This status consolidates many of the RoutingPlanStatus and offers a more detailes explanation of what happened to the routing plan.
  * @export
  * @enum {string}
  */
 export enum ConsolidatedRoutingPlanStatus {
+    REROUTED = 'REROUTED',
+    MANUALLYREROUTED = 'MANUALLY_REROUTED',
     ROUTED = 'ROUTED',
     ROUTEDTHENREROUTED = 'ROUTED_THEN_REROUTED',
     PROCESSMANUALREROUTEDTHENROUTED = 'PROCESS_MANUAL_REROUTED_THEN_ROUTED',
@@ -3771,8 +4654,10 @@ export enum ConsolidatedRoutingPlanStatus {
     PICKJOBREJECTEDTHENROUTEDANDSPLIT = 'PICKJOB_REJECTED_THEN_ROUTED_AND_SPLIT',
     ROUTEDANDSPLIT = 'ROUTED_AND_SPLIT',
     OBSOLETE = 'OBSOLETE',
-    OBSOLETEWASROUTED = 'OBSOLETE_WAS_ROUTED',
+    OBSOLETEWASMANUALLYREROUTED = 'OBSOLETE_WAS_MANUALLY_REROUTED',
+    OBSOLETEWASMANUALLYASSIGNED = 'OBSOLETE_WAS_MANUALLY_ASSIGNED',
     OBSOLETEWASSHORTPICKED = 'OBSOLETE_WAS_SHORTPICKED',
+    OBSOLETEWASROUTED = 'OBSOLETE_WAS_ROUTED',
     UNKNOWN = 'UNKNOWN',
     RETRYABLE = 'RETRYABLE',
     FAILEDREROUTE = 'FAILED_REROUTE',
@@ -3789,7 +4674,11 @@ export enum ConsolidatedRoutingPlanStatus {
     PROCESSMANUALREROUTEDTHENREROUTEDANDSPLITTHENCANCELED = 'PROCESS_MANUAL_REROUTED_THEN_REROUTED_AND_SPLIT_THEN_CANCELED',
     CANCELED = 'CANCELED',
     NOTROUTABLE = 'NOT_ROUTABLE',
+    NOTROUTABLEWASMANUALLYREROUTED = 'NOT_ROUTABLE_WAS_MANUALLY_REROUTED',
+    NOTROUTABLEWASMANUALLYASSIGNED = 'NOT_ROUTABLE_WAS_MANUALLY_ASSIGNED',
     WAITING = 'WAITING',
+    WAITINGWASMANUALLYREROUTED = 'WAITING_WAS_MANUALLY_REROUTED',
+    WAITINGWASMANUALLYASSIGNED = 'WAITING_WAS_MANUALLY_ASSIGNED',
     WAITINGANDSPLIT = 'WAITING_AND_SPLIT',
     WAITINGTHENROUTED = 'WAITING_THEN_ROUTED',
     WAITINGTHENROUTEDANDSPLIT = 'WAITING_THEN_ROUTED_AND_SPLIT',
@@ -3799,7 +4688,7 @@ export enum ConsolidatedRoutingPlanStatus {
     INITIAL = 'INITIAL'
 }
 /**
- * 
+ * ConsumerAddress
  * @export
  * @interface ConsumerAddress
  */
@@ -3848,7 +4737,38 @@ export interface ConsumerAddress extends Address {
     coordinates?: Coordinates;
 }
 /**
- * 
+ * ConsumerAddressForSourcingOptions
+ * @export
+ * @interface ConsumerAddressForSourcingOptions
+ */
+export interface ConsumerAddressForSourcingOptions {
+    /**
+     * 
+     * @type {string}
+     * @memberof ConsumerAddressForSourcingOptions
+     */
+    facilityRef?: string;
+    /**
+     * The id of the consumer.
+     * @type {string}
+     * @memberof ConsumerAddressForSourcingOptions
+     */
+    consumerId?: string;
+    /**
+     * 
+     * @type {Array<ConsumerAddress>}
+     * @memberof ConsumerAddressForSourcingOptions
+     */
+    addresses?: Array<ConsumerAddress>;
+    /**
+     * Attributes that can be added to the consumer. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof ConsumerAddressForSourcingOptions
+     */
+    customAttributes?: any;
+}
+/**
+ * ContainerDimensions
  * @export
  * @interface ContainerDimensions
  */
@@ -3879,7 +4799,41 @@ export interface ContainerDimensions {
     widthInCm?: number;
 }
 /**
- * 
+ * ContextLimitation
+ * @export
+ * @interface ContextLimitation
+ */
+export interface ContextLimitation {
+    /**
+     * The type of the context limitation
+     * @type {string}
+     * @memberof ContextLimitation
+     */
+    type: ContextLimitation.TypeEnum;
+    /**
+     * The values of the context limitation
+     * @type {Array<string>}
+     * @memberof ContextLimitation
+     */
+    values: Array<string>;
+}
+
+/**
+ * @export
+ * @namespace ContextLimitation
+ */
+export namespace ContextLimitation {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        FACILITY = 'FACILITY',
+        ZONE = 'ZONE'
+    }
+}
+/**
+ * ContextReference
  * @export
  * @interface ContextReference
  */
@@ -3922,13 +4876,113 @@ export interface Coordinates {
  */
 export type CountryCode = string
 /**
- * 
+ * CountryLanguageMapping
  * @export
  * @interface CountryLanguageMapping
  */
 export interface CountryLanguageMapping {
     [key: string]: string;
 
+}
+/**
+ * CountryServiceMappingShippingArticleAttribute
+ * @export
+ * @interface CountryServiceMappingShippingArticleAttribute
+ */
+export interface CountryServiceMappingShippingArticleAttribute {
+    /**
+     * 
+     * @type {MandatoryShippingArticleAttributeReferencedField}
+     * @memberof CountryServiceMappingShippingArticleAttribute
+     */
+    referencedField: MandatoryShippingArticleAttributeReferencedField;
+    /**
+     * 
+     * @type {MandatoryShippingArticleAttributeDataType}
+     * @memberof CountryServiceMappingShippingArticleAttribute
+     */
+    dataType: MandatoryShippingArticleAttributeDataType;
+    /**
+     * 
+     * @type {MandatoryShippingArticleAttributeCategory}
+     * @memberof CountryServiceMappingShippingArticleAttribute
+     */
+    category: MandatoryShippingArticleAttributeCategory;
+    /**
+     * 
+     * @type {string}
+     * @memberof CountryServiceMappingShippingArticleAttribute
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof CountryServiceMappingShippingArticleAttribute
+     */
+    descriptionLocalized: LocaleString;
+}
+/**
+ * CountryServiceMappingShippingAttribute
+ * @export
+ * @interface CountryServiceMappingShippingAttribute
+ */
+export interface CountryServiceMappingShippingAttribute {
+    /**
+     * - dimensions.weight: will be calculated from MandatoryShippingArticleAttribute.attributes.weightPerUnit if items with weightPerUnit is set on all items - productValue: will be calculated from MandatoryShippingArticleAttribute.attributes.pricePerUnit if items with pricePerUnit is set on all items
+     * @type {string}
+     * @memberof CountryServiceMappingShippingAttribute
+     */
+    referencedField?: CountryServiceMappingShippingAttribute.ReferencedFieldEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CountryServiceMappingShippingAttribute
+     */
+    dataType?: CountryServiceMappingShippingAttribute.DataTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CountryServiceMappingShippingAttribute
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof CountryServiceMappingShippingAttribute
+     */
+    descriptionLocalized?: LocaleString;
+}
+
+/**
+ * @export
+ * @namespace CountryServiceMappingShippingAttribute
+ */
+export namespace CountryServiceMappingShippingAttribute {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ReferencedFieldEnum {
+        DimensionsWeight = 'dimensions.weight',
+        ProductValue = 'productValue',
+        PickUpInformationStartTime = 'pickUpInformation.startTime',
+        PickUpInformationEndTime = 'pickUpInformation.endTime',
+        ServicesBulkyGoods = 'services.BulkyGoods',
+        ServicesSignature = 'services.Signature',
+        ServicesAdultSignature = 'services.AdultSignature',
+        ServicesCustomerSignature = 'services.CustomerSignature',
+        ServicesSaturdayDelivery = 'services.SaturdayDelivery'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum DataTypeEnum {
+        Number = 'Number',
+        String = 'String',
+        Date = 'Date',
+        Boolean = 'Boolean'
+    }
 }
 /**
  * The currency code is a three-letter code that represents a currency in the ISO 4217 standard.
@@ -4117,20 +5171,38 @@ export enum CurrencyCode {
     ZWL = 'ZWL'
 }
 /**
- * 
+ * CustomAttributableVersionedResource
  * @export
  * @interface CustomAttributableVersionedResource
  */
-export interface CustomAttributableVersionedResource extends VersionedResource {
+export interface CustomAttributableVersionedResource {
+    /**
+     * The date this entity was created at the platform. This value is generated by the service.
+     * @type {Date}
+     * @memberof CustomAttributableVersionedResource
+     */
+    created?: Date;
     /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
      * @memberof CustomAttributableVersionedResource
      */
     customAttributes?: any;
+    /**
+     * The date this entity was modified last. This value is generated by the service.
+     * @type {Date}
+     * @memberof CustomAttributableVersionedResource
+     */
+    lastModified?: Date;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof CustomAttributableVersionedResource
+     */
+    version: number;
 }
 /**
- * 
+ * CustomAttributesResource
  * @export
  * @interface CustomAttributesResource
  */
@@ -4143,17 +5215,17 @@ export interface CustomAttributesResource {
     customAttributes?: any;
 }
 /**
- * Include all different claims could be assigned to a user
+ * CustomClaims
  * @export
  * @interface CustomClaims
  */
 export interface CustomClaims {
     /**
-     * 
-     * @type {UserRoles}
+     * The roles of the user
+     * @type {Array<UserRole>}
      * @memberof CustomClaims
      */
-    roles: UserRoles;
+    roles: Array<UserRole>;
 }
 /**
  * You can supply a CUSTOM Prioritization rule. In order to successfully supply such a rule you also need to provide an evaluatable Expression in vmExpression. This expression needs to return an integer value that adds additional priority to an order.
@@ -4169,11 +5241,17 @@ export interface CustomPrioritizationRule extends PrioritizationRule {
     vmExpression: string;
 }
 /**
- * 
+ * CustomService
  * @export
  * @interface CustomService
  */
 export interface CustomService extends VersionedResource {
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomService
+     */
+    tenantCustomServiceId?: string;
     /**
      * 
      * @type {CustomServiceStatus}
@@ -4242,11 +5320,17 @@ export interface CustomService extends VersionedResource {
     description?: string;
 }
 /**
- * 
+ * CustomServiceDefinition
  * @export
  * @interface CustomServiceDefinition
  */
 export interface CustomServiceDefinition {
+    /**
+     * The id of the tenant specific custom service
+     * @type {string}
+     * @memberof CustomServiceDefinition
+     */
+    tenantCustomServiceId?: string;
     /**
      * A reference to the custom service to be applied to the orderline items
      * @type {string}
@@ -4279,6 +5363,12 @@ export interface CustomServiceDefinition {
  */
 export interface CustomServiceDefinitionAdditionalInformation {
     /**
+     * The id of the tenant specific additional information
+     * @type {string}
+     * @memberof CustomServiceDefinitionAdditionalInformation
+     */
+    tenantAdditionalInformationId?: string;
+    /**
      * A reference to the specific additional information of the custom service
      * @type {string}
      * @memberof CustomServiceDefinitionAdditionalInformation
@@ -4292,11 +5382,17 @@ export interface CustomServiceDefinitionAdditionalInformation {
     value?: string | number | boolean;
 }
 /**
- * 
+ * CustomServiceForCreation
  * @export
  * @interface CustomServiceForCreation
  */
 export interface CustomServiceForCreation {
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomServiceForCreation
+     */
+    tenantCustomServiceId?: string;
     /**
      * 
      * @type {CustomServiceStatus}
@@ -4347,7 +5443,7 @@ export interface CustomServiceForCreation {
     customAttributes?: any;
 }
 /**
- * 
+ * CustomServiceItem
  * @export
  * @interface CustomServiceItem
  */
@@ -4366,7 +5462,7 @@ export interface CustomServiceItem extends CustomServiceItemForCreation {
     customServiceItems: Array<CustomServiceItem>;
 }
 /**
- * 
+ * CustomServiceItemForCreation
  * @export
  * @interface CustomServiceItemForCreation
  */
@@ -4391,7 +5487,7 @@ export interface CustomServiceItemForCreation {
     customServiceItems: Array<CustomServiceItemForCreation>;
 }
 /**
- * 
+ * CustomServicePatchActions
  * @export
  * @interface CustomServicePatchActions
  */
@@ -4410,7 +5506,7 @@ export interface CustomServicePatchActions {
     version: number;
 }
 /**
- * 
+ * CustomServiceReference
  * @export
  * @interface CustomServiceReference
  */
@@ -4429,7 +5525,7 @@ export interface CustomServiceReference extends CustomServiceReferenceForCreatio
     customServiceItems: Array<CustomServiceItem>;
 }
 /**
- * 
+ * CustomServiceReferenceForCreation
  * @export
  * @interface CustomServiceReferenceForCreation
  */
@@ -4465,7 +5561,7 @@ export enum CustomServiceStatus {
     ACTIVE = 'ACTIVE'
 }
 /**
- * 
+ * CutoffTime
  * @export
  * @interface CutoffTime
  */
@@ -4484,7 +5580,7 @@ export interface CutoffTime {
     minute: number;
 }
 /**
- * 
+ * CutoffTimeConfiguration
  * @export
  * @interface CutoffTimeConfiguration
  */
@@ -4509,7 +5605,7 @@ export interface CutoffTimeConfiguration extends VersionedResource {
     id?: string;
 }
 /**
- * 
+ * DHL Business Credentials.
  * @export
  * @interface DHLV2BusinessCredentials
  */
@@ -4552,7 +5648,7 @@ export interface DHLV2BusinessCredentials extends AbstractCarrierCredentials {
     dhlBusinessUsergroup?: string;
 }
 /**
- * 
+ * DHL Credentials.
  * @export
  * @interface DHLV2CarrierCredentials
  */
@@ -4569,9 +5665,109 @@ export interface DHLV2CarrierCredentials extends AbstractCarrierCredentials {
      * @memberof DHLV2CarrierCredentials
      */
     fallback?: DHLV2BusinessCredentials;
+    /**
+     * 
+     * @type {DHLV2SftpCredentials}
+     * @memberof DHLV2CarrierCredentials
+     */
+    sftpCredentials?: DHLV2SftpCredentials;
 }
 /**
- * 
+ * Dhl V2 SFTP Credentials.
+ * @export
+ * @interface DHLV2SftpCredentials
+ */
+export interface DHLV2SftpCredentials {
+    /**
+     * Username for the SFTP
+     * @type {string}
+     * @memberof DHLV2SftpCredentials
+     */
+    username: string;
+    /**
+     * Password for the SFTP
+     * @type {string}
+     * @memberof DHLV2SftpCredentials
+     */
+    password: string;
+}
+/**
+ * DateEqFilter
+ * @export
+ * @interface DateEqFilter
+ */
+export interface DateEqFilter {
+    /**
+     * 
+     * @type {Date}
+     * @memberof DateEqFilter
+     */
+    eq?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DateEqFilter
+     */
+    notEq?: Date;
+}
+/**
+ * DateFilter
+ * @export
+ * @interface DateFilter
+ */
+export interface DateFilter {
+    /**
+     * 
+     * @type {Date}
+     * @memberof DateFilter
+     */
+    eq?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DateFilter
+     */
+    gt?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DateFilter
+     */
+    gte?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DateFilter
+     */
+    lt?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DateFilter
+     */
+    lte?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof DateFilter
+     */
+    notEq?: Date;
+}
+/**
+ * DateListFilter
+ * @export
+ * @interface DateListFilter
+ */
+export interface DateListFilter {
+    /**
+     * 
+     * @type {DateEqFilter}
+     * @memberof DateListFilter
+     */
+    contains?: DateEqFilter;
+}
+/**
+ * DecisionLog
  * @export
  * @interface DecisionLog
  */
@@ -4618,9 +5814,21 @@ export interface DecisionLog extends VersionedResource {
      * @memberof DecisionLog
      */
     routingPlanRef: string;
+    /**
+     * This part of the API is in Alpha status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#alpha\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />In case no LPS could be calculated for this facility, the possible causes will be listed in this array. This property is an alpha property and still under development
+     * @type {any}
+     * @memberof DecisionLog
+     */
+    latestPickingStartHints?: any;
+    /**
+     * 
+     * @type {RoutingStrategyEvaluationResult}
+     * @memberof DecisionLog
+     */
+    routingStrategyEvaluationResult?: RoutingStrategyEvaluationResult;
 }
 /**
- * 
+ * DecisionLogFacilityInfo
  * @export
  * @interface DecisionLogFacilityInfo
  */
@@ -4639,7 +5847,7 @@ export interface DecisionLogFacilityInfo {
     facilityRef: string;
 }
 /**
- * 
+ * DecisionLogRef
  * @export
  * @interface DecisionLogRef
  */
@@ -4658,7 +5866,7 @@ export interface DecisionLogRef {
     url: string;
 }
 /**
- * 
+ * DecisionType
  * @export
  * @enum {string}
  */
@@ -4669,7 +5877,7 @@ export enum DecisionType {
     RATING = 'RATING'
 }
 /**
- * 
+ * DefaultPickingTimesConfiguration
  * @export
  * @interface DefaultPickingTimesConfiguration
  */
@@ -4682,7 +5890,7 @@ export interface DefaultPickingTimesConfiguration extends VersionedResource {
     pickingTimes: PickingTimes;
 }
 /**
- * 
+ * DeleteRefuseReasonParameter
  * @export
  * @interface DeleteRefuseReasonParameter
  */
@@ -4695,7 +5903,7 @@ export interface DeleteRefuseReasonParameter {
     handoverConfigurationVersion: number;
 }
 /**
- * 
+ * DeliveryAddress
  * @export
  * @interface DeliveryAddress
  */
@@ -4744,7 +5952,7 @@ export interface DeliveryAddress {
     street: string;
 }
 /**
- * 
+ * DeliveryAddressWithType
  * @export
  * @interface DeliveryAddressWithType
  */
@@ -4757,7 +5965,7 @@ export interface DeliveryAddressWithType extends DeliveryAddress {
     addressType: AddressType;
 }
 /**
- * 
+ * DeliveryArea
  * @export
  * @interface DeliveryArea
  */
@@ -4776,7 +5984,7 @@ export interface DeliveryArea {
     postalCode: string;
 }
 /**
- * 
+ * DeliveryCost
  * @export
  * @interface DeliveryCost
  */
@@ -4795,7 +6003,7 @@ export interface DeliveryCost {
     currency: string;
 }
 /**
- * 
+ * DeliveryEvent
  * @export
  * @interface DeliveryEvent
  */
@@ -4828,7 +6036,7 @@ export namespace DeliveryEvent {
     }
 }
 /**
- * 
+ * DeliveryEventTargetAddress
  * @export
  * @interface DeliveryEventTargetAddress
  */
@@ -4853,7 +6061,7 @@ export interface DeliveryEventTargetAddress {
     deliveryEvent: DeliveryEvent;
 }
 /**
- * 
+ * DeliveryNote
  * @export
  * @interface DeliveryNote
  */
@@ -4890,7 +6098,7 @@ export interface DeliveryNote {
     orderInformation: OrderInformation;
 }
 /**
- * 
+ * DeliveryNoteConfiguration
  * @export
  * @interface DeliveryNoteConfiguration
  */
@@ -4981,7 +6189,7 @@ export interface DeliveryNoteConfiguration extends VersionedResource {
     pdfBackgroundConfiguration?: PdfBackgroundConfiguration;
 }
 /**
- * 
+ * DeliveryNoteConfigurationForUpsert
  * @export
  * @interface DeliveryNoteConfigurationForUpsert
  */
@@ -5072,7 +6280,7 @@ export interface DeliveryNoteConfigurationForUpsert {
     version: number;
 }
 /**
- * 
+ * DeliveryNoteItem
  * @export
  * @interface DeliveryNoteItem
  */
@@ -5103,7 +6311,7 @@ export interface DeliveryNoteItem {
     substitutes?: string;
 }
 /**
- * 
+ * DeliveryPreferences
  * @export
  * @interface DeliveryPreferences
  */
@@ -5140,7 +6348,7 @@ export interface DeliveryPreferences {
     reservationPreferences?: DeliveryReservationPreferences;
 }
 /**
- * 
+ * DeliveryPreferencesShipping
  * @export
  * @interface DeliveryPreferencesShipping
  */
@@ -5198,7 +6406,7 @@ export namespace DeliveryPreferencesShipping {
     }
 }
 /**
- * 
+ * DeliveryPromiseCollect
  * @export
  * @interface DeliveryPromiseCollect
  */
@@ -5211,7 +6419,7 @@ export interface DeliveryPromiseCollect extends BasicDeliveryPromiseShipment {
     targetTime: Date;
 }
 /**
- * 
+ * DeliveryPromiseLineItem
  * @export
  * @interface DeliveryPromiseLineItem
  */
@@ -5242,10 +6450,10 @@ export interface DeliveryPromiseLineItem {
     available?: number;
     /**
      * 
-     * @type {string}
+     * @type {OutOfStockBehaviour}
      * @memberof DeliveryPromiseLineItem
      */
-    outOfStockBehaviour?: DeliveryPromiseLineItem.OutOfStockBehaviourEnum;
+    outOfStockBehaviour?: OutOfStockBehaviour;
     /**
      * 
      * @type {AvailabilityTimeframe}
@@ -5253,22 +6461,8 @@ export interface DeliveryPromiseLineItem {
      */
     availabilityTimeframe?: AvailabilityTimeframe;
 }
-
 /**
- * @export
- * @namespace DeliveryPromiseLineItem
- */
-export namespace DeliveryPromiseLineItem {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum OutOfStockBehaviourEnum {
-        BACKORDER = 'BACKORDER'
-    }
-}
-/**
- * 
+ * DeliveryPromiseShipment
  * @export
  * @interface DeliveryPromiseShipment
  */
@@ -5281,7 +6475,7 @@ export interface DeliveryPromiseShipment extends BasicDeliveryPromiseShipment {
     carriers: Array<PromiseCarrier>;
 }
 /**
- * 
+ * DeliveryReservationMode
  * @export
  * @enum {string}
  */
@@ -5291,7 +6485,7 @@ export enum DeliveryReservationMode {
     ALAP = 'ALAP'
 }
 /**
- * 
+ * DeliveryReservationPreferences
  * @export
  * @interface DeliveryReservationPreferences
  */
@@ -5319,45 +6513,151 @@ export enum DeliveryTarget {
     CUSTOMER = 'SHIP_TO_CUSTOMER'
 }
 /**
+ * Location information provided by DHL
+ * @export
+ * @interface DhlTrackingLocation
+ */
+export interface DhlTrackingLocation {
+    /**
+     * 
+     * @type {DhlTrackingLocationAddress}
+     * @memberof DhlTrackingLocation
+     */
+    address?: DhlTrackingLocationAddress;
+}
+/**
  * 
+ * @export
+ * @interface DhlTrackingLocationAddress
+ */
+export interface DhlTrackingLocationAddress {
+    /**
+     * 
+     * @type {string}
+     * @memberof DhlTrackingLocationAddress
+     */
+    addressLocality?: string;
+}
+/**
+ * Native trackingStatus provided by carrier
+ * @export
+ * @interface DhlTrackingStatus
+ */
+export interface DhlTrackingStatus {
+    /**
+     * Timestamp this status was set by the carrier
+     * @type {Date}
+     * @memberof DhlTrackingStatus
+     */
+    timestamp?: Date;
+    /**
+     * Status of the parcel as provided by carrier
+     * @type {string}
+     * @memberof DhlTrackingStatus
+     */
+    status: string;
+    /**
+     * Second status description
+     * @type {string}
+     * @memberof DhlTrackingStatus
+     */
+    statusDetailed?: string;
+    /**
+     * Description of the status
+     * @type {string}
+     * @memberof DhlTrackingStatus
+     */
+    description?: string;
+    /**
+     * 
+     * @type {DhlTrackingLocation}
+     * @memberof DhlTrackingStatus
+     */
+    location?: DhlTrackingLocation;
+    /**
+     * Status code of the parcel as provided by carrier
+     * @type {string}
+     * @memberof DhlTrackingStatus
+     */
+    statusCode?: string;
+    /**
+     * Remark of the status
+     * @type {string}
+     * @memberof DhlTrackingStatus
+     */
+    remark?: string;
+}
+/**
+ * Configuration of DHL Carrier
  * @export
  * @interface DhlV2CarrierConfiguration
  */
 export interface DhlV2CarrierConfiguration extends CarrierConfiguration {
     /**
      * 
-     * @type {FacilityAddress}
-     * @memberof DhlV2CarrierConfiguration
-     */
-    alternativeReturnAddress?: FacilityAddress;
-    /**
-     * 
      * @type {string}
      * @memberof DhlV2CarrierConfiguration
      */
     trackAndTraceUrl?: string;
+    /**
+     * a shipperRef that can optionally be defined in the DHL business customer portal
+     * @type {string}
+     * @memberof DhlV2CarrierConfiguration
+     */
+    shipperRef?: string;
+    /**
+     * 
+     * @type {DhlV2SftpConfiguration}
+     * @memberof DhlV2CarrierConfiguration
+     */
+    sftpConfiguration?: DhlV2SftpConfiguration;
+    /**
+     * If true, the track and trace will always be done, even if a parcel is directly created in DONE status
+     * @type {boolean}
+     * @memberof DhlV2CarrierConfiguration
+     */
+    alwaysDoTrackAndTrace?: boolean;
 }
 /**
- * 
+ * DHL Facility Carrier Configuration.
  * @export
  * @interface DhlV2FacilityCarrierConfiguration
  */
 export interface DhlV2FacilityCarrierConfiguration extends AbstractFacilityCarrierConfiguration {
     /**
      * 
-     * @type {FacilityAddress}
+     * @type {string}
      * @memberof DhlV2FacilityCarrierConfiguration
      */
-    alternativeReturnAddress?: FacilityAddress;
+    trackAndTraceUrl?: string;
     /**
      * 
      * @type {string}
      * @memberof DhlV2FacilityCarrierConfiguration
      */
-    trackAndTraceUrl?: string;
+    shipperRef?: string;
+    /**
+     * If true, the track and trace will always be done, even if a parcel is directly created in DONE status
+     * @type {boolean}
+     * @memberof DhlV2FacilityCarrierConfiguration
+     */
+    alwaysDoTrackAndTrace?: boolean;
 }
 /**
- * 
+ * DhlV2SftpConfiguration
+ * @export
+ * @interface DhlV2SftpConfiguration
+ */
+export interface DhlV2SftpConfiguration {
+    /**
+     * Indicates if the SFTP should be used for tracking and tracing
+     * @type {boolean}
+     * @memberof DhlV2SftpConfiguration
+     */
+    useSftpForTandT: boolean;
+}
+/**
+ * DocumentCategory
  * @export
  * @enum {string}
  */
@@ -5366,10 +6666,11 @@ export enum DocumentCategory {
     DELIVERYNOTE = 'DELIVERYNOTE',
     RETURNNOTE = 'RETURNNOTE',
     SENDLABEL = 'SENDLABEL',
-    RETURNLABEL = 'RETURNLABEL'
+    RETURNLABEL = 'RETURNLABEL',
+    TRANSFERLABEL = 'TRANSFERLABEL'
 }
 /**
- * 
+ * DocumentHandling
  * @export
  * @interface DocumentHandling
  */
@@ -5395,7 +6696,7 @@ export interface DocumentHandlingSendLabel {
     enabled: boolean;
 }
 /**
- * 
+ * DocumentOperations
  * @export
  * @enum {string}
  */
@@ -5404,7 +6705,7 @@ export enum DocumentOperations {
     VIEW = 'VIEW'
 }
 /**
- * 
+ * DocumentSet
  * @export
  * @interface DocumentSet
  */
@@ -5429,7 +6730,7 @@ export interface DocumentSet extends VersionedResource {
     documents?: Array<PrintableDocument>;
 }
 /**
- * 
+ * DocumentStatus
  * @export
  * @enum {string}
  */
@@ -5441,7 +6742,7 @@ export enum DocumentStatus {
     WAITINGFORINPUT = 'WAITING_FOR_INPUT'
 }
 /**
- * 
+ * DocumentType
  * @export
  * @enum {string}
  */
@@ -5450,10 +6751,12 @@ export enum DocumentType {
     PNG = 'PNG',
     JPG = 'JPG',
     GIF = 'GIF',
-    JPEG = 'JPEG'
+    JPEG = 'JPEG',
+    XML = 'XML',
+    JSON = 'JSON'
 }
 /**
- * 
+ * DomainConfiguration
  * @export
  * @interface DomainConfiguration
  */
@@ -5472,7 +6775,7 @@ export interface DomainConfiguration extends VersionedResource {
     id?: string;
 }
 /**
- * 
+ * DomainStatus
  * @export
  * @enum {string}
  */
@@ -5515,9 +6818,15 @@ export interface DomainStatusHistoryItem {
      * @memberof DomainStatusHistoryItem
      */
     domainEntityProcessStatus: DomainStatus;
+    /**
+     * This property captures the reason for the entity’s status change. Each domain can define its own set of reasons, represented as an ENUM
+     * @type {string}
+     * @memberof DomainStatusHistoryItem
+     */
+    statusChangeReasonKey?: string;
 }
 /**
- * 
+ * DomainType
  * @export
  * @enum {string}
  */
@@ -5530,20 +6839,15 @@ export enum DomainType {
     HANDOVER = 'HANDOVER',
     RETURN = 'RETURN',
     SERVICEJOB = 'SERVICE_JOB',
-    ITEMRETURNJOB = 'ITEM_RETURN_JOB'
+    ITEMRETURNJOB = 'ITEM_RETURN_JOB',
+    PARCEL = 'PARCEL'
 }
 /**
- * 
+ * Configuration of DPD Switzerland Carrier
  * @export
  * @interface DpdChCarrierConfiguration
  */
 export interface DpdChCarrierConfiguration extends CarrierConfiguration {
-    /**
-     * 
-     * @type {FacilityAddress}
-     * @memberof DpdChCarrierConfiguration
-     */
-    alternativeSendAddress?: FacilityAddress;
     /**
      * 
      * @type {string}
@@ -5552,7 +6856,7 @@ export interface DpdChCarrierConfiguration extends CarrierConfiguration {
     trackAndTraceUrl?: string;
 }
 /**
- * 
+ * DPD CH Carrier Credentials
  * @export
  * @interface DpdChCarrierCredentials
  */
@@ -5571,7 +6875,7 @@ export interface DpdChCarrierCredentials extends AbstractCarrierCredentials {
     password: string;
 }
 /**
- * 
+ * DPD CH Facility Carrier Configuration.
  * @export
  * @interface DpdChFacilityCarrierConfiguration
  */
@@ -5590,7 +6894,20 @@ export interface DpdChFacilityCarrierConfiguration extends AbstractFacilityCarri
     trackAndTraceUrl?: string;
 }
 /**
- * 
+ * EarliestPickingStart
+ * @export
+ * @interface EarliestPickingStart
+ */
+export interface EarliestPickingStart extends PickingStartBase {
+    /**
+     * 
+     * @type {Date}
+     * @memberof EarliestPickingStart
+     */
+    earliestPickingStartDate: Date;
+}
+/**
+ * Editor
  * @export
  * @interface Editor
  */
@@ -5609,7 +6926,7 @@ export interface Editor {
     username: string;
 }
 /**
- * 
+ * EmailNotificationChannel
  * @export
  * @interface EmailNotificationChannel
  */
@@ -5631,12 +6948,6 @@ export interface EmailNotificationChannel {
      * @type {string}
      * @memberof EmailNotificationChannel
      */
-    type: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof EmailNotificationChannel
-     */
     id: string;
     /**
      * 
@@ -5644,6 +6955,12 @@ export interface EmailNotificationChannel {
      * @memberof EmailNotificationChannel
      */
     receiver: Array<EmailReceiver>;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmailNotificationChannel
+     */
+    type: string;
 }
 
 /**
@@ -5663,7 +6980,7 @@ export namespace EmailNotificationChannel {
     }
 }
 /**
- * 
+ * EmailNotificationChannelForCreation
  * @export
  * @interface EmailNotificationChannelForCreation
  */
@@ -5682,16 +6999,16 @@ export interface EmailNotificationChannelForCreation {
     events: Array<EmailNotificationChannelForCreation.EventsEnum>;
     /**
      * 
-     * @type {string}
-     * @memberof EmailNotificationChannelForCreation
-     */
-    type: string;
-    /**
-     * 
      * @type {Array<EmailReceiver>}
      * @memberof EmailNotificationChannelForCreation
      */
     receiver: Array<EmailReceiver>;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmailNotificationChannelForCreation
+     */
+    type: string;
 }
 
 /**
@@ -5711,7 +7028,7 @@ export namespace EmailNotificationChannelForCreation {
     }
 }
 /**
- * 
+ * EmailReceiver
  * @export
  * @interface EmailReceiver
  */
@@ -5730,7 +7047,7 @@ export interface EmailReceiver {
     language: SupportedLocale;
 }
 /**
- * 
+ * Entity
  * @export
  * @interface Entity
  */
@@ -5743,7 +7060,7 @@ export interface Entity extends VersionedResource {
     id: string;
 }
 /**
- * 
+ * ErrorInner
  * @export
  * @interface ErrorInner
  */
@@ -5774,7 +7091,7 @@ export interface ErrorInner {
     version?: number;
 }
 /**
- * 
+ * EstimatedDeliveryTime
  * @export
  * @interface EstimatedDeliveryTime
  */
@@ -5793,7 +7110,7 @@ export interface EstimatedDeliveryTime {
     maxDeliveryDays: number;
 }
 /**
- * 
+ * ExpectedLineItem
  * @export
  * @interface ExpectedLineItem
  */
@@ -5812,7 +7129,7 @@ export interface ExpectedLineItem extends OrderLineItem {
     facilityRef: string;
 }
 /**
- * 
+ * ExpectedPickLineItem
  * @export
  * @interface ExpectedPickLineItem
  */
@@ -5825,20 +7142,92 @@ export interface ExpectedPickLineItem extends ExpectedPickLineItemForCreation {
     id: string;
 }
 /**
- * 
+ * ExpectedPickLineItemForCreation
  * @export
  * @interface ExpectedPickLineItemForCreation
  */
-export interface ExpectedPickLineItemForCreation extends PickLineItemForCreation {
+export interface ExpectedPickLineItemForCreation {
     /**
      * 
      * @type {string}
      * @memberof ExpectedPickLineItemForCreation
      */
     transferId: string;
+    /**
+     * 
+     * @type {PickLineItemArticle}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    article: PickLineItemArticle;
+    /**
+     * Attributes that can be added to the pick line. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * Identifier for items unit of measurement.
+     * @type {string}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    measurementUnitKey?: string;
+    /**
+     * quantity of the specific article that has been ordered
+     * @type {number}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    quantity: number;
+    /**
+     * Identifier for items unit of measurement.
+     * @type {string}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    secondaryMeasurementUnitKey?: string;
+    /**
+     * quantity of the specific article that has been ordered
+     * @type {number}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    secondaryQuantity?: number;
+    /**
+     * 
+     * @type {MeasurementValidation}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    measurementValidation?: MeasurementValidation;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * Indicates where the items to pick could be found and from where the picking should be started.
+     * @type {Array<PickJobLineItemPartialStockLocationForCreation>}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    partialStockLocations?: Array<PickJobLineItemPartialStockLocationForCreation>;
+    /**
+     * 
+     * @type {Array<TagReference>}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    tags?: Array<TagReference>;
+    /**
+     * 
+     * @type {Array<Sticker>}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    stickers?: Array<Sticker>;
+    /**
+     * 
+     * @type {Array<Substitute>}
+     * @memberof ExpectedPickLineItemForCreation
+     */
+    allowedSubstitutes?: Array<Substitute>;
 }
 /**
- * 
+ * ExpiryConfiguration
  * @export
  * @interface ExpiryConfiguration
  */
@@ -5851,7 +7240,7 @@ export interface ExpiryConfiguration extends VersionedResource {
     provisioningTimeOffsetInMinutes: number;
 }
 /**
- * 
+ * ExpiryEntity
  * @export
  * @interface ExpiryEntity
  */
@@ -5868,6 +7257,12 @@ export interface ExpiryEntity {
      * @memberof ExpiryEntity
      */
     version: number;
+    /**
+     * the version of the process this expiry entity belongs to, needed for preventing of faulty changes via late messages
+     * @type {number}
+     * @memberof ExpiryEntity
+     */
+    processVersion?: number;
     /**
      * The date this entity was created at the platform. This value is generated by the service.
      * @type {Date}
@@ -5906,7 +7301,7 @@ export interface ExpiryEntity {
     status: ExpiryEntityStatus;
 }
 /**
- * 
+ * ExpiryEntityFilter
  * @export
  * @interface ExpiryEntityFilter
  */
@@ -5937,7 +7332,7 @@ export interface ExpiryEntityFilter {
     endDate?: any;
 }
 /**
- * 
+ * ExpiryEntityForCreation
  * @export
  * @interface ExpiryEntityForCreation
  */
@@ -5962,7 +7357,7 @@ export interface ExpiryEntityForCreation {
     status: ExpiryEntityStatus;
 }
 /**
- * 
+ * ExpiryEntityForUpdate
  * @export
  * @interface ExpiryEntityForUpdate
  */
@@ -5987,7 +7382,7 @@ export interface ExpiryEntityForUpdate {
     status?: ExpiryEntityStatus;
 }
 /**
- * 
+ * ExpiryEntityStatus
  * @export
  * @enum {string}
  */
@@ -5996,7 +7391,7 @@ export enum ExpiryEntityStatus {
     INACTIVE = 'INACTIVE'
 }
 /**
- * 
+ * ExternalAction
  * @export
  * @interface ExternalAction
  */
@@ -6039,7 +7434,7 @@ export interface ExternalAction extends ExternalActionForReplacement {
     name: string;
 }
 /**
- * 
+ * ExternalActionExecutedWebHookEvent
  * @export
  * @interface ExternalActionExecutedWebHookEvent
  */
@@ -6052,7 +7447,7 @@ export interface ExternalActionExecutedWebHookEvent extends WebHookEvent {
     payload: ExternalActionExecutedWebHookEventPayload;
 }
 /**
- * 
+ * ExternalActionExecutedWebHookEventPayload
  * @export
  * @interface ExternalActionExecutedWebHookEventPayload
  */
@@ -6089,7 +7484,7 @@ export interface ExternalActionExecutedWebHookEventPayload {
     actionPayload: ExternalLinkActionLogPayload | ExternalFormActionLogPayload;
 }
 /**
- * 
+ * ExternalActionForCreation
  * @export
  * @interface ExternalActionForCreation
  */
@@ -6126,7 +7521,7 @@ export interface ExternalActionForCreation {
     customAttributes?: any;
 }
 /**
- * 
+ * ExternalActionForReplacement
  * @export
  * @interface ExternalActionForReplacement
  */
@@ -6163,7 +7558,7 @@ export interface ExternalActionForReplacement {
     customAttributes?: any;
 }
 /**
- * 
+ * ExternalActionLog
  * @export
  * @interface ExternalActionLog
  */
@@ -6194,7 +7589,7 @@ export interface ExternalActionLog extends ExternalActionLogForCreation {
     created: Date;
 }
 /**
- * 
+ * ExternalActionLogForCreation
  * @export
  * @interface ExternalActionLogForCreation
  */
@@ -6213,7 +7608,7 @@ export interface ExternalActionLogForCreation {
     actionPayload: ExternalLinkActionLogPayload | ExternalFormActionLogPayload | ExternalCommentActionLogPayload;
 }
 /**
- * 
+ * ExternalActionLogs
  * @export
  * @interface ExternalActionLogs
  */
@@ -6242,7 +7637,7 @@ export enum ExternalActionType {
     COMMENT = 'COMMENT'
 }
 /**
- * 
+ * ExternalActions
  * @export
  * @interface ExternalActions
  */
@@ -6272,6 +7667,12 @@ export interface ExternalCommentActionDefinition {
      * @memberof ExternalCommentActionDefinition
      */
     type: ExternalActionType;
+    /**
+     * Whether or not this action is meant to be internally to the fulfillmenttools platform. If true, an additional entry in the actions dropdown will be added.
+     * @type {boolean}
+     * @memberof ExternalCommentActionDefinition
+     */
+    isInternal?: boolean;
 }
 /**
  * This action payload provides a possibility to set comments. It also enables a possibility to save action results for other actions.
@@ -6293,7 +7694,7 @@ export interface ExternalCommentActionLogPayload {
     externalActionRef?: string;
 }
 /**
- * 
+ * ExternalDocument
  * @export
  * @interface ExternalDocument
  */
@@ -6336,7 +7737,7 @@ export interface ExternalDocument extends VersionedResource {
     priority?: number;
 }
 /**
- * 
+ * ExternalDocumentContentForUpdate
  * @export
  * @interface ExternalDocumentContentForUpdate
  */
@@ -6355,7 +7756,7 @@ export interface ExternalDocumentContentForUpdate {
     documentSetVersion: number;
 }
 /**
- * 
+ * ExternalDocumentForCreation
  * @export
  * @interface ExternalDocumentForCreation
  */
@@ -6386,7 +7787,7 @@ export interface ExternalDocumentForCreation {
     priority?: number;
 }
 /**
- * 
+ * ExternalDocumentForUpdate
  * @export
  * @interface ExternalDocumentForUpdate
  */
@@ -6399,7 +7800,7 @@ export interface ExternalDocumentForUpdate extends VersionedResource {
     file: NamedFile;
 }
 /**
- * 
+ * ExternalDocumentInSectionForCreation
  * @export
  * @interface ExternalDocumentInSectionForCreation
  */
@@ -6424,7 +7825,7 @@ export interface ExternalDocumentInSectionForCreation {
     priority?: number;
 }
 /**
- * 
+ * ExternalFormActionButton
  * @export
  * @interface ExternalFormActionButton
  */
@@ -6443,7 +7844,7 @@ export interface ExternalFormActionButton {
     label?: string;
 }
 /**
- * 
+ * External Form Action.
  * @export
  * @interface ExternalFormActionDefinition
  */
@@ -6474,7 +7875,7 @@ export interface ExternalFormActionDefinition {
     cancel: ExternalFormActionButton;
 }
 /**
- * 
+ * ExternalFormActionElement
  * @export
  * @interface ExternalFormActionElement
  */
@@ -6522,7 +7923,7 @@ export namespace ExternalFormActionElement {
     }
 }
 /**
- * 
+ * ExternalFormActionElementType
  * @export
  * @enum {string}
  */
@@ -6533,7 +7934,7 @@ export enum ExternalFormActionElementType {
     TEXT = 'TEXT'
 }
 /**
- * 
+ * External Form Input Action.
  * @export
  * @interface ExternalFormActionInputElement
  */
@@ -6599,7 +8000,7 @@ export namespace ExternalFormActionInputElement {
     }
 }
 /**
- * 
+ * External Form Action Log Payload.
  * @export
  * @interface ExternalFormActionLogPayload
  */
@@ -6612,7 +8013,7 @@ export interface ExternalFormActionLogPayload {
     elements: Array<ExternalFormActionLogPayloadElement>;
 }
 /**
- * 
+ * ExternalFormActionLogPayloadElement
  * @export
  * @interface ExternalFormActionLogPayloadElement
  */
@@ -6631,7 +8032,7 @@ export interface ExternalFormActionLogPayloadElement {
     value: string;
 }
 /**
- * 
+ * External Link Action.
  * @export
  * @interface ExternalLinkActionDefinition
  */
@@ -6650,7 +8051,7 @@ export interface ExternalLinkActionDefinition {
     linkUrl: string;
 }
 /**
- * 
+ * External Link Action Log Payload.
  * @export
  * @interface ExternalLinkActionLogPayload
  */
@@ -6663,7 +8064,7 @@ export interface ExternalLinkActionLogPayload {
     linkOpenedAt: Date;
 }
 /**
- * 
+ * ExternalPrintableDocumentForCreation
  * @export
  * @interface ExternalPrintableDocumentForCreation
  */
@@ -6687,6 +8088,18 @@ export interface ExternalPrintableDocumentForCreation {
      */
     priority?: number;
     /**
+     * 
+     * @type {DocumentStatus}
+     * @memberof ExternalPrintableDocumentForCreation
+     */
+    status?: DocumentStatus;
+    /**
+     * Attributes that can be added to the document. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof ExternalPrintableDocumentForCreation
+     */
+    customAttributes?: any;
+    /**
      * Offered operations for this document
      * @type {Array<DocumentOperations>}
      * @memberof ExternalPrintableDocumentForCreation
@@ -6694,70 +8107,250 @@ export interface ExternalPrintableDocumentForCreation {
     operations?: Array<DocumentOperations>;
 }
 /**
- * 
+ * ExternalStockChangeReason
  * @export
- * @interface Facility
+ * @interface ExternalStockChangeReason
  */
-export interface Facility extends FacilityForCreation {
+export interface ExternalStockChangeReason {
     /**
-     * The date this entity was created at the platform. This value is generated by the service.
+     * Whether the reason is active
+     * @type {boolean}
+     * @memberof ExternalStockChangeReason
+     */
+    active: boolean;
+    /**
+     * Date of creation
      * @type {Date}
-     * @memberof Facility
+     * @memberof ExternalStockChangeReason
      */
     created?: Date;
     /**
-     * The date this entity was modified last. This value is generated by the service.
+     * The custom attributes of this external stock change reason
+     * @type {any}
+     * @memberof ExternalStockChangeReason
+     */
+    customAttributes?: any;
+    /**
+     * Id of the external stock change reason
+     * @type {string}
+     * @memberof ExternalStockChangeReason
+     */
+    id: string;
+    /**
+     * Date of last modification
      * @type {Date}
-     * @memberof Facility
+     * @memberof ExternalStockChangeReason
      */
     lastModified?: Date;
     /**
-     * The version of the document to be used in optimistic locking mechanisms.
+     * Localizations, i.e. names which are to be displayed. Each localized string must not exceed 255 characters
+     * @type {{ [key: string]: string; }}
+     * @memberof ExternalStockChangeReason
+     */
+    reasonLocalized: { [key: string]: string; };
+    /**
+     * Identifier of the stock change reason
+     * @type {string}
+     * @memberof ExternalStockChangeReason
+     */
+    tenantReasonId?: string;
+    /**
+     * Version of the external stock change reason
      * @type {number}
-     * @memberof Facility
+     * @memberof ExternalStockChangeReason
      */
     version: number;
+}
+/**
+ * ExternalStockChangeReasonForCreation
+ * @export
+ * @interface ExternalStockChangeReasonForCreation
+ */
+export interface ExternalStockChangeReasonForCreation {
+    /**
+     * Whether the reason is active
+     * @type {boolean}
+     * @memberof ExternalStockChangeReasonForCreation
+     */
+    active: boolean;
+    /**
+     * The custom attributes of this external stock change reason
+     * @type {any}
+     * @memberof ExternalStockChangeReasonForCreation
+     */
+    customAttributes?: any;
+    /**
+     * Localizations, i.e. names which are to be displayed. Each localized string must not exceed 255 characters
+     * @type {{ [key: string]: string; }}
+     * @memberof ExternalStockChangeReasonForCreation
+     */
+    reasonLocalized: { [key: string]: string; };
+    /**
+     * Identifier of the stock change reason
+     * @type {string}
+     * @memberof ExternalStockChangeReasonForCreation
+     */
+    tenantReasonId?: string;
+}
+/**
+ * ExternalStockChangeReasonForUpdate
+ * @export
+ * @interface ExternalStockChangeReasonForUpdate
+ */
+export interface ExternalStockChangeReasonForUpdate {
+    /**
+     * Whether the reason is active
+     * @type {boolean}
+     * @memberof ExternalStockChangeReasonForUpdate
+     */
+    active?: boolean;
+    /**
+     * The custom attributes of this external stock change reason
+     * @type {any}
+     * @memberof ExternalStockChangeReasonForUpdate
+     */
+    customAttributes?: any;
+    /**
+     * Id of the external stock change reason
+     * @type {string}
+     * @memberof ExternalStockChangeReasonForUpdate
+     */
+    id?: string;
+    /**
+     * Localizations, i.e. names which are to be displayed. Each localized string must not exceed 255 characters
+     * @type {{ [key: string]: string; }}
+     * @memberof ExternalStockChangeReasonForUpdate
+     */
+    reasonLocalized?: { [key: string]: string; };
+    /**
+     * Version of the external stock change reason
+     * @type {number}
+     * @memberof ExternalStockChangeReasonForUpdate
+     */
+    version: number;
+}
+/**
+ * ExternalStockChangeReasonInput
+ * @export
+ * @interface ExternalStockChangeReasonInput
+ */
+export interface ExternalStockChangeReasonInput {
+    /**
+     * ID of reason. Use to enrich with preconfigured reason
+     * @type {string}
+     * @memberof ExternalStockChangeReasonInput
+     */
+    id?: string;
+    /**
+     * List of localized reason strings. If provided, no preconfiguration is necessary. Cannot be provided in combination with id or existing tenantReasonId.
+     * @type {any}
+     * @memberof ExternalStockChangeReasonInput
+     */
+    reasonLocalized?: any;
+    /**
+     * tenantReasonId of reason. If no reasonLocalized provided, a preconfigured reason with the tenantReasonId must be present
+     * @type {string}
+     * @memberof ExternalStockChangeReasonInput
+     */
+    tenantReasonId?: string;
+}
+/**
+ * ExternalStockChangeReasonOutput
+ * @export
+ * @interface ExternalStockChangeReasonOutput
+ */
+export interface ExternalStockChangeReasonOutput {
+    /**
+     * Localized reason strings
+     * @type {any}
+     * @memberof ExternalStockChangeReasonOutput
+     */
+    reasonLocalized: any;
+    /**
+     * tenantReasonId of reason
+     * @type {string}
+     * @memberof ExternalStockChangeReasonOutput
+     */
+    tenantReasonId?: string;
+}
+/**
+ * 
+ * @export
+ * @interface FacilitiesFacilityIdBody
+ */
+export interface FacilitiesFacilityIdBody {
+}
+/**
+ * 
+ * @export
+ * @interface FacilitiesFacilityIdBody1
+ */
+export interface FacilitiesFacilityIdBody1 {
+}
+/**
+ * Facility
+ * @export
+ * @interface Facility
+ */
+export interface Facility extends VersionedResource {
     /**
      * 
-     * @type {FacilityAddress}
-     * @memberof Facility
-     */
-    address: FacilityAddress;
-    /**
-     * 
-     * @type {Array<LinkedConfiguration>}
-     * @memberof Facility
-     */
-    configs?: Array<LinkedConfiguration>;
-    /**
-     * The id of this facility. It is generated during creation automatically and suits as the primary identifier of the described entity.
      * @type {string}
      * @memberof Facility
      */
-    id: string;
+    name: string;
     /**
      * 
      * @type {FacilityStatus}
      * @memberof Facility
      */
     status: FacilityStatus;
+    /**
+     * The id of the facility in the tenants own system
+     * @type {string}
+     * @memberof Facility
+     */
+    tenantFacilityId?: string;
+    /**
+     * 
+     * @type {Array<TagReference>}
+     * @memberof Facility
+     */
+    tags?: Array<TagReference>;
+    /**
+     * Attributes that can be added to the facility. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof Facility
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<FacilityOperativeCost>}
+     * @memberof Facility
+     */
+    operativeCosts?: Array<FacilityOperativeCost>;
+    /**
+     * 
+     * @type {FacilityType}
+     * @memberof Facility
+     */
+    type: FacilityType;
+    /**
+     * The id of this facility. It is generated during creation automatically and suits as the primary identifier of the described entity.
+     * @type {string}
+     * @memberof Facility
+     */
+    id: string;
 }
-
 /**
- * @export
- * @namespace Facility
- */
-export namespace Facility {
-}
-/**
- * 
+ * FacilityActionsParameter
  * @export
  * @interface FacilityActionsParameter
  */
 export interface FacilityActionsParameter {
 }
 /**
- * 
+ * FacilityAddress
  * @export
  * @interface FacilityAddress
  */
@@ -6770,7 +8363,100 @@ export interface FacilityAddress extends FacilityAddressForCreation {
     resolvedTimeZone?: TimeZone;
 }
 /**
- * 
+ * FacilityAddressEmailAddressesFilter
+ * @export
+ * @interface FacilityAddressEmailAddressesFilter
+ */
+export interface FacilityAddressEmailAddressesFilter {
+    /**
+     * Search by recipient
+     * @type {StringFilter}
+     * @memberof FacilityAddressEmailAddressesFilter
+     */
+    recipient?: StringFilter;
+    /**
+     * Search by value
+     * @type {StringFilter}
+     * @memberof FacilityAddressEmailAddressesFilter
+     */
+    value?: StringFilter;
+}
+/**
+ * FacilityAddressEmailAddressesListFilter
+ * @export
+ * @interface FacilityAddressEmailAddressesListFilter
+ */
+export interface FacilityAddressEmailAddressesListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {FacilityAddressEmailAddressesFilter}
+     * @memberof FacilityAddressEmailAddressesListFilter
+     */
+    contains?: FacilityAddressEmailAddressesFilter;
+}
+/**
+ * FacilityAddressFilter
+ * @export
+ * @interface FacilityAddressFilter
+ */
+export interface FacilityAddressFilter {
+    /**
+     * Search by city
+     * @type {StringFilter}
+     * @memberof FacilityAddressFilter
+     */
+    city?: StringFilter;
+    /**
+     * Search by companyName
+     * @type {StringFilter}
+     * @memberof FacilityAddressFilter
+     */
+    companyName?: StringFilter;
+    /**
+     * Search by country
+     * @type {StringFilter}
+     * @memberof FacilityAddressFilter
+     */
+    country?: StringFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof FacilityAddressFilter
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Nested list search by emailAddresses
+     * @type {FacilityAddressEmailAddressesListFilter}
+     * @memberof FacilityAddressFilter
+     */
+    emailAddresses?: FacilityAddressEmailAddressesListFilter;
+    /**
+     * Search by houseNumber
+     * @type {StringFilter}
+     * @memberof FacilityAddressFilter
+     */
+    houseNumber?: StringFilter;
+    /**
+     * Search by postalCode
+     * @type {StringFilter}
+     * @memberof FacilityAddressFilter
+     */
+    postalCode?: StringFilter;
+    /**
+     * Search by province
+     * @type {StringFilter}
+     * @memberof FacilityAddressFilter
+     */
+    province?: StringFilter;
+    /**
+     * Search by street
+     * @type {StringFilter}
+     * @memberof FacilityAddressFilter
+     */
+    street?: StringFilter;
+}
+/**
+ * FacilityAddressForCreation
  * @export
  * @interface FacilityAddressForCreation
  */
@@ -6814,7 +8500,7 @@ export interface FacilityAddressForCreationEmailAddresses {
     value: string;
 }
 /**
- * 
+ * FacilityCarrierConnection
  * @export
  * @interface FacilityCarrierConnection
  */
@@ -6851,16 +8537,16 @@ export interface FacilityCarrierConnection extends VersionedResource {
     key: string;
     /**
      * Facility specific configuration for this carrier
-     * @type {GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration}
+     * @type {GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration | HermesFacilityCarrierConfiguration}
      * @memberof FacilityCarrierConnection
      */
-    configuration?: GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration;
+    configuration?: GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration | HermesFacilityCarrierConfiguration;
     /**
      * Facility specific credentials for this carrier
-     * @type {DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials}
+     * @type {DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials | HermesCarrierCredentials}
      * @memberof FacilityCarrierConnection
      */
-    credentials?: DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials;
+    credentials?: DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials | HermesCarrierCredentials;
     /**
      * 
      * @type {CutoffTime}
@@ -6872,7 +8558,7 @@ export interface FacilityCarrierConnection extends VersionedResource {
      * @type {CarrierCutoffTimes}
      * @memberof FacilityCarrierConnection
      */
-    cutoffTimes: CarrierCutoffTimes;
+    cutoffTimes?: CarrierCutoffTimes;
     /**
      * 
      * @type {Array<DeliveryArea>}
@@ -6911,23 +8597,23 @@ export interface FacilityCarrierConnection extends VersionedResource {
     validDeliveryTargets?: Array<DeliveryTarget>;
 }
 /**
- * 
+ * FacilityCarrierConnectionForCreation
  * @export
  * @interface FacilityCarrierConnectionForCreation
  */
 export interface FacilityCarrierConnectionForCreation {
     /**
      * Facility specific credentials for this carrier
-     * @type {DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials}
+     * @type {DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials | HermesCarrierCredentials}
      * @memberof FacilityCarrierConnectionForCreation
      */
-    credentials?: DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials;
+    credentials?: DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials | HermesCarrierCredentials;
     /**
      * Facility specific configuration for this carrier
-     * @type {GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration}
+     * @type {GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration | HermesFacilityCarrierConfiguration}
      * @memberof FacilityCarrierConnectionForCreation
      */
-    configuration?: GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration;
+    configuration?: GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration | HermesFacilityCarrierConfiguration;
     /**
      * 
      * @type {CutoffTime}
@@ -6978,23 +8664,23 @@ export interface FacilityCarrierConnectionForCreation {
     validDeliveryTargets?: Array<DeliveryTarget>;
 }
 /**
- * 
+ * FacilityCarrierConnectionForModification
  * @export
  * @interface FacilityCarrierConnectionForModification
  */
 export interface FacilityCarrierConnectionForModification {
     /**
      * Facility specific credentials for this carrier
-     * @type {DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials}
+     * @type {DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials | HermesCarrierCredentials}
      * @memberof FacilityCarrierConnectionForModification
      */
-    credentials?: DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials;
+    credentials?: DHLV2BusinessCredentials | DpdChCarrierCredentials | PostNLCarrierCredentials | VceCarrierCredentials | HermesCarrierCredentials;
     /**
      * Facility specific configuration for this carrier
-     * @type {GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration}
+     * @type {GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration | HermesFacilityCarrierConfiguration}
      * @memberof FacilityCarrierConnectionForModification
      */
-    configuration?: GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration;
+    configuration?: GlsFacilityCarrierConfiguration | AngelFacilityCarrierConfiguration | PostNLFacilityCarrierConfiguration | DpdChFacilityCarrierConfiguration | DhlV2FacilityCarrierConfiguration | VceFacilityCarrierConfiguration | BringFacilityCarrierConfiguration | FedExFacilityCarrierConfiguration | HermesFacilityCarrierConfiguration;
     /**
      * 
      * @type {CutoffTime}
@@ -7051,20 +8737,70 @@ export interface FacilityCarrierConnectionForModification {
     validDeliveryTargets?: Array<DeliveryTarget>;
 }
 /**
- * 
+ * FacilityContact
+ * @export
+ * @interface FacilityContact
+ */
+export interface FacilityContact {
+    /**
+     * Attributes that can be added to the contact. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof FacilityContact
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof FacilityContact
+     */
+    firstName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FacilityContact
+     */
+    lastName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FacilityContact
+     */
+    roleDescription?: string;
+}
+/**
+ * FacilityContactFilter
+ * @export
+ * @interface FacilityContactFilter
+ */
+export interface FacilityContactFilter {
+    /**
+     * Search by firstName
+     * @type {StringFilter}
+     * @memberof FacilityContactFilter
+     */
+    firstName?: StringFilter;
+    /**
+     * Search by lastName
+     * @type {StringFilter}
+     * @memberof FacilityContactFilter
+     */
+    lastName?: StringFilter;
+}
+/**
+ * FacilityCreatedWebHookEvent
  * @export
  * @interface FacilityCreatedWebHookEvent
  */
 export interface FacilityCreatedWebHookEvent extends WebHookEvent {
     /**
      * 
-     * @type {Facility}
+     * @type {ManagedFacility}
      * @memberof FacilityCreatedWebHookEvent
      */
-    payload: Facility;
+    payload: ManagedFacility;
 }
 /**
- * 
+ * FacilityCustomServiceConnection
  * @export
  * @interface FacilityCustomServiceConnection
  */
@@ -7101,7 +8837,7 @@ export interface FacilityCustomServiceConnection extends VersionedResource {
     executionTimeInMin?: number;
 }
 /**
- * 
+ * FacilityCustomServiceConnectionForCreation
  * @export
  * @interface FacilityCustomServiceConnectionForCreation
  */
@@ -7120,7 +8856,7 @@ export interface FacilityCustomServiceConnectionForCreation {
     status: FacilityCustomServiceConnectionStatus;
 }
 /**
- * 
+ * FacilityCustomServiceConnectionForUpdate
  * @export
  * @interface FacilityCustomServiceConnectionForUpdate
  */
@@ -7145,7 +8881,7 @@ export interface FacilityCustomServiceConnectionForUpdate {
     version: number;
 }
 /**
- * 
+ * FacilityCustomServiceConnectionStatus
  * @export
  * @enum {string}
  */
@@ -7154,7 +8890,7 @@ export enum FacilityCustomServiceConnectionStatus {
     INACTIVE = 'INACTIVE'
 }
 /**
- * 
+ * FacilityDecision
  * @export
  * @interface FacilityDecision
  */
@@ -7221,13 +8957,13 @@ export interface FacilityDecision {
     isBestReassignmentCandidate?: boolean;
     /**
      * 
-     * @type {Date}
+     * @type {LatestPickingStartForDecisionLog}
      * @memberof FacilityDecision
      */
-    latestPickingStart?: Date;
+    latestPickingStartInformation?: LatestPickingStartForDecisionLog;
 }
 /**
- * 
+ * FacilityDeletedWebHookEvent
  * @export
  * @interface FacilityDeletedWebHookEvent
  */
@@ -7240,83 +8976,17 @@ export interface FacilityDeletedWebHookEvent extends WebHookEvent {
     payload: string;
 }
 /**
- * 
+ * FacilityForCreation
  * @export
  * @interface FacilityForCreation
  */
 export interface FacilityForCreation {
     /**
      * 
-     * @type {FacilityAddressForCreation}
-     * @memberof FacilityForCreation
-     */
-    address: FacilityAddressForCreation;
-    /**
-     * Days of the year where the facility is closed and doesn't allows picking
-     * @type {Array<ClosingDay>}
-     * @memberof FacilityForCreation
-     */
-    closingDays?: Array<ClosingDay>;
-    /**
-     * 
-     * @type {FacilityForCreationContact}
-     * @memberof FacilityForCreation
-     */
-    contact?: FacilityForCreationContact;
-    /**
-     * Attributes that can be added to the facility. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
-     * @type {any}
-     * @memberof FacilityForCreation
-     */
-    customAttributes?: any;
-    /**
-     * Duration in minutes until an order is processed
-     * @type {number}
-     * @memberof FacilityForCreation
-     */
-    fulfillmentProcessBuffer?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof FacilityForCreation
-     */
-    locationType?: FacilityForCreation.LocationTypeEnum;
-    /**
-     * 
      * @type {string}
      * @memberof FacilityForCreation
      */
     name: string;
-    /**
-     * The range in days per facility which defines how many days in the future the capacity of the facility can be planned
-     * @type {number}
-     * @memberof FacilityForCreation
-     */
-    capacityPlanningTimeframe?: number;
-    /**
-     * 
-     * @type {PickingTimes}
-     * @memberof FacilityForCreation
-     */
-    pickingTimes?: PickingTimes;
-    /**
-     * Picking Methods supported by this facility.
-     * @type {Array<PickingMethodEnum>}
-     * @memberof FacilityForCreation
-     */
-    pickingMethods?: Array<PickingMethodEnum>;
-    /**
-     * 
-     * @type {ScanningRuleConfiguration}
-     * @memberof FacilityForCreation
-     */
-    scanningRule?: ScanningRuleConfiguration;
-    /**
-     * 
-     * @type {Array<FacilityForCreationServices>}
-     * @memberof FacilityForCreation
-     */
-    services?: Array<FacilityForCreationServices>;
     /**
      * 
      * @type {FacilityStatus}
@@ -7330,77 +9000,285 @@ export interface FacilityForCreation {
      */
     tenantFacilityId?: string;
     /**
-     * Indicates that configured capacity limits for picking times are considered
-     * @type {boolean}
-     * @memberof FacilityForCreation
-     */
-    capacityEnabled?: boolean;
-    /**
      * 
      * @type {Array<TagReference>}
      * @memberof FacilityForCreation
      */
     tags?: Array<TagReference>;
+    /**
+     * Attributes that can be added to the facility. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof FacilityForCreation
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<FacilityOperativeCostForCreation>}
+     * @memberof FacilityForCreation
+     */
+    operativeCosts?: Array<FacilityOperativeCostForCreation>;
+    /**
+     * 
+     * @type {FacilityType}
+     * @memberof FacilityForCreation
+     */
+    type?: FacilityType;
+}
+/**
+ * FacilityGroup
+ * @export
+ * @interface FacilityGroup
+ */
+export interface FacilityGroup extends VersionedResource {
+    /**
+     * The id of the facility group in the tenants own system
+     * @type {string}
+     * @memberof FacilityGroup
+     */
+    tenantFacilityGroupId: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FacilityGroup
+     */
+    facilityRefs: Array<string>;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof FacilityGroup
+     */
+    nameLocalized: LocaleString;
+    /**
+     * Attributes that can be added to the facility group. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof FacilityGroup
+     */
+    customAttributes?: any;
+    /**
+     * The id of this facility group. It is generated during creation automatically and suits as the primary identifier of the described entity.
+     * @type {string}
+     * @memberof FacilityGroup
+     */
+    id: string;
+    /**
+     * The name of this facility group.
+     * @type {string}
+     * @memberof FacilityGroup
+     */
+    name?: string;
+}
+/**
+ * FacilityGroupForCreation
+ * @export
+ * @interface FacilityGroupForCreation
+ */
+export interface FacilityGroupForCreation {
+    /**
+     * The id of the facility group in the tenants own system
+     * @type {string}
+     * @memberof FacilityGroupForCreation
+     */
+    tenantFacilityGroupId: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FacilityGroupForCreation
+     */
+    facilityRefs: Array<string>;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof FacilityGroupForCreation
+     */
+    nameLocalized: LocaleString;
+    /**
+     * Attributes that can be added to the facility group. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof FacilityGroupForCreation
+     */
+    customAttributes?: any;
+}
+/**
+ * FacilityGroupForUpdate
+ * @export
+ * @interface FacilityGroupForUpdate
+ */
+export interface FacilityGroupForUpdate {
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof FacilityGroupForUpdate
+     */
+    version: number;
+    /**
+     * The id of the facility group in the tenants own system
+     * @type {string}
+     * @memberof FacilityGroupForUpdate
+     */
+    tenantFacilityGroupId?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FacilityGroupForUpdate
+     */
+    facilityRefs?: Array<string>;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof FacilityGroupForUpdate
+     */
+    nameLocalized?: LocaleString;
+    /**
+     * Attributes that can be added to the facility group. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof FacilityGroupForUpdate
+     */
+    customAttributes?: any;
+}
+/**
+ * FacilityGroups
+ * @export
+ * @interface FacilityGroups
+ */
+export interface FacilityGroups {
+    /**
+     * 
+     * @type {Array<FacilityGroup>}
+     * @memberof FacilityGroups
+     */
+    facilityGroups?: Array<FacilityGroup>;
+    /**
+     * Total number of found entities for this query
+     * @type {number}
+     * @memberof FacilityGroups
+     */
+    total?: number;
+}
+/**
+ * 
+ * @export
+ * @interface FacilityIdConnectionsBody
+ */
+export interface FacilityIdConnectionsBody {
+}
+/**
+ * FacilityLocationType
+ * @export
+ * @enum {string}
+ */
+export enum FacilityLocationType {
+    STORE = 'STORE',
+    WAREHOUSE = 'WAREHOUSE',
+    EXTERNAL = 'EXTERNAL'
+}
+/**
+ * FacilityLocationTypeEnumFilter
+ * @export
+ * @interface FacilityLocationTypeEnumFilter
+ */
+export interface FacilityLocationTypeEnumFilter {
+    /**
+     * Search by locationType
+     * @type {string}
+     * @memberof FacilityLocationTypeEnumFilter
+     */
+    eq?: FacilityLocationTypeEnumFilter.EqEnum;
+    /**
+     * Search by locationType
+     * @type {string}
+     * @memberof FacilityLocationTypeEnumFilter
+     */
+    _in?: FacilityLocationTypeEnumFilter.InEnum;
+    /**
+     * Search by locationType
+     * @type {string}
+     * @memberof FacilityLocationTypeEnumFilter
+     */
+    notEq?: FacilityLocationTypeEnumFilter.NotEqEnum;
 }
 
 /**
  * @export
- * @namespace FacilityForCreation
+ * @namespace FacilityLocationTypeEnumFilter
  */
-export namespace FacilityForCreation {
+export namespace FacilityLocationTypeEnumFilter {
     /**
      * @export
      * @enum {string}
      */
-    export enum LocationTypeEnum {
+    export enum EqEnum {
+        STORE = 'STORE',
+        WAREHOUSE = 'WAREHOUSE',
+        EXTERNAL = 'EXTERNAL'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        STORE = 'STORE',
+        WAREHOUSE = 'WAREHOUSE',
+        EXTERNAL = 'EXTERNAL'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
         STORE = 'STORE',
         WAREHOUSE = 'WAREHOUSE',
         EXTERNAL = 'EXTERNAL'
     }
 }
 /**
- * 
+ * FacilityOperativeCost
  * @export
- * @interface FacilityForCreationContact
+ * @interface FacilityOperativeCost
  */
-export interface FacilityForCreationContact {
+export interface FacilityOperativeCost {
     /**
-     * Attributes that can be added to the contact. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
-     * @type {any}
-     * @memberof FacilityForCreationContact
+     * Value of operational cost of the facility. Value is configured in the smallest subunit, e.g. cents.
+     * @type {number}
+     * @memberof FacilityOperativeCost
      */
-    customAttributes?: any;
+    value: number;
     /**
-     * 
-     * @type {string}
-     * @memberof FacilityForCreationContact
+     * The currency of the price as an ISO 4217 code.
+     * @type {CurrencyCode}
+     * @memberof FacilityOperativeCost
      */
-    firstName: string;
+    currency: CurrencyCode;
     /**
-     * 
-     * @type {string}
-     * @memberof FacilityForCreationContact
+     * Number of decimal places for the given currency
+     * @type {number}
+     * @memberof FacilityOperativeCost
      */
-    lastName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FacilityForCreationContact
-     */
-    roleDescription?: string;
+    decimalPlaces: number;
 }
 /**
- * 
+ * FacilityOperativeCostForCreation
  * @export
- * @interface FacilityForCreationServices
+ * @interface FacilityOperativeCostForCreation
  */
-export interface FacilityForCreationServices {
+export interface FacilityOperativeCostForCreation {
     /**
-     * 
-     * @type {FacilityServiceType}
-     * @memberof FacilityForCreationServices
+     * Value of operational cost of the facility. Value is configured in the smallest subunit, e.g. cents.
+     * @type {number}
+     * @memberof FacilityOperativeCostForCreation
      */
-    type: FacilityServiceType;
+    value: number;
+    /**
+     * The currency of the price as an ISO 4217 code.
+     * @type {CurrencyCode}
+     * @memberof FacilityOperativeCostForCreation
+     */
+    currency: CurrencyCode;
+    /**
+     * Number of decimal places for the given currency. We be defaulted according to the currency if missing.
+     * @type {number}
+     * @memberof FacilityOperativeCostForCreation
+     */
+    decimalPlaces?: number;
 }
 /**
  * Attribute to order a facility list
@@ -7413,7 +9291,7 @@ export enum FacilityOrderBy {
     POSTALCODEASC = 'POSTAL_CODE_ASC'
 }
 /**
- * 
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Deprecated; works only on managed facilities. Prefer to use ManagedFacilityForModification / SupplierForModification for full compatibility.
  * @export
  * @interface FacilityPatchActions
  */
@@ -7432,7 +9310,7 @@ export interface FacilityPatchActions {
     version: number;
 }
 /**
- * 
+ * FacilityRefLatestPickingStartPair
  * @export
  * @interface FacilityRefLatestPickingStartPair
  */
@@ -7451,6 +9329,129 @@ export interface FacilityRefLatestPickingStartPair {
     latestPickingStart: Date;
 }
 /**
+ * FacilitySearchPayload
+ * @export
+ * @interface FacilitySearchPayload
+ */
+export interface FacilitySearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof FacilitySearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {FacilitySearchQuery}
+     * @memberof FacilitySearchPayload
+     */
+    query: FacilitySearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof FacilitySearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<FacilitySort>}
+     * @memberof FacilitySearchPayload
+     */
+    sort?: Array<FacilitySort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof FacilitySearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * FacilitySearchQuery
+ * @export
+ * @interface FacilitySearchQuery
+ */
+export interface FacilitySearchQuery {
+    /**
+     * Nested search by address
+     * @type {FacilityAddressFilter}
+     * @memberof FacilitySearchQuery
+     */
+    address?: FacilityAddressFilter;
+    /**
+     * 
+     * @type {Array<FacilitySearchQuery>}
+     * @memberof FacilitySearchQuery
+     */
+    and?: Array<FacilitySearchQuery>;
+    /**
+     * Nested search by contact
+     * @type {FacilityContactFilter}
+     * @memberof FacilitySearchQuery
+     */
+    contact?: FacilityContactFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof FacilitySearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by locationType
+     * @type {FacilityLocationTypeEnumFilter}
+     * @memberof FacilitySearchQuery
+     */
+    locationType?: FacilityLocationTypeEnumFilter;
+    /**
+     * Search by name
+     * @type {StringFilter}
+     * @memberof FacilitySearchQuery
+     */
+    name?: StringFilter;
+    /**
+     * 
+     * @type {Array<FacilitySearchQuery>}
+     * @memberof FacilitySearchQuery
+     */
+    or?: Array<FacilitySearchQuery>;
+    /**
+     * Nested list search by services
+     * @type {FacilityServicesListFilter}
+     * @memberof FacilitySearchQuery
+     */
+    services?: FacilityServicesListFilter;
+    /**
+     * Search by status
+     * @type {FacilityStatusEnumFilter}
+     * @memberof FacilitySearchQuery
+     */
+    status?: FacilityStatusEnumFilter;
+    /**
+     * Nested list search by tags
+     * @type {FacilityTagsListFilter}
+     * @memberof FacilitySearchQuery
+     */
+    tags?: FacilityTagsListFilter;
+    /**
+     * Search by tenantFacilityId
+     * @type {StringFilter}
+     * @memberof FacilitySearchQuery
+     */
+    tenantFacilityId?: StringFilter;
+}
+/**
+ * FacilityService
+ * @export
+ * @interface FacilityService
+ */
+export interface FacilityService {
+    /**
+     * 
+     * @type {FacilityServiceType}
+     * @memberof FacilityService
+     */
+    type: FacilityServiceType;
+}
+/**
  * The description of the service this facility offers.
  * @export
  * @enum {string}
@@ -7458,6 +9459,150 @@ export interface FacilityRefLatestPickingStartPair {
 export enum FacilityServiceType {
     SHIPFROMSTORE = 'SHIP_FROM_STORE',
     PICKUP = 'PICKUP'
+}
+/**
+ * FacilityServicesFacilityServiceTypeEnumFilter
+ * @export
+ * @interface FacilityServicesFacilityServiceTypeEnumFilter
+ */
+export interface FacilityServicesFacilityServiceTypeEnumFilter {
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof FacilityServicesFacilityServiceTypeEnumFilter
+     */
+    eq?: FacilityServicesFacilityServiceTypeEnumFilter.EqEnum;
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof FacilityServicesFacilityServiceTypeEnumFilter
+     */
+    _in?: FacilityServicesFacilityServiceTypeEnumFilter.InEnum;
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof FacilityServicesFacilityServiceTypeEnumFilter
+     */
+    notEq?: FacilityServicesFacilityServiceTypeEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace FacilityServicesFacilityServiceTypeEnumFilter
+ */
+export namespace FacilityServicesFacilityServiceTypeEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        SHIPFROMSTORE = 'SHIP_FROM_STORE',
+        PICKUP = 'PICKUP'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        SHIPFROMSTORE = 'SHIP_FROM_STORE',
+        PICKUP = 'PICKUP'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        SHIPFROMSTORE = 'SHIP_FROM_STORE',
+        PICKUP = 'PICKUP'
+    }
+}
+/**
+ * FacilityServicesFilter
+ * @export
+ * @interface FacilityServicesFilter
+ */
+export interface FacilityServicesFilter {
+    /**
+     * Search by type
+     * @type {FacilityServicesFacilityServiceTypeEnumFilter}
+     * @memberof FacilityServicesFilter
+     */
+    type?: FacilityServicesFacilityServiceTypeEnumFilter;
+}
+/**
+ * FacilityServicesListFilter
+ * @export
+ * @interface FacilityServicesListFilter
+ */
+export interface FacilityServicesListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {FacilityServicesFilter}
+     * @memberof FacilityServicesListFilter
+     */
+    contains?: FacilityServicesFilter;
+}
+/**
+ * FacilitySort
+ * @export
+ * @interface FacilitySort
+ */
+export interface FacilitySort {
+    /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof FacilitySort
+     */
+    customAttributes?: { [key: string]: any; };
+    /**
+     * 
+     * @type {string}
+     * @memberof FacilitySort
+     */
+    name?: FacilitySort.NameEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FacilitySort
+     */
+    status?: FacilitySort.StatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof FacilitySort
+     */
+    tenantFacilityId?: FacilitySort.TenantFacilityIdEnum;
+}
+
+/**
+ * @export
+ * @namespace FacilitySort
+ */
+export namespace FacilitySort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum StatusEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TenantFacilityIdEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
 }
 /**
  * The state of the facility. ONLINE means that this facility can process new orders and pickjobs, SUSPENDED means it cannot get new orders but is able to fulfill the current workload and OFFLINE means that it cannot fulfill any new or existing orders. Processes already running might be rescheduled to another facility depending on the preferences.
@@ -7470,7 +9615,66 @@ export enum FacilityStatus {
     OFFLINE = 'OFFLINE'
 }
 /**
- * 
+ * FacilityStatusEnumFilter
+ * @export
+ * @interface FacilityStatusEnumFilter
+ */
+export interface FacilityStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof FacilityStatusEnumFilter
+     */
+    eq?: FacilityStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof FacilityStatusEnumFilter
+     */
+    _in?: FacilityStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof FacilityStatusEnumFilter
+     */
+    notEq?: FacilityStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace FacilityStatusEnumFilter
+ */
+export namespace FacilityStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        ONLINE = 'ONLINE',
+        SUSPENDED = 'SUSPENDED',
+        OFFLINE = 'OFFLINE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        ONLINE = 'ONLINE',
+        SUSPENDED = 'SUSPENDED',
+        OFFLINE = 'OFFLINE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        ONLINE = 'ONLINE',
+        SUSPENDED = 'SUSPENDED',
+        OFFLINE = 'OFFLINE'
+    }
+}
+/**
+ * FacilityStock
  * @export
  * @interface FacilityStock
  */
@@ -7483,24 +9687,6 @@ export interface FacilityStock {
     available: number;
     /**
      * 
-     * @type {number}
-     * @memberof FacilityStock
-     */
-    reserved: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FacilityStock
-     */
-    value: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof FacilityStock
-     */
-    tenantArticleId: string;
-    /**
-     * 
      * @type {string}
      * @memberof FacilityStock
      */
@@ -7511,9 +9697,27 @@ export interface FacilityStock {
      * @memberof FacilityStock
      */
     id: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FacilityStock
+     */
+    reserved: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FacilityStock
+     */
+    tenantArticleId: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FacilityStock
+     */
+    value: number;
 }
 /**
- * 
+ * FacilityStockBulkOperation
  * @export
  * @interface FacilityStockBulkOperation
  */
@@ -7532,7 +9736,7 @@ export interface FacilityStockBulkOperation {
     value: number;
 }
 /**
- * 
+ * FacilityStockBulkOperations
  * @export
  * @interface FacilityStockBulkOperations
  */
@@ -7545,17 +9749,17 @@ export interface FacilityStockBulkOperations {
     operations: Array<FacilityStockBulkOperation>;
 }
 /**
- * 
+ * FacilityStockBulkResult
  * @export
  * @interface FacilityStockBulkResult
  */
 export interface FacilityStockBulkResult {
     /**
      * 
-     * @type {string}
+     * @type {BulkOperationError}
      * @memberof FacilityStockBulkResult
      */
-    tenantArticleId: string;
+    error?: BulkOperationError;
     /**
      * 
      * @type {string}
@@ -7570,10 +9774,10 @@ export interface FacilityStockBulkResult {
     status: FacilityStockBulkResult.StatusEnum;
     /**
      * 
-     * @type {BulkOperationError}
+     * @type {string}
      * @memberof FacilityStockBulkResult
      */
-    error?: BulkOperationError;
+    tenantArticleId: string;
 }
 
 /**
@@ -7592,7 +9796,7 @@ export namespace FacilityStockBulkResult {
     }
 }
 /**
- * 
+ * FacilityStockConfiguration
  * @export
  * @interface FacilityStockConfiguration
  */
@@ -7642,7 +9846,7 @@ export interface FacilityStockConfigurationListingReactivationAfter {
     value?: number;
 }
 /**
- * 
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Concept depreated. Use safety stock instead.
  * @export
  * @interface FacilityStockConfigurationRetainedOfflineStock
  */
@@ -7674,23 +9878,11 @@ export interface FacilityStockConfigurationShortpick {
     active: boolean;
 }
 /**
- * 
+ * FacilityStockDistribution
  * @export
  * @interface FacilityStockDistribution
  */
 export interface FacilityStockDistribution {
-    /**
-     * 
-     * @type {number}
-     * @memberof FacilityStockDistribution
-     */
-    reserved: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof FacilityStockDistribution
-     */
-    totalAmount: number;
     /**
      * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
@@ -7702,31 +9894,7 @@ export interface FacilityStockDistribution {
      * @type {number}
      * @memberof FacilityStockDistribution
      */
-    safetyStock: number;
-    /**
-     * 
-     * @type {ByTrait}
-     * @memberof FacilityStockDistribution
-     */
-    byTrait: ByTrait;
-    /**
-     * 
-     * @type {number}
-     * @memberof FacilityStockDistribution
-     */
     availableForPicking: number;
-    /**
-     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
-     * @type {number}
-     * @memberof FacilityStockDistribution
-     */
-    availableToPromise: number;
-    /**
-     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
-     * @type {number}
-     * @memberof FacilityStockDistribution
-     */
-    readyToPick: number;
     /**
      * 
      * @type {number}
@@ -7734,11 +9902,17 @@ export interface FacilityStockDistribution {
      */
     availableOnStock: number;
     /**
-     * 
+     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
      * @memberof FacilityStockDistribution
      */
-    stockOnHand: number;
+    availableToPromise: number;
+    /**
+     * 
+     * @type {ByTrait}
+     * @memberof FacilityStockDistribution
+     */
+    byTrait: ByTrait;
     /**
      * 
      * @type {Array<ChannelStockAvailability>}
@@ -7775,22 +9949,132 @@ export interface FacilityStockDistribution {
      * @memberof FacilityStockDistribution
      */
     price: number;
+    /**
+     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
+     * @type {number}
+     * @memberof FacilityStockDistribution
+     */
+    readyToPick: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FacilityStockDistribution
+     */
+    reserved: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FacilityStockDistribution
+     */
+    safetyStock: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FacilityStockDistribution
+     */
+    stockOnHand: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof FacilityStockDistribution
+     */
+    totalAmount: number;
 }
 /**
- * 
+ * FacilitySuspendedWebHookEvent
+ * @export
+ * @interface FacilitySuspendedWebHookEvent
+ */
+export interface FacilitySuspendedWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ManagedFacility}
+     * @memberof FacilitySuspendedWebHookEvent
+     */
+    payload: ManagedFacility;
+}
+/**
+ * FacilityTagsFilter
+ * @export
+ * @interface FacilityTagsFilter
+ */
+export interface FacilityTagsFilter {
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof FacilityTagsFilter
+     */
+    id?: StringFilter;
+    /**
+     * Search by value
+     * @type {StringFilter}
+     * @memberof FacilityTagsFilter
+     */
+    value?: StringFilter;
+}
+/**
+ * FacilityTagsListFilter
+ * @export
+ * @interface FacilityTagsListFilter
+ */
+export interface FacilityTagsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {FacilityTagsFilter}
+     * @memberof FacilityTagsListFilter
+     */
+    contains?: FacilityTagsFilter;
+}
+/**
+ * FacilityType
+ * @export
+ * @enum {string}
+ */
+export enum FacilityType {
+    MANAGEDFACILITY = 'MANAGED_FACILITY',
+    SUPPLIER = 'SUPPLIER'
+}
+/**
+ * FacilityUpdatedWebHookEvent
  * @export
  * @interface FacilityUpdatedWebHookEvent
  */
 export interface FacilityUpdatedWebHookEvent extends WebHookEvent {
     /**
      * 
-     * @type {Facility}
+     * @type {ManagedFacility}
      * @memberof FacilityUpdatedWebHookEvent
      */
-    payload: Facility;
+    payload: ManagedFacility;
 }
 /**
- * 
+ * FacilityWentOfflineWebHookEvent
+ * @export
+ * @interface FacilityWentOfflineWebHookEvent
+ */
+export interface FacilityWentOfflineWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ManagedFacility}
+     * @memberof FacilityWentOfflineWebHookEvent
+     */
+    payload: ManagedFacility;
+}
+/**
+ * FacilityWentOnlineWebHookEvent
+ * @export
+ * @interface FacilityWentOnlineWebHookEvent
+ */
+export interface FacilityWentOnlineWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ManagedFacility}
+     * @memberof FacilityWentOnlineWebHookEvent
+     */
+    payload: ManagedFacility;
+}
+/**
+ * FallbackFacilityConfiguration
  * @export
  * @interface FallbackFacilityConfiguration
  */
@@ -7815,7 +10099,7 @@ export interface FallbackFacilityConfiguration {
     fallbackAfterTime: string;
 }
 /**
- * 
+ * FallbackFacilityConfigurationForPatch
  * @export
  * @interface FallbackFacilityConfigurationForPatch
  */
@@ -7840,7 +10124,7 @@ export interface FallbackFacilityConfigurationForPatch {
     fallbackAfterTime?: string;
 }
 /**
- * 
+ * Feature
  * @export
  * @interface Feature
  */
@@ -7859,7 +10143,7 @@ export interface Feature extends VersionedResource {
     status: FeatureStatus;
 }
 /**
- * 
+ * FeaturePatchActions
  * @export
  * @interface FeaturePatchActions
  */
@@ -7878,7 +10162,7 @@ export interface FeaturePatchActions {
     version: number;
 }
 /**
- * 
+ * FeatureStatus
  * @export
  * @enum {string}
  */
@@ -7888,26 +10172,7 @@ export enum FeatureStatus {
     Disabled = 'disabled'
 }
 /**
- * 
- * @export
- * @interface Features
- */
-export interface Features {
-    /**
-     * 
-     * @type {Array<Feature>}
-     * @memberof Features
-     */
-    features?: Array<Feature>;
-    /**
-     * Total number of found entities for this query
-     * @type {number}
-     * @memberof Features
-     */
-    total?: number;
-}
-/**
- * 
+ * FedEx Facility Carrier Configuration.
  * @export
  * @interface FedExFacilityCarrierConfiguration
  */
@@ -7920,7 +10185,7 @@ export interface FedExFacilityCarrierConfiguration extends AbstractFacilityCarri
     trackAndTraceUrl?: string;
 }
 /**
- * 
+ * Configuration of Fedex Carrier
  * @export
  * @interface FedexCarrierConfiguration
  */
@@ -7963,7 +10228,7 @@ export interface FedexCarrierConfiguration extends CarrierConfiguration {
     trackAndTraceUrl?: string;
 }
 /**
- * 
+ * Fedex Credentials.
  * @export
  * @interface FedexCarrierCredentials
  */
@@ -7988,7 +10253,7 @@ export interface FedexCarrierCredentials extends AbstractCarrierCredentials {
     secretKey: string;
 }
 /**
- * 
+ * Fence
  * @export
  * @interface Fence
  */
@@ -8052,7 +10317,7 @@ export enum FenceImplementation {
     AVOIDZEROSTOCK = 'AVOID-ZERO-STOCK'
 }
 /**
- * 
+ * FenceMode
  * @export
  * @enum {string}
  */
@@ -8061,7 +10326,7 @@ export enum FenceMode {
     Reactive = 'reactive'
 }
 /**
- * 
+ * FenceResultStatus
  * @export
  * @enum {string}
  */
@@ -8071,7 +10336,7 @@ export enum FenceResultStatus {
     REACTIVEPASSINGPOSSIBLE = 'REACTIVE_PASSING_POSSIBLE'
 }
 /**
- * 
+ * FenceStatistic
  * @export
  * @interface FenceStatistic
  */
@@ -8108,7 +10373,7 @@ export interface FenceStatistic {
     durationMs: number;
 }
 /**
- * 
+ * FilterEntity
  * @export
  * @interface FilterEntity
  */
@@ -8139,7 +10404,7 @@ export interface FilterEntity {
     valueLocalized: LocaleString;
 }
 /**
- * 
+ * FinishHandoverJobActionEnum
  * @export
  * @enum {string}
  */
@@ -8147,7 +10412,7 @@ export enum FinishHandoverJobActionEnum {
     FINISHHANDOVERJOB = 'FINISH_HANDOVER_JOB'
 }
 /**
- * 
+ * Action to finish a handoverjob.
  * @export
  * @interface FinishHandoverJobActionParameter
  */
@@ -8172,7 +10437,7 @@ export interface FinishHandoverJobActionParameter {
     lineItems: Array<FinishHandoverJobLineItem>;
 }
 /**
- * 
+ * FinishHandoverJobLineItem
  * @export
  * @interface FinishHandoverJobLineItem
  */
@@ -8203,7 +10468,7 @@ export interface FinishHandoverJobLineItem {
     substituteLineItems?: Array<FinishHandoverJobSubstituteLineItem>;
 }
 /**
- * 
+ * FinishHandoverJobSubstituteLineItem
  * @export
  * @interface FinishHandoverJobSubstituteLineItem
  */
@@ -8228,7 +10493,7 @@ export interface FinishHandoverJobSubstituteLineItem {
     refused?: Array<RefusedItemForUpdate>;
 }
 /**
- * 
+ * FinishItemReturnActionEnum
  * @export
  * @enum {string}
  */
@@ -8236,7 +10501,7 @@ export enum FinishItemReturnActionEnum {
     FinishItemReturn = 'FinishItemReturn'
 }
 /**
- * 
+ * Action to finish an ItemReturn.
  * @export
  * @interface FinishItemReturnActionParameter
  */
@@ -8255,7 +10520,7 @@ export interface FinishItemReturnActionParameter {
     itemReturnJobVersion: number;
 }
 /**
- * 
+ * FinishItemReturnJobActionEnum
  * @export
  * @enum {string}
  */
@@ -8263,7 +10528,7 @@ export enum FinishItemReturnJobActionEnum {
     FinishItemReturnJob = 'FinishItemReturnJob'
 }
 /**
- * 
+ * Action to finish a ItemReturnJob.
  * @export
  * @interface FinishItemReturnJobActionParameter
  */
@@ -8282,7 +10547,7 @@ export interface FinishItemReturnJobActionParameter {
     version: number;
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use api/pickruns/:id/actions instead
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use api/pickruns/:id/actions instead
  * @export
  * @interface FinishPickRunAction
  */
@@ -8309,7 +10574,7 @@ export namespace FinishPickRunAction {
     }
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />Configuration of fixed count split.
+ * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Configuration of fixed count split.
  * @export
  * @interface FixedCountConfiguration
  */
@@ -8322,7 +10587,7 @@ export interface FixedCountConfiguration {
     maxSplitCount: number;
 }
 /**
- * 
+ * Validate input as float.
  * @export
  * @interface FloatValidation
  */
@@ -8423,7 +10688,7 @@ export interface FulfillabilityCollect {
     facilities?: Array<FulfillabilityFacility>;
 }
 /**
- * 
+ * FulfillabilityDetail
  * @export
  * @interface FulfillabilityDetail
  */
@@ -8478,14 +10743,14 @@ export interface FulfillabilityDetail {
     articleAvailabilities: Array<ArticleAvailability>;
 }
 /**
- * 
+ * FulfillabilityFacility
  * @export
  * @interface FulfillabilityFacility
  */
-export interface FulfillabilityFacility extends StrippedFacility {
+export interface FulfillabilityFacility extends StrippedManagedFacility {
 }
 /**
- * 
+ * FulfillabilityItemsConstraintValue
  * @export
  * @interface FulfillabilityItemsConstraintValue
  */
@@ -8600,7 +10865,7 @@ export interface FulfillabilityQueryShipping {
     targetAddress: StrippedShippingTargetAddress;
 }
 /**
- * 
+ * FulfillabilityResult
  * @export
  * @interface FulfillabilityResult
  */
@@ -8726,7 +10991,7 @@ export interface FulfillabilityShippingSAMEDAY {
     validUntil?: Date;
 }
 /**
- * 
+ * FulfillmentProcessBufferConfiguration
  * @export
  * @interface FulfillmentProcessBufferConfiguration
  */
@@ -8745,7 +11010,7 @@ export interface FulfillmentProcessBufferConfiguration extends VersionedResource
     id?: string;
 }
 /**
- * 
+ * GLS Carrier Credentials
  * @export
  * @interface GLSCarrierCredentials
  */
@@ -8776,7 +11041,7 @@ export interface GLSCarrierCredentials extends AbstractCarrierCredentials {
     trackAndTracePassword: string;
 }
 /**
- * 
+ * GdprConfiguration
  * @export
  * @interface GdprConfiguration
  */
@@ -8799,6 +11064,12 @@ export interface GdprConfiguration extends VersionedResource {
      * @memberof GdprConfiguration
      */
     version: number;
+    /**
+     * If true, the actor information will be stored anonymized for auditing. Might take up to 1 hour to be take into effect
+     * @type {boolean}
+     * @memberof GdprConfiguration
+     */
+    actorAnonymization?: boolean;
     /**
      * 
      * @type {string}
@@ -8863,7 +11134,7 @@ export interface GlobalRoutingConfiguration {
      */
     defaultPrice: number;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Default amount of hours after which a routing plan is marked not routable. This field is deprecated in favour of stopRoutingAttemptsAfterTime
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Default amount of hours after which a routing plan is marked not routable. This field is deprecated in favour of stopRoutingAttemptsAfterTime
      * @type {number}
      * @memberof GlobalRoutingConfiguration
      */
@@ -8882,7 +11153,7 @@ export interface GlobalRoutingConfiguration {
     fallbackFacilityConfiguration?: FallbackFacilityConfiguration;
 }
 /**
- * 
+ * Configuration of GLS Carrier
  * @export
  * @interface GlsCarrierConfiguration
  */
@@ -8913,7 +11184,7 @@ export interface GlsCarrierConfiguration extends CarrierConfiguration {
     trackAndTraceWsdlUrl?: string;
 }
 /**
- * 
+ * Gls Facility Carrier Configuration.
  * @export
  * @interface GlsFacilityCarrierConfiguration
  */
@@ -8944,7 +11215,26 @@ export interface GlsFacilityCarrierConfiguration extends AbstractFacilityCarrier
     trackAndTraceWsdlUrl?: string;
 }
 /**
- * 
+ * HandledItem
+ * @export
+ * @interface HandledItem
+ */
+export interface HandledItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof HandledItem
+     */
+    tenantArticleId?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof HandledItem
+     */
+    quantity?: number;
+}
+/**
+ * HandoverConfiguration
  * @export
  * @interface HandoverConfiguration
  */
@@ -8957,7 +11247,7 @@ export interface HandoverConfiguration extends VersionedResource {
     availableRefusedReasons?: Array<AvailableRefusedReason>;
 }
 /**
- * 
+ * HandoverConfigurationForCreate
  * @export
  * @interface HandoverConfigurationForCreate
  */
@@ -8976,14 +11266,285 @@ export interface HandoverConfigurationForCreate {
     availableRefusedReasons?: Array<AvailableRefuseReasonForCreation>;
 }
 /**
- * 
+ * HandoverContainer
+ * @export
+ * @interface HandoverContainer
+ */
+export interface HandoverContainer extends HandoverContainerForCreation {
+    /**
+     * 
+     * @type {string}
+     * @memberof HandoverContainer
+     */
+    id: string;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof HandoverContainer
+     */
+    version: number;
+    /**
+     * The date this entity was created at the platform. This value is generated by the service.
+     * @type {Date}
+     * @memberof HandoverContainer
+     */
+    created: Date;
+    /**
+     * The date this entity was modified last. This value is generated by the service.
+     * @type {Date}
+     * @memberof HandoverContainer
+     */
+    lastModified: Date;
+    /**
+     * Translated Description from descriptionLocalized
+     * @type {string}
+     * @memberof HandoverContainer
+     */
+    description?: string;
+    /**
+     * Translated name from nameLocalized
+     * @type {string}
+     * @memberof HandoverContainer
+     */
+    name?: string;
+    /**
+     * Linked Facility through reference
+     * @type {string}
+     * @memberof HandoverContainer
+     */
+    facilityRef: string;
+    /**
+     * Linked Process through reference
+     * @type {string}
+     * @memberof HandoverContainer
+     */
+    processRef: string;
+    /**
+     * Linked stack through reference
+     * @type {string}
+     * @memberof HandoverContainer
+     */
+    stackRef: string;
+    /**
+     * 
+     * @type {Array<HandoverContainerLineItem>}
+     * @memberof HandoverContainer
+     */
+    lineItems: Array<HandoverContainerLineItem>;
+}
+/**
+ * HandoverContainerForCreation
+ * @export
+ * @interface HandoverContainerForCreation
+ */
+export interface HandoverContainerForCreation {
+    /**
+     * Linked Operative Container Type through reference
+     * @type {string}
+     * @memberof HandoverContainerForCreation
+     */
+    operativeContainerTypeRef?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof HandoverContainerForCreation
+     */
+    codes?: Array<string>;
+    /**
+     * Linked HandoverJob through reference
+     * @type {string}
+     * @memberof HandoverContainerForCreation
+     */
+    handoverJobRef: string;
+    /**
+     * 
+     * @type {Array<HandoverContainerLineItemForCreation>}
+     * @memberof HandoverContainerForCreation
+     */
+    lineItems: Array<HandoverContainerLineItemForCreation>;
+    /**
+     * 
+     * @type {Array<any>}
+     * @memberof HandoverContainerForCreation
+     */
+    customAttributes?: Array<any>;
+    /**
+     * 
+     * @type {ContainerDimensions}
+     * @memberof HandoverContainerForCreation
+     */
+    dimensions?: ContainerDimensions;
+    /**
+     * Weight limit in gram for this Container
+     * @type {number}
+     * @memberof HandoverContainerForCreation
+     */
+    weightLimitInG?: number;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof HandoverContainerForCreation
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * URL to icon
+     * @type {string}
+     * @memberof HandoverContainerForCreation
+     */
+    iconUrl?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof HandoverContainerForCreation
+     */
+    nameLocalized: LocaleString;
+    /**
+     * Linked StorageLocation through reference
+     * @type {string}
+     * @memberof HandoverContainerForCreation
+     */
+    storageLocationRef?: string;
+    /**
+     * Linked Stack through reference
+     * @type {string}
+     * @memberof HandoverContainerForCreation
+     */
+    stackRef?: string;
+}
+/**
+ * HandoverContainerLineItem
+ * @export
+ * @interface HandoverContainerLineItem
+ */
+export interface HandoverContainerLineItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof HandoverContainerLineItem
+     */
+    id: string;
+    /**
+     * 
+     * @type {HandoverContainerLineItemArticle}
+     * @memberof HandoverContainerLineItem
+     */
+    article: HandoverContainerLineItemArticle;
+    /**
+     * Attributes that can be added to the service job. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof HandoverContainerLineItem
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof HandoverContainerLineItem
+     */
+    quantity: number;
+    /**
+     * Identifier for items unit of measurement.
+     * @type {string}
+     * @memberof HandoverContainerLineItem
+     */
+    measurementUnitKey?: string;
+    /**
+     * Codes, that identify the line item
+     * @type {Array<string>}
+     * @memberof HandoverContainerLineItem
+     */
+    scannableCodes?: Array<string>;
+}
+/**
+ * HandoverContainerLineItemArticle
+ * @export
+ * @interface HandoverContainerLineItemArticle
+ */
+export interface HandoverContainerLineItemArticle extends AbstractArticle {
+    /**
+     * 
+     * @type {Array<ArticleAttributeItem>}
+     * @memberof HandoverContainerLineItemArticle
+     */
+    attributes?: Array<ArticleAttributeItem>;
+}
+/**
+ * HandoverContainerLineItemForCreation
+ * @export
+ * @interface HandoverContainerLineItemForCreation
+ */
+export interface HandoverContainerLineItemForCreation {
+    /**
+     * 
+     * @type {HandoverContainerLineItemArticle}
+     * @memberof HandoverContainerLineItemForCreation
+     */
+    article: HandoverContainerLineItemArticle;
+    /**
+     * Attributes that can be added to the service job. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof HandoverContainerLineItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * Amount per line item
+     * @type {number}
+     * @memberof HandoverContainerLineItemForCreation
+     */
+    quantity: number;
+    /**
+     * Identifier for items unit of measurement.
+     * @type {string}
+     * @memberof HandoverContainerLineItemForCreation
+     */
+    measurementUnitKey?: string;
+    /**
+     * Codes, that identify the line item
+     * @type {Array<string>}
+     * @memberof HandoverContainerLineItemForCreation
+     */
+    scannableCodes?: Array<string>;
+}
+/**
+ * HandoverJobActionsParameter
  * @export
  * @interface HandoverJobActionsParameter
  */
 export interface HandoverJobActionsParameter {
 }
 /**
- * 
+ * HandoverJobAssignedUsersFilter
+ * @export
+ * @interface HandoverJobAssignedUsersFilter
+ */
+export interface HandoverJobAssignedUsersFilter {
+    /**
+     * Search by userId
+     * @type {StringFilter}
+     * @memberof HandoverJobAssignedUsersFilter
+     */
+    userId?: StringFilter;
+    /**
+     * Search by username
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobAssignedUsersFilter
+     */
+    username?: StringSearchFilter;
+}
+/**
+ * HandoverJobAssignedUsersListFilter
+ * @export
+ * @interface HandoverJobAssignedUsersListFilter
+ */
+export interface HandoverJobAssignedUsersListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {HandoverJobAssignedUsersFilter}
+     * @memberof HandoverJobAssignedUsersListFilter
+     */
+    contains?: HandoverJobAssignedUsersFilter;
+}
+/**
+ * HandoverJobCancelActionEnum
  * @export
  * @enum {string}
  */
@@ -8991,7 +11552,7 @@ export enum HandoverJobCancelActionEnum {
     CANCEL = 'CANCEL'
 }
 /**
- * 
+ * Action to cancel a handoverjob.
  * @export
  * @interface HandoverJobCancelActionParameter
  */
@@ -9029,7 +11590,7 @@ export interface HandoverJobCancelActionParameterPayload {
     handoverJobCancelReason: HandoverJobCancelReason;
 }
 /**
- * 
+ * HandoverJobCancelReason
  * @export
  * @enum {string}
  */
@@ -9039,7 +11600,7 @@ export enum HandoverJobCancelReason {
     ORDERCANCELED = 'ORDER_CANCELED'
 }
 /**
- * 
+ * HandoverJobCanceledWebHookEvent
  * @export
  * @interface HandoverJobCanceledWebHookEvent
  */
@@ -9052,7 +11613,63 @@ export interface HandoverJobCanceledWebHookEvent extends WebHookEvent {
     payload: Handoverjob;
 }
 /**
- * 
+ * HandoverJobChannelEnumEnumFilter
+ * @export
+ * @interface HandoverJobChannelEnumEnumFilter
+ */
+export interface HandoverJobChannelEnumEnumFilter {
+    /**
+     * Search by channel
+     * @type {string}
+     * @memberof HandoverJobChannelEnumEnumFilter
+     */
+    eq?: HandoverJobChannelEnumEnumFilter.EqEnum;
+    /**
+     * Search by channel
+     * @type {string}
+     * @memberof HandoverJobChannelEnumEnumFilter
+     */
+    _in?: HandoverJobChannelEnumEnumFilter.InEnum;
+    /**
+     * Search by channel
+     * @type {string}
+     * @memberof HandoverJobChannelEnumEnumFilter
+     */
+    notEq?: HandoverJobChannelEnumEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace HandoverJobChannelEnumEnumFilter
+ */
+export namespace HandoverJobChannelEnumEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        DELIVERY = 'DELIVERY',
+        COLLECT = 'COLLECT'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        DELIVERY = 'DELIVERY',
+        COLLECT = 'COLLECT'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        DELIVERY = 'DELIVERY',
+        COLLECT = 'COLLECT'
+    }
+}
+/**
+ * HandoverJobCreatedWebHookEvent
  * @export
  * @interface HandoverJobCreatedWebHookEvent
  */
@@ -9065,7 +11682,7 @@ export interface HandoverJobCreatedWebHookEvent extends WebHookEvent {
     payload: Handoverjob;
 }
 /**
- * 
+ * HandoverJobHandedOverWebHookEvent
  * @export
  * @interface HandoverJobHandedOverWebHookEvent
  */
@@ -9078,7 +11695,227 @@ export interface HandoverJobHandedOverWebHookEvent extends WebHookEvent {
     payload: Handoverjob;
 }
 /**
- * 
+ * HandoverJobHandoverJobLineItemsArticleFilter
+ * @export
+ * @interface HandoverJobHandoverJobLineItemsArticleFilter
+ */
+export interface HandoverJobHandoverJobLineItemsArticleFilter {
+    /**
+     * Search by tenantArticleId
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobHandoverJobLineItemsArticleFilter
+     */
+    tenantArticleId?: StringSearchFilter;
+    /**
+     * Search by title
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobHandoverJobLineItemsArticleFilter
+     */
+    title?: StringSearchFilter;
+}
+/**
+ * HandoverJobHandoverJobLineItemsFilter
+ * @export
+ * @interface HandoverJobHandoverJobLineItemsFilter
+ */
+export interface HandoverJobHandoverJobLineItemsFilter {
+    /**
+     * Nested search by article
+     * @type {HandoverJobHandoverJobLineItemsArticleFilter}
+     * @memberof HandoverJobHandoverJobLineItemsFilter
+     */
+    article?: HandoverJobHandoverJobLineItemsArticleFilter;
+    /**
+     * Nested list search by substituteLineItems
+     * @type {HandoverJobHandoverJobLineItemsSubstituteLineItemsListFilter}
+     * @memberof HandoverJobHandoverJobLineItemsFilter
+     */
+    substituteLineItems?: HandoverJobHandoverJobLineItemsSubstituteLineItemsListFilter;
+}
+/**
+ * HandoverJobHandoverJobLineItemsListFilter
+ * @export
+ * @interface HandoverJobHandoverJobLineItemsListFilter
+ */
+export interface HandoverJobHandoverJobLineItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {HandoverJobHandoverJobLineItemsFilter}
+     * @memberof HandoverJobHandoverJobLineItemsListFilter
+     */
+    contains?: HandoverJobHandoverJobLineItemsFilter;
+}
+/**
+ * HandoverJobHandoverJobLineItemsSubstituteLineItemsArticleFilter
+ * @export
+ * @interface HandoverJobHandoverJobLineItemsSubstituteLineItemsArticleFilter
+ */
+export interface HandoverJobHandoverJobLineItemsSubstituteLineItemsArticleFilter {
+    /**
+     * Search by tenantArticleId
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobHandoverJobLineItemsSubstituteLineItemsArticleFilter
+     */
+    tenantArticleId?: StringSearchFilter;
+    /**
+     * Search by title
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobHandoverJobLineItemsSubstituteLineItemsArticleFilter
+     */
+    title?: StringSearchFilter;
+}
+/**
+ * HandoverJobHandoverJobLineItemsSubstituteLineItemsFilter
+ * @export
+ * @interface HandoverJobHandoverJobLineItemsSubstituteLineItemsFilter
+ */
+export interface HandoverJobHandoverJobLineItemsSubstituteLineItemsFilter {
+    /**
+     * Nested search by article
+     * @type {HandoverJobHandoverJobLineItemsSubstituteLineItemsArticleFilter}
+     * @memberof HandoverJobHandoverJobLineItemsSubstituteLineItemsFilter
+     */
+    article?: HandoverJobHandoverJobLineItemsSubstituteLineItemsArticleFilter;
+}
+/**
+ * HandoverJobHandoverJobLineItemsSubstituteLineItemsListFilter
+ * @export
+ * @interface HandoverJobHandoverJobLineItemsSubstituteLineItemsListFilter
+ */
+export interface HandoverJobHandoverJobLineItemsSubstituteLineItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {HandoverJobHandoverJobLineItemsSubstituteLineItemsFilter}
+     * @memberof HandoverJobHandoverJobLineItemsSubstituteLineItemsListFilter
+     */
+    contains?: HandoverJobHandoverJobLineItemsSubstituteLineItemsFilter;
+}
+/**
+ * HandoverJobHandoverJobParcelInfoFilter
+ * @export
+ * @interface HandoverJobHandoverJobParcelInfoFilter
+ */
+export interface HandoverJobHandoverJobParcelInfoFilter {
+    /**
+     * Search by carrierKey
+     * @type {StringFilter}
+     * @memberof HandoverJobHandoverJobParcelInfoFilter
+     */
+    carrierKey?: StringFilter;
+    /**
+     * Search by carrierRef
+     * @type {StringFilter}
+     * @memberof HandoverJobHandoverJobParcelInfoFilter
+     */
+    carrierRef?: StringFilter;
+    /**
+     * Search by carrierTrackingNumber
+     * @type {StringFilter}
+     * @memberof HandoverJobHandoverJobParcelInfoFilter
+     */
+    carrierTrackingNumber?: StringFilter;
+    /**
+     * Search by shipmentRef
+     * @type {StringFilter}
+     * @memberof HandoverJobHandoverJobParcelInfoFilter
+     */
+    shipmentRef?: StringFilter;
+}
+/**
+ * HandoverJobHandoverjobStatusEnumFilter
+ * @export
+ * @interface HandoverJobHandoverjobStatusEnumFilter
+ */
+export interface HandoverJobHandoverjobStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof HandoverJobHandoverjobStatusEnumFilter
+     */
+    eq?: HandoverJobHandoverjobStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof HandoverJobHandoverjobStatusEnumFilter
+     */
+    _in?: HandoverJobHandoverjobStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof HandoverJobHandoverjobStatusEnumFilter
+     */
+    notEq?: HandoverJobHandoverjobStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace HandoverJobHandoverjobStatusEnumFilter
+ */
+export namespace HandoverJobHandoverjobStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        HANDEDOVER = 'HANDED_OVER',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        HANDEDOVER = 'HANDED_OVER',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        HANDEDOVER = 'HANDED_OVER',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED'
+    }
+}
+/**
+ * HandoverJobInvoiceAddressFilter
+ * @export
+ * @interface HandoverJobInvoiceAddressFilter
+ */
+export interface HandoverJobInvoiceAddressFilter {
+    /**
+     * Search by companyName
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobInvoiceAddressFilter
+     */
+    companyName?: StringSearchFilter;
+    /**
+     * Search by email
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobInvoiceAddressFilter
+     */
+    email?: StringSearchFilter;
+    /**
+     * Search by firstName
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobInvoiceAddressFilter
+     */
+    firstName?: StringSearchFilter;
+    /**
+     * Search by lastName
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobInvoiceAddressFilter
+     */
+    lastName?: StringSearchFilter;
+}
+/**
+ * HandoverJobLineItemUpdateActionEnum
  * @export
  * @enum {string}
  */
@@ -9086,7 +11923,7 @@ export enum HandoverJobLineItemUpdateActionEnum {
     UPDATELINEITEM = 'UPDATE_LINEITEM'
 }
 /**
- * 
+ * Action to update a lineItem of a handoverjob.
  * @export
  * @interface HandoverJobLineItemUpdateActionParameter
  */
@@ -9145,7 +11982,127 @@ export enum HandoverJobOrderBy {
     TARGETTIMEASC = 'TARGET_TIME_ASC'
 }
 /**
- * 
+ * HandoverJobParcelInfo
+ * @export
+ * @interface HandoverJobParcelInfo
+ */
+export interface HandoverJobParcelInfo extends HandoverJobParcelInfoForCreation {
+    /**
+     * the key of the carrier
+     * @type {string}
+     * @memberof HandoverJobParcelInfo
+     */
+    carrierKey?: string;
+}
+/**
+ * HandoverJobParcelInfoForCreation
+ * @export
+ * @interface HandoverJobParcelInfoForCreation
+ */
+export interface HandoverJobParcelInfoForCreation {
+    /**
+     * the reference to the related parcel
+     * @type {string}
+     * @memberof HandoverJobParcelInfoForCreation
+     */
+    parcelRef?: string;
+    /**
+     * the tracking number of the parcel
+     * @type {string}
+     * @memberof HandoverJobParcelInfoForCreation
+     */
+    carrierTrackingNumber?: string;
+    /**
+     * The URL to the carrier logo
+     * @type {string}
+     * @memberof HandoverJobParcelInfoForCreation
+     */
+    carrierLogoUrl?: string;
+    /**
+     * the reference to the related carrier
+     * @type {string}
+     * @memberof HandoverJobParcelInfoForCreation
+     */
+    carrierRef?: string;
+    /**
+     * the reference to the related shipment
+     * @type {string}
+     * @memberof HandoverJobParcelInfoForCreation
+     */
+    shipmentRef?: string;
+    /**
+     * The reference number of the parcel by the carrier
+     * @type {string}
+     * @memberof HandoverJobParcelInfoForCreation
+     */
+    carrierParcelRef?: string;
+}
+/**
+ * HandoverJobRecipientAddressFilter
+ * @export
+ * @interface HandoverJobRecipientAddressFilter
+ */
+export interface HandoverJobRecipientAddressFilter {
+    /**
+     * Search by companyName
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobRecipientAddressFilter
+     */
+    companyName?: StringSearchFilter;
+    /**
+     * Search by email
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobRecipientAddressFilter
+     */
+    email?: StringSearchFilter;
+    /**
+     * Search by firstName
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobRecipientAddressFilter
+     */
+    firstName?: StringSearchFilter;
+    /**
+     * Search by lastName
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobRecipientAddressFilter
+     */
+    lastName?: StringSearchFilter;
+}
+/**
+ * HandoverJobReplaceAssignedUsersActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum HandoverJobReplaceAssignedUsersActionEnum {
+    REPLACEASSIGNEDUSERS = 'REPLACE_ASSIGNED_USERS'
+}
+/**
+ * Action to replace the assigned users.
+ * @export
+ * @interface HandoverJobReplaceAssignedUsersActionParameter
+ */
+export interface HandoverJobReplaceAssignedUsersActionParameter {
+    /**
+     * 
+     * @type {HandoverJobReplaceAssignedUsersActionEnum}
+     * @memberof HandoverJobReplaceAssignedUsersActionParameter
+     */
+    name: HandoverJobReplaceAssignedUsersActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof HandoverJobReplaceAssignedUsersActionParameter
+     */
+    version: number;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUserForCreationByName | AssignedUserForCreationById>}
+     * @memberof HandoverJobReplaceAssignedUsersActionParameter
+     */
+    assignedUsers: Array<AssignedUserForCreationByName | AssignedUserForCreationById>;
+}
+/**
+ * HandoverJobRevertedWebHookEvent
  * @export
  * @interface HandoverJobRevertedWebHookEvent
  */
@@ -9158,7 +12115,233 @@ export interface HandoverJobRevertedWebHookEvent extends WebHookEvent {
     payload: Handoverjob;
 }
 /**
- * 
+ * HandoverJobSearchPayload
+ * @export
+ * @interface HandoverJobSearchPayload
+ */
+export interface HandoverJobSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof HandoverJobSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {HandoverJobSearchQuery}
+     * @memberof HandoverJobSearchPayload
+     */
+    query: HandoverJobSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof HandoverJobSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<HandoverJobSort>}
+     * @memberof HandoverJobSearchPayload
+     */
+    sort?: Array<HandoverJobSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof HandoverJobSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * HandoverJobSearchQuery
+ * @export
+ * @interface HandoverJobSearchQuery
+ */
+export interface HandoverJobSearchQuery {
+    /**
+     * 
+     * @type {Array<HandoverJobSearchQuery>}
+     * @memberof HandoverJobSearchQuery
+     */
+    and?: Array<HandoverJobSearchQuery>;
+    /**
+     * Search by anonymized
+     * @type {BooleanFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    anonymized?: BooleanFilter;
+    /**
+     * Nested list search by assignedUsers
+     * @type {HandoverJobAssignedUsersListFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    assignedUsers?: HandoverJobAssignedUsersListFilter;
+    /**
+     * Search by channel
+     * @type {HandoverJobChannelEnumEnumFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    channel?: HandoverJobChannelEnumEnumFilter;
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by fullIdentifier
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    fullIdentifier?: StringSearchFilter;
+    /**
+     * Nested list search by handoverJobLineItems
+     * @type {HandoverJobHandoverJobLineItemsListFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    handoverJobLineItems?: HandoverJobHandoverJobLineItemsListFilter;
+    /**
+     * Nested search by handoverJobParcelInfo
+     * @type {HandoverJobHandoverJobParcelInfoFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    handoverJobParcelInfo?: HandoverJobHandoverJobParcelInfoFilter;
+    /**
+     * Nested search by invoiceAddress
+     * @type {HandoverJobInvoiceAddressFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    invoiceAddress?: HandoverJobInvoiceAddressFilter;
+    /**
+     * 
+     * @type {Array<HandoverJobSearchQuery>}
+     * @memberof HandoverJobSearchQuery
+     */
+    or?: Array<HandoverJobSearchQuery>;
+    /**
+     * Search by pickJobRef
+     * @type {StringEqFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    pickJobRef?: StringEqFilter;
+    /**
+     * Nested search by recipientAddress
+     * @type {HandoverJobRecipientAddressFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    recipientAddress?: HandoverJobRecipientAddressFilter;
+    /**
+     * Search by shortIdentifier
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    shortIdentifier?: StringSearchFilter;
+    /**
+     * Search by status
+     * @type {HandoverJobHandoverjobStatusEnumFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    status?: HandoverJobHandoverjobStatusEnumFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    targetTime?: DateFilter;
+    /**
+     * Search by tenantOrderId
+     * @type {StringSearchFilter}
+     * @memberof HandoverJobSearchQuery
+     */
+    tenantOrderId?: StringSearchFilter;
+}
+/**
+ * HandoverJobSort
+ * @export
+ * @interface HandoverJobSort
+ */
+export interface HandoverJobSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof HandoverJobSort
+     */
+    targetTime?: HandoverJobSort.TargetTimeEnum;
+}
+
+/**
+ * @export
+ * @namespace HandoverJobSort
+ */
+export namespace HandoverJobSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TargetTimeEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * HandoverJobSplitLineItemsActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum HandoverJobSplitLineItemsActionEnum {
+    SPLITLINESHANDOVERJOB = 'SPLIT_LINES_HANDOVER_JOB'
+}
+/**
+ * HandoverJobSplitLineItemsActionParameter
+ * @export
+ * @interface HandoverJobSplitLineItemsActionParameter
+ */
+export interface HandoverJobSplitLineItemsActionParameter {
+    /**
+     * 
+     * @type {HandoverJobSplitLineItemsActionEnum}
+     * @memberof HandoverJobSplitLineItemsActionParameter
+     */
+    name: HandoverJobSplitLineItemsActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof HandoverJobSplitLineItemsActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<HandoverJobSplitLineItemsInfo>}
+     * @memberof HandoverJobSplitLineItemsActionParameter
+     */
+    splitLineItemsInfo: Array<HandoverJobSplitLineItemsInfo>;
+}
+/**
+ * HandoverJobSplitLineItemsInfo
+ * @export
+ * @interface HandoverJobSplitLineItemsInfo
+ */
+export interface HandoverJobSplitLineItemsInfo {
+    /**
+     * references the id of the line item of a handover job
+     * @type {string}
+     * @memberof HandoverJobSplitLineItemsInfo
+     */
+    lineItemId: string;
+    /**
+     * quantity of the specific item that has been ordered
+     * @type {number}
+     * @memberof HandoverJobSplitLineItemsInfo
+     */
+    quantity: number;
+    /**
+     * The amount of articles that were handed over for this line item.
+     * @type {number}
+     * @memberof HandoverJobSplitLineItemsInfo
+     */
+    handedOverQuantity: number;
+}
+/**
+ * HandoverJobTagConfiguration
  * @export
  * @interface HandoverJobTagConfiguration
  */
@@ -9183,7 +12366,40 @@ export interface HandoverJobTagConfiguration extends VersionedResource {
     stickerConfiguration?: StickerConfiguration;
 }
 /**
- * 
+ * HandoverJobUpdateRecordableAttributesActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum HandoverJobUpdateRecordableAttributesActionEnum {
+    UPDATERECORDABLEATTRIBUTESHANDOVERJOB = 'UPDATE_RECORDABLE_ATTRIBUTES_HANDOVER_JOB'
+}
+/**
+ * HandoverJobUpdateRecordableAttributesActionParameter
+ * @export
+ * @interface HandoverJobUpdateRecordableAttributesActionParameter
+ */
+export interface HandoverJobUpdateRecordableAttributesActionParameter {
+    /**
+     * 
+     * @type {HandoverJobUpdateRecordableAttributesActionEnum}
+     * @memberof HandoverJobUpdateRecordableAttributesActionParameter
+     */
+    name: HandoverJobUpdateRecordableAttributesActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof HandoverJobUpdateRecordableAttributesActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForUpdate>}
+     * @memberof HandoverJobUpdateRecordableAttributesActionParameter
+     */
+    recordableAttributeUpdates: Array<RecordableAttributeForUpdate>;
+}
+/**
+ * HandoverLineItem
  * @export
  * @interface HandoverLineItem
  */
@@ -9194,9 +12410,21 @@ export interface HandoverLineItem extends HandoverLineItemForCreation {
      * @memberof HandoverLineItem
      */
     id: string;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof HandoverLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
+    /**
+     * The id of the line item this line item was originated from, before any split has happened. This can be used to restore the ‘pre-split’ status.
+     * @type {string}
+     * @memberof HandoverLineItem
+     */
+    originId?: string;
 }
 /**
- * 
+ * HandoverLineItemArticle
  * @export
  * @interface HandoverLineItemArticle
  */
@@ -9209,7 +12437,7 @@ export interface HandoverLineItemArticle extends AbstractArticle {
     attributes?: Array<ArticleAttributeItem>;
 }
 /**
- * 
+ * HandoverLineItemForCreation
  * @export
  * @interface HandoverLineItemForCreation
  */
@@ -9239,7 +12467,7 @@ export interface HandoverLineItemForCreation {
      */
     handedOverQuantity: number;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />
+     * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />
      * @type {Array<HandoverSubstituteLineItem>}
      * @memberof HandoverLineItemForCreation
      */
@@ -9256,9 +12484,21 @@ export interface HandoverLineItemForCreation {
      * @memberof HandoverLineItemForCreation
      */
     stickers?: Array<Sticker>;
+    /**
+     * Attributes that can be added to the handover line. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof HandoverLineItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof HandoverLineItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * HandoverSubstituteLineItem
  * @export
  * @interface HandoverSubstituteLineItem
  */
@@ -9289,7 +12529,7 @@ export interface HandoverSubstituteLineItem extends SubstituteLineItem {
     refused?: Array<RefusedItem>;
 }
 /**
- * 
+ * HandoverSubstituteLineItemForUpdate
  * @export
  * @interface HandoverSubstituteLineItemForUpdate
  */
@@ -9308,25 +12548,25 @@ export interface HandoverSubstituteLineItemForUpdate {
     refused?: Array<RefusedItemForUpdate>;
 }
 /**
- * 
+ * Handoverjob
  * @export
  * @interface Handoverjob
  */
 export interface Handoverjob extends VersionedResource {
     /**
-     * The URL to the carrier logo
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof Handoverjob
      */
     carrierLogoUrl?: string;
     /**
-     * 
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof Handoverjob
      */
     carrierRef?: string;
     /**
-     * Tracking number for the created shipment
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof Handoverjob
      */
@@ -9368,7 +12608,7 @@ export interface Handoverjob extends VersionedResource {
      */
     orderDate: Date;
     /**
-     * The reference to the parcel.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof Handoverjob
      */
@@ -9392,7 +12632,7 @@ export interface Handoverjob extends VersionedResource {
      */
     operativeProcessRef?: string;
     /**
-     * The reference to the shipment belonging to the handoverjob
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof Handoverjob
      */
@@ -9470,6 +12710,18 @@ export interface Handoverjob extends VersionedResource {
      */
     transfers?: Array<OperativeTransfer>;
     /**
+     * 
+     * @type {HandoverJobParcelInfo}
+     * @memberof Handoverjob
+     */
+    handoverJobParcelInfo?: HandoverJobParcelInfo;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUser>}
+     * @memberof Handoverjob
+     */
+    assignedUsers?: Array<AssignedUser>;
+    /**
      * Indicates if gdpr related data was anonymized
      * @type {boolean}
      * @memberof Handoverjob
@@ -9494,7 +12746,7 @@ export interface Handoverjob extends VersionedResource {
      */
     documentsRef?: string;
     /**
-     * Key of the carrier that is used for this entity
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof Handoverjob
      */
@@ -9516,25 +12768,25 @@ export namespace Handoverjob {
     }
 }
 /**
- * 
+ * HandoverjobForCreation
  * @export
  * @interface HandoverjobForCreation
  */
 export interface HandoverjobForCreation {
     /**
-     * The URL to the carrier logo
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof HandoverjobForCreation
      */
     carrierLogoUrl?: string;
     /**
-     * 
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof HandoverjobForCreation
      */
     carrierRef?: string;
     /**
-     * Tracking number for the created shipment
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof HandoverjobForCreation
      */
@@ -9576,7 +12828,7 @@ export interface HandoverjobForCreation {
      */
     orderDate: Date;
     /**
-     * The reference to the parcel.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof HandoverjobForCreation
      */
@@ -9600,7 +12852,7 @@ export interface HandoverjobForCreation {
      */
     operativeProcessRef?: string;
     /**
-     * The reference to the shipment belonging to the handoverjob
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo instead.
      * @type {string}
      * @memberof HandoverjobForCreation
      */
@@ -9677,6 +12929,18 @@ export interface HandoverjobForCreation {
      * @memberof HandoverjobForCreation
      */
     transfers?: Array<OperativeTransfer>;
+    /**
+     * 
+     * @type {HandoverJobParcelInfoForCreation}
+     * @memberof HandoverjobForCreation
+     */
+    handoverJobParcelInfo?: HandoverJobParcelInfoForCreation;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUserForCreationByName | AssignedUserForCreationById>}
+     * @memberof HandoverjobForCreation
+     */
+    assignedUsers?: Array<AssignedUserForCreationByName | AssignedUserForCreationById>;
 }
 
 /**
@@ -9694,7 +12958,7 @@ export namespace HandoverjobForCreation {
     }
 }
 /**
- * 
+ * HandoverjobPatchActions
  * @export
  * @interface HandoverjobPatchActions
  */
@@ -9713,7 +12977,7 @@ export interface HandoverjobPatchActions {
     version: number;
 }
 /**
- * 
+ * HandoverjobStatus
  * @export
  * @enum {string}
  */
@@ -9724,7 +12988,7 @@ export enum HandoverjobStatus {
     CANCELED = 'CANCELED'
 }
 /**
- * 
+ * HealthDependencyStatus
  * @export
  * @interface HealthDependencyStatus
  */
@@ -9743,7 +13007,7 @@ export interface HealthDependencyStatus {
     status: HealthStatus;
 }
 /**
- * 
+ * HealthResult
  * @export
  * @interface HealthResult
  */
@@ -9762,7 +13026,7 @@ export interface HealthResult {
     dependencies: Array<HealthDependencyStatus>;
 }
 /**
- * 
+ * HealthStatus
  * @export
  * @enum {string}
  */
@@ -9771,23 +13035,56 @@ export enum HealthStatus {
     DOWN = 'DOWN'
 }
 /**
- * 
+ * Configuration of Hermes Carrier
+ * @export
+ * @interface HermesCarrierConfiguration
+ */
+export interface HermesCarrierConfiguration extends CarrierConfiguration {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof HermesCarrierConfiguration
+     */
+    alwaysDoTrackAndTrace?: boolean;
+}
+/**
+ * Hermes Credentials.
+ * @export
+ * @interface HermesCarrierCredentials
+ */
+export interface HermesCarrierCredentials extends AbstractCarrierCredentials {
+    /**
+     * Internal user to identify with the Hermes Api
+     * @type {string}
+     * @memberof HermesCarrierCredentials
+     */
+    username: string;
+    /**
+     * Password to authenticate with the Hermes Api
+     * @type {string}
+     * @memberof HermesCarrierCredentials
+     */
+    password: string;
+}
+/**
+ * Hermes Facility Carrier Configuration.
+ * @export
+ * @interface HermesFacilityCarrierConfiguration
+ */
+export interface HermesFacilityCarrierConfiguration extends AbstractFacilityCarrierConfiguration {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof HermesFacilityCarrierConfiguration
+     */
+    alwaysDoTrackAndTrace?: boolean;
+}
+/**
+ * InboundAttachment
  * @export
  * @interface InboundAttachment
  */
 export interface InboundAttachment {
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundAttachment
-     */
-    id: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InboundAttachment
-     */
-    version: number;
     /**
      * 
      * @type {Date}
@@ -9796,32 +13093,44 @@ export interface InboundAttachment {
     created?: Date;
     /**
      * 
+     * @type {string}
+     * @memberof InboundAttachment
+     */
+    id: string;
+    /**
+     * 
      * @type {Date}
      * @memberof InboundAttachment
      */
     lastModified?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof InboundAttachment
+     */
+    version: number;
 }
 /**
- * 
+ * InboundAttachmentForCreation
  * @export
  * @interface InboundAttachmentForCreation
  */
 export interface InboundAttachmentForCreation {
-    /**
-     * File name of attachment
-     * @type {string}
-     * @memberof InboundAttachmentForCreation
-     */
-    fileName: string;
     /**
      * Base64 encoded attachment file
      * @type {string}
      * @memberof InboundAttachmentForCreation
      */
     content: string;
+    /**
+     * File name of attachment
+     * @type {string}
+     * @memberof InboundAttachmentForCreation
+     */
+    fileName: string;
 }
 /**
- * 
+ * InboundAttachmentLink
  * @export
  * @interface InboundAttachmentLink
  */
@@ -9834,29 +13143,17 @@ export interface InboundAttachmentLink {
     inboundAttachmentRef: string;
 }
 /**
- * 
+ * InboundDeliveryFinishedPayload
  * @export
  * @interface InboundDeliveryFinishedPayload
  */
 export interface InboundDeliveryFinishedPayload {
     /**
-     * 
-     * @type {string}
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
      * @memberof InboundDeliveryFinishedPayload
      */
-    inboundProcessRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundDeliveryFinishedPayload
-     */
-    tenantInboundProcessRef?: string;
-    /**
-     * 
-     * @type {InboundProcessPurchaseOrder}
-     * @memberof InboundDeliveryFinishedPayload
-     */
-    purchaseOrder?: InboundProcessPurchaseOrder;
+    customAttributes?: any;
     /**
      * 
      * @type {string}
@@ -9868,7 +13165,7 @@ export interface InboundDeliveryFinishedPayload {
      * @type {string}
      * @memberof InboundDeliveryFinishedPayload
      */
-    status: InboundDeliveryFinishedPayload.StatusEnum;
+    inboundProcessRef: string;
     /**
      * 
      * @type {boolean}
@@ -9877,10 +13174,28 @@ export interface InboundDeliveryFinishedPayload {
     onHold: boolean;
     /**
      * 
+     * @type {InboundProcessPurchaseOrder}
+     * @memberof InboundDeliveryFinishedPayload
+     */
+    purchaseOrder?: InboundProcessPurchaseOrder;
+    /**
+     * 
      * @type {Array<InboundReceipt>}
      * @memberof InboundDeliveryFinishedPayload
      */
     receipts: Array<InboundReceipt>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliveryFinishedPayload
+     */
+    status: InboundDeliveryFinishedPayload.StatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliveryFinishedPayload
+     */
+    tenantInboundProcessRef?: string;
 }
 
 /**
@@ -9900,7 +13215,7 @@ export namespace InboundDeliveryFinishedPayload {
     }
 }
 /**
- * 
+ * InboundDeliveryFinishedWebHookEvent
  * @export
  * @interface InboundDeliveryFinishedWebHookEvent
  */
@@ -9913,29 +13228,17 @@ export interface InboundDeliveryFinishedWebHookEvent extends WebHookEvent {
     payload: InboundDeliveryFinishedPayload;
 }
 /**
- * 
+ * InboundDeliveryOnHoldPayload
  * @export
  * @interface InboundDeliveryOnHoldPayload
  */
 export interface InboundDeliveryOnHoldPayload {
     /**
-     * 
-     * @type {string}
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
      * @memberof InboundDeliveryOnHoldPayload
      */
-    inboundProcessRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundDeliveryOnHoldPayload
-     */
-    tenantInboundProcessRef?: string;
-    /**
-     * 
-     * @type {InboundProcessPurchaseOrder}
-     * @memberof InboundDeliveryOnHoldPayload
-     */
-    purchaseOrder?: InboundProcessPurchaseOrder;
+    customAttributes?: any;
     /**
      * 
      * @type {string}
@@ -9947,13 +13250,31 @@ export interface InboundDeliveryOnHoldPayload {
      * @type {string}
      * @memberof InboundDeliveryOnHoldPayload
      */
-    status: InboundDeliveryOnHoldPayload.StatusEnum;
+    inboundProcessRef: string;
     /**
      * 
      * @type {boolean}
      * @memberof InboundDeliveryOnHoldPayload
      */
     onHold: boolean;
+    /**
+     * 
+     * @type {InboundProcessPurchaseOrder}
+     * @memberof InboundDeliveryOnHoldPayload
+     */
+    purchaseOrder?: InboundProcessPurchaseOrder;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliveryOnHoldPayload
+     */
+    status: InboundDeliveryOnHoldPayload.StatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliveryOnHoldPayload
+     */
+    tenantInboundProcessRef?: string;
 }
 
 /**
@@ -9973,7 +13294,7 @@ export namespace InboundDeliveryOnHoldPayload {
     }
 }
 /**
- * 
+ * InboundDeliveryOnHoldWebHookEvent
  * @export
  * @interface InboundDeliveryOnHoldWebHookEvent
  */
@@ -9986,29 +13307,17 @@ export interface InboundDeliveryOnHoldWebHookEvent extends WebHookEvent {
     payload: InboundDeliveryOnHoldPayload;
 }
 /**
- * 
+ * InboundDeliveryReceivedPayload
  * @export
  * @interface InboundDeliveryReceivedPayload
  */
 export interface InboundDeliveryReceivedPayload {
     /**
-     * 
-     * @type {string}
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
      * @memberof InboundDeliveryReceivedPayload
      */
-    inboundProcessRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundDeliveryReceivedPayload
-     */
-    tenantInboundProcessRef?: string;
-    /**
-     * 
-     * @type {InboundProcessPurchaseOrder}
-     * @memberof InboundDeliveryReceivedPayload
-     */
-    purchaseOrder?: InboundProcessPurchaseOrder;
+    customAttributes?: any;
     /**
      * 
      * @type {string}
@@ -10020,7 +13329,7 @@ export interface InboundDeliveryReceivedPayload {
      * @type {string}
      * @memberof InboundDeliveryReceivedPayload
      */
-    status: InboundDeliveryReceivedPayload.StatusEnum;
+    inboundProcessRef: string;
     /**
      * 
      * @type {boolean}
@@ -10029,10 +13338,28 @@ export interface InboundDeliveryReceivedPayload {
     onHold: boolean;
     /**
      * 
+     * @type {InboundProcessPurchaseOrder}
+     * @memberof InboundDeliveryReceivedPayload
+     */
+    purchaseOrder?: InboundProcessPurchaseOrder;
+    /**
+     * 
      * @type {InboundReceipt}
      * @memberof InboundDeliveryReceivedPayload
      */
     receipt: InboundReceipt;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliveryReceivedPayload
+     */
+    status: InboundDeliveryReceivedPayload.StatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliveryReceivedPayload
+     */
+    tenantInboundProcessRef?: string;
 }
 
 /**
@@ -10052,7 +13379,7 @@ export namespace InboundDeliveryReceivedPayload {
     }
 }
 /**
- * 
+ * InboundDeliveryReceivedWebHookEvent
  * @export
  * @interface InboundDeliveryReceivedWebHookEvent
  */
@@ -10065,29 +13392,17 @@ export interface InboundDeliveryReceivedWebHookEvent extends WebHookEvent {
     payload: InboundDeliveryReceivedPayload;
 }
 /**
- * 
+ * InboundDeliveryReleasedPayload
  * @export
  * @interface InboundDeliveryReleasedPayload
  */
 export interface InboundDeliveryReleasedPayload {
     /**
-     * 
-     * @type {string}
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
      * @memberof InboundDeliveryReleasedPayload
      */
-    inboundProcessRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundDeliveryReleasedPayload
-     */
-    tenantInboundProcessRef?: string;
-    /**
-     * 
-     * @type {InboundProcessPurchaseOrder}
-     * @memberof InboundDeliveryReleasedPayload
-     */
-    purchaseOrder?: InboundProcessPurchaseOrder;
+    customAttributes?: any;
     /**
      * 
      * @type {string}
@@ -10099,13 +13414,31 @@ export interface InboundDeliveryReleasedPayload {
      * @type {string}
      * @memberof InboundDeliveryReleasedPayload
      */
-    status: InboundDeliveryReleasedPayload.StatusEnum;
+    inboundProcessRef: string;
     /**
      * 
      * @type {boolean}
      * @memberof InboundDeliveryReleasedPayload
      */
     onHold: boolean;
+    /**
+     * 
+     * @type {InboundProcessPurchaseOrder}
+     * @memberof InboundDeliveryReleasedPayload
+     */
+    purchaseOrder?: InboundProcessPurchaseOrder;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliveryReleasedPayload
+     */
+    status: InboundDeliveryReleasedPayload.StatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliveryReleasedPayload
+     */
+    tenantInboundProcessRef?: string;
 }
 
 /**
@@ -10125,7 +13458,7 @@ export namespace InboundDeliveryReleasedPayload {
     }
 }
 /**
- * 
+ * InboundDeliveryReleasedWebHookEvent
  * @export
  * @interface InboundDeliveryReleasedWebHookEvent
  */
@@ -10138,17 +13471,89 @@ export interface InboundDeliveryReleasedWebHookEvent extends WebHookEvent {
     payload: InboundDeliveryReleasedPayload;
 }
 /**
- * 
+ * InboundDeliverySingleReceiptPayload
+ * @export
+ * @interface InboundDeliverySingleReceiptPayload
+ */
+export interface InboundDeliverySingleReceiptPayload {
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InboundDeliverySingleReceiptPayload
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliverySingleReceiptPayload
+     */
+    facilityRef: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliverySingleReceiptPayload
+     */
+    inboundProcessRef: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InboundDeliverySingleReceiptPayload
+     */
+    onHold: boolean;
+    /**
+     * 
+     * @type {InboundProcessPurchaseOrder}
+     * @memberof InboundDeliverySingleReceiptPayload
+     */
+    purchaseOrder?: InboundProcessPurchaseOrder;
+    /**
+     * 
+     * @type {InboundReceipt}
+     * @memberof InboundDeliverySingleReceiptPayload
+     */
+    receipt: InboundReceipt;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliverySingleReceiptPayload
+     */
+    status: InboundDeliverySingleReceiptPayload.StatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundDeliverySingleReceiptPayload
+     */
+    tenantInboundProcessRef?: string;
+}
+
+/**
+ * @export
+ * @namespace InboundDeliverySingleReceiptPayload
+ */
+export namespace InboundDeliverySingleReceiptPayload {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum StatusEnum {
+        OPEN = 'OPEN',
+        PARTIALDELIVERY = 'PARTIAL_DELIVERY',
+        ONHOLD = 'ON_HOLD',
+        CLOSED = 'CLOSED'
+    }
+}
+/**
+ * InboundLineItem
  * @export
  * @interface InboundLineItem
  */
 export interface InboundLineItem {
     /**
-     * 
-     * @type {string}
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
      * @memberof InboundLineItem
      */
-    tenantArticleId: string;
+    customAttributes?: any;
     /**
      * 
      * @type {Quantity}
@@ -10161,25 +13566,25 @@ export interface InboundLineItem {
      * @memberof InboundLineItem
      */
     stockProperties?: StockPropertyPreset;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundLineItem
+     */
+    tenantArticleId: string;
 }
 /**
- * 
+ * InboundProcess
  * @export
  * @interface InboundProcess
  */
 export interface InboundProcess {
     /**
-     * 
-     * @type {string}
+     * Indicates the inbound process was anonymized acording to configured GDPR retention time.
+     * @type {boolean}
      * @memberof InboundProcess
      */
-    id: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof InboundProcess
-     */
-    version: number;
+    anonymized: boolean;
     /**
      * 
      * @type {Date}
@@ -10187,17 +13592,11 @@ export interface InboundProcess {
      */
     created: Date;
     /**
-     * 
-     * @type {Date}
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
      * @memberof InboundProcess
      */
-    lastModified: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundProcess
-     */
-    tenantInboundProcessId?: string;
+    customAttributes?: any;
     /**
      * 
      * @type {string}
@@ -10209,37 +13608,31 @@ export interface InboundProcess {
      * @type {string}
      * @memberof InboundProcess
      */
-    status: InboundProcess.StatusEnum;
+    id: string;
     /**
-     * 
-     * @type {boolean}
-     * @memberof InboundProcess
-     */
-    onHold: boolean;
-    /**
-     * 
+     * Aggregated dates from sources which advise incoming stock. Currently that is \"purchaseOrder\"
      * @type {Array<Date>}
      * @memberof InboundProcess
      */
     inboundDate: Array<Date>;
     /**
      * 
+     * @type {Date}
+     * @memberof InboundProcess
+     */
+    lastModified: Date;
+    /**
+     * Indicates if the inbound process is on hold and will not be processed further
+     * @type {boolean}
+     * @memberof InboundProcess
+     */
+    onHold: boolean;
+    /**
+     * Aggregated origin data from sources which advise incoming stock. Currently that is just  \"purchaseOrder\"
      * @type {Array<InboundProcessOrigin>}
      * @memberof InboundProcess
      */
     origin: Array<InboundProcessOrigin>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InboundProcess
-     */
-    scannableCodes: Array<string>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InboundProcess
-     */
-    anonymized: boolean;
     /**
      * 
      * @type {InboundProcessPurchaseOrder}
@@ -10253,11 +13646,29 @@ export interface InboundProcess {
      */
     receipts: Array<InboundReceipt>;
     /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
+     * scannableCodes such as barcodes that are relevant in the inboundProcess, e.g. , barcode of the delivery note
+     * @type {Array<string>}
      * @memberof InboundProcess
      */
-    customAttributes?: any;
+    scannableCodes: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundProcess
+     */
+    status: InboundProcess.StatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundProcess
+     */
+    tenantInboundProcessId?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InboundProcess
+     */
+    version: number;
 }
 
 /**
@@ -10277,31 +13688,25 @@ export namespace InboundProcess {
     }
 }
 /**
- * 
+ * InboundProcessForCreation
  * @export
  * @interface InboundProcessForCreation
  */
 export interface InboundProcessForCreation {
     /**
-     * 
-     * @type {string}
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
      * @memberof InboundProcessForCreation
      */
-    tenantInboundProcessId?: string;
+    customAttributes?: any;
     /**
-     * 
+     * Facility in which the inbound process takes place
      * @type {string}
      * @memberof InboundProcessForCreation
      */
     facilityRef: string;
     /**
-     * 
-     * @type {Array<InboundReceiptForCreation>}
-     * @memberof InboundProcessForCreation
-     */
-    receipts?: Array<InboundReceiptForCreation>;
-    /**
-     * 
+     * Indicates if the inbound process is on hold and will not be processed further
      * @type {boolean}
      * @memberof InboundProcessForCreation
      */
@@ -10314,41 +13719,47 @@ export interface InboundProcessForCreation {
     purchaseOrder?: InboundProcessPurchaseOrderForCreation;
     /**
      * 
+     * @type {Array<InboundReceiptForCreation>}
+     * @memberof InboundProcessForCreation
+     */
+    receipts?: Array<InboundReceiptForCreation>;
+    /**
+     * scannableCodes such as barcodes that are relevant in the inboundProcess, e.g. , barcode of the delivery note
      * @type {Array<string>}
      * @memberof InboundProcessForCreation
      */
     scannableCodes?: Array<string>;
     /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
+     * Identifier of the process provided by the tenant system. It is recommended to be unique
+     * @type {string}
      * @memberof InboundProcessForCreation
      */
-    customAttributes?: any;
+    tenantInboundProcessId?: string;
 }
 /**
- * 
+ * InboundProcessForPatch
  * @export
  * @interface InboundProcessForPatch
  */
 export interface InboundProcessForPatch {
     /**
-     * 
-     * @type {boolean}
-     * @memberof InboundProcessForPatch
-     */
-    onHold?: boolean;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InboundProcessForPatch
-     */
-    scannableCodes?: Array<string>;
-    /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
      * @memberof InboundProcessForPatch
      */
     customAttributes?: any;
+    /**
+     * Indicates if the inbound process is on hold and will not be processed further
+     * @type {boolean}
+     * @memberof InboundProcessForPatch
+     */
+    onHold?: boolean;
+    /**
+     * scannableCodes such as barcodes that are relevant in the inboundProcess, e.g. , barcode of the delivery note
+     * @type {Array<string>}
+     * @memberof InboundProcessForPatch
+     */
+    scannableCodes?: Array<string>;
     /**
      * 
      * @type {number}
@@ -10357,7 +13768,7 @@ export interface InboundProcessForPatch {
     version: number;
 }
 /**
- * 
+ * InboundProcessOrigin
  * @export
  * @interface InboundProcessOrigin
  */
@@ -10370,30 +13781,48 @@ export interface InboundProcessOrigin {
     name?: string;
 }
 /**
- * 
+ * InboundProcessPaginatedResult
  * @export
  * @interface InboundProcessPaginatedResult
  */
 export interface InboundProcessPaginatedResult {
     /**
      * 
+     * @type {Array<InboundProcess>}
+     * @memberof InboundProcessPaginatedResult
+     */
+    inboundProcesses: Array<InboundProcess>;
+    /**
+     * The total number of items matching the search criteria. Only filled, if withTotal is set to true in the search options.
      * @type {number}
      * @memberof InboundProcessPaginatedResult
      */
-    total: number;
-    /**
-     * 
-     * @type {Array<StrippedInboundProcess>}
-     * @memberof InboundProcessPaginatedResult
-     */
-    inboundProcesses: Array<StrippedInboundProcess>;
+    total?: number;
 }
 /**
- * 
+ * InboundProcessPurchaseOrder
  * @export
  * @interface InboundProcessPurchaseOrder
  */
 export interface InboundProcessPurchaseOrder {
+    /**
+     * This field is deprecated. Set the status to 'CANCELED' Set the purchaseOrder to 'cancelled'. No further deliveries will be expected. Already received goods are unaffected.
+     * @type {boolean}
+     * @memberof InboundProcessPurchaseOrder
+     */
+    cancelled: boolean;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InboundProcessPurchaseOrder
+     */
+    created: Date;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InboundProcessPurchaseOrder
+     */
+    customAttributes?: any;
     /**
      * 
      * @type {string}
@@ -10405,27 +13834,21 @@ export interface InboundProcessPurchaseOrder {
      * @type {Date}
      * @memberof InboundProcessPurchaseOrder
      */
-    created: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof InboundProcessPurchaseOrder
-     */
     lastModified: Date;
     /**
-     * 
+     * Time and date at which the order was placed. Note: This does not refer to the creation date of this entity in the system.
      * @type {Date}
      * @memberof InboundProcessPurchaseOrder
      */
     orderDate: Date;
     /**
-     * 
-     * @type {RequestedDate}
+     * Time and date at which the order is expected to arrive. Use 'ASAP' for deliveries with unknown date, but be aware that some features will not include these orders.
+     * @type {InputRequestedDate}
      * @memberof InboundProcessPurchaseOrder
      */
-    requestedDate: RequestedDate;
+    requestedDate: InputRequestedDate;
     /**
-     * 
+     * Line items which are expected to be delivered.
      * @type {Array<InboundLineItem>}
      * @memberof InboundProcessPurchaseOrder
      */
@@ -10438,28 +13861,16 @@ export interface InboundProcessPurchaseOrder {
     status: InboundProcessPurchaseOrder.StatusEnum;
     /**
      * 
-     * @type {boolean}
-     * @memberof InboundProcessPurchaseOrder
-     */
-    cancelled: boolean;
-    /**
-     * 
      * @type {InboundProcessPurchaseOrderSupplier}
      * @memberof InboundProcessPurchaseOrder
      */
     supplier?: InboundProcessPurchaseOrderSupplier;
     /**
-     * 
+     * Includes data about transfer between different facilities in the tenant's network.
      * @type {InboundProcessPurchaseOrderTransfer}
      * @memberof InboundProcessPurchaseOrder
      */
     transfer?: InboundProcessPurchaseOrderTransfer;
-    /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof InboundProcessPurchaseOrder
-     */
-    customAttributes?: any;
 }
 
 /**
@@ -10472,29 +13883,97 @@ export namespace InboundProcessPurchaseOrder {
      * @enum {string}
      */
     export enum StatusEnum {
-        OPEN = 'OPEN'
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
     }
 }
 /**
- * 
+ * InboundProcessPurchaseOrderFilter
+ * @export
+ * @interface InboundProcessPurchaseOrderFilter
+ */
+export interface InboundProcessPurchaseOrderFilter {
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof InboundProcessPurchaseOrderFilter
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof InboundProcessPurchaseOrderFilter
+     */
+    id?: StringFilter;
+    /**
+     * Search by orderDate
+     * @type {DateFilter}
+     * @memberof InboundProcessPurchaseOrderFilter
+     */
+    orderDate?: DateFilter;
+    /**
+     * Nested search by requestedDate
+     * @type {InboundProcessPurchaseOrderRequestedDateFilter}
+     * @memberof InboundProcessPurchaseOrderFilter
+     */
+    requestedDate?: InboundProcessPurchaseOrderRequestedDateFilter;
+    /**
+     * Nested list search by requestedItems
+     * @type {InboundProcessPurchaseOrderRequestedItemsListFilter}
+     * @memberof InboundProcessPurchaseOrderFilter
+     */
+    requestedItems?: InboundProcessPurchaseOrderRequestedItemsListFilter;
+    /**
+     * Search by status
+     * @type {InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter}
+     * @memberof InboundProcessPurchaseOrderFilter
+     */
+    status?: InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter;
+    /**
+     * Nested search by supplier
+     * @type {InboundProcessPurchaseOrderSupplierFilter}
+     * @memberof InboundProcessPurchaseOrderFilter
+     */
+    supplier?: InboundProcessPurchaseOrderSupplierFilter;
+    /**
+     * Nested search by transfer
+     * @type {InboundProcessPurchaseOrderTransferFilter}
+     * @memberof InboundProcessPurchaseOrderFilter
+     */
+    transfer?: InboundProcessPurchaseOrderTransferFilter;
+}
+/**
+ * InboundProcessPurchaseOrderForCreation
  * @export
  * @interface InboundProcessPurchaseOrderForCreation
  */
 export interface InboundProcessPurchaseOrderForCreation {
     /**
-     * 
+     * This field is deprecated. Set the status to 'CANCELED' Set the purchaseOrder to 'cancelled'. No further deliveries will be expected. Already received goods are unaffected.
+     * @type {boolean}
+     * @memberof InboundProcessPurchaseOrderForCreation
+     */
+    cancelled?: boolean;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InboundProcessPurchaseOrderForCreation
+     */
+    customAttributes?: any;
+    /**
+     * Time and date at which the order was placed. Note: This does not refer to the creation date of this entity in the system.
      * @type {Date}
      * @memberof InboundProcessPurchaseOrderForCreation
      */
     orderDate: Date;
     /**
-     * 
+     * Time and date at which the order is expected to arrive. Use 'ASAP' for deliveries with unknown date, but be aware that some features will not include these orders.
      * @type {InputRequestedDate}
      * @memberof InboundProcessPurchaseOrderForCreation
      */
     requestedDate: InputRequestedDate;
     /**
-     * 
+     * Line items which are expected to be delivered.
      * @type {Array<InboundLineItem>}
      * @memberof InboundProcessPurchaseOrderForCreation
      */
@@ -10507,22 +13986,10 @@ export interface InboundProcessPurchaseOrderForCreation {
     status?: InboundProcessPurchaseOrderForCreation.StatusEnum;
     /**
      * 
-     * @type {boolean}
-     * @memberof InboundProcessPurchaseOrderForCreation
-     */
-    cancelled?: boolean;
-    /**
-     * 
      * @type {InboundProcessPurchaseOrderSupplier}
      * @memberof InboundProcessPurchaseOrderForCreation
      */
     supplier?: InboundProcessPurchaseOrderSupplier;
-    /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof InboundProcessPurchaseOrderForCreation
-     */
-    customAttributes?: any;
 }
 
 /**
@@ -10535,29 +14002,42 @@ export namespace InboundProcessPurchaseOrderForCreation {
      * @enum {string}
      */
     export enum StatusEnum {
-        OPEN = 'OPEN'
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
     }
 }
 /**
- * 
+ * InboundProcessPurchaseOrderForUpsert
  * @export
  * @interface InboundProcessPurchaseOrderForUpsert
  */
 export interface InboundProcessPurchaseOrderForUpsert {
     /**
-     * 
+     * This field is deprecated. Set the status to 'CANCELED' Set the purchaseOrder to 'cancelled'. No further deliveries will be expected. Already received goods are unaffected.
+     * @type {boolean}
+     * @memberof InboundProcessPurchaseOrderForUpsert
+     */
+    cancelled?: boolean;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InboundProcessPurchaseOrderForUpsert
+     */
+    customAttributes?: any;
+    /**
+     * Time and date at which the order was placed. Note: This does not refer to the creation date of this entity in the system.
      * @type {Date}
      * @memberof InboundProcessPurchaseOrderForUpsert
      */
     orderDate: Date;
     /**
-     * 
+     * Time and date at which the order is expected to arrive. Use 'ASAP' for deliveries with unknown date, but be aware that some features will not include these orders.
      * @type {InputRequestedDate}
      * @memberof InboundProcessPurchaseOrderForUpsert
      */
     requestedDate: InputRequestedDate;
     /**
-     * 
+     * Line items which are expected to be delivered.
      * @type {Array<InboundLineItem>}
      * @memberof InboundProcessPurchaseOrderForUpsert
      */
@@ -10570,22 +14050,10 @@ export interface InboundProcessPurchaseOrderForUpsert {
     status?: InboundProcessPurchaseOrderForUpsert.StatusEnum;
     /**
      * 
-     * @type {boolean}
-     * @memberof InboundProcessPurchaseOrderForUpsert
-     */
-    cancelled?: boolean;
-    /**
-     * 
      * @type {InboundProcessPurchaseOrderSupplier}
      * @memberof InboundProcessPurchaseOrderForUpsert
      */
     supplier?: InboundProcessPurchaseOrderSupplier;
-    /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof InboundProcessPurchaseOrderForUpsert
-     */
-    customAttributes?: any;
     /**
      * 
      * @type {number}
@@ -10604,24 +14072,226 @@ export namespace InboundProcessPurchaseOrderForUpsert {
      * @enum {string}
      */
     export enum StatusEnum {
-        OPEN = 'OPEN'
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
     }
 }
 /**
- * 
+ * InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter
+ * @export
+ * @interface InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter
+ */
+export interface InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter
+     */
+    eq?: InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter
+     */
+    _in?: InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter
+     */
+    notEq?: InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter
+ */
+export namespace InboundProcessPurchaseOrderPurchaseOrderStatusEnumEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
+    }
+}
+/**
+ * InboundProcessPurchaseOrderRequestedDateFilter
+ * @export
+ * @interface InboundProcessPurchaseOrderRequestedDateFilter
+ */
+export interface InboundProcessPurchaseOrderRequestedDateFilter {
+    /**
+     * Search by type
+     * @type {InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter}
+     * @memberof InboundProcessPurchaseOrderRequestedDateFilter
+     */
+    type?: InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter;
+    /**
+     * Search by value
+     * @type {DateFilter}
+     * @memberof InboundProcessPurchaseOrderRequestedDateFilter
+     */
+    value?: DateFilter;
+}
+/**
+ * InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter
+ * @export
+ * @interface InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter
+ */
+export interface InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter {
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter
+     */
+    eq?: InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter.EqEnum;
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter
+     */
+    _in?: InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter.InEnum;
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter
+     */
+    notEq?: InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter
+ */
+export namespace InboundProcessPurchaseOrderRequestedDateRequestedDateTypeEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        ASAP = 'ASAP',
+        TIMEPOINT = 'TIME_POINT'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        ASAP = 'ASAP',
+        TIMEPOINT = 'TIME_POINT'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        ASAP = 'ASAP',
+        TIMEPOINT = 'TIME_POINT'
+    }
+}
+/**
+ * InboundProcessPurchaseOrderRequestedItemsFilter
+ * @export
+ * @interface InboundProcessPurchaseOrderRequestedItemsFilter
+ */
+export interface InboundProcessPurchaseOrderRequestedItemsFilter {
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof InboundProcessPurchaseOrderRequestedItemsFilter
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by stockProperties
+     * @type {{ [key: string]: StringFilter | KeyExistsFilter; }}
+     * @memberof InboundProcessPurchaseOrderRequestedItemsFilter
+     */
+    stockProperties?: { [key: string]: StringFilter | KeyExistsFilter; };
+    /**
+     * Search by tenantArticleId
+     * @type {StringFilter}
+     * @memberof InboundProcessPurchaseOrderRequestedItemsFilter
+     */
+    tenantArticleId?: StringFilter;
+}
+/**
+ * InboundProcessPurchaseOrderRequestedItemsListFilter
+ * @export
+ * @interface InboundProcessPurchaseOrderRequestedItemsListFilter
+ */
+export interface InboundProcessPurchaseOrderRequestedItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {InboundProcessPurchaseOrderRequestedItemsFilter}
+     * @memberof InboundProcessPurchaseOrderRequestedItemsListFilter
+     */
+    contains?: InboundProcessPurchaseOrderRequestedItemsFilter;
+}
+/**
+ * InboundProcessPurchaseOrderSort
+ * @export
+ * @interface InboundProcessPurchaseOrderSort
+ */
+export interface InboundProcessPurchaseOrderSort {
+    /**
+     * 
+     * @type {InboundProcessRequestedDateSort}
+     * @memberof InboundProcessPurchaseOrderSort
+     */
+    requestedDate?: InboundProcessRequestedDateSort;
+    /**
+     * 
+     * @type {InboundProcessSupplierSort}
+     * @memberof InboundProcessPurchaseOrderSort
+     */
+    supplier?: InboundProcessSupplierSort;
+}
+/**
+ * InboundProcessPurchaseOrderSupplier
  * @export
  * @interface InboundProcessPurchaseOrderSupplier
  */
 export interface InboundProcessPurchaseOrderSupplier {
     /**
-     * 
+     * Name of the supplier.
      * @type {string}
      * @memberof InboundProcessPurchaseOrderSupplier
      */
     name?: string;
 }
 /**
- * 
+ * InboundProcessPurchaseOrderSupplierFilter
+ * @export
+ * @interface InboundProcessPurchaseOrderSupplierFilter
+ */
+export interface InboundProcessPurchaseOrderSupplierFilter {
+    /**
+     * Search by name
+     * @type {StringFilter}
+     * @memberof InboundProcessPurchaseOrderSupplierFilter
+     */
+    name?: StringFilter;
+}
+/**
+ * InboundProcessPurchaseOrderTransfer
  * @export
  * @interface InboundProcessPurchaseOrderTransfer
  */
@@ -10634,41 +14304,499 @@ export interface InboundProcessPurchaseOrderTransfer {
     id: string;
 }
 /**
- * 
+ * InboundProcessPurchaseOrderTransferFilter
+ * @export
+ * @interface InboundProcessPurchaseOrderTransferFilter
+ */
+export interface InboundProcessPurchaseOrderTransferFilter {
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof InboundProcessPurchaseOrderTransferFilter
+     */
+    id?: StringFilter;
+}
+/**
+ * InboundProcessReceiptBulkWebHookEvent
+ * @export
+ * @interface InboundProcessReceiptBulkWebHookEvent
+ */
+export interface InboundProcessReceiptBulkWebHookEvent {
+    /**
+     * 
+     * @type {InboundProcessReceiptBulkWebHookEventPayload}
+     * @memberof InboundProcessReceiptBulkWebHookEvent
+     */
+    payload: InboundProcessReceiptBulkWebHookEventPayload;
+}
+/**
+ * InboundProcessReceiptBulkWebHookEventPayload
+ * @export
+ * @interface InboundProcessReceiptBulkWebHookEventPayload
+ */
+export interface InboundProcessReceiptBulkWebHookEventPayload {
+    /**
+     * 
+     * @type {Array<InboundDeliverySingleReceiptPayload>}
+     * @memberof InboundProcessReceiptBulkWebHookEventPayload
+     */
+    items: Array<InboundDeliverySingleReceiptPayload>;
+}
+/**
+ * InboundProcessReceiptsFilter
+ * @export
+ * @interface InboundProcessReceiptsFilter
+ */
+export interface InboundProcessReceiptsFilter {
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof InboundProcessReceiptsFilter
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof InboundProcessReceiptsFilter
+     */
+    id?: StringFilter;
+    /**
+     * Search by receivedDate
+     * @type {DateFilter}
+     * @memberof InboundProcessReceiptsFilter
+     */
+    receivedDate?: DateFilter;
+    /**
+     * Nested list search by receivedItems
+     * @type {InboundProcessReceiptsReceivedItemsListFilter}
+     * @memberof InboundProcessReceiptsFilter
+     */
+    receivedItems?: InboundProcessReceiptsReceivedItemsListFilter;
+    /**
+     * Search by status
+     * @type {InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter}
+     * @memberof InboundProcessReceiptsFilter
+     */
+    status?: InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter;
+}
+/**
+ * InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter
+ * @export
+ * @interface InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter
+ */
+export interface InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter
+     */
+    eq?: InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter
+     */
+    _in?: InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter
+     */
+    notEq?: InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter
+ */
+export namespace InboundProcessReceiptsInboundReceiptStatusTypeEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        FINISHED = 'FINISHED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        FINISHED = 'FINISHED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        FINISHED = 'FINISHED'
+    }
+}
+/**
+ * InboundProcessReceiptsListFilter
+ * @export
+ * @interface InboundProcessReceiptsListFilter
+ */
+export interface InboundProcessReceiptsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {InboundProcessReceiptsFilter}
+     * @memberof InboundProcessReceiptsListFilter
+     */
+    contains?: InboundProcessReceiptsFilter;
+}
+/**
+ * InboundProcessReceiptsReceivedItemsFilter
+ * @export
+ * @interface InboundProcessReceiptsReceivedItemsFilter
+ */
+export interface InboundProcessReceiptsReceivedItemsFilter {
+    /**
+     * Search by stockProperties
+     * @type {{ [key: string]: StringFilter | KeyExistsFilter; }}
+     * @memberof InboundProcessReceiptsReceivedItemsFilter
+     */
+    stockProperties?: { [key: string]: StringFilter | KeyExistsFilter; };
+    /**
+     * Search by tenantArticleId
+     * @type {StringFilter}
+     * @memberof InboundProcessReceiptsReceivedItemsFilter
+     */
+    tenantArticleId?: StringFilter;
+}
+/**
+ * InboundProcessReceiptsReceivedItemsListFilter
+ * @export
+ * @interface InboundProcessReceiptsReceivedItemsListFilter
+ */
+export interface InboundProcessReceiptsReceivedItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {InboundProcessReceiptsReceivedItemsFilter}
+     * @memberof InboundProcessReceiptsReceivedItemsListFilter
+     */
+    contains?: InboundProcessReceiptsReceivedItemsFilter;
+}
+/**
+ * InboundProcessRequestedDateSort
+ * @export
+ * @interface InboundProcessRequestedDateSort
+ */
+export interface InboundProcessRequestedDateSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundProcessRequestedDateSort
+     */
+    type?: InboundProcessRequestedDateSort.TypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundProcessRequestedDateSort
+     */
+    value?: InboundProcessRequestedDateSort.ValueEnum;
+}
+
+/**
+ * @export
+ * @namespace InboundProcessRequestedDateSort
+ */
+export namespace InboundProcessRequestedDateSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ValueEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * InboundProcessSearchPayload
+ * @export
+ * @interface InboundProcessSearchPayload
+ */
+export interface InboundProcessSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof InboundProcessSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {InboundProcessSearchQuery}
+     * @memberof InboundProcessSearchPayload
+     */
+    query: InboundProcessSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof InboundProcessSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<InboundProcessSort>}
+     * @memberof InboundProcessSearchPayload
+     */
+    sort?: Array<InboundProcessSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof InboundProcessSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * InboundProcessSearchQuery
+ * @export
+ * @interface InboundProcessSearchQuery
+ */
+export interface InboundProcessSearchQuery {
+    /**
+     * 
+     * @type {Array<InboundProcessSearchQuery>}
+     * @memberof InboundProcessSearchQuery
+     */
+    and?: Array<InboundProcessSearchQuery>;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof InboundProcessSearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof InboundProcessSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof InboundProcessSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * Search by inboundDate
+     * @type {DateListFilter}
+     * @memberof InboundProcessSearchQuery
+     */
+    inboundDate?: DateListFilter;
+    /**
+     * 
+     * @type {Array<InboundProcessSearchQuery>}
+     * @memberof InboundProcessSearchQuery
+     */
+    or?: Array<InboundProcessSearchQuery>;
+    /**
+     * Nested search by purchaseOrder
+     * @type {InboundProcessPurchaseOrderFilter}
+     * @memberof InboundProcessSearchQuery
+     */
+    purchaseOrder?: InboundProcessPurchaseOrderFilter;
+    /**
+     * Nested list search by receipts
+     * @type {InboundProcessReceiptsListFilter}
+     * @memberof InboundProcessSearchQuery
+     */
+    receipts?: InboundProcessReceiptsListFilter;
+    /**
+     * Search by scannableCodes
+     * @type {StringListFilter}
+     * @memberof InboundProcessSearchQuery
+     */
+    scannableCodes?: StringListFilter;
+    /**
+     * Search by status
+     * @type {InboundProcessStatusTypeEnumFilter}
+     * @memberof InboundProcessSearchQuery
+     */
+    status?: InboundProcessStatusTypeEnumFilter;
+    /**
+     * Search by tenantInboundProcessId
+     * @type {StringFilter}
+     * @memberof InboundProcessSearchQuery
+     */
+    tenantInboundProcessId?: StringFilter;
+}
+/**
+ * InboundProcessSort
+ * @export
+ * @interface InboundProcessSort
+ */
+export interface InboundProcessSort {
+    /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof InboundProcessSort
+     */
+    customAttributes?: { [key: string]: any; };
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundProcessSort
+     */
+    lastModified?: InboundProcessSort.LastModifiedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundProcessSort
+     */
+    poCreated?: InboundProcessSort.PoCreatedEnum;
+    /**
+     * 
+     * @type {InboundProcessPurchaseOrderSort}
+     * @memberof InboundProcessSort
+     */
+    purchaseOrder?: InboundProcessPurchaseOrderSort;
+}
+
+/**
+ * @export
+ * @namespace InboundProcessSort
+ */
+export namespace InboundProcessSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum PoCreatedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * InboundProcessStatusTypeEnumFilter
+ * @export
+ * @interface InboundProcessStatusTypeEnumFilter
+ */
+export interface InboundProcessStatusTypeEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessStatusTypeEnumFilter
+     */
+    eq?: InboundProcessStatusTypeEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessStatusTypeEnumFilter
+     */
+    _in?: InboundProcessStatusTypeEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof InboundProcessStatusTypeEnumFilter
+     */
+    notEq?: InboundProcessStatusTypeEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace InboundProcessStatusTypeEnumFilter
+ */
+export namespace InboundProcessStatusTypeEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        PARTIALDELIVERY = 'PARTIAL_DELIVERY',
+        ONHOLD = 'ON_HOLD',
+        CLOSED = 'CLOSED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        PARTIALDELIVERY = 'PARTIAL_DELIVERY',
+        ONHOLD = 'ON_HOLD',
+        CLOSED = 'CLOSED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        PARTIALDELIVERY = 'PARTIAL_DELIVERY',
+        ONHOLD = 'ON_HOLD',
+        CLOSED = 'CLOSED'
+    }
+}
+/**
+ * InboundProcessSupplierSort
+ * @export
+ * @interface InboundProcessSupplierSort
+ */
+export interface InboundProcessSupplierSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundProcessSupplierSort
+     */
+    name?: InboundProcessSupplierSort.NameEnum;
+}
+
+/**
+ * @export
+ * @namespace InboundProcessSupplierSort
+ */
+export namespace InboundProcessSupplierSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * InboundReceipt
  * @export
  * @interface InboundReceipt
  */
 export interface InboundReceipt {
     /**
-     * 
+     * enables mapping a receipt to one of the ASNs in this inbound process
      * @type {string}
      * @memberof InboundReceipt
      */
     asnRef?: string;
     /**
-     * 
-     * @type {Date}
-     * @memberof InboundReceipt
-     */
-    receivedDate: Date;
-    /**
-     * 
-     * @type {Array<InboundReceiptLineItem>}
-     * @memberof InboundReceipt
-     */
-    receivedItems: Array<InboundReceiptLineItem>;
-    /**
-     * 
+     * comments regarding the receipt itself
      * @type {Array<InboundReceiptComment>}
      * @memberof InboundReceipt
      */
     comments: Array<InboundReceiptComment>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundReceipt
-     */
-    status?: InboundReceipt.StatusEnum;
     /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
@@ -10681,6 +14809,24 @@ export interface InboundReceipt {
      * @memberof InboundReceipt
      */
     id: string;
+    /**
+     * date-time of the arrival of the items in the facility
+     * @type {Date}
+     * @memberof InboundReceipt
+     */
+    receivedDate: Date;
+    /**
+     * list of item that arrived in the facility
+     * @type {Array<InboundReceiptLineItem>}
+     * @memberof InboundReceipt
+     */
+    receivedItems: Array<InboundReceiptLineItem>;
+    /**
+     * status of this receipt, only receipts with status 'FINISHED' are booked. IN_PROGRESS can be used to save partial receipts.
+     * @type {string}
+     * @memberof InboundReceipt
+     */
+    status?: InboundReceipt.StatusEnum;
 }
 
 /**
@@ -10693,77 +14839,146 @@ export namespace InboundReceipt {
      * @enum {string}
      */
     export enum StatusEnum {
+        OPEN = 'OPEN',
         INPROGRESS = 'IN_PROGRESS',
         FINISHED = 'FINISHED'
     }
 }
 /**
- * 
+ * InboundReceiptComment
  * @export
  * @interface InboundReceiptComment
  */
 export interface InboundReceiptComment {
     /**
-     * 
-     * @type {string}
+     * attachments such as photos or documents
+     * @type {Array<InboundAttachmentLink>}
      * @memberof InboundReceiptComment
      */
-    userRef?: string;
+    attachments?: Array<InboundAttachmentLink>;
     /**
-     * 
+     * text content of the comment
      * @type {string}
      * @memberof InboundReceiptComment
      */
     content: string;
     /**
-     * 
-     * @type {Array<InboundAttachmentLink>}
+     * reference to the documentSet that contains the attachments. Read-only field
+     * @type {string}
      * @memberof InboundReceiptComment
      */
-    attachments?: Array<InboundAttachmentLink>;
+    documentSetRef?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundReceiptComment
+     */
+    id?: string;
+    /**
+     * user that added the comment, is anonymized according to specified rules
+     * @type {string}
+     * @memberof InboundReceiptComment
+     */
+    userRef?: string;
 }
 /**
- * 
+ * InboundReceiptCommentForCreation
+ * @export
+ * @interface InboundReceiptCommentForCreation
+ */
+export interface InboundReceiptCommentForCreation {
+    /**
+     * attachments such as photos or documents
+     * @type {Array<InboundAttachmentLink>}
+     * @memberof InboundReceiptCommentForCreation
+     */
+    attachments?: Array<InboundAttachmentLink>;
+    /**
+     * text content of the comment
+     * @type {string}
+     * @memberof InboundReceiptCommentForCreation
+     */
+    content: string;
+    /**
+     * user that added the comment, is anonymized according to specified rules
+     * @type {string}
+     * @memberof InboundReceiptCommentForCreation
+     */
+    userRef?: string;
+}
+/**
+ * InboundReceiptCommentForUpdate
+ * @export
+ * @interface InboundReceiptCommentForUpdate
+ */
+export interface InboundReceiptCommentForUpdate {
+    /**
+     * attachments such as photos or documents
+     * @type {Array<InboundAttachmentLink>}
+     * @memberof InboundReceiptCommentForUpdate
+     */
+    attachments?: Array<InboundAttachmentLink>;
+    /**
+     * text content of the comment
+     * @type {string}
+     * @memberof InboundReceiptCommentForUpdate
+     */
+    content: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundReceiptCommentForUpdate
+     */
+    id?: string;
+    /**
+     * user that added the comment, is anonymized according to specified rules
+     * @type {string}
+     * @memberof InboundReceiptCommentForUpdate
+     */
+    userRef?: string;
+}
+/**
+ * InboundReceiptForCreation
  * @export
  * @interface InboundReceiptForCreation
  */
 export interface InboundReceiptForCreation {
     /**
-     * 
+     * enables mapping a receipt to one of the ASNs in this inbound process
      * @type {string}
      * @memberof InboundReceiptForCreation
      */
     asnRef?: string;
     /**
-     * 
-     * @type {Date}
+     * comments regarding the receipt itself
+     * @type {Array<InboundReceiptCommentForCreation>}
      * @memberof InboundReceiptForCreation
      */
-    receivedDate: Date;
-    /**
-     * 
-     * @type {Array<InboundReceiptLineItem>}
-     * @memberof InboundReceiptForCreation
-     */
-    receivedItems: Array<InboundReceiptLineItem>;
-    /**
-     * 
-     * @type {Array<InboundReceiptComment>}
-     * @memberof InboundReceiptForCreation
-     */
-    comments: Array<InboundReceiptComment>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundReceiptForCreation
-     */
-    status?: InboundReceiptForCreation.StatusEnum;
+    comments: Array<InboundReceiptCommentForCreation>;
     /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
      * @memberof InboundReceiptForCreation
      */
     customAttributes?: any;
+    /**
+     * date-time of the arrival of the items in the facility
+     * @type {Date}
+     * @memberof InboundReceiptForCreation
+     */
+    receivedDate: Date;
+    /**
+     * list of item that arrived in the facility
+     * @type {Array<InboundReceiptLineItemForCreation>}
+     * @memberof InboundReceiptForCreation
+     */
+    receivedItems: Array<InboundReceiptLineItemForCreation>;
+    /**
+     * status of this receipt, only receipts with status 'FINISHED' are booked. IN_PROGRESS can be used to save partial receipts.
+     * @type {string}
+     * @memberof InboundReceiptForCreation
+     */
+    status?: InboundReceiptForCreation.StatusEnum;
 }
 
 /**
@@ -10776,42 +14991,49 @@ export namespace InboundReceiptForCreation {
      * @enum {string}
      */
     export enum StatusEnum {
+        OPEN = 'OPEN',
         INPROGRESS = 'IN_PROGRESS',
         FINISHED = 'FINISHED'
     }
 }
 /**
- * 
+ * InboundReceiptForPatch
  * @export
  * @interface InboundReceiptForPatch
  */
 export interface InboundReceiptForPatch {
     /**
-     * 
+     * enables mapping a receipt to one of the ASNs in this inbound process
      * @type {string}
      * @memberof InboundReceiptForPatch
      */
     asnRef?: string;
     /**
-     * 
-     * @type {Array<InboundReceiptComment>}
+     * comments regarding the receipt itself
+     * @type {Array<InboundReceiptCommentForUpdate>}
      * @memberof InboundReceiptForPatch
      */
-    comments?: Array<InboundReceiptComment>;
+    comments?: Array<InboundReceiptCommentForUpdate>;
     /**
-     * 
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InboundReceiptForPatch
+     */
+    customAttributes?: any;
+    /**
+     * date-time of the arrival of the items in the facility
      * @type {Date}
      * @memberof InboundReceiptForPatch
      */
     receivedDate?: Date;
     /**
-     * 
-     * @type {Array<InboundReceiptLineItem>}
+     * list of item that arrived in the facility
+     * @type {Array<InboundReceiptLineItemForUpdate>}
      * @memberof InboundReceiptForPatch
      */
-    receivedItems?: Array<InboundReceiptLineItem>;
+    receivedItems?: Array<InboundReceiptLineItemForUpdate>;
     /**
-     * 
+     * status of this receipt, only receipts with status 'FINISHED' are booked. IN_PROGRESS can be used to save partial receipts.
      * @type {string}
      * @memberof InboundReceiptForPatch
      */
@@ -10822,12 +15044,6 @@ export interface InboundReceiptForPatch {
      * @memberof InboundReceiptForPatch
      */
     version: number;
-    /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof InboundReceiptForPatch
-     */
-    customAttributes?: any;
 }
 
 /**
@@ -10840,52 +15056,53 @@ export namespace InboundReceiptForPatch {
      * @enum {string}
      */
     export enum StatusEnum {
+        OPEN = 'OPEN',
         INPROGRESS = 'IN_PROGRESS',
         FINISHED = 'FINISHED'
     }
 }
 /**
- * 
+ * InboundReceiptForUpdate
  * @export
  * @interface InboundReceiptForUpdate
  */
 export interface InboundReceiptForUpdate {
     /**
-     * 
+     * enables mapping a receipt to one of the ASNs in this inbound process
      * @type {string}
      * @memberof InboundReceiptForUpdate
      */
     asnRef?: string;
     /**
-     * 
-     * @type {Date}
-     * @memberof InboundReceiptForUpdate
-     */
-    receivedDate: Date;
-    /**
-     * 
-     * @type {Array<InboundReceiptLineItem>}
-     * @memberof InboundReceiptForUpdate
-     */
-    receivedItems: Array<InboundReceiptLineItem>;
-    /**
-     * 
+     * comments regarding the receipt itself
      * @type {Array<InboundReceiptComment>}
      * @memberof InboundReceiptForUpdate
      */
     comments: Array<InboundReceiptComment>;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundReceiptForUpdate
-     */
-    status?: InboundReceiptForUpdate.StatusEnum;
     /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
      * @memberof InboundReceiptForUpdate
      */
     customAttributes?: any;
+    /**
+     * date-time of the arrival of the items in the facility
+     * @type {Date}
+     * @memberof InboundReceiptForUpdate
+     */
+    receivedDate: Date;
+    /**
+     * list of item that arrived in the facility
+     * @type {Array<InboundReceiptLineItemForUpdate>}
+     * @memberof InboundReceiptForUpdate
+     */
+    receivedItems: Array<InboundReceiptLineItemForUpdate>;
+    /**
+     * status of this receipt, only receipts with status 'FINISHED' are booked. IN_PROGRESS can be used to save partial receipts.
+     * @type {string}
+     * @memberof InboundReceiptForUpdate
+     */
+    status?: InboundReceiptForUpdate.StatusEnum;
     /**
      * 
      * @type {number}
@@ -10904,22 +15121,23 @@ export namespace InboundReceiptForUpdate {
      * @enum {string}
      */
     export enum StatusEnum {
+        OPEN = 'OPEN',
         INPROGRESS = 'IN_PROGRESS',
         FINISHED = 'FINISHED'
     }
 }
 /**
- * 
+ * InboundReceiptJob
  * @export
  * @interface InboundReceiptJob
  */
 export interface InboundReceiptJob {
     /**
      * 
-     * @type {string}
+     * @type {RequestedDate}
      * @memberof InboundReceiptJob
      */
-    id: string;
+    expectedDate: RequestedDate;
     /**
      * 
      * @type {string}
@@ -10931,31 +15149,13 @@ export interface InboundReceiptJob {
      * @type {string}
      * @memberof InboundReceiptJob
      */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundReceiptJob
+     */
     inboundProcessRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundReceiptJob
-     */
-    originReadableName?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundReceiptJob
-     */
-    originReadableId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InboundReceiptJob
-     */
-    status: InboundReceiptJob.StatusEnum;
-    /**
-     * 
-     * @type {RequestedDate}
-     * @memberof InboundReceiptJob
-     */
-    expectedDate: RequestedDate;
     /**
      * 
      * @type {InboundLineItem}
@@ -10968,6 +15168,24 @@ export interface InboundReceiptJob {
      * @memberof InboundReceiptJob
      */
     origin: InboundReceiptJobOrigin;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundReceiptJob
+     */
+    originReadableId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundReceiptJob
+     */
+    originReadableName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundReceiptJob
+     */
+    status: InboundReceiptJob.StatusEnum;
 }
 
 /**
@@ -10987,7 +15205,7 @@ export namespace InboundReceiptJob {
     }
 }
 /**
- * 
+ * InboundReceiptJobOrigin
  * @export
  * @interface InboundReceiptJobOrigin
  */
@@ -11000,69 +15218,185 @@ export interface InboundReceiptJobOrigin {
     name?: string;
 }
 /**
- * 
+ * InboundReceiptJobPaginatedResult
  * @export
  * @interface InboundReceiptJobPaginatedResult
  */
 export interface InboundReceiptJobPaginatedResult {
     /**
      * 
-     * @type {number}
-     * @memberof InboundReceiptJobPaginatedResult
-     */
-    total: number;
-    /**
-     * 
      * @type {Array<InboundReceiptJob>}
      * @memberof InboundReceiptJobPaginatedResult
      */
     inboundReceiptJobs: Array<InboundReceiptJob>;
+    /**
+     * 
+     * @type {number}
+     * @memberof InboundReceiptJobPaginatedResult
+     */
+    total: number;
 }
 /**
- * 
+ * InboundReceiptLineItem
  * @export
  * @interface InboundReceiptLineItem
  */
 export interface InboundReceiptLineItem {
     /**
-     * 
-     * @type {string}
-     * @memberof InboundReceiptLineItem
-     */
-    tenantArticleId: string;
-    /**
-     * 
+     * quantity of the stock that was accepted in this receipt. If its larger than 0, Stock will be created when this receipt is FINISHED.
      * @type {Quantity}
      * @memberof InboundReceiptLineItem
      */
     acceptedQuantity: Quantity;
     /**
-     * 
-     * @type {Quantity}
-     * @memberof InboundReceiptLineItem
-     */
-    rejectedQuantity: Quantity;
-    /**
-     * 
+     * comments regarding the receival of this item
      * @type {Array<InboundReceiptComment>}
      * @memberof InboundReceiptLineItem
      */
     comments: Array<InboundReceiptComment>;
     /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InboundReceiptLineItem
+     */
+    customAttributes?: any;
+    /**
      * 
+     * @type {string}
+     * @memberof InboundReceiptLineItem
+     */
+    id?: string;
+    /**
+     * quantity of the stock that was rejected in this receipt. If it is larger than 0, Stock will be created with condition \"defective\" when this receipt is FINISHED.
+     * @type {Quantity}
+     * @memberof InboundReceiptLineItem
+     */
+    rejectedQuantity: Quantity;
+    /**
+     * stock properties that will be set on the created stock
+     * @type {StockPropertyPreset}
+     * @memberof InboundReceiptLineItem
+     */
+    stockProperties?: StockPropertyPreset;
+    /**
+     * storage location on which stock was placed
      * @type {string}
      * @memberof InboundReceiptLineItem
      */
     storageLocationRef?: string;
     /**
-     * 
-     * @type {StockPropertyPreset}
+     * tenantArticleId of the stock that was received
+     * @type {string}
      * @memberof InboundReceiptLineItem
      */
-    stockProperties?: StockPropertyPreset;
+    tenantArticleId: string;
 }
 /**
- * 
+ * InboundReceiptLineItemForCreation
+ * @export
+ * @interface InboundReceiptLineItemForCreation
+ */
+export interface InboundReceiptLineItemForCreation {
+    /**
+     * quantity of the stock that was accepted in this receipt. If its larger than 0, Stock will be created when this receipt is FINISHED.
+     * @type {Quantity}
+     * @memberof InboundReceiptLineItemForCreation
+     */
+    acceptedQuantity: Quantity;
+    /**
+     * comments regarding the receival of this item
+     * @type {Array<InboundReceiptCommentForCreation>}
+     * @memberof InboundReceiptLineItemForCreation
+     */
+    comments: Array<InboundReceiptCommentForCreation>;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InboundReceiptLineItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * quantity of the stock that was rejected in this receipt. If it is larger than 0, Stock will be created with condition \"defective\" when this receipt is FINISHED.
+     * @type {Quantity}
+     * @memberof InboundReceiptLineItemForCreation
+     */
+    rejectedQuantity: Quantity;
+    /**
+     * stock properties that will be set on the created stock
+     * @type {StockPropertyPreset}
+     * @memberof InboundReceiptLineItemForCreation
+     */
+    stockProperties?: StockPropertyPreset;
+    /**
+     * storage location on which stock was placed
+     * @type {string}
+     * @memberof InboundReceiptLineItemForCreation
+     */
+    storageLocationRef?: string;
+    /**
+     * tenantArticleId of the stock that was received
+     * @type {string}
+     * @memberof InboundReceiptLineItemForCreation
+     */
+    tenantArticleId: string;
+}
+/**
+ * InboundReceiptLineItemForUpdate
+ * @export
+ * @interface InboundReceiptLineItemForUpdate
+ */
+export interface InboundReceiptLineItemForUpdate {
+    /**
+     * quantity of the stock that was accepted in this receipt. If its larger than 0, Stock will be created when this receipt is FINISHED.
+     * @type {Quantity}
+     * @memberof InboundReceiptLineItemForUpdate
+     */
+    acceptedQuantity: Quantity;
+    /**
+     * comments regarding the receival of this item
+     * @type {Array<InboundReceiptCommentForUpdate>}
+     * @memberof InboundReceiptLineItemForUpdate
+     */
+    comments: Array<InboundReceiptCommentForUpdate>;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InboundReceiptLineItemForUpdate
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof InboundReceiptLineItemForUpdate
+     */
+    id?: string;
+    /**
+     * quantity of the stock that was rejected in this receipt. If it is larger than 0, Stock will be created with condition \"defective\" when this receipt is FINISHED.
+     * @type {Quantity}
+     * @memberof InboundReceiptLineItemForUpdate
+     */
+    rejectedQuantity: Quantity;
+    /**
+     * stock properties that will be set on the created stock
+     * @type {StockPropertyPreset}
+     * @memberof InboundReceiptLineItemForUpdate
+     */
+    stockProperties?: StockPropertyPreset;
+    /**
+     * storage location on which stock was placed
+     * @type {string}
+     * @memberof InboundReceiptLineItemForUpdate
+     */
+    storageLocationRef?: string;
+    /**
+     * tenantArticleId of the stock that was received
+     * @type {string}
+     * @memberof InboundReceiptLineItemForUpdate
+     */
+    tenantArticleId: string;
+}
+/**
+ * InheritedServiceJobLineItem
  * @export
  * @interface InheritedServiceJobLineItem
  */
@@ -11097,6 +15431,18 @@ export interface InheritedServiceJobLineItem {
      * @memberof InheritedServiceJobLineItem
      */
     serviceJobRef: string;
+    /**
+     * Attributes that can be added to custom service. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof InheritedServiceJobLineItem
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof InheritedServiceJobLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
 }
 /**
  * 
@@ -11114,6 +15460,20 @@ export interface InlineResponse2001 {
 }
 /**
  * 
+ * @export
+ * @interface InlineResponse2002
+ */
+export interface InlineResponse2002 {
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse201
+ */
+export interface InlineResponse201 {
+}
+/**
+ * InputRequestedDate
  * @export
  * @interface InputRequestedDate
  */
@@ -11147,7 +15507,7 @@ export namespace InputRequestedDate {
     }
 }
 /**
- * 
+ * Validate input as integer.
  * @export
  * @interface IntegerValidation
  */
@@ -11173,7 +15533,267 @@ export interface IntegerValidation extends BaseValidation {
 export namespace IntegerValidation {
 }
 /**
- * 
+ * InterFacilityConnection
+ * @export
+ * @interface InterFacilityConnection
+ */
+export interface InterFacilityConnection extends VersionedResource {
+    /**
+     * 
+     * @type {string}
+     * @memberof InterFacilityConnection
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InterFacilityConnection
+     */
+    sourceFacilityRef: string;
+    /**
+     * 
+     * @type {InterFacilityConnectionCustomerTarget | InterFacilityConnectionManagedFacilityTarget | InterFacilityConnectionSupplierTarget}
+     * @memberof InterFacilityConnection
+     */
+    target: InterFacilityConnectionCustomerTarget | InterFacilityConnectionManagedFacilityTarget | InterFacilityConnectionSupplierTarget;
+    /**
+     * 
+     * @type {DeliveryCost}
+     * @memberof InterFacilityConnection
+     */
+    fallbackCost?: DeliveryCost;
+    /**
+     * 
+     * @type {CarrierTransitTime}
+     * @memberof InterFacilityConnection
+     */
+    fallbackTransitTime?: CarrierTransitTime;
+    /**
+     * 
+     * @type {CarrierCutoffTimes}
+     * @memberof InterFacilityConnection
+     */
+    cutoffTimes?: CarrierCutoffTimes;
+}
+/**
+ * InterFacilityConnectionBaseTarget
+ * @export
+ * @interface InterFacilityConnectionBaseTarget
+ */
+export interface InterFacilityConnectionBaseTarget {
+    /**
+     * 
+     * @type {ConnectionType}
+     * @memberof InterFacilityConnectionBaseTarget
+     */
+    type: ConnectionType;
+    /**
+     * 
+     * @type {CarrierProductCategory}
+     * @memberof InterFacilityConnectionBaseTarget
+     */
+    carrierProductCategory?: CarrierProductCategory;
+}
+/**
+ * InterFacilityConnectionCustomerTarget
+ * @export
+ * @interface InterFacilityConnectionCustomerTarget
+ */
+export interface InterFacilityConnectionCustomerTarget extends InterFacilityConnectionBaseTarget {
+}
+/**
+ * InterFacilityConnectionForCreation
+ * @export
+ * @interface InterFacilityConnectionForCreation
+ */
+export interface InterFacilityConnectionForCreation {
+    /**
+     * 
+     * @type {DeliveryCost}
+     * @memberof InterFacilityConnectionForCreation
+     */
+    fallbackCost?: DeliveryCost;
+    /**
+     * 
+     * @type {CarrierTransitTime}
+     * @memberof InterFacilityConnectionForCreation
+     */
+    fallbackTransitTime?: CarrierTransitTime;
+    /**
+     * 
+     * @type {CarrierCutoffTimes}
+     * @memberof InterFacilityConnectionForCreation
+     */
+    cutoffTimes?: CarrierCutoffTimes;
+    /**
+     * 
+     * @type {ConnectionType}
+     * @memberof InterFacilityConnectionForCreation
+     */
+    type: ConnectionType;
+}
+/**
+ * InterFacilityConnectionForUpdate
+ * @export
+ * @interface InterFacilityConnectionForUpdate
+ */
+export interface InterFacilityConnectionForUpdate {
+    /**
+     * 
+     * @type {number}
+     * @memberof InterFacilityConnectionForUpdate
+     */
+    version: number;
+    /**
+     * 
+     * @type {DeliveryCost}
+     * @memberof InterFacilityConnectionForUpdate
+     */
+    fallbackCost?: DeliveryCost;
+    /**
+     * 
+     * @type {CarrierTransitTime}
+     * @memberof InterFacilityConnectionForUpdate
+     */
+    fallbackTransitTime?: CarrierTransitTime;
+    /**
+     * 
+     * @type {CarrierCutoffTimes}
+     * @memberof InterFacilityConnectionForUpdate
+     */
+    cutoffTimes?: CarrierCutoffTimes;
+    /**
+     * 
+     * @type {ConnectionType}
+     * @memberof InterFacilityConnectionForUpdate
+     */
+    type: ConnectionType;
+}
+/**
+ * InterFacilityConnectionManagedFacilityTarget
+ * @export
+ * @interface InterFacilityConnectionManagedFacilityTarget
+ */
+export interface InterFacilityConnectionManagedFacilityTarget extends InterFacilityConnectionBaseTarget {
+    /**
+     * 
+     * @type {string}
+     * @memberof InterFacilityConnectionManagedFacilityTarget
+     */
+    facilityRef: string;
+}
+/**
+ * InterFacilityConnectionSupplierTarget
+ * @export
+ * @interface InterFacilityConnectionSupplierTarget
+ */
+export interface InterFacilityConnectionSupplierTarget extends InterFacilityConnectionBaseTarget {
+    /**
+     * 
+     * @type {string}
+     * @memberof InterFacilityConnectionSupplierTarget
+     */
+    facilityRef: string;
+}
+/**
+ * InterFacilityConnectionToCustomerForCreation
+ * @export
+ * @interface InterFacilityConnectionToCustomerForCreation
+ */
+export interface InterFacilityConnectionToCustomerForCreation extends InterFacilityConnectionForCreation {
+    /**
+     * 
+     * @type {InterFacilityConnectionCustomerTarget}
+     * @memberof InterFacilityConnectionToCustomerForCreation
+     */
+    target: InterFacilityConnectionCustomerTarget;
+}
+/**
+ * InterFacilityConnectionToCustomerForUpdate
+ * @export
+ * @interface InterFacilityConnectionToCustomerForUpdate
+ */
+export interface InterFacilityConnectionToCustomerForUpdate extends InterFacilityConnectionForUpdate {
+    /**
+     * 
+     * @type {InterFacilityConnectionCustomerTarget}
+     * @memberof InterFacilityConnectionToCustomerForUpdate
+     */
+    target: InterFacilityConnectionCustomerTarget;
+}
+/**
+ * InterFacilityConnectionToManagedFacilityForCreation
+ * @export
+ * @interface InterFacilityConnectionToManagedFacilityForCreation
+ */
+export interface InterFacilityConnectionToManagedFacilityForCreation extends InterFacilityConnectionForCreation {
+    /**
+     * 
+     * @type {InterFacilityConnectionManagedFacilityTarget}
+     * @memberof InterFacilityConnectionToManagedFacilityForCreation
+     */
+    target: InterFacilityConnectionManagedFacilityTarget;
+}
+/**
+ * InterFacilityConnectionToManagedFacilityForUpdate
+ * @export
+ * @interface InterFacilityConnectionToManagedFacilityForUpdate
+ */
+export interface InterFacilityConnectionToManagedFacilityForUpdate extends InterFacilityConnectionForUpdate {
+    /**
+     * 
+     * @type {InterFacilityConnectionManagedFacilityTarget}
+     * @memberof InterFacilityConnectionToManagedFacilityForUpdate
+     */
+    target: InterFacilityConnectionManagedFacilityTarget;
+}
+/**
+ * InterFacilityConnectionToSupplierForCreation
+ * @export
+ * @interface InterFacilityConnectionToSupplierForCreation
+ */
+export interface InterFacilityConnectionToSupplierForCreation extends InterFacilityConnectionForCreation {
+    /**
+     * 
+     * @type {InterFacilityConnectionSupplierTarget}
+     * @memberof InterFacilityConnectionToSupplierForCreation
+     */
+    target: InterFacilityConnectionSupplierTarget;
+}
+/**
+ * InterFacilityConnectionToSupplierForUpdate
+ * @export
+ * @interface InterFacilityConnectionToSupplierForUpdate
+ */
+export interface InterFacilityConnectionToSupplierForUpdate extends InterFacilityConnectionForUpdate {
+    /**
+     * 
+     * @type {InterFacilityConnectionSupplierTarget}
+     * @memberof InterFacilityConnectionToSupplierForUpdate
+     */
+    target: InterFacilityConnectionSupplierTarget;
+}
+/**
+ * InterFacilityConnections
+ * @export
+ * @interface InterFacilityConnections
+ */
+export interface InterFacilityConnections {
+    /**
+     * 
+     * @type {Array<InterFacilityConnection>}
+     * @memberof InterFacilityConnections
+     */
+    interFacilityConnections: Array<InterFacilityConnection>;
+    /**
+     * Total number of entities found for this query
+     * @type {number}
+     * @memberof InterFacilityConnections
+     */
+    total: number;
+}
+/**
+ * InventoryArticle
  * @export
  * @interface InventoryArticle
  */
@@ -11210,64 +15830,111 @@ export interface InventoryArticle {
     titleLocalized?: LocaleString;
 }
 /**
- * 
+ * InventoryArticlePaginatedResult
  * @export
  * @interface InventoryArticlePaginatedResult
  */
 export interface InventoryArticlePaginatedResult {
     /**
      * 
-     * @type {number}
-     * @memberof InventoryArticlePaginatedResult
-     */
-    total: number;
-    /**
-     * 
      * @type {Array<InventoryArticle>}
      * @memberof InventoryArticlePaginatedResult
      */
     articles: Array<InventoryArticle>;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryArticlePaginatedResult
+     */
+    total: number;
 }
 /**
- * 
+ * InventoryAvailabilityTimeframe
+ * @export
+ * @interface InventoryAvailabilityTimeframe
+ */
+export interface InventoryAvailabilityTimeframe {
+    /**
+     * 
+     * @type {Date}
+     * @memberof InventoryAvailabilityTimeframe
+     */
+    start?: Date;
+}
+/**
+ * InventoryAvailableUntilDefinition
+ * @export
+ * @interface InventoryAvailableUntilDefinition
+ */
+export interface InventoryAvailableUntilDefinition {
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryAvailableUntilDefinition
+     */
+    calculationBase: InventoryAvailableUntilDefinition.CalculationBaseEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryAvailableUntilDefinition
+     */
+    modifier?: string;
+}
+
+/**
+ * @export
+ * @namespace InventoryAvailableUntilDefinition
+ */
+export namespace InventoryAvailableUntilDefinition {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CalculationBaseEnum {
+        CREATION = 'CREATION',
+        EXPIRY = 'EXPIRY'
+    }
+}
+/**
+ * InventoryConfiguration
  * @export
  * @interface InventoryConfiguration
  */
 export interface InventoryConfiguration {
     /**
      * 
-     * @type {number}
-     * @memberof InventoryConfiguration
-     */
-    version: number;
-    /**
-     * 
      * @type {boolean}
      * @memberof InventoryConfiguration
      */
     isMixedStorage?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryConfiguration
+     */
+    version: number;
 }
 /**
- * 
+ * InventoryConfigurationForPatch
  * @export
  * @interface InventoryConfigurationForPatch
  */
 export interface InventoryConfigurationForPatch {
     /**
      * 
-     * @type {number}
-     * @memberof InventoryConfigurationForPatch
-     */
-    version: number;
-    /**
-     * 
      * @type {boolean}
      * @memberof InventoryConfigurationForPatch
      */
     isMixedStorage?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryConfigurationForPatch
+     */
+    version: number;
 }
 /**
- * 
+ * InventoryFacilityConfiguration
  * @export
  * @interface InventoryFacilityConfiguration
  */
@@ -11277,13 +15944,13 @@ export interface InventoryFacilityConfiguration {
      * @type {string}
      * @memberof InventoryFacilityConfiguration
      */
-    id: string;
+    facilityRef: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof InventoryFacilityConfiguration
      */
-    version: number;
+    id: string;
     /**
      * 
      * @type {boolean}
@@ -11292,31 +15959,25 @@ export interface InventoryFacilityConfiguration {
     isMixedStorage?: boolean;
     /**
      * 
-     * @type {string}
-     * @memberof InventoryFacilityConfiguration
-     */
-    facilityRef: string;
-    /**
-     * 
      * @type {OutboundStockConfiguration}
      * @memberof InventoryFacilityConfiguration
      */
     outboundStockConfiguration?: OutboundStockConfiguration;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityConfiguration
+     */
+    version: number;
 }
 /**
- * 
+ * InventoryFacilityConfigurationForPatch
  * @export
  * @interface InventoryFacilityConfigurationForPatch
  */
 export interface InventoryFacilityConfigurationForPatch {
     /**
      * 
-     * @type {number}
-     * @memberof InventoryFacilityConfigurationForPatch
-     */
-    version: number;
-    /**
-     * 
      * @type {boolean}
      * @memberof InventoryFacilityConfigurationForPatch
      */
@@ -11327,9 +15988,15 @@ export interface InventoryFacilityConfigurationForPatch {
      * @memberof InventoryFacilityConfigurationForPatch
      */
     outboundStockConfiguration?: OutboundStockConfiguration;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityConfigurationForPatch
+     */
+    version: number;
 }
 /**
- * 
+ * InventoryFacilityStockChangedWebHookEvent
  * @export
  * @interface InventoryFacilityStockChangedWebHookEvent
  */
@@ -11342,7 +16009,7 @@ export interface InventoryFacilityStockChangedWebHookEvent extends WebHookEvent 
     payload: Array<InventoryFacilityStockShape>;
 }
 /**
- * 
+ * InventoryFacilityStockDeltaShape
  * @export
  * @interface InventoryFacilityStockDeltaShape
  */
@@ -11352,43 +16019,7 @@ export interface InventoryFacilityStockDeltaShape {
      * @type {number}
      * @memberof InventoryFacilityStockDeltaShape
      */
-    totalAmount: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InventoryFacilityStockDeltaShape
-     */
-    reserved: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InventoryFacilityStockDeltaShape
-     */
-    safetyStock: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InventoryFacilityStockDeltaShape
-     */
     available: number;
-    /**
-     * 
-     * @type {InventoryFacilityStockShapeByTrait}
-     * @memberof InventoryFacilityStockDeltaShape
-     */
-    byTrait: InventoryFacilityStockShapeByTrait;
-    /**
-     * 
-     * @type {number}
-     * @memberof InventoryFacilityStockDeltaShape
-     */
-    availableToPromise: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InventoryFacilityStockDeltaShape
-     */
-    readyToPick: number;
     /**
      * 
      * @type {number}
@@ -11397,10 +16028,10 @@ export interface InventoryFacilityStockDeltaShape {
     availableForPicking: number;
     /**
      * 
-     * @type {number}
+     * @type {AvailableForPickingDetails}
      * @memberof InventoryFacilityStockDeltaShape
      */
-    stockCount: number;
+    availableForPickingDetails: AvailableForPickingDetails;
     /**
      * 
      * @type {number}
@@ -11412,50 +16043,86 @@ export interface InventoryFacilityStockDeltaShape {
      * @type {number}
      * @memberof InventoryFacilityStockDeltaShape
      */
-    stockOnHand: number;
-}
-/**
- * 
- * @export
- * @interface InventoryFacilityStockShape
- */
-export interface InventoryFacilityStockShape {
+    availableToPromise: number;
     /**
      * 
-     * @type {string}
-     * @memberof InventoryFacilityStockShape
+     * @type {InventoryFacilityStockShapeByTrait}
+     * @memberof InventoryFacilityStockDeltaShape
      */
-    facilityRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InventoryFacilityStockShape
-     */
-    tenantArticleId: string;
+    byTrait: InventoryFacilityStockShapeByTrait;
     /**
      * 
      * @type {number}
-     * @memberof InventoryFacilityStockShape
+     * @memberof InventoryFacilityStockDeltaShape
      */
-    totalAmount: number;
+    readyToPick: number;
     /**
      * 
      * @type {number}
-     * @memberof InventoryFacilityStockShape
+     * @memberof InventoryFacilityStockDeltaShape
      */
     reserved: number;
     /**
      * 
      * @type {number}
-     * @memberof InventoryFacilityStockShape
+     * @memberof InventoryFacilityStockDeltaShape
      */
     safetyStock: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityStockDeltaShape
+     */
+    stockCount: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityStockDeltaShape
+     */
+    stockOnHand: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityStockDeltaShape
+     */
+    totalAmount: number;
+}
+/**
+ * InventoryFacilityStockShape
+ * @export
+ * @interface InventoryFacilityStockShape
+ */
+export interface InventoryFacilityStockShape {
     /**
      * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
      * @memberof InventoryFacilityStockShape
      */
     available: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityStockShape
+     */
+    availableForPicking: number;
+    /**
+     * 
+     * @type {AvailableForPickingDetails}
+     * @memberof InventoryFacilityStockShape
+     */
+    availableForPickingDetails: AvailableForPickingDetails;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryFacilityStockShape
+     */
+    availableOnStock: number;
+    /**
+     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
+     * @type {number}
+     * @memberof InventoryFacilityStockShape
+     */
+    availableToPromise: number;
     /**
      * 
      * @type {InventoryFacilityStockShapeByTrait}
@@ -11469,11 +16136,17 @@ export interface InventoryFacilityStockShape {
      */
     changeReason: InventoryFacilityStockShape.ChangeReasonEnum;
     /**
-     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
-     * @type {number}
+     * 
+     * @type {InventoryFacilityStockDeltaShape}
      * @memberof InventoryFacilityStockShape
      */
-    availableToPromise: number;
+    delta: InventoryFacilityStockDeltaShape;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryFacilityStockShape
+     */
+    facilityRef: string;
     /**
      * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
@@ -11485,13 +16158,13 @@ export interface InventoryFacilityStockShape {
      * @type {number}
      * @memberof InventoryFacilityStockShape
      */
-    availableForPicking: number;
+    reserved: number;
     /**
      * 
-     * @type {InventoryFacilityStockDeltaShape}
+     * @type {number}
      * @memberof InventoryFacilityStockShape
      */
-    delta: InventoryFacilityStockDeltaShape;
+    safetyStock: number;
     /**
      * 
      * @type {Array<InventoryFacilityStockStaleReason>}
@@ -11506,10 +16179,16 @@ export interface InventoryFacilityStockShape {
     stockOnHand: number;
     /**
      * 
+     * @type {string}
+     * @memberof InventoryFacilityStockShape
+     */
+    tenantArticleId: string;
+    /**
+     * 
      * @type {number}
      * @memberof InventoryFacilityStockShape
      */
-    availableOnStock: number;
+    totalAmount: number;
 }
 
 /**
@@ -11526,7 +16205,7 @@ export namespace InventoryFacilityStockShape {
     }
 }
 /**
- * 
+ * InventoryFacilityStockShapeByTrait
  * @export
  * @interface InventoryFacilityStockShapeByTrait
  */
@@ -11536,35 +16215,774 @@ export interface InventoryFacilityStockShapeByTrait {
      * @type {number}
      * @memberof InventoryFacilityStockShapeByTrait
      */
-    PICKABLE: number;
+    ACCESSIBLE: number;
     /**
      * 
      * @type {number}
      * @memberof InventoryFacilityStockShapeByTrait
      */
-    ACCESSIBLE: number;
+    PICKABLE: number;
 }
 /**
- * 
+ * InventoryFacilityStockStaleReason
  * @export
  * @interface InventoryFacilityStockStaleReason
  */
 export interface InventoryFacilityStockStaleReason {
     /**
      * 
-     * @type {Date}
-     * @memberof InventoryFacilityStockStaleReason
-     */
-    timestamp: Date;
-    /**
-     * 
      * @type {Array<string>}
      * @memberof InventoryFacilityStockStaleReason
      */
     reasons: Array<string>;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InventoryFacilityStockStaleReason
+     */
+    timestamp: Date;
 }
 /**
- * 
+ * InventoryListingAttributeItem
+ * @export
+ * @interface InventoryListingAttributeItem
+ */
+export interface InventoryListingAttributeItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingAttributeItem
+     */
+    category?: InventoryListingAttributeItem.CategoryEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingAttributeItem
+     */
+    key: string;
+    /**
+     * Provides Localized values. The key is the locale, the value is the translation. See https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/localization#fallback-language-mechanism
+     * @type {{ [key: string]: string; }}
+     * @memberof InventoryListingAttributeItem
+     */
+    keyLocalized?: { [key: string]: string; };
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryListingAttributeItem
+     */
+    priority?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingAttributeItem
+     */
+    value: string;
+    /**
+     * Provides Localized values. The key is the locale, the value is the translation. See https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/localization#fallback-language-mechanism
+     * @type {{ [key: string]: string; }}
+     * @memberof InventoryListingAttributeItem
+     */
+    valueLocalized?: { [key: string]: string; };
+}
+
+/**
+ * @export
+ * @namespace InventoryListingAttributeItem
+ */
+export namespace InventoryListingAttributeItem {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CategoryEnum {
+        Descriptive = 'descriptive',
+        Miscellaneous = 'miscellaneous',
+        PickingSequence = 'pickingSequence',
+        Customs = 'customs',
+        Insurance = 'insurance',
+        Shop = 'shop',
+        Dimensions = 'dimensions',
+        CarrierService = 'carrierService'
+    }
+}
+/**
+ * InventoryListingEventPayload
+ * @export
+ * @interface InventoryListingEventPayload
+ */
+export interface InventoryListingEventPayload {
+    /**
+     * 
+     * @type {Array<InventoryListingAttributeItem>}
+     * @memberof InventoryListingEventPayload
+     */
+    attributes?: Array<InventoryListingAttributeItem>;
+    /**
+     * 
+     * @type {InventoryAvailabilityTimeframe}
+     * @memberof InventoryListingEventPayload
+     */
+    availabilityTimeframe?: InventoryAvailabilityTimeframe;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InventoryListingEventPayload
+     */
+    created: Date;
+    /**
+     * The currency of the price as an ISO 4217 code.
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    currency?: InventoryListingEventPayload.CurrencyEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    facilityId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    imageUrl?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InventoryListingEventPayload
+     */
+    lastModified: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    measurementUnitKey?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    outOfStockBehaviour?: InventoryListingEventPayload.OutOfStockBehaviourEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryListingEventPayload
+     */
+    price?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InventoryListingEventPayload
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * 
+     * @type {InventoryScanningRuleConfiguration}
+     * @memberof InventoryListingEventPayload
+     */
+    scanningRule?: InventoryScanningRuleConfiguration;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    status: InventoryListingEventPayload.StatusEnum;
+    /**
+     * 
+     * @type {InventoryAvailableUntilDefinition}
+     * @memberof InventoryListingEventPayload
+     */
+    stockAvailableUntil?: InventoryAvailableUntilDefinition;
+    /**
+     * 
+     * @type {{ [key: string]: InventoryStockPropertyDefinition; }}
+     * @memberof InventoryListingEventPayload
+     */
+    stockProperties?: { [key: string]: InventoryStockPropertyDefinition; };
+    /**
+     * 
+     * @type {Array<InventoryTagReference>}
+     * @memberof InventoryListingEventPayload
+     */
+    tags?: Array<InventoryTagReference>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    tenantArticleId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryListingEventPayload
+     */
+    title: string;
+    /**
+     * Provides Localized values. The key is the locale, the value is the translation. See https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/localization#fallback-language-mechanism
+     * @type {{ [key: string]: string; }}
+     * @memberof InventoryListingEventPayload
+     */
+    titleLocalized?: { [key: string]: string; };
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryListingEventPayload
+     */
+    version: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryListingEventPayload
+     */
+    weight?: number;
+}
+
+/**
+ * @export
+ * @namespace InventoryListingEventPayload
+ */
+export namespace InventoryListingEventPayload {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CurrencyEnum {
+        AED = 'AED',
+        AFN = 'AFN',
+        ALL = 'ALL',
+        AMD = 'AMD',
+        ANG = 'ANG',
+        AOA = 'AOA',
+        ARS = 'ARS',
+        AUD = 'AUD',
+        AWG = 'AWG',
+        AZN = 'AZN',
+        BAM = 'BAM',
+        BBD = 'BBD',
+        BDT = 'BDT',
+        BGN = 'BGN',
+        BHD = 'BHD',
+        BIF = 'BIF',
+        BMD = 'BMD',
+        BND = 'BND',
+        BOB = 'BOB',
+        BOV = 'BOV',
+        BRL = 'BRL',
+        BSD = 'BSD',
+        BTN = 'BTN',
+        BWP = 'BWP',
+        BYN = 'BYN',
+        BZD = 'BZD',
+        CAD = 'CAD',
+        CDF = 'CDF',
+        CHE = 'CHE',
+        CHF = 'CHF',
+        CHW = 'CHW',
+        CLF = 'CLF',
+        CLP = 'CLP',
+        CNY = 'CNY',
+        COP = 'COP',
+        COU = 'COU',
+        CRC = 'CRC',
+        CUC = 'CUC',
+        CUP = 'CUP',
+        CVE = 'CVE',
+        CZK = 'CZK',
+        DJF = 'DJF',
+        DKK = 'DKK',
+        DOP = 'DOP',
+        DZD = 'DZD',
+        EGP = 'EGP',
+        ERN = 'ERN',
+        ETB = 'ETB',
+        EUR = 'EUR',
+        FJD = 'FJD',
+        FKP = 'FKP',
+        GBP = 'GBP',
+        GEL = 'GEL',
+        GHS = 'GHS',
+        GIP = 'GIP',
+        GMD = 'GMD',
+        GNF = 'GNF',
+        GTQ = 'GTQ',
+        GYD = 'GYD',
+        HKD = 'HKD',
+        HNL = 'HNL',
+        HTG = 'HTG',
+        HUF = 'HUF',
+        IDR = 'IDR',
+        ILS = 'ILS',
+        INR = 'INR',
+        IQD = 'IQD',
+        IRR = 'IRR',
+        ISK = 'ISK',
+        JMD = 'JMD',
+        JOD = 'JOD',
+        JPY = 'JPY',
+        KES = 'KES',
+        KGS = 'KGS',
+        KHR = 'KHR',
+        KMF = 'KMF',
+        KPW = 'KPW',
+        KRW = 'KRW',
+        KWD = 'KWD',
+        KYD = 'KYD',
+        KZT = 'KZT',
+        LAK = 'LAK',
+        LBP = 'LBP',
+        LKR = 'LKR',
+        LRD = 'LRD',
+        LSL = 'LSL',
+        LYD = 'LYD',
+        MAD = 'MAD',
+        MDL = 'MDL',
+        MGA = 'MGA',
+        MKD = 'MKD',
+        MMK = 'MMK',
+        MNT = 'MNT',
+        MOP = 'MOP',
+        MRU = 'MRU',
+        MUR = 'MUR',
+        MVR = 'MVR',
+        MWK = 'MWK',
+        MXN = 'MXN',
+        MXV = 'MXV',
+        MYR = 'MYR',
+        MZN = 'MZN',
+        NAD = 'NAD',
+        NGN = 'NGN',
+        NIO = 'NIO',
+        NOK = 'NOK',
+        NPR = 'NPR',
+        NZD = 'NZD',
+        OMR = 'OMR',
+        PAB = 'PAB',
+        PEN = 'PEN',
+        PGK = 'PGK',
+        PHP = 'PHP',
+        PKR = 'PKR',
+        PLN = 'PLN',
+        PYG = 'PYG',
+        QAR = 'QAR',
+        RON = 'RON',
+        RSD = 'RSD',
+        RUB = 'RUB',
+        RWF = 'RWF',
+        SAR = 'SAR',
+        SBD = 'SBD',
+        SCR = 'SCR',
+        SDG = 'SDG',
+        SEK = 'SEK',
+        SGD = 'SGD',
+        SHP = 'SHP',
+        SLE = 'SLE',
+        SOS = 'SOS',
+        SRD = 'SRD',
+        SSP = 'SSP',
+        STN = 'STN',
+        SVC = 'SVC',
+        SYP = 'SYP',
+        SZL = 'SZL',
+        THB = 'THB',
+        TJS = 'TJS',
+        TMT = 'TMT',
+        TND = 'TND',
+        TOP = 'TOP',
+        TRY = 'TRY',
+        TTD = 'TTD',
+        TWD = 'TWD',
+        TZS = 'TZS',
+        UAH = 'UAH',
+        UGX = 'UGX',
+        USD = 'USD',
+        USN = 'USN',
+        UYI = 'UYI',
+        UYU = 'UYU',
+        UYW = 'UYW',
+        UZS = 'UZS',
+        VED = 'VED',
+        VES = 'VES',
+        VND = 'VND',
+        VUV = 'VUV',
+        WST = 'WST',
+        XAF = 'XAF',
+        XAG = 'XAG',
+        XAU = 'XAU',
+        XBA = 'XBA',
+        XBB = 'XBB',
+        XBC = 'XBC',
+        XBD = 'XBD',
+        XCD = 'XCD',
+        XDR = 'XDR',
+        XOF = 'XOF',
+        XPD = 'XPD',
+        XPF = 'XPF',
+        XPT = 'XPT',
+        XSU = 'XSU',
+        XTS = 'XTS',
+        XUA = 'XUA',
+        XXX = 'XXX',
+        YER = 'YER',
+        ZAR = 'ZAR',
+        ZMW = 'ZMW',
+        ZWL = 'ZWL'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum OutOfStockBehaviourEnum {
+        BACKORDER = 'BACKORDER',
+        PREORDER = 'PREORDER',
+        RESTOCK = 'RESTOCK'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum StatusEnum {
+        ACTIVE = 'ACTIVE',
+        INACTIVE = 'INACTIVE'
+    }
+}
+/**
+ * InventoryScanningRuleConfiguration
+ * @export
+ * @interface InventoryScanningRuleConfiguration
+ */
+export interface InventoryScanningRuleConfiguration {
+    /**
+     * 
+     * @type {Array<InventoryScanningRuleValue>}
+     * @memberof InventoryScanningRuleConfiguration
+     */
+    values?: Array<InventoryScanningRuleValue>;
+}
+/**
+ * InventoryScanningRuleValue
+ * @export
+ * @interface InventoryScanningRuleValue
+ */
+export interface InventoryScanningRuleValue {
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryScanningRuleValue
+     */
+    priority: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryScanningRuleValue
+     */
+    scanningRuleType: InventoryScanningRuleValue.ScanningRuleTypeEnum;
+}
+
+/**
+ * @export
+ * @namespace InventoryScanningRuleValue
+ */
+export namespace InventoryScanningRuleValue {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ScanningRuleTypeEnum {
+        ARTICLE = 'ARTICLE',
+        LOCATION = 'LOCATION'
+    }
+}
+/**
+ * InventoryStockBulkWebHookEvent
+ * @export
+ * @interface InventoryStockBulkWebHookEvent
+ */
+export interface InventoryStockBulkWebHookEvent {
+    /**
+     * 
+     * @type {InventoryStockWebHookEventPayload}
+     * @memberof InventoryStockBulkWebHookEvent
+     */
+    payload: InventoryStockWebHookEventPayload;
+}
+/**
+ * InventoryStockDelta
+ * @export
+ * @interface InventoryStockDelta
+ */
+export interface InventoryStockDelta {
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryStockDelta
+     */
+    previousLocationRef: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryStockDelta
+     */
+    reserved: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryStockDelta
+     */
+    stockCount: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryStockDelta
+     */
+    value: number;
+}
+/**
+ * InventoryStockPropertyDefinition
+ * @export
+ * @interface InventoryStockPropertyDefinition
+ */
+export interface InventoryStockPropertyDefinition {
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryStockPropertyDefinition
+     */
+    inputType: InventoryStockPropertyDefinition.InputTypeEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InventoryStockPropertyDefinition
+     */
+    required: boolean;
+}
+
+/**
+ * @export
+ * @namespace InventoryStockPropertyDefinition
+ */
+export namespace InventoryStockPropertyDefinition {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InputTypeEnum {
+        DATE = 'DATE',
+        TEXT = 'TEXT'
+    }
+}
+/**
+ * InventoryStockWebHookEventPayload
+ * @export
+ * @interface InventoryStockWebHookEventPayload
+ */
+export interface InventoryStockWebHookEventPayload {
+    /**
+     * 
+     * @type {Array<InventoryStockWebHookEventPayloadItem>}
+     * @memberof InventoryStockWebHookEventPayload
+     */
+    items: Array<InventoryStockWebHookEventPayloadItem>;
+}
+/**
+ * InventoryStockWebHookEventPayloadItem
+ * @export
+ * @interface InventoryStockWebHookEventPayloadItem
+ */
+export interface InventoryStockWebHookEventPayloadItem {
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    available: number;
+    /**
+     * defines until when a stock is included in the stock availability as available and used for routing
+     * @type {Date}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    availableUntil?: Date;
+    /**
+     * Describes conditions of a stock     *`DEFECTIVE` - stock is defective, not usable for customer orders
+     * @type {Array<string>}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    conditions?: Array<InventoryStockWebHookEventPayloadItem.ConditionsEnum>;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    created: Date;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {InventoryStockDelta}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    delta: InventoryStockDelta;
+    /**
+     * facility in which the stock is located
+     * @type {string}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    facilityRef: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    facilityWideReserved: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    id: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    lastModified: Date;
+    /**
+     * location on which the stock is placed
+     * @type {string}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    locationRef?: string;
+    /**
+     * allow tracking of specific values such as expiry dates on a set of items. They should describe physical identifiable properties of the stock and are not meant to be used for metadata (see \"customAttributes\" for that).
+     * @type {StockPropertyPreset}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    properties?: StockPropertyPreset;
+    /**
+     * date-time when stock has entered the system, defaults to the creation date
+     * @type {Date}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    receiptDate?: Date;
+    /**
+     * amount of this stock for customer orders
+     * @type {number}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    reserved: number;
+    /**
+     * scannableCodes such as barcodes that identify this stock
+     * @type {Array<string>}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * stock with a high score can used preferably over stock with a lower score in routing, depending on configuration. The score can represent different attributes of the stock like zone, storage location, expiry date or receipt date.
+     * @type {Array<string>}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    scores?: Array<string>;
+    /**
+     * properties object serialized as JSON string, sorted alphabetically by key
+     * @type {string}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    serializedProperties: string;
+    /**
+     * tenantArticleId of the stock
+     * @type {string}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    tenantArticleId: string;
+    /**
+     * tenantStockId is an optional identifier for the stock in the tenant system, only set on stocks synced from listings
+     * @type {string}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    tenantStockId?: string;
+    /**
+     * defines the traits of the stock, overrules the storage location traits
+     * @type {Array<StorageLocationTraitConfigEntry>}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    traitConfig?: Array<StorageLocationTraitConfigEntry>;
+    /**
+     * provide information on how storage locations and stocks are to be handled in operational processes. Can only be set via storageLocation. 
+     * @type {Array<string>}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    traits: Array<InventoryStockWebHookEventPayloadItem.TraitsEnum>;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    value: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InventoryStockWebHookEventPayloadItem
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace InventoryStockWebHookEventPayloadItem
+ */
+export namespace InventoryStockWebHookEventPayloadItem {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ConditionsEnum {
+        DEFECTIVE = 'DEFECTIVE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TraitsEnum {
+        PICKABLE = 'PICKABLE',
+        ACCESSIBLE = 'ACCESSIBLE',
+        KEEPONZERO = 'KEEP_ON_ZERO',
+        OUTBOUND = 'OUTBOUND',
+        INMOTION = 'IN_MOTION'
+    }
+}
+/**
+ * InventoryTagReference
+ * @export
+ * @interface InventoryTagReference
+ */
+export interface InventoryTagReference {
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryTagReference
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InventoryTagReference
+     */
+    value: string;
+}
+/**
+ * ItemReturn
  * @export
  * @interface ItemReturn
  */
@@ -11623,16 +17041,22 @@ export interface ItemReturn {
      * @memberof ItemReturn
      */
     returnedLineItems: Array<ItemReturnLineItem>;
+    /**
+     * Attributes that can be added to the entity. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ItemReturn
+     */
+    customAttributes?: any;
 }
 /**
- * 
+ * ItemReturnActionsParameter
  * @export
  * @interface ItemReturnActionsParameter
  */
 export interface ItemReturnActionsParameter {
 }
 /**
- * 
+ * ItemReturnForCreation
  * @export
  * @interface ItemReturnForCreation
  */
@@ -11669,7 +17093,7 @@ export interface ItemReturnForCreation {
     returnedLineItems: Array<ItemReturnLineItemForCreation>;
 }
 /**
- * 
+ * ItemReturnJob
  * @export
  * @interface ItemReturnJob
  */
@@ -11730,6 +17154,12 @@ export interface ItemReturnJob extends VersionedResource {
     returnableLineItems: Array<ItemReturnJobLineItem>;
     /**
      * 
+     * @type {Array<ItemReturnJobLineItem>}
+     * @memberof ItemReturnJob
+     */
+    notReturnableLineItems?: Array<ItemReturnJobLineItem>;
+    /**
+     * 
      * @type {Array<ItemReturn>}
      * @memberof ItemReturnJob
      */
@@ -11740,16 +17170,22 @@ export interface ItemReturnJob extends VersionedResource {
      * @memberof ItemReturnJob
      */
     anonymized?: boolean;
+    /**
+     * Attributes that can be added to the entity. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ItemReturnJob
+     */
+    customAttributes?: any;
 }
 /**
- * 
+ * ItemReturnJobActionsParameter
  * @export
  * @interface ItemReturnJobActionsParameter
  */
 export interface ItemReturnJobActionsParameter {
 }
 /**
- * 
+ * ItemReturnJobForCreation
  * @export
  * @interface ItemReturnJobForCreation
  */
@@ -11802,9 +17238,21 @@ export interface ItemReturnJobForCreation {
      * @memberof ItemReturnJobForCreation
      */
     returnableLineItems: Array<ItemReturnJobLineItemForCreation>;
+    /**
+     * 
+     * @type {Array<ItemReturnJobLineItemForCreation>}
+     * @memberof ItemReturnJobForCreation
+     */
+    notReturnableLineItems?: Array<ItemReturnJobLineItemForCreation>;
+    /**
+     * Attributes that can be added to the entity. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ItemReturnJobForCreation
+     */
+    customAttributes?: any;
 }
 /**
- * 
+ * ItemReturnJobLineItem
  * @export
  * @interface ItemReturnJobLineItem
  */
@@ -11828,14 +17276,20 @@ export interface ItemReturnJobLineItem extends ItemReturnJobLineItemForCreation 
      */
     returnable: number;
     /**
-     * Marks if some of the items could be not refundable. E.g. through altering via a ServiceJob via engraving.
+     * Add items to notReturnableLineItems array in itemReturnJob instead.
      * @type {boolean}
      * @memberof ItemReturnJobLineItem
      */
     notReturnableItemsExists?: boolean;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof ItemReturnJobLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
 }
 /**
- * 
+ * ItemReturnJobLineItemArticle
  * @export
  * @interface ItemReturnJobLineItemArticle
  */
@@ -11847,14 +17301,14 @@ export interface ItemReturnJobLineItemArticle extends AbstractArticle {
      */
     attributes?: Array<ArticleAttributeItem>;
     /**
-     * 
+     * Deprecated: Use attributes with keys: 'valuePerUnit', 'currency' and 'numberOfDecimalPlaces'
      * @type {Array<ArticlePrice>}
      * @memberof ItemReturnJobLineItemArticle
      */
     prices?: Array<ArticlePrice>;
 }
 /**
- * 
+ * ItemReturnJobLineItemForCreation
  * @export
  * @interface ItemReturnJobLineItemForCreation
  */
@@ -11872,7 +17326,7 @@ export interface ItemReturnJobLineItemForCreation {
      */
     delivered: number;
     /**
-     * Marks if some of the items could be not refundable. E.g. through altering via a ServiceJob via engraving.
+     * Add items to notReturnableLineItems array in itemReturnJob instead.
      * @type {boolean}
      * @memberof ItemReturnJobLineItemForCreation
      */
@@ -11883,19 +17337,32 @@ export interface ItemReturnJobLineItemForCreation {
      * @memberof ItemReturnJobLineItemForCreation
      */
     scannableCodes?: Array<string>;
+    /**
+     * Attributes that can be added to the entity. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ItemReturnJobLineItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof ItemReturnJobLineItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * ItemReturnJobStatus
  * @export
  * @enum {string}
  */
 export enum ItemReturnJobStatus {
     OPEN = 'OPEN',
     INPROGRESS = 'IN_PROGRESS',
-    FINISHED = 'FINISHED'
+    FINISHED = 'FINISHED',
+    CANCELED = 'CANCELED'
 }
 /**
- * 
+ * ItemReturnJobWithSearchPaths
  * @export
  * @interface ItemReturnJobWithSearchPaths
  */
@@ -11908,7 +17375,7 @@ export interface ItemReturnJobWithSearchPaths extends ItemReturnJob {
     searchPaths?: Array<string>;
 }
 /**
- * 
+ * ItemReturnJobs
  * @export
  * @interface ItemReturnJobs
  */
@@ -11927,7 +17394,7 @@ export interface ItemReturnJobs {
     total?: number;
 }
 /**
- * 
+ * ItemReturnLineItem
  * @export
  * @interface ItemReturnLineItem
  */
@@ -11962,9 +17429,15 @@ export interface ItemReturnLineItem extends ItemReturnLineItemForCreation {
      * @memberof ItemReturnLineItem
      */
     refund?: ReturnedLineItemRefund;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof ItemReturnLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
 }
 /**
- * 
+ * ItemReturnLineItemForCreation
  * @export
  * @interface ItemReturnLineItemForCreation
  */
@@ -12005,9 +17478,21 @@ export interface ItemReturnLineItemForCreation {
      * @memberof ItemReturnLineItemForCreation
      */
     reasons?: Array<ItemReturnLineItemReason>;
+    /**
+     * Attributes that can be added to the entity. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ItemReturnLineItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof ItemReturnLineItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * ItemReturnLineItemForUpdate
  * @export
  * @interface ItemReturnLineItemForUpdate
  */
@@ -12032,7 +17517,7 @@ export interface ItemReturnLineItemForUpdate {
     itemReturnJobVersion: number;
 }
 /**
- * 
+ * ItemReturnLineItemReason
  * @export
  * @interface ItemReturnLineItemReason
  */
@@ -12057,7 +17542,7 @@ export interface ItemReturnLineItemReason {
     comment?: string;
 }
 /**
- * 
+ * ItemReturnLineItemStatus
  * @export
  * @enum {string}
  */
@@ -12066,10 +17551,22 @@ export enum ItemReturnLineItemStatus {
     INPROGRESS = 'IN_PROGRESS',
     WAITINGFORINPUT = 'WAITING_FOR_INPUT',
     REJECTED = 'REJECTED',
-    ACCEPTED = 'ACCEPTED'
+    ACCEPTED = 'ACCEPTED',
+    CANCELED = 'CANCELED'
 }
 /**
- * 
+ * ItemReturnSortOptions
+ * @export
+ * @enum {string}
+ */
+export enum ItemReturnSortOptions {
+    LASTMODIFIEDASC = 'ITEM_RETURN_LAST_MODIFIED_ASC',
+    LASTMODIFIEDDESC = 'ITEM_RETURN_LAST_MODIFIED_DESC',
+    CREATEDASC = 'ITEM_RETURN_CREATED_ASC',
+    CREATEDDESC = 'ITEM_RETURN_CREATED_DESC'
+}
+/**
+ * ItemReturnStatus
  * @export
  * @enum {string}
  */
@@ -12082,7 +17579,7 @@ export enum ItemReturnStatus {
     WAITINGFORINPUT = 'WAITING_FOR_INPUT'
 }
 /**
- * 
+ * ItemReturns
  * @export
  * @interface ItemReturns
  */
@@ -12101,7 +17598,7 @@ export interface ItemReturns {
     totalCount: number;
 }
 /**
- * 
+ * ItemReturnsWithSearchPaths
  * @export
  * @interface ItemReturnsWithSearchPaths
  */
@@ -12114,7 +17611,7 @@ export interface ItemReturnsWithSearchPaths extends ItemReturn {
     searchPaths: Array<string>;
 }
 /**
- * 
+ * ItemsFulfillabilityConstraintType
  * @export
  * @interface ItemsFulfillabilityConstraintType
  */
@@ -12147,13 +17644,26 @@ export namespace ItemsFulfillabilityConstraintType {
     }
 }
 /**
- * 
+ * ItemsRequiredEnum
  * @export
  * @enum {string}
  */
 export enum ItemsRequiredEnum {
     MANDATORY = 'MANDATORY',
     NONE = 'NONE'
+}
+/**
+ * KeyExistsFilter
+ * @export
+ * @interface KeyExistsFilter
+ */
+export interface KeyExistsFilter {
+    /**
+     * Search all entities which have or do not have this key defined
+     * @type {boolean}
+     * @memberof KeyExistsFilter
+     */
+    exists?: boolean;
 }
 /**
  * An object holding the last DomainStatus of a given entity and its corresponding domain.
@@ -12181,32 +17691,51 @@ export interface LastDomainEntityStatusItem {
     entityId: string;
 }
 /**
- * 
+ * LatestPickingStart
  * @export
  * @interface LatestPickingStart
  */
-export interface LatestPickingStart {
+export interface LatestPickingStart extends PickingStartBase {
     /**
      * 
      * @type {Date}
      * @memberof LatestPickingStart
      */
     latestPickingStartDate: Date;
+}
+/**
+ * LatestPickingStartForDecisionLog
+ * @export
+ * @interface LatestPickingStartForDecisionLog
+ */
+export interface LatestPickingStartForDecisionLog {
     /**
      * 
      * @type {Date}
-     * @memberof LatestPickingStart
+     * @memberof LatestPickingStartForDecisionLog
      */
-    targetTime: Date;
+    latestPickingStartDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof LatestPickingStartForDecisionLog
+     */
+    targetTime?: Date;
     /**
      * 
      * @type {string}
-     * @memberof LatestPickingStart
+     * @memberof LatestPickingStartForDecisionLog
      */
-    carrierRef: string;
+    carrierRef?: string;
+    /**
+     * @deprecated, use hints
+     * @type {Array<string>}
+     * @memberof LatestPickingStartForDecisionLog
+     */
+    lpsCalculationHints?: Array<string>;
 }
 /**
- * 
+ * LinkedConfiguration
  * @export
  * @interface LinkedConfiguration
  */
@@ -12225,7 +17754,7 @@ export interface LinkedConfiguration {
     rel?: string;
 }
 /**
- * 
+ * LinkedServiceJobs
  * @export
  * @interface LinkedServiceJobs
  */
@@ -12290,9 +17819,15 @@ export interface LinkedServiceJobs extends VersionedResource {
      * @memberof LinkedServiceJobs
      */
     fullIdentifier?: string;
+    /**
+     * 
+     * @type {Array<UserModificationHistory>}
+     * @memberof LinkedServiceJobs
+     */
+    usersModificationHistory?: Array<UserModificationHistory>;
 }
 /**
- * 
+ * LinkedServiceJobsFilterChannel
  * @export
  * @enum {string}
  */
@@ -12301,7 +17836,7 @@ export enum LinkedServiceJobsFilterChannel {
     SHIPPING = 'SHIPPING'
 }
 /**
- * 
+ * LinkedServiceJobsForCreation
  * @export
  * @interface LinkedServiceJobsForCreation
  */
@@ -12343,7 +17878,7 @@ export enum LinkedServiceJobsOrderBy {
     TARGETTIMEDESC = 'TARGET_TIME_DESC'
 }
 /**
- * 
+ * LinkedServiceJobsPaginatedResult
  * @export
  * @interface LinkedServiceJobsPaginatedResult
  */
@@ -12362,7 +17897,189 @@ export interface LinkedServiceJobsPaginatedResult {
     linkedServiceJobs: Array<LinkedServiceJobsWithSearchPaths>;
 }
 /**
- * 
+ * LinkedServiceJobsSearchPayload
+ * @export
+ * @interface LinkedServiceJobsSearchPayload
+ */
+export interface LinkedServiceJobsSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof LinkedServiceJobsSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {LinkedServiceJobsSearchQuery}
+     * @memberof LinkedServiceJobsSearchPayload
+     */
+    query: LinkedServiceJobsSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof LinkedServiceJobsSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<LinkedServiceJobsSort>}
+     * @memberof LinkedServiceJobsSearchPayload
+     */
+    sort?: Array<LinkedServiceJobsSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof LinkedServiceJobsSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * LinkedServiceJobsSearchQuery
+ * @export
+ * @interface LinkedServiceJobsSearchQuery
+ */
+export interface LinkedServiceJobsSearchQuery {
+    /**
+     * Search by additionalInformation
+     * @type {StringListFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    additionalInformation?: StringListFilter;
+    /**
+     * 
+     * @type {Array<LinkedServiceJobsSearchQuery>}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    and?: Array<LinkedServiceJobsSearchQuery>;
+    /**
+     * Search by articleTitles
+     * @type {StringListFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    articleTitles?: StringListFilter;
+    /**
+     * Search by channel
+     * @type {StringFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    channel?: StringFilter;
+    /**
+     * Search by consumerName
+     * @type {StringSearchFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    consumerName?: StringSearchFilter;
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by invoiceAddress
+     * @type {StringSearchFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    invoiceAddress?: StringSearchFilter;
+    /**
+     * Search by lastModified
+     * @type {DateFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    lastModified?: DateFilter;
+    /**
+     * Search by linkedServiceJobRef
+     * @type {StringFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    linkedServiceJobRef?: StringFilter;
+    /**
+     * 
+     * @type {Array<LinkedServiceJobsSearchQuery>}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    or?: Array<LinkedServiceJobsSearchQuery>;
+    /**
+     * Search by serviceName
+     * @type {StringListFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    serviceName?: StringListFilter;
+    /**
+     * Search by shippingAddress
+     * @type {StringSearchFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    shippingAddress?: StringSearchFilter;
+    /**
+     * Search by status
+     * @type {StringFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    status?: StringFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    targetTime?: DateFilter;
+    /**
+     * Search by tenantOrderId
+     * @type {StringSearchFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    tenantOrderId?: StringSearchFilter;
+    /**
+     * Nested list search by usersModificationHistory
+     * @type {LinkedServiceJobsUsersModificationHistoryListFilter}
+     * @memberof LinkedServiceJobsSearchQuery
+     */
+    usersModificationHistory?: LinkedServiceJobsUsersModificationHistoryListFilter;
+}
+/**
+ * LinkedServiceJobsSort
+ * @export
+ * @interface LinkedServiceJobsSort
+ */
+export interface LinkedServiceJobsSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkedServiceJobsSort
+     */
+    lastModified?: LinkedServiceJobsSort.LastModifiedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkedServiceJobsSort
+     */
+    targetTime?: LinkedServiceJobsSort.TargetTimeEnum;
+}
+
+/**
+ * @export
+ * @namespace LinkedServiceJobsSort
+ */
+export namespace LinkedServiceJobsSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TargetTimeEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * LinkedServiceJobsStatus
  * @export
  * @enum {string}
  */
@@ -12375,7 +18092,33 @@ export enum LinkedServiceJobsStatus {
     NOTREADY = 'NOT_READY'
 }
 /**
- * 
+ * LinkedServiceJobsUsersModificationHistoryFilter
+ * @export
+ * @interface LinkedServiceJobsUsersModificationHistoryFilter
+ */
+export interface LinkedServiceJobsUsersModificationHistoryFilter {
+    /**
+     * Search by username
+     * @type {StringFilter}
+     * @memberof LinkedServiceJobsUsersModificationHistoryFilter
+     */
+    username?: StringFilter;
+}
+/**
+ * LinkedServiceJobsUsersModificationHistoryListFilter
+ * @export
+ * @interface LinkedServiceJobsUsersModificationHistoryListFilter
+ */
+export interface LinkedServiceJobsUsersModificationHistoryListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {LinkedServiceJobsUsersModificationHistoryFilter}
+     * @memberof LinkedServiceJobsUsersModificationHistoryListFilter
+     */
+    contains?: LinkedServiceJobsUsersModificationHistoryFilter;
+}
+/**
+ * LinkedServiceJobsWithSearchPaths
  * @export
  * @interface LinkedServiceJobsWithSearchPaths
  */
@@ -12388,7 +18131,7 @@ export interface LinkedServiceJobsWithSearchPaths extends LinkedServiceJobs {
     searchPaths: Array<string>;
 }
 /**
- * 
+ * Listing
  * @export
  * @interface Listing
  */
@@ -12436,7 +18179,7 @@ export interface Listing extends ListingForCreation {
      */
     status: Listing.StatusEnum;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated This field is deprecated since 11th of September 2023. Use /api/stocks endpoints instead.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 11th of September 2023. Use /api/stocks endpoints instead.
      * @type {Array<PartialStock>}
      * @memberof Listing
      */
@@ -12464,7 +18207,7 @@ export namespace Listing {
     }
 }
 /**
- * 
+ * ListingAttributeItem
  * @export
  * @interface ListingAttributeItem
  */
@@ -12490,7 +18233,20 @@ export interface ListingAttributeItem extends ArticleAttributeItem {
 export namespace ListingAttributeItem {
 }
 /**
- * 
+ * ListingAvailabilityTimeframeFilter
+ * @export
+ * @interface ListingAvailabilityTimeframeFilter
+ */
+export interface ListingAvailabilityTimeframeFilter {
+    /**
+     * Search by start
+     * @type {DateFilter}
+     * @memberof ListingAvailabilityTimeframeFilter
+     */
+    start?: DateFilter;
+}
+/**
+ * ListingBulkOperationResult
  * @export
  * @interface ListingBulkOperationResult
  */
@@ -12509,7 +18265,20 @@ export interface ListingBulkOperationResult {
     status: BulkOperationResultStatus;
 }
 /**
- * 
+ * ListingBulkWebHookEvent
+ * @export
+ * @interface ListingBulkWebHookEvent
+ */
+export interface ListingBulkWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ListingWebHookEventPayload}
+     * @memberof ListingBulkWebHookEvent
+     */
+    payload: ListingWebHookEventPayload;
+}
+/**
+ * ListingForCreation
  * @export
  * @interface ListingForCreation
  */
@@ -12557,7 +18326,7 @@ export interface ListingForCreation {
      */
     titleLocalized?: LocaleString;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated This field is deprecated since 11th of September 2023. Use /api/stocks endpoints instead.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 11th of September 2023. Use /api/stocks endpoints instead.
      * @type {Array<PartialStockForCreation>}
      * @memberof ListingForCreation
      */
@@ -12582,10 +18351,16 @@ export interface ListingForCreation {
     scannableCodes?: Array<string>;
     /**
      * 
-     * @type {string}
+     * @type {OutOfStockBehaviour}
      * @memberof ListingForCreation
      */
-    outOfStockBehaviour?: ListingForCreation.OutOfStockBehaviourEnum;
+    outOfStockBehaviour?: OutOfStockBehaviour;
+    /**
+     * 
+     * @type {OutOfStockConfig}
+     * @memberof ListingForCreation
+     */
+    outOfStockConfig?: OutOfStockConfig;
     /**
      * 
      * @type {AvailabilityTimeframe}
@@ -12635,22 +18410,8 @@ export interface ListingForCreation {
      */
     customAttributes?: any;
 }
-
 /**
- * @export
- * @namespace ListingForCreation
- */
-export namespace ListingForCreation {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum OutOfStockBehaviourEnum {
-        BACKORDER = 'BACKORDER'
-    }
-}
-/**
- * 
+ * ListingForReplacement
  * @export
  * @interface ListingForReplacement
  */
@@ -12684,7 +18445,7 @@ export namespace ListingForReplacement {
     }
 }
 /**
- * 
+ * ListingLegal
  * @export
  * @interface ListingLegal
  */
@@ -12697,7 +18458,66 @@ export interface ListingLegal {
     hsCode?: string;
 }
 /**
- * 
+ * ListingOutOfStockBehaviourEnumFilter
+ * @export
+ * @interface ListingOutOfStockBehaviourEnumFilter
+ */
+export interface ListingOutOfStockBehaviourEnumFilter {
+    /**
+     * Search by outOfStockBehaviour
+     * @type {string}
+     * @memberof ListingOutOfStockBehaviourEnumFilter
+     */
+    eq?: ListingOutOfStockBehaviourEnumFilter.EqEnum;
+    /**
+     * Search by outOfStockBehaviour
+     * @type {string}
+     * @memberof ListingOutOfStockBehaviourEnumFilter
+     */
+    _in?: ListingOutOfStockBehaviourEnumFilter.InEnum;
+    /**
+     * Search by outOfStockBehaviour
+     * @type {string}
+     * @memberof ListingOutOfStockBehaviourEnumFilter
+     */
+    notEq?: ListingOutOfStockBehaviourEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace ListingOutOfStockBehaviourEnumFilter
+ */
+export namespace ListingOutOfStockBehaviourEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        BACKORDER = 'BACKORDER',
+        PREORDER = 'PREORDER',
+        RESTOCK = 'RESTOCK'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        BACKORDER = 'BACKORDER',
+        PREORDER = 'PREORDER',
+        RESTOCK = 'RESTOCK'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        BACKORDER = 'BACKORDER',
+        PREORDER = 'PREORDER',
+        RESTOCK = 'RESTOCK'
+    }
+}
+/**
+ * ListingPatchActions
  * @export
  * @interface ListingPatchActions
  */
@@ -12716,7 +18536,284 @@ export interface ListingPatchActions {
     version: number;
 }
 /**
- * 
+ * ListingSearchPayload
+ * @export
+ * @interface ListingSearchPayload
+ */
+export interface ListingSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof ListingSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {ListingSearchQuery}
+     * @memberof ListingSearchPayload
+     */
+    query: ListingSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof ListingSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<ListingSort>}
+     * @memberof ListingSearchPayload
+     */
+    sort?: Array<ListingSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof ListingSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * ListingSearchQuery
+ * @export
+ * @interface ListingSearchQuery
+ */
+export interface ListingSearchQuery {
+    /**
+     * 
+     * @type {Array<ListingSearchQuery>}
+     * @memberof ListingSearchQuery
+     */
+    and?: Array<ListingSearchQuery>;
+    /**
+     * Nested search by availabilityTimeframe
+     * @type {ListingAvailabilityTimeframeFilter}
+     * @memberof ListingSearchQuery
+     */
+    availabilityTimeframe?: ListingAvailabilityTimeframeFilter;
+    /**
+     * Search by created
+     * @type {DateFilter}
+     * @memberof ListingSearchQuery
+     */
+    created?: DateFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof ListingSearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof ListingSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof ListingSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * Search by measurementUnitKey
+     * @type {StringFilter}
+     * @memberof ListingSearchQuery
+     */
+    measurementUnitKey?: StringFilter;
+    /**
+     * 
+     * @type {Array<ListingSearchQuery>}
+     * @memberof ListingSearchQuery
+     */
+    or?: Array<ListingSearchQuery>;
+    /**
+     * Search by outOfStockBehaviour
+     * @type {ListingOutOfStockBehaviourEnumFilter}
+     * @memberof ListingSearchQuery
+     */
+    outOfStockBehaviour?: ListingOutOfStockBehaviourEnumFilter;
+    /**
+     * Search by price
+     * @type {NumberFilter}
+     * @memberof ListingSearchQuery
+     */
+    price?: NumberFilter;
+    /**
+     * Search by status
+     * @type {ListingStatusEnumEnumFilter}
+     * @memberof ListingSearchQuery
+     */
+    status?: ListingStatusEnumEnumFilter;
+    /**
+     * Nested list search by tags
+     * @type {ListingTagsListFilter}
+     * @memberof ListingSearchQuery
+     */
+    tags?: ListingTagsListFilter;
+    /**
+     * Search by tenantArticleId
+     * @type {StringFilter}
+     * @memberof ListingSearchQuery
+     */
+    tenantArticleId?: StringFilter;
+    /**
+     * Search by weight
+     * @type {NumberFilter}
+     * @memberof ListingSearchQuery
+     */
+    weight?: NumberFilter;
+}
+/**
+ * ListingSort
+ * @export
+ * @interface ListingSort
+ */
+export interface ListingSort {
+    /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof ListingSort
+     */
+    customAttributes?: { [key: string]: any; };
+    /**
+     * 
+     * @type {string}
+     * @memberof ListingSort
+     */
+    lastModified?: ListingSort.LastModifiedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ListingSort
+     */
+    tenantArticleId?: ListingSort.TenantArticleIdEnum;
+}
+
+/**
+ * @export
+ * @namespace ListingSort
+ */
+export namespace ListingSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TenantArticleIdEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * ListingStatusEnumEnumFilter
+ * @export
+ * @interface ListingStatusEnumEnumFilter
+ */
+export interface ListingStatusEnumEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ListingStatusEnumEnumFilter
+     */
+    eq?: ListingStatusEnumEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ListingStatusEnumEnumFilter
+     */
+    _in?: ListingStatusEnumEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ListingStatusEnumEnumFilter
+     */
+    notEq?: ListingStatusEnumEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace ListingStatusEnumEnumFilter
+ */
+export namespace ListingStatusEnumEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        ACTIVE = 'ACTIVE',
+        INACTIVE = 'INACTIVE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        ACTIVE = 'ACTIVE',
+        INACTIVE = 'INACTIVE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        ACTIVE = 'ACTIVE',
+        INACTIVE = 'INACTIVE'
+    }
+}
+/**
+ * ListingTagsFilter
+ * @export
+ * @interface ListingTagsFilter
+ */
+export interface ListingTagsFilter {
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof ListingTagsFilter
+     */
+    id?: StringFilter;
+    /**
+     * Search by value
+     * @type {StringFilter}
+     * @memberof ListingTagsFilter
+     */
+    value?: StringFilter;
+}
+/**
+ * ListingTagsListFilter
+ * @export
+ * @interface ListingTagsListFilter
+ */
+export interface ListingTagsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {ListingTagsFilter}
+     * @memberof ListingTagsListFilter
+     */
+    contains?: ListingTagsFilter;
+}
+/**
+ * ListingWebHookEventPayload
+ * @export
+ * @interface ListingWebHookEventPayload
+ */
+export interface ListingWebHookEventPayload {
+    /**
+     * 
+     * @type {Array<InventoryListingEventPayload>}
+     * @memberof ListingWebHookEventPayload
+     */
+    items: Array<InventoryListingEventPayload>;
+}
+/**
+ * ListingsForCreation
  * @export
  * @interface ListingsForCreation
  */
@@ -12729,7 +18826,7 @@ export interface ListingsForCreation {
     listings: Array<ListingForCreation>;
 }
 /**
- * 
+ * ListingsForReplacement
  * @export
  * @interface ListingsForReplacement
  */
@@ -12742,7 +18839,7 @@ export interface ListingsForReplacement {
     listings: Array<ListingForReplacement>;
 }
 /**
- * 
+ * LoadUnit.
  * @export
  * @interface LoadUnit
  */
@@ -12754,11 +18851,11 @@ export interface LoadUnit extends VersionedResource {
      */
     codes?: Array<string>;
     /**
-     * 
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Use operativeContainerTypeRef instead.
      * @type {string}
      * @memberof LoadUnit
      */
-    loadUnitTypeRef: string;
+    loadUnitTypeRef?: string;
     /**
      * 
      * @type {Array<LoadUnitLineItem>}
@@ -12777,6 +18874,24 @@ export interface LoadUnit extends VersionedResource {
      * @memberof LoadUnit
      */
     customAttributes?: any;
+    /**
+     * the reference to the storage location this load unit as been placed into
+     * @type {string}
+     * @memberof LoadUnit
+     */
+    storageLocationRef?: string;
+    /**
+     * the reference to the operativeContainerType
+     * @type {string}
+     * @memberof LoadUnit
+     */
+    operativeContainerTypeRef?: string;
+    /**
+     * the reference to the stackRef this loadUnit is part of
+     * @type {string}
+     * @memberof LoadUnit
+     */
+    stackRef?: string;
     /**
      * 
      * @type {LoadUnitDimensions}
@@ -12863,7 +18978,7 @@ export enum LoadUnitAssignmentType {
     DURINGPICKING = 'DURING_PICKING'
 }
 /**
- * 
+ * LoadUnitConfiguration
  * @export
  * @interface LoadUnitConfiguration
  */
@@ -12876,7 +18991,7 @@ export interface LoadUnitConfiguration extends VersionedResource {
     maxCount?: number;
 }
 /**
- * 
+ * LoadUnitDimensions
  * @export
  * @interface LoadUnitDimensions
  */
@@ -12907,7 +19022,7 @@ export interface LoadUnitDimensions {
     widthInCm?: number;
 }
 /**
- * 
+ * LoadUnitForCreation
  * @export
  * @interface LoadUnitForCreation
  */
@@ -12919,11 +19034,11 @@ export interface LoadUnitForCreation {
      */
     codes?: Array<string>;
     /**
-     * 
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Use operativeContainerTypeRef instead.
      * @type {string}
      * @memberof LoadUnitForCreation
      */
-    loadUnitTypeRef: string;
+    loadUnitTypeRef?: string;
     /**
      * 
      * @type {Array<LoadUnitLineItemForCreation>}
@@ -12942,9 +19057,27 @@ export interface LoadUnitForCreation {
      * @memberof LoadUnitForCreation
      */
     customAttributes?: any;
+    /**
+     * the reference to the storage location this load unit as been placed into
+     * @type {string}
+     * @memberof LoadUnitForCreation
+     */
+    storageLocationRef?: string;
+    /**
+     * the reference to the operativeContainerType
+     * @type {string}
+     * @memberof LoadUnitForCreation
+     */
+    operativeContainerTypeRef?: string;
+    /**
+     * the reference to the stackRef this loadUnit is part of
+     * @type {string}
+     * @memberof LoadUnitForCreation
+     */
+    stackRef?: string;
 }
 /**
- * 
+ * LoadUnitLineItem
  * @export
  * @interface LoadUnitLineItem
  */
@@ -12955,9 +19088,15 @@ export interface LoadUnitLineItem extends LoadUnitLineItemForCreation {
      * @memberof LoadUnitLineItem
      */
     id: string;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof LoadUnitLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
 }
 /**
- * 
+ * LoadUnitLineItemForCreation
  * @export
  * @interface LoadUnitLineItemForCreation
  */
@@ -12992,9 +19131,15 @@ export interface LoadUnitLineItemForCreation {
      * @memberof LoadUnitLineItemForCreation
      */
     scannableCodes?: Array<string>;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof LoadUnitLineItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * Actions to patch a LoadUnit.
  * @export
  * @interface LoadUnitPatchActions
  */
@@ -13013,7 +19158,7 @@ export interface LoadUnitPatchActions {
     version: number;
 }
 /**
- * 
+ * LoadUnitType
  * @export
  * @interface LoadUnitType
  */
@@ -13074,7 +19219,7 @@ export interface LoadUnitType extends VersionedResource {
     priority?: number;
 }
 /**
- * 
+ * LoadUnitTypeForCreation
  * @export
  * @interface LoadUnitTypeForCreation
  */
@@ -13117,7 +19262,7 @@ export interface LoadUnitTypeForCreation {
     priority?: number;
 }
 /**
- * 
+ * LoadUnitTypePatchActions
  * @export
  * @interface LoadUnitTypePatchActions
  */
@@ -13136,12 +19281,12 @@ export interface LoadUnitTypePatchActions {
     version: number;
 }
 /**
- * 
+ * LoadUnitTypes
  * @export
  */
 export type LoadUnitTypes = Array<LoadUnitType>
 /**
- * 
+ * LoadUnits
  * @export
  * @interface LoadUnits
  */
@@ -13160,7 +19305,7 @@ export interface LoadUnits {
     total?: number;
 }
 /**
- * 
+ * LoadUnitsForCreation
  * @export
  * @interface LoadUnitsForCreation
  */
@@ -13180,7 +19325,7 @@ export interface LoadUnitsForCreation {
 export interface LoadunitsLoadUnitIdBody {
 }
 /**
- * 
+ * LocaleConfiguration
  * @export
  * @interface LocaleConfiguration
  */
@@ -13214,7 +19359,14 @@ export interface LocaleString {
 
 }
 /**
- * 
+ * LocaleStringConstrained
+ * @export
+ * @interface LocaleStringConstrained
+ */
+export interface LocaleStringConstrained {
+}
+/**
+ * LocalizedAvailableItemCondition
  * @export
  * @interface LocalizedAvailableItemCondition
  */
@@ -13233,7 +19385,7 @@ export interface LocalizedAvailableItemCondition {
     conditionLocalized: LocaleString;
 }
 /**
- * 
+ * LocalizedAvailableReturnReason
  * @export
  * @interface LocalizedAvailableReturnReason
  */
@@ -13244,15 +19396,21 @@ export interface LocalizedAvailableReturnReason extends AvailableReturnReason {
      * @memberof LocalizedAvailableReturnReason
      */
     reason: string;
+    /**
+     * Small identifier to be displayed and printed. Allowed values are 1-99 and A-Z. Needs to be unique respecting all other reasons. If not set, an ascending will be chosen automatically
+     * @type {string}
+     * @memberof LocalizedAvailableReturnReason
+     */
+    identifier: string;
 }
 /**
- * 
+ * LocalizedReturnConfiguration
  * @export
  * @interface LocalizedReturnConfiguration
  */
 export interface LocalizedReturnConfiguration extends VersionedResource {
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />Enable or disable legacy returns. Use returnTypeConfiguration instead
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Enable or disable legacy returns. Use returnTypeConfiguration instead
      * @type {boolean}
      * @memberof LocalizedReturnConfiguration
      */
@@ -13275,9 +19433,15 @@ export interface LocalizedReturnConfiguration extends VersionedResource {
      * @memberof LocalizedReturnConfiguration
      */
     availableReturnReasons?: Array<LocalizedAvailableReturnReason>;
+    /**
+     * If true, a refund can be triggered. If false, the endpoints to trigger a refund are disabled.
+     * @type {boolean}
+     * @memberof LocalizedReturnConfiguration
+     */
+    allowTriggerRefund?: boolean;
 }
 /**
- * 
+ * Location
  * @export
  * @interface Location
  */
@@ -13296,53 +19460,418 @@ export interface Location {
     scannableCodes?: Array<string>;
 }
 /**
- * 
+ * ManagedFacility
  * @export
- * @interface MandatoryShippingArticleAttribute
+ * @interface ManagedFacility
  */
-export interface MandatoryShippingArticleAttribute {
+export interface ManagedFacility extends Facility {
     /**
      * 
-     * @type {MandatoryShippingArticleAttributeReferencedField}
-     * @memberof MandatoryShippingArticleAttribute
+     * @type {FacilityAddress}
+     * @memberof ManagedFacility
      */
-    referencedField: MandatoryShippingArticleAttributeReferencedField;
+    address: FacilityAddress;
+    /**
+     * Days of the year where the facility is closed and doesn't allows picking
+     * @type {Array<ClosingDay>}
+     * @memberof ManagedFacility
+     */
+    closingDays?: Array<ClosingDay>;
     /**
      * 
-     * @type {MandatoryShippingArticleAttributeDataType}
-     * @memberof MandatoryShippingArticleAttribute
+     * @type {FacilityContact}
+     * @memberof ManagedFacility
      */
-    dataType: MandatoryShippingArticleAttributeDataType;
+    contact?: FacilityContact;
+    /**
+     * Duration in minutes until an order is processed
+     * @type {number}
+     * @memberof ManagedFacility
+     */
+    fulfillmentProcessBuffer?: number;
     /**
      * 
-     * @type {MandatoryShippingArticleAttributeCategory}
-     * @memberof MandatoryShippingArticleAttribute
+     * @type {FacilityLocationType}
+     * @memberof ManagedFacility
      */
-    category: MandatoryShippingArticleAttributeCategory;
+    locationType?: FacilityLocationType;
+    /**
+     * The range in days per facility which defines how many days in the future the capacity of the facility can be planned
+     * @type {number}
+     * @memberof ManagedFacility
+     */
+    capacityPlanningTimeframe?: number;
+    /**
+     * 
+     * @type {PickingTimes}
+     * @memberof ManagedFacility
+     */
+    pickingTimes?: PickingTimes;
+    /**
+     * Picking Methods supported by this facility.
+     * @type {Array<PickingMethodEnum>}
+     * @memberof ManagedFacility
+     */
+    pickingMethods?: Array<PickingMethodEnum>;
+    /**
+     * 
+     * @type {ScanningRuleConfiguration}
+     * @memberof ManagedFacility
+     */
+    scanningRule?: ScanningRuleConfiguration;
+    /**
+     * 
+     * @type {Array<FacilityService>}
+     * @memberof ManagedFacility
+     */
+    services?: Array<FacilityService>;
+    /**
+     * Indicates that configured capacity limits for picking times are considered
+     * @type {boolean}
+     * @memberof ManagedFacility
+     */
+    capacityEnabled?: boolean;
+    /**
+     * 
+     * @type {Array<LinkedConfiguration>}
+     * @memberof ManagedFacility
+     */
+    configs?: Array<LinkedConfiguration>;
+}
+/**
+ * ManagedFacilityForCreation
+ * @export
+ * @interface ManagedFacilityForCreation
+ */
+export interface ManagedFacilityForCreation extends FacilityForCreation {
+    /**
+     * 
+     * @type {FacilityAddressForCreation}
+     * @memberof ManagedFacilityForCreation
+     */
+    address: FacilityAddressForCreation;
+    /**
+     * Days of the year where the facility is closed and doesn't allows picking
+     * @type {Array<ClosingDay>}
+     * @memberof ManagedFacilityForCreation
+     */
+    closingDays?: Array<ClosingDay>;
+    /**
+     * 
+     * @type {FacilityContact}
+     * @memberof ManagedFacilityForCreation
+     */
+    contact?: FacilityContact;
+    /**
+     * Duration in minutes until an order is processed
+     * @type {number}
+     * @memberof ManagedFacilityForCreation
+     */
+    fulfillmentProcessBuffer?: number;
+    /**
+     * 
+     * @type {FacilityLocationType}
+     * @memberof ManagedFacilityForCreation
+     */
+    locationType?: FacilityLocationType;
+    /**
+     * The range in days per facility which defines how many days in the future the capacity of the facility can be planned
+     * @type {number}
+     * @memberof ManagedFacilityForCreation
+     */
+    capacityPlanningTimeframe?: number;
+    /**
+     * 
+     * @type {PickingTimes}
+     * @memberof ManagedFacilityForCreation
+     */
+    pickingTimes?: PickingTimes;
+    /**
+     * Picking Methods supported by this facility.
+     * @type {Array<PickingMethodEnum>}
+     * @memberof ManagedFacilityForCreation
+     */
+    pickingMethods?: Array<PickingMethodEnum>;
+    /**
+     * 
+     * @type {ScanningRuleConfiguration}
+     * @memberof ManagedFacilityForCreation
+     */
+    scanningRule?: ScanningRuleConfiguration;
+    /**
+     * 
+     * @type {Array<FacilityService>}
+     * @memberof ManagedFacilityForCreation
+     */
+    services?: Array<FacilityService>;
+    /**
+     * Indicates that configured capacity limits for picking times are considered
+     * @type {boolean}
+     * @memberof ManagedFacilityForCreation
+     */
+    capacityEnabled?: boolean;
+}
+/**
+ * ManagedFacilityForModification
+ * @export
+ * @interface ManagedFacilityForModification
+ */
+export interface ManagedFacilityForModification {
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof ManagedFacilityForModification
+     */
+    version: number;
     /**
      * 
      * @type {string}
-     * @memberof MandatoryShippingArticleAttribute
+     * @memberof ManagedFacilityForModification
      */
-    description?: string;
+    name?: string;
     /**
      * 
-     * @type {LocaleString}
-     * @memberof MandatoryShippingArticleAttribute
+     * @type {FacilityStatus}
+     * @memberof ManagedFacilityForModification
      */
-    descriptionLocalized: LocaleString;
+    status?: FacilityStatus;
+    /**
+     * The id of the facility in the tenants own system
+     * @type {string}
+     * @memberof ManagedFacilityForModification
+     */
+    tenantFacilityId?: string;
+    /**
+     * 
+     * @type {Array<TagReference>}
+     * @memberof ManagedFacilityForModification
+     */
+    tags?: Array<TagReference>;
+    /**
+     * Attributes that can be added to the facility. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof ManagedFacilityForModification
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {FacilityType}
+     * @memberof ManagedFacilityForModification
+     */
+    type: FacilityType;
+    /**
+     * 
+     * @type {FacilityAddressForCreation}
+     * @memberof ManagedFacilityForModification
+     */
+    address?: FacilityAddressForCreation;
+    /**
+     * Days of the year where the facility is closed and doesn't allows picking
+     * @type {Array<ClosingDay>}
+     * @memberof ManagedFacilityForModification
+     */
+    closingDays?: Array<ClosingDay>;
+    /**
+     * 
+     * @type {FacilityContact}
+     * @memberof ManagedFacilityForModification
+     */
+    contact?: FacilityContact;
+    /**
+     * Duration in minutes until an order is processed
+     * @type {number}
+     * @memberof ManagedFacilityForModification
+     */
+    fulfillmentProcessBuffer?: number;
+    /**
+     * 
+     * @type {FacilityLocationType}
+     * @memberof ManagedFacilityForModification
+     */
+    locationType?: FacilityLocationType;
+    /**
+     * The range in days per facility which defines how many days in the future the capacity of the facility can be planned
+     * @type {number}
+     * @memberof ManagedFacilityForModification
+     */
+    capacityPlanningTimeframe?: number;
+    /**
+     * 
+     * @type {PickingTimes}
+     * @memberof ManagedFacilityForModification
+     */
+    pickingTimes?: PickingTimes;
+    /**
+     * Picking Methods supported by this facility.
+     * @type {Array<PickingMethodEnum>}
+     * @memberof ManagedFacilityForModification
+     */
+    pickingMethods?: Array<PickingMethodEnum>;
+    /**
+     * 
+     * @type {ScanningRuleConfiguration}
+     * @memberof ManagedFacilityForModification
+     */
+    scanningRule?: ScanningRuleConfiguration;
+    /**
+     * 
+     * @type {Array<FacilityService>}
+     * @memberof ManagedFacilityForModification
+     */
+    services?: Array<FacilityService>;
+    /**
+     * Indicates that configured capacity limits for picking times are considered
+     * @type {boolean}
+     * @memberof ManagedFacilityForModification
+     */
+    capacityEnabled?: boolean;
+    /**
+     * 
+     * @type {Array<LinkedConfiguration>}
+     * @memberof ManagedFacilityForModification
+     */
+    configs?: Array<LinkedConfiguration>;
 }
 /**
- * 
+ * ManagedFacilityForReplacement
+ * @export
+ * @interface ManagedFacilityForReplacement
+ */
+export interface ManagedFacilityForReplacement {
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof ManagedFacilityForReplacement
+     */
+    version: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ManagedFacilityForReplacement
+     */
+    name: string;
+    /**
+     * 
+     * @type {FacilityStatus}
+     * @memberof ManagedFacilityForReplacement
+     */
+    status: FacilityStatus;
+    /**
+     * The id of the facility in the tenants own system
+     * @type {string}
+     * @memberof ManagedFacilityForReplacement
+     */
+    tenantFacilityId?: string;
+    /**
+     * 
+     * @type {Array<TagReference>}
+     * @memberof ManagedFacilityForReplacement
+     */
+    tags?: Array<TagReference>;
+    /**
+     * Attributes that can be added to the facility. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof ManagedFacilityForReplacement
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {FacilityType}
+     * @memberof ManagedFacilityForReplacement
+     */
+    type: FacilityType;
+    /**
+     * 
+     * @type {FacilityAddressForCreation}
+     * @memberof ManagedFacilityForReplacement
+     */
+    address: FacilityAddressForCreation;
+    /**
+     * Days of the year where the facility is closed and doesn't allows picking
+     * @type {Array<ClosingDay>}
+     * @memberof ManagedFacilityForReplacement
+     */
+    closingDays?: Array<ClosingDay>;
+    /**
+     * 
+     * @type {FacilityContact}
+     * @memberof ManagedFacilityForReplacement
+     */
+    contact?: FacilityContact;
+    /**
+     * Duration in minutes until an order is processed
+     * @type {number}
+     * @memberof ManagedFacilityForReplacement
+     */
+    fulfillmentProcessBuffer: number;
+    /**
+     * 
+     * @type {FacilityLocationType}
+     * @memberof ManagedFacilityForReplacement
+     */
+    locationType: FacilityLocationType;
+    /**
+     * The range in days per facility which defines how many days in the future the capacity of the facility can be planned
+     * @type {number}
+     * @memberof ManagedFacilityForReplacement
+     */
+    capacityPlanningTimeframe?: number;
+    /**
+     * 
+     * @type {PickingTimes}
+     * @memberof ManagedFacilityForReplacement
+     */
+    pickingTimes?: PickingTimes;
+    /**
+     * Picking Methods supported by this facility.
+     * @type {Array<PickingMethodEnum>}
+     * @memberof ManagedFacilityForReplacement
+     */
+    pickingMethods?: Array<PickingMethodEnum>;
+    /**
+     * 
+     * @type {ScanningRuleConfiguration}
+     * @memberof ManagedFacilityForReplacement
+     */
+    scanningRule?: ScanningRuleConfiguration;
+    /**
+     * 
+     * @type {Array<FacilityService>}
+     * @memberof ManagedFacilityForReplacement
+     */
+    services?: Array<FacilityService>;
+    /**
+     * Indicates that configured capacity limits for picking times are considered
+     * @type {boolean}
+     * @memberof ManagedFacilityForReplacement
+     */
+    capacityEnabled: boolean;
+    /**
+     * 
+     * @type {Array<LinkedConfiguration>}
+     * @memberof ManagedFacilityForReplacement
+     */
+    configs?: Array<LinkedConfiguration>;
+}
+/**
+ * MandatoryShippingArticleAttribute
+ * @export
+ * @interface MandatoryShippingArticleAttribute
+ */
+export interface MandatoryShippingArticleAttribute extends CountryServiceMappingShippingArticleAttribute {
+}
+/**
+ * MandatoryShippingArticleAttributeCategory
  * @export
  * @enum {string}
  */
 export enum MandatoryShippingArticleAttributeCategory {
     Customs = 'customs',
-    Dimensions = 'dimensions'
+    Dimensions = 'dimensions',
+    Insurance = 'insurance'
 }
 /**
- * 
+ * MandatoryShippingArticleAttributeDataType
  * @export
  * @enum {string}
  */
@@ -13351,7 +19880,7 @@ export enum MandatoryShippingArticleAttributeDataType {
     STRING = 'STRING'
 }
 /**
- * 
+ * MandatoryShippingArticleAttributeReferencedField
  * @export
  * @enum {string}
  */
@@ -13363,35 +19892,11 @@ export enum MandatoryShippingArticleAttributeReferencedField {
     CountryOfManufacture = 'attributes.countryOfManufacture'
 }
 /**
- * 
+ * MandatoryShippingAttribute
  * @export
  * @interface MandatoryShippingAttribute
  */
-export interface MandatoryShippingAttribute {
-    /**
-     * - dimensions.weight: will be calculated from MandatoryShippingArticleAttribute.attributes.weightPerUnit if items with weightPerUnit is set on all items - productValue: will be calculated from MandatoryShippingArticleAttribute.attributes.pricePerUnit if items with pricePerUnit is set on all items
-     * @type {string}
-     * @memberof MandatoryShippingAttribute
-     */
-    referencedField?: MandatoryShippingAttribute.ReferencedFieldEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof MandatoryShippingAttribute
-     */
-    dataType?: MandatoryShippingAttribute.DataTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof MandatoryShippingAttribute
-     */
-    description?: string;
-    /**
-     * 
-     * @type {LocaleString}
-     * @memberof MandatoryShippingAttribute
-     */
-    descriptionLocalized?: LocaleString;
+export interface MandatoryShippingAttribute extends CountryServiceMappingShippingAttribute {
 }
 
 /**
@@ -13399,28 +19904,9 @@ export interface MandatoryShippingAttribute {
  * @namespace MandatoryShippingAttribute
  */
 export namespace MandatoryShippingAttribute {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum ReferencedFieldEnum {
-        DimensionsWeight = 'dimensions.weight',
-        ProductValue = 'productValue',
-        PickUpInformationStartTime = 'pickUpInformation.startTime',
-        PickUpInformationEndTime = 'pickUpInformation.endTime'
-    }
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum DataTypeEnum {
-        Number = 'Number',
-        String = 'String',
-        Date = 'Date'
-    }
 }
 /**
- * 
+ * MandatoryShippingItemAttribute
  * @export
  * @interface MandatoryShippingItemAttribute
  */
@@ -13476,7 +19962,8 @@ export namespace MandatoryShippingItemAttribute {
     export enum DataTypeEnum {
         Number = 'Number',
         String = 'String',
-        Date = 'Date'
+        Date = 'Date',
+        Boolean = 'Boolean'
     }
 }
 /**
@@ -13499,7 +19986,7 @@ export interface ManualRerouteConfiguration extends VersionedResource {
     id?: string;
 }
 /**
- * 
+ * MeasurementUnit
  * @export
  * @interface MeasurementUnit
  */
@@ -13542,7 +20029,7 @@ export interface MeasurementUnit extends MeasurementUnitForCreation {
     name?: string;
 }
 /**
- * 
+ * MeasurementUnitForCreation
  * @export
  * @interface MeasurementUnitForCreation
  */
@@ -13573,7 +20060,7 @@ export interface MeasurementUnitForCreation {
     requiresMeasurement?: boolean;
 }
 /**
- * 
+ * MeasurementUnits
  * @export
  * @interface MeasurementUnits
  */
@@ -13592,7 +20079,7 @@ export interface MeasurementUnits {
     total?: number;
 }
 /**
- * 
+ * MeasurementValidation
  * @export
  * @interface MeasurementValidation
  */
@@ -13623,7 +20110,7 @@ export interface MeasurementValidation {
     overPickHardTolerancePercentage?: number;
 }
 /**
- * 
+ * ModifyAddress
  * @export
  * @interface ModifyAddress
  */
@@ -13736,7 +20223,7 @@ export namespace ModifyAddressPhoneNumbers {
     }
 }
 /**
- * 
+ * ModifyAngelCarrierCredentials
  * @export
  * @interface ModifyAngelCarrierCredentials
  */
@@ -13767,7 +20254,7 @@ export interface ModifyAngelCarrierCredentials extends AbstractModifyCarrierCred
     key: string;
 }
 /**
- * 
+ * ModifyBringCarrierCredentials
  * @export
  * @interface ModifyBringCarrierCredentials
  */
@@ -13804,7 +20291,7 @@ export interface ModifyBringCarrierCredentials extends AbstractModifyCarrierCred
     key: string;
 }
 /**
- * 
+ * ModifyCarrierAction
  * @export
  * @interface ModifyCarrierAction
  */
@@ -13821,6 +20308,24 @@ export interface ModifyCarrierAction extends AbstractModificationAction {
      * @memberof ModifyCarrierAction
      */
     defaultParcelWeightInGram?: number;
+    /**
+     * Default width in cm
+     * @type {number}
+     * @memberof ModifyCarrierAction
+     */
+    defaultParcelWidthInCm?: number;
+    /**
+     * Default length in cm
+     * @type {number}
+     * @memberof ModifyCarrierAction
+     */
+    defaultParcelLengthInCm?: number;
+    /**
+     * Default height in cm
+     * @type {number}
+     * @memberof ModifyCarrierAction
+     */
+    defaultParcelHeightInCm?: number;
     /**
      * 
      * @type {Array<ParcelLabelClassificationForCreation>}
@@ -13885,7 +20390,7 @@ export namespace ModifyCarrierAction {
     }
 }
 /**
- * 
+ * Action to modify a custom service.
  * @export
  * @interface ModifyCustomServiceAction
  */
@@ -13896,6 +20401,12 @@ export interface ModifyCustomServiceAction extends AbstractModificationAction {
      * @memberof ModifyCustomServiceAction
      */
     action: ModifyCustomServiceAction.ActionEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ModifyCustomServiceAction
+     */
+    tenantCustomServiceId?: string;
     /**
      * 
      * @type {CustomServiceStatus}
@@ -13948,7 +20459,7 @@ export namespace ModifyCustomServiceAction {
     }
 }
 /**
- * 
+ * ModifyDHLV2CarrierCredentials
  * @export
  * @interface ModifyDHLV2CarrierCredentials
  */
@@ -13967,7 +20478,7 @@ export interface ModifyDHLV2CarrierCredentials extends AbstractModifyCarrierCred
     fallback?: DHLV2BusinessCredentials;
 }
 /**
- * 
+ * ModifyDpdChCarrierCredentials
  * @export
  * @interface ModifyDpdChCarrierCredentials
  */
@@ -13992,7 +20503,7 @@ export interface ModifyDpdChCarrierCredentials extends AbstractModifyCarrierCred
     password?: string;
 }
 /**
- * 
+ * ModifyFacilityAction
  * @export
  * @interface ModifyFacilityAction
  */
@@ -14017,10 +20528,10 @@ export interface ModifyFacilityAction extends AbstractModificationAction {
     closingDays?: Array<ClosingDay>;
     /**
      * 
-     * @type {FacilityForCreationContact}
+     * @type {FacilityContact}
      * @memberof ModifyFacilityAction
      */
-    contact?: FacilityForCreationContact;
+    contact?: FacilityContact;
     /**
      * Attributes that can be added to the facility. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
      * @type {any}
@@ -14035,10 +20546,10 @@ export interface ModifyFacilityAction extends AbstractModificationAction {
     fulfillmentProcessBuffer?: number;
     /**
      * 
-     * @type {string}
+     * @type {FacilityLocationType}
      * @memberof ModifyFacilityAction
      */
-    locationType?: ModifyFacilityAction.LocationTypeEnum;
+    locationType?: FacilityLocationType;
     /**
      * 
      * @type {string}
@@ -14099,6 +20610,12 @@ export interface ModifyFacilityAction extends AbstractModificationAction {
      * @memberof ModifyFacilityAction
      */
     tags?: Array<TagReference>;
+    /**
+     * 
+     * @type {Array<FacilityOperativeCostForCreation>}
+     * @memberof ModifyFacilityAction
+     */
+    operativeCosts?: Array<FacilityOperativeCostForCreation>;
 }
 
 /**
@@ -14112,15 +20629,6 @@ export namespace ModifyFacilityAction {
      */
     export enum ActionEnum {
         ModifyFacility = 'ModifyFacility'
-    }
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum LocationTypeEnum {
-        STORE = 'STORE',
-        WAREHOUSE = 'WAREHOUSE',
-        EXTERNAL = 'EXTERNAL'
     }
     /**
      * @export
@@ -14161,7 +20669,7 @@ export namespace ModifyFacilityActionServices {
     }
 }
 /**
- * 
+ * ModifyFacilityAddress
  * @export
  * @interface ModifyFacilityAddress
  */
@@ -14199,7 +20707,7 @@ export interface ModifyFacilityAddressEmailAddresses {
     value: string;
 }
 /**
- * 
+ * ModifyFeatureAction
  * @export
  * @interface ModifyFeatureAction
  */
@@ -14232,7 +20740,7 @@ export namespace ModifyFeatureAction {
     }
 }
 /**
- * 
+ * ModifyFedexCarrierCredentials
  * @export
  * @interface ModifyFedexCarrierCredentials
  */
@@ -14263,7 +20771,7 @@ export interface ModifyFedexCarrierCredentials extends AbstractModifyCarrierCred
     key: string;
 }
 /**
- * 
+ * Action to Modify a Fence.
  * @export
  * @interface ModifyFenceAction
  */
@@ -14308,7 +20816,7 @@ export namespace ModifyFenceAction {
     }
 }
 /**
- * 
+ * ModifyGLSCarrierCredentials
  * @export
  * @interface ModifyGLSCarrierCredentials
  */
@@ -14345,7 +20853,7 @@ export interface ModifyGLSCarrierCredentials extends AbstractModifyCarrierCreden
     key: string;
 }
 /**
- * 
+ * Action to Modify the Global Routing Configuration.
  * @export
  * @interface ModifyGlobalRoutingConfigurationAction
  */
@@ -14369,7 +20877,7 @@ export interface ModifyGlobalRoutingConfigurationAction extends AbstractModifica
      */
     manualRerouteConfiguration?: GlobalManualRerouteConfiguration;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Default amount of hours after which a routing plan is marked not routable. This field is deprecated in favour of stopRoutingAttemptsAfterTime
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Default amount of hours after which a routing plan is marked not routable. This field is deprecated in favour of stopRoutingAttemptsAfterTime
      * @type {number}
      * @memberof ModifyGlobalRoutingConfigurationAction
      */
@@ -14402,7 +20910,7 @@ export namespace ModifyGlobalRoutingConfigurationAction {
     }
 }
 /**
- * 
+ * Action to modify a HandoverJob.
  * @export
  * @interface ModifyHandoverjobAction
  */
@@ -14441,7 +20949,7 @@ export namespace ModifyHandoverjobAction {
     }
 }
 /**
- * 
+ * ModifyListingAction
  * @export
  * @interface ModifyListingAction
  */
@@ -14532,10 +21040,16 @@ export interface ModifyListingAction extends AbstractModificationAction {
     weight?: number;
     /**
      * 
-     * @type {string}
+     * @type {OutOfStockBehaviour}
      * @memberof ModifyListingAction
      */
-    outOfStockBehaviour?: ModifyListingAction.OutOfStockBehaviourEnum;
+    outOfStockBehaviour?: OutOfStockBehaviour;
+    /**
+     * 
+     * @type {OutOfStockConfig}
+     * @memberof ModifyListingAction
+     */
+    outOfStockConfig?: OutOfStockConfig;
     /**
      * 
      * @type {AvailabilityTimeframe}
@@ -14594,16 +21108,9 @@ export namespace ModifyListingAction {
         ACTIVE = 'ACTIVE',
         INACTIVE = 'INACTIVE'
     }
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum OutOfStockBehaviourEnum {
-        BACKORDER = 'BACKORDER'
-    }
 }
 /**
- * 
+ * Action to modify the reactivationAfter property of a Listing.
  * @export
  * @interface ModifyListingReactivationAfterAction
  */
@@ -14636,7 +21143,7 @@ export namespace ModifyListingReactivationAfterAction {
     }
 }
 /**
- * 
+ * ModifyLoadUnitTypeAction
  * @export
  * @interface ModifyLoadUnitTypeAction
  */
@@ -14693,7 +21200,7 @@ export namespace ModifyLoadUnitTypeAction {
     }
 }
 /**
- * 
+ * Action to Modify the Order Split Configuration.
  * @export
  * @interface ModifyOrderSplitAction
  */
@@ -14750,7 +21257,7 @@ export namespace ModifyOrderSplitAction {
     }
 }
 /**
- * 
+ * Action to modify a PackJob
  * @export
  * @interface ModifyPackJobAction
  */
@@ -14767,6 +21274,12 @@ export interface ModifyPackJobAction extends AbstractModificationAction {
      * @memberof ModifyPackJobAction
      */
     status?: PackJobStatus;
+    /**
+     * Attributes that can be added to the line item. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof ModifyPackJobAction
+     */
+    customAttributes?: any;
 }
 
 /**
@@ -14783,7 +21296,7 @@ export namespace ModifyPackJobAction {
     }
 }
 /**
- * 
+ * Action to modify a PackLineItem of a PackJob
  * @export
  * @interface ModifyPackLineItemAction
  */
@@ -14822,7 +21335,7 @@ export namespace ModifyPackLineItemAction {
     }
 }
 /**
- * 
+ * Action to a modify the type of a packing container.
  * @export
  * @interface ModifyPackingContainerTypeAction
  */
@@ -14879,7 +21392,7 @@ export namespace ModifyPackingContainerTypeAction {
     }
 }
 /**
- * 
+ * Action to a modify the type icon of a packing container.
  * @export
  * @interface ModifyPackingContainerTypeIconAction
  */
@@ -14918,7 +21431,7 @@ export namespace ModifyPackingContainerTypeIconAction {
     }
 }
 /**
- * 
+ * Modify Parcel Action.
  * @export
  * @interface ModifyParcelAction
  */
@@ -14960,6 +21473,12 @@ export interface ModifyParcelAction extends AbstractModificationAction {
      */
     productValue?: number;
     /**
+     * Set this value if you want to overwrite the calculated product value of the parcel.
+     * @type {number}
+     * @memberof ModifyParcelAction
+     */
+    customProductValue?: number;
+    /**
      * 
      * @type {ParcelPickUpInformation}
      * @memberof ModifyParcelAction
@@ -14993,7 +21512,7 @@ export namespace ModifyParcelAction {
     }
 }
 /**
- * 
+ * Modify Parcels of a LoadUnit.
  * @export
  * @interface ModifyParcelLoadUnitsAction
  */
@@ -15026,7 +21545,7 @@ export namespace ModifyParcelLoadUnitsAction {
     }
 }
 /**
- * 
+ * ModifyPartialStockAction
  * @export
  * @interface ModifyPartialStockAction
  */
@@ -15059,7 +21578,7 @@ export namespace ModifyPartialStockAction {
     }
 }
 /**
- * 
+ * Action to modify a PickJob.
  * @export
  * @interface ModifyPickJobAction
  */
@@ -15110,7 +21629,7 @@ export namespace ModifyPickJobAction {
     }
 }
 /**
- * 
+ * Action to modify the last editor of a PickJob.
  * @export
  * @interface ModifyPickJobLastEditorAction
  */
@@ -15137,7 +21656,7 @@ export namespace ModifyPickJobLastEditorAction {
     }
 }
 /**
- * 
+ * ModifyPickJobLineItemsActionEnum
  * @export
  * @enum {string}
  */
@@ -15145,7 +21664,7 @@ export enum ModifyPickJobLineItemsActionEnum {
     MODIFYPICKJOBLINEITEMS = 'MODIFY_PICK_JOB_LINE_ITEMS'
 }
 /**
- * 
+ * Action to modify a picklineitem of a PickJob.
  * @export
  * @interface ModifyPickLineItemAction
  */
@@ -15217,7 +21736,7 @@ export interface ModifyPickLineItemAction extends AbstractModificationAction {
      */
     secondaryPicked?: number;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />
+     * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />
      * @type {Array<SubstituteLineItemForCreation>}
      * @memberof ModifyPickLineItemAction
      */
@@ -15244,7 +21763,7 @@ export namespace ModifyPickLineItemAction {
     }
 }
 /**
- * 
+ * Action to modify picklineItems of a Pickjob.
  * @export
  * @interface ModifyPickLineItemsActionParameter
  */
@@ -15269,7 +21788,7 @@ export interface ModifyPickLineItemsActionParameter {
     pickJobLineItemUpdates: Array<PickLineItemUpdate>;
 }
 /**
- * 
+ * Action to modify a lineitem of a pickrun
  * @export
  * @interface ModifyPickRunLineItemAction
  */
@@ -15293,6 +21812,12 @@ export interface ModifyPickRunLineItemAction extends AbstractModificationAction 
      */
     picked?: number;
     /**
+     * The secondary amount of articles that were picked for this pickline.
+     * @type {number}
+     * @memberof ModifyPickRunLineItemAction
+     */
+    secondaryPicked?: number;
+    /**
      * 
      * @type {PickLineItemStatus}
      * @memberof ModifyPickRunLineItemAction
@@ -15304,6 +21829,12 @@ export interface ModifyPickRunLineItemAction extends AbstractModificationAction 
      * @memberof ModifyPickRunLineItemAction
      */
     partialStockLocations?: Array<PickJobLineItemPartialStockLocationForUpdate>;
+    /**
+     * 
+     * @type {ShortPickReasonForUpsert}
+     * @memberof ModifyPickRunLineItemAction
+     */
+    shortPickReason?: ShortPickReasonForUpsert;
 }
 
 /**
@@ -15320,7 +21851,7 @@ export namespace ModifyPickRunLineItemAction {
     }
 }
 /**
- * 
+ * ModifyPostNLCarrierCredentials
  * @export
  * @interface ModifyPostNLCarrierCredentials
  */
@@ -15339,7 +21870,7 @@ export interface ModifyPostNLCarrierCredentials extends AbstractModifyCarrierCre
     key: string;
 }
 /**
- * 
+ * Action to Modify the Prioritization Configuration.
  * @export
  * @interface ModifyPrioritizationAction
  */
@@ -15384,7 +21915,7 @@ export namespace ModifyPrioritizationAction {
     }
 }
 /**
- * 
+ * Action to Modify a Rating.
  * @export
  * @interface ModifyRatingAction
  */
@@ -15441,7 +21972,7 @@ export namespace ModifyRatingAction {
     }
 }
 /**
- * 
+ * Action to modify a restow item.
  * @export
  * @interface ModifyRestowItemAction
  */
@@ -15480,13 +22011,13 @@ export namespace ModifyRestowItemAction {
     }
 }
 /**
- * 
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Concept depreated. Use safety stock instead.
  * @export
  * @interface ModifyRetainedOfflineStockAction
  */
 export interface ModifyRetainedOfflineStockAction extends AbstractModificationAction {
     /**
-     * Use value 'ModifyRetainedOfflineStock', if you want to modify the retained offline stocks of a facility
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Concept depreated. Use safety stock instead.
      * @type {string}
      * @memberof ModifyRetainedOfflineStockAction
      */
@@ -15519,7 +22050,7 @@ export namespace ModifyRetainedOfflineStockAction {
     }
 }
 /**
- * 
+ * Action to modify a return
  * @export
  * @interface ModifyReturnAction
  */
@@ -15552,7 +22083,7 @@ export namespace ModifyReturnAction {
     }
 }
 /**
- * 
+ * Action to modify a returnLineItem of a return
  * @export
  * @interface ModifyReturnLineItemAction
  */
@@ -15597,7 +22128,7 @@ export namespace ModifyReturnLineItemAction {
     }
 }
 /**
- * 
+ * ModifyRoutingPlanAction
  * @export
  * @interface ModifyRoutingPlanAction
  */
@@ -15636,7 +22167,7 @@ export namespace ModifyRoutingPlanAction {
     }
 }
 /**
- * 
+ * ModifyShipmentAction
  * @export
  * @interface ModifyShipmentAction
  */
@@ -15699,7 +22230,7 @@ export namespace ModifyShipmentAction {
     }
 }
 /**
- * 
+ * Modify Shortpick Action.
  * @export
  * @interface ModifyShortpickAction
  */
@@ -15732,7 +22263,7 @@ export namespace ModifyShortpickAction {
     }
 }
 /**
- * 
+ * ModifyStorageLocationAction
  * @export
  * @interface ModifyStorageLocationAction
  */
@@ -15819,7 +22350,46 @@ export namespace ModifyStorageLocationAction {
     }
 }
 /**
- * 
+ * MODIFY_STOW_LINE_ITEMS targets specific stowJob.stowLineItems by ID. Each targeted entry is partially updated: provided fields are completely replaced, while unspecified fields remain unchanged. New entries can be added by omitting the ID field.
+ * @export
+ * @interface ModifyStowLineItemsAction
+ */
+export interface ModifyStowLineItemsAction {
+    /**
+     * The name of the action that should be performed
+     * @type {string}
+     * @memberof ModifyStowLineItemsAction
+     */
+    name: ModifyStowLineItemsAction.NameEnum;
+    /**
+     * 
+     * @type {Array<StowLineItemForUpdate>}
+     * @memberof ModifyStowLineItemsAction
+     */
+    stowLineItems: Array<StowLineItemForUpdate>;
+    /**
+     * The current version of the stow job that should be modified
+     * @type {number}
+     * @memberof ModifyStowLineItemsAction
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace ModifyStowLineItemsAction
+ */
+export namespace ModifyStowLineItemsAction {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        MODIFYSTOWLINEITEMS = 'MODIFY_STOW_LINE_ITEMS'
+    }
+}
+/**
+ * Action to Modify the Timing Mode.
  * @export
  * @interface ModifyTimingModeAction
  */
@@ -15852,25 +22422,37 @@ export namespace ModifyTimingModeAction {
     }
 }
 /**
- * 
+ * ModifyUserAction
  * @export
  * @interface ModifyUserAction
  */
-export interface ModifyUserAction extends AbstractModificationAction {
-    /**
-     * Use value 'ModifyUser', because you want to modify a user
-     * @type {string}
-     * @memberof ModifyUserAction
-     */
-    action: ModifyUserAction.ActionEnum;
+export interface ModifyUserAction {
     /**
      * 
+     * @type {UserActionEnum}
+     * @memberof ModifyUserAction
+     */
+    action: UserActionEnum;
+    /**
+     * The new assigned facilities of the user
+     * @type {Array<UserAssignedFacilityForCreation>}
+     * @memberof ModifyUserAction
+     */
+    assignedFacilities?: Array<UserAssignedFacilityForCreation>;
+    /**
+     * The new custom attributes of the user
+     * @type {any}
+     * @memberof ModifyUserAction
+     */
+    customAttributes?: any;
+    /**
+     * The new firstname of the user
      * @type {string}
      * @memberof ModifyUserAction
      */
     firstname?: string;
     /**
-     * 
+     * The new lastname of the user
      * @type {string}
      * @memberof ModifyUserAction
      */
@@ -15882,46 +22464,20 @@ export interface ModifyUserAction extends AbstractModificationAction {
      */
     locale?: SupportedLocale;
     /**
-     * 
+     * The new password of the user
      * @type {string}
      * @memberof ModifyUserAction
      */
     password?: string;
     /**
-     * 
-     * @type {UserRoles}
+     * The new roles of the user
+     * @type {Array<UserRole>}
      * @memberof ModifyUserAction
      */
-    roles?: UserRoles;
-    /**
-     * 
-     * @type {Array<UserAssignedFacilityForCreation>}
-     * @memberof ModifyUserAction
-     */
-    assignedFacilities?: Array<UserAssignedFacilityForCreation>;
-    /**
-     * Attributes that can be added to the user. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof ModifyUserAction
-     */
-    customAttributes?: any;
-}
-
-/**
- * @export
- * @namespace ModifyUserAction
- */
-export namespace ModifyUserAction {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum ActionEnum {
-        ModifyUser = 'ModifyUser'
-    }
+    roles?: Array<UserRole>;
 }
 /**
- * 
+ * MoveStockToLocationOptions
  * @export
  * @interface MoveStockToLocationOptions
  */
@@ -15934,7 +22490,20 @@ export interface MoveStockToLocationOptions {
     deleteFromStockIfZero?: boolean;
 }
 /**
- * 
+ * MultiOrderPickingConfiguration
+ * @export
+ * @interface MultiOrderPickingConfiguration
+ */
+export interface MultiOrderPickingConfiguration {
+    /**
+     * The maximum amount of pick jobs that can be combined in a multi order pick. Must be a value between 1 and 50.
+     * @type {number}
+     * @memberof MultiOrderPickingConfiguration
+     */
+    maxAmountOfPickJobsForMultiOrderPick: number;
+}
+/**
+ * NamedFile
  * @export
  * @interface NamedFile
  */
@@ -15953,7 +22522,7 @@ export interface NamedFile {
     name: string;
 }
 /**
- * 
+ * NeedsPacking
  * @export
  * @interface NeedsPacking
  */
@@ -15966,7 +22535,17 @@ export interface NeedsPacking {
     needsPacking: boolean;
 }
 /**
- * 
+ * NodeType
+ * @export
+ * @enum {string}
+ */
+export enum NodeType {
+    SUPPLIER = 'SUPPLIER',
+    MANAGEDFACILITY = 'MANAGED_FACILITY',
+    CUSTOMER = 'CUSTOMER'
+}
+/**
+ * NonDeliveryDays
  * @export
  * @interface NonDeliveryDays
  */
@@ -15985,7 +22564,7 @@ export interface NonDeliveryDays {
     nonDeliveryDay: string;
 }
 /**
- * 
+ * NonDeliveryDaysPerCountryAndProvince
  * @export
  * @interface NonDeliveryDaysPerCountryAndProvince
  */
@@ -16016,7 +22595,7 @@ export interface NonDeliveryDaysPerCountryAndProvince {
     nonDeliveryDaysPerProvince: Array<NonDeliveryDaysPerProvince>;
 }
 /**
- * 
+ * NonDeliveryDaysPerProvince
  * @export
  * @interface NonDeliveryDaysPerProvince
  */
@@ -16041,7 +22620,7 @@ export interface NonDeliveryDaysPerProvince {
     recurringNonDeliveryWeekdays: Array<WeekDay>;
 }
 /**
- * 
+ * NonDeliveryType
  * @export
  * @enum {string}
  */
@@ -16050,17 +22629,17 @@ export enum NonDeliveryType {
     RECURRING = 'RECURRING'
 }
 /**
- * 
+ * NotificationCenterConfig
  * @export
  * @interface NotificationCenterConfig
  */
 export interface NotificationCenterConfig {
     /**
      * 
-     * @type {number}
+     * @type {Array<EmailNotificationChannel>}
      * @memberof NotificationCenterConfig
      */
-    version: number;
+    channels: Array<EmailNotificationChannel>;
     /**
      * 
      * @type {Date}
@@ -16075,13 +22654,13 @@ export interface NotificationCenterConfig {
     lastModified: Date;
     /**
      * 
-     * @type {Array<EmailNotificationChannel>}
+     * @type {number}
      * @memberof NotificationCenterConfig
      */
-    channels: Array<EmailNotificationChannel>;
+    version: number;
 }
 /**
- * 
+ * NotificationCenterConfigForCreation
  * @export
  * @interface NotificationCenterConfigForCreation
  */
@@ -16094,7 +22673,7 @@ export interface NotificationCenterConfigForCreation {
     channels: Array<EmailNotificationChannelForCreation>;
 }
 /**
- * 
+ * NotificationCenterConfigForUpdate
  * @export
  * @interface NotificationCenterConfigForUpdate
  */
@@ -16127,7 +22706,110 @@ export interface NotificationsActionsBody {
 export interface NotificationsActionsBody1 {
 }
 /**
- * 
+ * NullableEntity
+ * @export
+ */
+export type NullableEntity = any
+/**
+ * NumberEqFilter
+ * @export
+ * @interface NumberEqFilter
+ */
+export interface NumberEqFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberEqFilter
+     */
+    eq?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberEqFilter
+     */
+    gt?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberEqFilter
+     */
+    gte?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberEqFilter
+     */
+    lt?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberEqFilter
+     */
+    lte?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberEqFilter
+     */
+    notEq?: number;
+}
+/**
+ * NumberFilter
+ * @export
+ * @interface NumberFilter
+ */
+export interface NumberFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberFilter
+     */
+    eq?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberFilter
+     */
+    gt?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberFilter
+     */
+    gte?: number;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof NumberFilter
+     */
+    _in?: Array<number>;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberFilter
+     */
+    lt?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberFilter
+     */
+    lte?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NumberFilter
+     */
+    notEq?: number;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof NumberFilter
+     */
+    notIn?: Array<number>;
+}
+/**
+ * OfferedDocument
  * @export
  * @interface OfferedDocument
  */
@@ -16140,7 +22822,7 @@ export interface OfferedDocument {
     documentCategory: DocumentCategory;
 }
 /**
- * 
+ * OfferedDocumentPerTag
  * @export
  * @interface OfferedDocumentPerTag
  */
@@ -16165,7 +22847,7 @@ export interface OfferedDocumentPerTag {
     offeredDocuments: Array<OfferedDocument>;
 }
 /**
- * 
+ * OfferedScanningRuleByTag
  * @export
  * @interface OfferedScanningRuleByTag
  */
@@ -16190,7 +22872,7 @@ export interface OfferedScanningRuleByTag {
     scanningType: PickingScanningConfigurationEnum;
 }
 /**
- * 
+ * OfferedStickersByTag
  * @export
  * @interface OfferedStickersByTag
  */
@@ -16215,7 +22897,7 @@ export interface OfferedStickersByTag {
     stickers: Array<Sticker>;
 }
 /**
- * 
+ * OidcProviderCustomParameter
  * @export
  * @interface OidcProviderCustomParameter
  */
@@ -16234,7 +22916,7 @@ export interface OidcProviderCustomParameter {
     value: string;
 }
 /**
- * 
+ * OidcProviderForCreation
  * @export
  * @interface OidcProviderForCreation
  */
@@ -16283,7 +22965,7 @@ export interface OidcProviderForCreation {
     assignedGroups: Array<AssignedGroup>;
 }
 /**
- * 
+ * OidcProviderForUpdate
  * @export
  * @interface OidcProviderForUpdate
  */
@@ -16305,7 +22987,7 @@ export enum OidcProviderStatus {
     INACTIVE = 'INACTIVE'
 }
 /**
- * 
+ * OidcProviders
  * @export
  * @interface OidcProviders
  */
@@ -16324,7 +23006,7 @@ export interface OidcProviders {
     total: number;
 }
 /**
- * 
+ * OpenItemReturnActionEnum
  * @export
  * @enum {string}
  */
@@ -16332,7 +23014,7 @@ export enum OpenItemReturnActionEnum {
     OpenItemReturn = 'OpenItemReturn'
 }
 /**
- * 
+ * Action to open an ItemReturn.
  * @export
  * @interface OpenItemReturnActionParameter
  */
@@ -16351,7 +23033,263 @@ export interface OpenItemReturnActionParameter {
     itemReturnJobVersion: number;
 }
 /**
- * 
+ * OperationalRestowingConfigurations
+ * @export
+ * @interface OperationalRestowingConfigurations
+ */
+export interface OperationalRestowingConfigurations extends VersionedResource {
+    /**
+     * 
+     * @type {RestowingProcessConfiguration}
+     * @memberof OperationalRestowingConfigurations
+     */
+    restowingProcessConfiguration?: RestowingProcessConfiguration;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof OperationalRestowingConfigurations
+     */
+    version: number;
+}
+/**
+ * OperativeContainerType
+ * @export
+ * @interface OperativeContainerType
+ */
+export interface OperativeContainerType extends VersionedResource {
+    /**
+     * 
+     * @type {string}
+     * @memberof OperativeContainerType
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof OperativeContainerType
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof OperativeContainerType
+     */
+    iconUrl?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OperativeContainerType
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OperativeContainerType
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof OperativeContainerType
+     */
+    nameLocalized: LocaleString;
+    /**
+     * This value gives the priority of the respective operativeContainerType. The lower the value the higher is the priority, e.g. priority 1 is higher than priority 10. The priority can be used to order packingContainerTypes in the UI.
+     * @type {number}
+     * @memberof OperativeContainerType
+     */
+    priority?: number;
+    /**
+     * 
+     * @type {ContainerDimensions}
+     * @memberof OperativeContainerType
+     */
+    dimensions?: ContainerDimensions;
+    /**
+     * Maximal weight in gramm(gr) the container can be loaded with. 
+     * @type {number}
+     * @memberof OperativeContainerType
+     */
+    weightLimitInG?: number;
+    /**
+     * Attributes that can be added to the operativeContainerType. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof OperativeContainerType
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<OperativeType>}
+     * @memberof OperativeContainerType
+     */
+    allowedOperativeTypes: Array<OperativeType>;
+    /**
+     * 
+     * @type {Array<ScannableIdentifier>}
+     * @memberof OperativeContainerType
+     */
+    scannableIdentifiers?: Array<ScannableIdentifier>;
+}
+/**
+ * OperativeContainerTypeForCreation
+ * @export
+ * @interface OperativeContainerTypeForCreation
+ */
+export interface OperativeContainerTypeForCreation {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    iconUrl?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    nameLocalized: LocaleString;
+    /**
+     * This value gives the priority of the respective operativeContainerType. The lower the value the higher is the priority, e.g. priority 1 is higher than priority 10. The priority can be used to order packingContainerTypes in the UI.
+     * @type {number}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    priority?: number;
+    /**
+     * 
+     * @type {ContainerDimensions}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    dimensions?: ContainerDimensions;
+    /**
+     * Maximal weight in gramm(gr) the container can be loaded with. 
+     * @type {number}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    weightLimitInG?: number;
+    /**
+     * Attributes that can be added to the operativeContainerType. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<OperativeType>}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    allowedOperativeTypes: Array<OperativeType>;
+    /**
+     * 
+     * @type {Array<ScannableIdentifier>}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    scannableIdentifiers?: Array<ScannableIdentifier>;
+    /**
+     * 
+     * @type {NamedFile}
+     * @memberof OperativeContainerTypeForCreation
+     */
+    icon?: NamedFile;
+}
+/**
+ * OperativeContainerTypeForUpdate
+ * @export
+ * @interface OperativeContainerTypeForUpdate
+ */
+export interface OperativeContainerTypeForUpdate {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    iconUrl?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    nameLocalized?: LocaleString;
+    /**
+     * This value gives the priority of the respective operativeContainerType. The lower the value the higher is the priority, e.g. priority 1 is higher than priority 10. The priority can be used to order packingContainerTypes in the UI.
+     * @type {number}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    priority?: number;
+    /**
+     * 
+     * @type {ContainerDimensions}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    dimensions?: ContainerDimensions;
+    /**
+     * Maximal weight in gramm(gr) the container can be loaded with. 
+     * @type {number}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    weightLimitInG?: number;
+    /**
+     * Attributes that can be added to the operativeContainerTypes. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<OperativeType>}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    allowedOperativeTypes?: Array<OperativeType>;
+    /**
+     * 
+     * @type {Array<ScannableIdentifier>}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    scannableIdentifiers?: Array<ScannableIdentifier>;
+    /**
+     * 
+     * @type {number}
+     * @memberof OperativeContainerTypeForUpdate
+     */
+    version: number;
+}
+/**
+ * OperativeContainerTypes
+ * @export
+ */
+export type OperativeContainerTypes = Array<OperativeContainerType>
+/**
+ * OperativeContainerTypesResponse
+ * @export
+ * @interface OperativeContainerTypesResponse
+ */
+export interface OperativeContainerTypesResponse {
+    /**
+     * 
+     * @type {Array<OperativeContainerType>}
+     * @memberof OperativeContainerTypesResponse
+     */
+    operativeContainerTypes?: Array<OperativeContainerType>;
+    /**
+     * Total number of found entities for this query
+     * @type {number}
+     * @memberof OperativeContainerTypesResponse
+     */
+    total?: number;
+}
+/**
+ * OperativeEntity
  * @export
  * @interface OperativeEntity
  */
@@ -16376,7 +23314,7 @@ export interface OperativeEntity {
     entityChildren?: Array<OperativeEntity>;
 }
 /**
- * 
+ * OperativeEntityType
  * @export
  * @enum {string}
  */
@@ -16393,7 +23331,7 @@ export enum OperativeEntityType {
     PACKINGTARGETCONTAINER = 'PACKING_TARGET_CONTAINER'
 }
 /**
- * 
+ * OperativeProcess
  * @export
  * @interface OperativeProcess
  */
@@ -16430,7 +23368,7 @@ export interface OperativeProcess extends VersionedResource {
     entityChildren: Array<OperativeEntity>;
 }
 /**
- * 
+ * OperativeProcessForCreation
  * @export
  * @interface OperativeProcessForCreation
  */
@@ -16455,7 +23393,45 @@ export interface OperativeProcessForCreation {
     entityChildren?: Array<OperativeEntity>;
 }
 /**
- * 
+ * OperativeServiceConfiguration
+ * @export
+ * @interface OperativeServiceConfiguration
+ */
+export interface OperativeServiceConfiguration extends VersionedResource {
+    /**
+     * ID of the Operative Service Configuration is always operativeservice
+     * @type {string}
+     * @memberof OperativeServiceConfiguration
+     */
+    id: string;
+    /**
+     * 
+     * @type {Array<ServiceJobCancelReason>}
+     * @memberof OperativeServiceConfiguration
+     */
+    cancelReasons?: Array<ServiceJobCancelReason>;
+}
+/**
+ * OperativeServiceConfigurationForUpsert
+ * @export
+ * @interface OperativeServiceConfigurationForUpsert
+ */
+export interface OperativeServiceConfigurationForUpsert {
+    /**
+     * 
+     * @type {number}
+     * @memberof OperativeServiceConfigurationForUpsert
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<ServiceJobCancelReason>}
+     * @memberof OperativeServiceConfigurationForUpsert
+     */
+    cancelReasons?: Array<ServiceJobCancelReason>;
+}
+/**
+ * OperativeTransfer
  * @export
  * @interface OperativeTransfer
  */
@@ -16471,10 +23447,55 @@ export interface OperativeTransfer {
      * @type {string}
      * @memberof OperativeTransfer
      */
-    type: string;
+    type: OperativeTransfer.TypeEnum;
+}
+
+/**
+ * @export
+ * @namespace OperativeTransfer
+ */
+export namespace OperativeTransfer {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        SUPPLIER = 'SUPPLIER',
+        RECEIVER = 'RECEIVER'
+    }
 }
 /**
- * 
+ * OperativeType
+ * @export
+ * @enum {string}
+ */
+export enum OperativeType {
+    PICKING = 'PICKING',
+    PACKINGSOURCE = 'PACKING_SOURCE',
+    PACKINGTARGET = 'PACKING_TARGET',
+    HANDOVER = 'HANDOVER'
+}
+/**
+ * OptimzationHints
+ * @export
+ * @interface OptimzationHints
+ */
+export interface OptimzationHints {
+    /**
+     * Number of different results we calculated
+     * @type {number}
+     * @memberof OptimzationHints
+     */
+    requestedResultCount?: number;
+    /**
+     * Should only be used for debugging. Includes more information on how we calculated the response.
+     * @type {boolean}
+     * @memberof OptimzationHints
+     */
+    includeCalculationHints?: boolean;
+}
+/**
+ * Order
  * @export
  * @interface Order
  */
@@ -16529,6 +23550,12 @@ export interface Order extends OrderForCreation {
     processId: string;
     /**
      * 
+     * @type {OrderPaymentInfo}
+     * @memberof Order
+     */
+    paymentInfo?: OrderPaymentInfo;
+    /**
+     * 
      * @type {Array<CustomServiceReference>}
      * @memberof Order
      */
@@ -16547,14 +23574,14 @@ export interface Order extends OrderForCreation {
     status: OrderStatus;
 }
 /**
- * 
+ * OrderActionsParameter
  * @export
  * @interface OrderActionsParameter
  */
 export interface OrderActionsParameter {
 }
 /**
- * 
+ * OrderArticleAttributeItem
  * @export
  * @interface OrderArticleAttributeItem
  */
@@ -16568,7 +23595,7 @@ export interface OrderArticleAttributeItem extends ArticleAttributeItem {
 export namespace OrderArticleAttributeItem {
 }
 /**
- * 
+ * Action to cancel an order.
  * @export
  * @interface OrderCancelActionParameter
  */
@@ -16601,7 +23628,7 @@ export namespace OrderCancelActionParameter {
     }
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />This configuration is to define specific rules for canceling orders such as the forced cancelation.
+ * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />This configuration is to define specific rules for canceling orders such as the forced cancelation.
  * @export
  * @interface OrderCancelationConfiguration
  */
@@ -16632,7 +23659,20 @@ export interface OrderCancelationConfiguration {
     allowForceCancelOrder: boolean;
 }
 /**
- * 
+ * OrderCancelledByExpiryEvent
+ * @export
+ * @interface OrderCancelledByExpiryEvent
+ */
+export interface OrderCancelledByExpiryEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {Order}
+     * @memberof OrderCancelledByExpiryEvent
+     */
+    payload: Order;
+}
+/**
+ * OrderCancelledWebHookEvent
  * @export
  * @interface OrderCancelledWebHookEvent
  */
@@ -16645,7 +23685,7 @@ export interface OrderCancelledWebHookEvent extends WebHookEvent {
     payload: Order;
 }
 /**
- * 
+ * Action to change a consumer address of an order.
  * @export
  * @interface OrderConsumerAddressChangeActionParameter
  */
@@ -16684,7 +23724,152 @@ export namespace OrderConsumerAddressChangeActionParameter {
     }
 }
 /**
- * 
+ * OrderConsumerAddressesAddressTypeEnumFilter
+ * @export
+ * @interface OrderConsumerAddressesAddressTypeEnumFilter
+ */
+export interface OrderConsumerAddressesAddressTypeEnumFilter {
+    /**
+     * Search by addressType
+     * @type {string}
+     * @memberof OrderConsumerAddressesAddressTypeEnumFilter
+     */
+    eq?: OrderConsumerAddressesAddressTypeEnumFilter.EqEnum;
+    /**
+     * Search by addressType
+     * @type {string}
+     * @memberof OrderConsumerAddressesAddressTypeEnumFilter
+     */
+    _in?: OrderConsumerAddressesAddressTypeEnumFilter.InEnum;
+    /**
+     * Search by addressType
+     * @type {string}
+     * @memberof OrderConsumerAddressesAddressTypeEnumFilter
+     */
+    notEq?: OrderConsumerAddressesAddressTypeEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace OrderConsumerAddressesAddressTypeEnumFilter
+ */
+export namespace OrderConsumerAddressesAddressTypeEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        POSTALADDRESS = 'POSTAL_ADDRESS',
+        PARCELLOCKER = 'PARCEL_LOCKER',
+        INVOICEADDRESS = 'INVOICE_ADDRESS'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        POSTALADDRESS = 'POSTAL_ADDRESS',
+        PARCELLOCKER = 'PARCEL_LOCKER',
+        INVOICEADDRESS = 'INVOICE_ADDRESS'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        POSTALADDRESS = 'POSTAL_ADDRESS',
+        PARCELLOCKER = 'PARCEL_LOCKER',
+        INVOICEADDRESS = 'INVOICE_ADDRESS'
+    }
+}
+/**
+ * OrderConsumerAddressesFilter
+ * @export
+ * @interface OrderConsumerAddressesFilter
+ */
+export interface OrderConsumerAddressesFilter {
+    /**
+     * Search by addressType
+     * @type {OrderConsumerAddressesAddressTypeEnumFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    addressType?: OrderConsumerAddressesAddressTypeEnumFilter;
+    /**
+     * Search by city
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    city?: StringFilter;
+    /**
+     * Search by companyName
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    companyName?: StringFilter;
+    /**
+     * Search by country
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    country?: StringFilter;
+    /**
+     * Search by email
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    email?: StringFilter;
+    /**
+     * Search by firstName
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    firstName?: StringFilter;
+    /**
+     * Search by houseNumber
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    houseNumber?: StringFilter;
+    /**
+     * Search by lastName
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    lastName?: StringFilter;
+    /**
+     * Search by postalCode
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    postalCode?: StringFilter;
+    /**
+     * Search by province
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    province?: StringFilter;
+    /**
+     * Search by street
+     * @type {StringFilter}
+     * @memberof OrderConsumerAddressesFilter
+     */
+    street?: StringFilter;
+}
+/**
+ * OrderConsumerAddressesListFilter
+ * @export
+ * @interface OrderConsumerAddressesListFilter
+ */
+export interface OrderConsumerAddressesListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {OrderConsumerAddressesFilter}
+     * @memberof OrderConsumerAddressesListFilter
+     */
+    contains?: OrderConsumerAddressesFilter;
+}
+/**
+ * Action to replace a consumer address of an order.
  * @export
  * @interface OrderConsumerAddressesReplaceActionParameter
  */
@@ -16717,7 +23902,26 @@ export namespace OrderConsumerAddressesReplaceActionParameter {
     }
 }
 /**
- * 
+ * OrderConsumerFilter
+ * @export
+ * @interface OrderConsumerFilter
+ */
+export interface OrderConsumerFilter {
+    /**
+     * Nested list search by addresses
+     * @type {OrderConsumerAddressesListFilter}
+     * @memberof OrderConsumerFilter
+     */
+    addresses?: OrderConsumerAddressesListFilter;
+    /**
+     * Search by consumerId
+     * @type {StringFilter}
+     * @memberof OrderConsumerFilter
+     */
+    consumerId?: StringFilter;
+}
+/**
+ * OrderCreatedWebHookEvent
  * @export
  * @interface OrderCreatedWebHookEvent
  */
@@ -16730,7 +23934,133 @@ export interface OrderCreatedWebHookEvent extends WebHookEvent {
     payload: Order;
 }
 /**
- * 
+ * OrderDeliveryPreferencesCollectFilter
+ * @export
+ * @interface OrderDeliveryPreferencesCollectFilter
+ */
+export interface OrderDeliveryPreferencesCollectFilter {
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof OrderDeliveryPreferencesCollectFilter
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by paid
+     * @type {BooleanFilter}
+     * @memberof OrderDeliveryPreferencesCollectFilter
+     */
+    paid?: BooleanFilter;
+}
+/**
+ * OrderDeliveryPreferencesCollectListFilter
+ * @export
+ * @interface OrderDeliveryPreferencesCollectListFilter
+ */
+export interface OrderDeliveryPreferencesCollectListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {OrderDeliveryPreferencesCollectFilter}
+     * @memberof OrderDeliveryPreferencesCollectListFilter
+     */
+    contains?: OrderDeliveryPreferencesCollectFilter;
+}
+/**
+ * OrderDeliveryPreferencesFilter
+ * @export
+ * @interface OrderDeliveryPreferencesFilter
+ */
+export interface OrderDeliveryPreferencesFilter {
+    /**
+     * Nested list search by collect
+     * @type {OrderDeliveryPreferencesCollectListFilter}
+     * @memberof OrderDeliveryPreferencesFilter
+     */
+    collect?: OrderDeliveryPreferencesCollectListFilter;
+    /**
+     * Nested search by shipping
+     * @type {OrderDeliveryPreferencesShippingFilter}
+     * @memberof OrderDeliveryPreferencesFilter
+     */
+    shipping?: OrderDeliveryPreferencesShippingFilter;
+}
+/**
+ * OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter
+ * @export
+ * @interface OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter
+ */
+export interface OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter {
+    /**
+     * Search by serviceLevel
+     * @type {string}
+     * @memberof OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter
+     */
+    eq?: OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter.EqEnum;
+    /**
+     * Search by serviceLevel
+     * @type {string}
+     * @memberof OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter
+     */
+    _in?: OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter.InEnum;
+    /**
+     * Search by serviceLevel
+     * @type {string}
+     * @memberof OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter
+     */
+    notEq?: OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter
+ */
+export namespace OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        DELIVERY = 'DELIVERY',
+        SAMEDAY = 'SAMEDAY'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        DELIVERY = 'DELIVERY',
+        SAMEDAY = 'SAMEDAY'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        DELIVERY = 'DELIVERY',
+        SAMEDAY = 'SAMEDAY'
+    }
+}
+/**
+ * OrderDeliveryPreferencesShippingFilter
+ * @export
+ * @interface OrderDeliveryPreferencesShippingFilter
+ */
+export interface OrderDeliveryPreferencesShippingFilter {
+    /**
+     * Search by desiredDeliveryTime
+     * @type {DateFilter}
+     * @memberof OrderDeliveryPreferencesShippingFilter
+     */
+    desiredDeliveryTime?: DateFilter;
+    /**
+     * Search by serviceLevel
+     * @type {OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter}
+     * @memberof OrderDeliveryPreferencesShippingFilter
+     */
+    serviceLevel?: OrderDeliveryPreferencesShippingDeliveryServiceLevelEnumFilter;
+}
+/**
+ * OrderFenceDecision
  * @export
  * @interface OrderFenceDecision
  */
@@ -16755,7 +24085,7 @@ export interface OrderFenceDecision {
     details: Array<OrderFenceDecisionDetail | ToolkitDecisionDetail | ToolkitComparisonDecisionDetail>;
 }
 /**
- * 
+ * Order Fence Decision Detail.
  * @export
  * @interface OrderFenceDecisionDetail
  */
@@ -16786,7 +24116,7 @@ export interface OrderFenceDecisionDetail extends BaseDecisionDetail {
     reactiveErrorReason?: ReactiveErrorReason;
 }
 /**
- * 
+ * OrderForCreation
  * @export
  * @interface OrderForCreation
  */
@@ -16853,10 +24183,10 @@ export interface OrderForCreation {
     customServices?: Array<CustomServiceReferenceForCreation>;
     /**
      * 
-     * @type {OrderPaymentInfo}
+     * @type {OrderPaymentInfoForCreation}
      * @memberof OrderForCreation
      */
-    paymentInfo?: OrderPaymentInfo;
+    paymentInfo?: OrderPaymentInfoForCreation;
     /**
      * 
      * @type {Array<OrderStatusReason>}
@@ -16895,14 +24225,118 @@ export interface OrderForCreationConsumer {
      */
     customAttributes?: any;
     /**
-     * The email address of the consumer.
+     * @deprecated The email address of the consumer. Use email in addresses array 
      * @type {string}
      * @memberof OrderForCreationConsumer
      */
     email?: string;
 }
 /**
- * 
+ * OrderForSourcingOptionsRequest
+ * @export
+ * @interface OrderForSourcingOptionsRequest
+ */
+export interface OrderForSourcingOptionsRequest {
+    /**
+     * 
+     * @type {ConsumerAddressForSourcingOptions}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    consumer?: ConsumerAddressForSourcingOptions;
+    /**
+     * Attributes that can be added to the order. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {DeliveryPreferences}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    deliveryPreferences?: DeliveryPreferences;
+    /**
+     * The date this order was created at the supplying system.
+     * @type {Date}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    orderDate?: Date;
+    /**
+     * 
+     * @type {Array<OrderLineItemForCreation>}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    orderLineItems?: Array<OrderLineItemForCreation>;
+    /**
+     * 
+     * @type {OrderStatus}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    status?: OrderStatus;
+    /**
+     * 
+     * @type {Array<Sticker>}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    stickers?: Array<Sticker>;
+    /**
+     * Field can be used as a reference number in foreign systems, for example as a reference to the source system's identifier for this order.
+     * @type {string}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    tenantOrderId?: string;
+    /**
+     * 
+     * @type {Array<TagReference>}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    tags?: Array<TagReference>;
+    /**
+     * 
+     * @type {Array<CustomServiceReferenceForCreation>}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    customServices?: Array<CustomServiceReferenceForCreation>;
+    /**
+     * 
+     * @type {OrderPaymentInfoForCreation}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    paymentInfo?: OrderPaymentInfoForCreation;
+    /**
+     * 
+     * @type {Array<OrderStatusReason>}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    statusReasons?: Array<OrderStatusReason>;
+    /**
+     * 
+     * @type {OrderPromisesOptions}
+     * @memberof OrderForSourcingOptionsRequest
+     */
+    promisesOptions?: OrderPromisesOptions;
+}
+/**
+ * OrderForUpdate
+ * @export
+ * @interface OrderForUpdate
+ */
+export interface OrderForUpdate {
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof OrderForUpdate
+     */
+    version: number;
+    /**
+     * Attributes that can be added to the order. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof OrderForUpdate
+     */
+    customAttributes?: any;
+}
+/**
+ * Action to force cancel an order.
  * @export
  * @interface OrderForceCancelActionParameter
  */
@@ -16929,6 +24363,19 @@ export namespace OrderForceCancelActionParameter {
     }
 }
 /**
+ * OrderForceCancelledWebHookEvent
+ * @export
+ * @interface OrderForceCancelledWebHookEvent
+ */
+export interface OrderForceCancelledWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {Order}
+     * @memberof OrderForceCancelledWebHookEvent
+     */
+    payload: Order;
+}
+/**
  * 
  * @export
  * @interface OrderIdCancelBody
@@ -16942,7 +24389,7 @@ export interface OrderIdCancelBody {
     cancelationReasonId?: string;
 }
 /**
- * 
+ * OrderInformation
  * @export
  * @interface OrderInformation
  */
@@ -16961,7 +24408,7 @@ export interface OrderInformation {
     orderNumber?: string;
 }
 /**
- * 
+ * OrderLineItem
  * @export
  * @interface OrderLineItem
  */
@@ -16974,27 +24421,27 @@ export interface OrderLineItem extends OrderLineItemForCreation {
     id: string;
 }
 /**
- * 
+ * OrderLineItemActionsParameter
  * @export
  * @interface OrderLineItemActionsParameter
  */
 export interface OrderLineItemActionsParameter {
 }
 /**
- * 
+ * OrderLineItemArticle
  * @export
  * @interface OrderLineItemArticle
  */
 export interface OrderLineItemArticle extends AbstractArticle {
     /**
-     * 
+     * Attributes are used in the fulfillmenttools platform in order to impose a certain degree of customization to a process, such as improving the appearance in the platform and clients. Details about usage can be found <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/customization-via-attributes\">here</a>
      * @type {Array<OrderArticleAttributeItem>}
      * @memberof OrderLineItemArticle
      */
     attributes?: Array<OrderArticleAttributeItem>;
 }
 /**
- * 
+ * Action to update custom attributes of an order.
  * @export
  * @interface OrderLineItemCustomAttributesUpdateParameter
  */
@@ -17027,7 +24474,7 @@ export namespace OrderLineItemCustomAttributesUpdateParameter {
     }
 }
 /**
- * 
+ * OrderLineItemFenceDecision
  * @export
  * @interface OrderLineItemFenceDecision
  */
@@ -17064,7 +24511,7 @@ export interface OrderLineItemFenceDecision {
     reactiveErrorReason?: ReactiveErrorReason;
 }
 /**
- * 
+ * OrderLineItemFenceDecisions
  * @export
  * @interface OrderLineItemFenceDecisions
  */
@@ -17083,7 +24530,7 @@ export interface OrderLineItemFenceDecisions {
     orderLineItems: Array<OrderLineItemFenceDecision>;
 }
 /**
- * 
+ * OrderLineItemForCreation
  * @export
  * @interface OrderLineItemForCreation
  */
@@ -17137,7 +24584,7 @@ export interface OrderLineItemForCreation {
      */
     measurementValidation?: MeasurementValidation;
     /**
-     * price per piece of this line item
+     * @deprecated price per piece of this line item Use attributes instead (see: <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/customization-via-attributes\">customization by attributes</a>) 
      * @type {number}
      * @memberof OrderLineItemForCreation
      */
@@ -17156,7 +24603,83 @@ export interface OrderLineItemForCreation {
     allowedSubstitutes?: Array<Substitute>;
 }
 /**
- * 
+ * OrderOrderLineItemsArticleFilter
+ * @export
+ * @interface OrderOrderLineItemsArticleFilter
+ */
+export interface OrderOrderLineItemsArticleFilter {
+    /**
+     * Search by tenantArticleId
+     * @type {StringFilter}
+     * @memberof OrderOrderLineItemsArticleFilter
+     */
+    tenantArticleId?: StringFilter;
+    /**
+     * Search by title
+     * @type {StringFilter}
+     * @memberof OrderOrderLineItemsArticleFilter
+     */
+    title?: StringFilter;
+    /**
+     * Nested search by titleLocalized
+     * @type {OrderOrderLineItemsArticleTitleLocalizedFilter}
+     * @memberof OrderOrderLineItemsArticleFilter
+     */
+    titleLocalized?: OrderOrderLineItemsArticleTitleLocalizedFilter;
+}
+/**
+ * OrderOrderLineItemsArticleTitleLocalizedFilter
+ * @export
+ * @interface OrderOrderLineItemsArticleTitleLocalizedFilter
+ */
+export interface OrderOrderLineItemsArticleTitleLocalizedFilter {
+    /**
+     * Search by de_DE
+     * @type {StringFilter}
+     * @memberof OrderOrderLineItemsArticleTitleLocalizedFilter
+     */
+    deDE?: StringFilter;
+    /**
+     * Search by en_US
+     * @type {StringFilter}
+     * @memberof OrderOrderLineItemsArticleTitleLocalizedFilter
+     */
+    enUS?: StringFilter;
+    /**
+     * Search by ru_RU
+     * @type {StringFilter}
+     * @memberof OrderOrderLineItemsArticleTitleLocalizedFilter
+     */
+    ruRU?: StringFilter;
+}
+/**
+ * OrderOrderLineItemsFilter
+ * @export
+ * @interface OrderOrderLineItemsFilter
+ */
+export interface OrderOrderLineItemsFilter {
+    /**
+     * Nested search by article
+     * @type {OrderOrderLineItemsArticleFilter}
+     * @memberof OrderOrderLineItemsFilter
+     */
+    article?: OrderOrderLineItemsArticleFilter;
+}
+/**
+ * OrderOrderLineItemsListFilter
+ * @export
+ * @interface OrderOrderLineItemsListFilter
+ */
+export interface OrderOrderLineItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {OrderOrderLineItemsFilter}
+     * @memberof OrderOrderLineItemsListFilter
+     */
+    contains?: OrderOrderLineItemsFilter;
+}
+/**
+ * OrderPaymentInfo
  * @export
  * @interface OrderPaymentInfo
  */
@@ -17167,9 +24690,90 @@ export interface OrderPaymentInfo {
      * @memberof OrderPaymentInfo
      */
     currency?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof OrderPaymentInfo
+     */
+    methodLocalized?: LocaleString;
+    /**
+     * Localized value from methodLocalized
+     * @type {string}
+     * @memberof OrderPaymentInfo
+     */
+    method?: string;
 }
 /**
- * 
+ * OrderPaymentInfoFilter
+ * @export
+ * @interface OrderPaymentInfoFilter
+ */
+export interface OrderPaymentInfoFilter {
+    /**
+     * Search by currency
+     * @type {StringFilter}
+     * @memberof OrderPaymentInfoFilter
+     */
+    currency?: StringFilter;
+    /**
+     * Search by method
+     * @type {StringFilter}
+     * @memberof OrderPaymentInfoFilter
+     */
+    method?: StringFilter;
+    /**
+     * Nested search by methodLocalized
+     * @type {OrderPaymentInfoMethodLocalizedFilter}
+     * @memberof OrderPaymentInfoFilter
+     */
+    methodLocalized?: OrderPaymentInfoMethodLocalizedFilter;
+}
+/**
+ * OrderPaymentInfoForCreation
+ * @export
+ * @interface OrderPaymentInfoForCreation
+ */
+export interface OrderPaymentInfoForCreation {
+    /**
+     * The currency in which the consumer paid with
+     * @type {string}
+     * @memberof OrderPaymentInfoForCreation
+     */
+    currency?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof OrderPaymentInfoForCreation
+     */
+    methodLocalized?: LocaleString;
+}
+/**
+ * OrderPaymentInfoMethodLocalizedFilter
+ * @export
+ * @interface OrderPaymentInfoMethodLocalizedFilter
+ */
+export interface OrderPaymentInfoMethodLocalizedFilter {
+    /**
+     * Search by de_DE
+     * @type {StringFilter}
+     * @memberof OrderPaymentInfoMethodLocalizedFilter
+     */
+    deDE?: StringFilter;
+    /**
+     * Search by en_US
+     * @type {StringFilter}
+     * @memberof OrderPaymentInfoMethodLocalizedFilter
+     */
+    enUS?: StringFilter;
+    /**
+     * Search by ru_RU
+     * @type {StringFilter}
+     * @memberof OrderPaymentInfoMethodLocalizedFilter
+     */
+    ruRU?: StringFilter;
+}
+/**
+ * OrderPromisesOptions
  * @export
  * @interface OrderPromisesOptions
  */
@@ -17182,7 +24786,7 @@ export interface OrderPromisesOptions {
     validUntil: Date;
 }
 /**
- * 
+ * OrderRatingDecision
  * @export
  * @interface OrderRatingDecision
  */
@@ -17219,7 +24823,7 @@ export interface OrderRatingDecision {
     details?: Array<ToolkitDecisionDetail | ToolkitComparisonDecisionDetail>;
 }
 /**
- * 
+ * OrderRoutingConfiguration
  * @export
  * @interface OrderRoutingConfiguration
  */
@@ -17238,7 +24842,159 @@ export interface OrderRoutingConfiguration extends VersionedResource {
     id?: string;
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />
+ * OrderSearchPayload
+ * @export
+ * @interface OrderSearchPayload
+ */
+export interface OrderSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof OrderSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {OrderSearchQuery}
+     * @memberof OrderSearchPayload
+     */
+    query: OrderSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof OrderSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<OrderSort>}
+     * @memberof OrderSearchPayload
+     */
+    sort?: Array<OrderSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof OrderSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * OrderSearchQuery
+ * @export
+ * @interface OrderSearchQuery
+ */
+export interface OrderSearchQuery {
+    /**
+     * 
+     * @type {Array<OrderSearchQuery>}
+     * @memberof OrderSearchQuery
+     */
+    and?: Array<OrderSearchQuery>;
+    /**
+     * Nested search by consumer
+     * @type {OrderConsumerFilter}
+     * @memberof OrderSearchQuery
+     */
+    consumer?: OrderConsumerFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof OrderSearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Nested search by deliveryPreferences
+     * @type {OrderDeliveryPreferencesFilter}
+     * @memberof OrderSearchQuery
+     */
+    deliveryPreferences?: OrderDeliveryPreferencesFilter;
+    /**
+     * 
+     * @type {Array<OrderSearchQuery>}
+     * @memberof OrderSearchQuery
+     */
+    or?: Array<OrderSearchQuery>;
+    /**
+     * Search by orderDate
+     * @type {DateFilter}
+     * @memberof OrderSearchQuery
+     */
+    orderDate?: DateFilter;
+    /**
+     * Nested list search by orderLineItems
+     * @type {OrderOrderLineItemsListFilter}
+     * @memberof OrderSearchQuery
+     */
+    orderLineItems?: OrderOrderLineItemsListFilter;
+    /**
+     * Nested search by paymentInfo
+     * @type {OrderPaymentInfoFilter}
+     * @memberof OrderSearchQuery
+     */
+    paymentInfo?: OrderPaymentInfoFilter;
+    /**
+     * Search by status
+     * @type {OrderStatusEnumFilter}
+     * @memberof OrderSearchQuery
+     */
+    status?: OrderStatusEnumFilter;
+    /**
+     * Nested list search by tags
+     * @type {OrderTagsListFilter}
+     * @memberof OrderSearchQuery
+     */
+    tags?: OrderTagsListFilter;
+    /**
+     * Search by tenantOrderId
+     * @type {StringFilter}
+     * @memberof OrderSearchQuery
+     */
+    tenantOrderId?: StringFilter;
+}
+/**
+ * OrderSort
+ * @export
+ * @interface OrderSort
+ */
+export interface OrderSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderSort
+     */
+    orderDate?: OrderSort.OrderDateEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderSort
+     */
+    status?: OrderSort.StatusEnum;
+}
+
+/**
+ * @export
+ * @namespace OrderSort
+ */
+export namespace OrderSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum OrderDateEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum StatusEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />
  * @export
  * @interface OrderSplit
  */
@@ -17275,7 +25031,7 @@ export interface OrderSplit {
     orderSplitType: OrderSplitType;
 }
 /**
- * 
+ * OrderSplitDecision
  * @export
  * @interface OrderSplitDecision
  */
@@ -17320,7 +25076,72 @@ export enum OrderStatus {
     OBSOLETE = 'OBSOLETE'
 }
 /**
- * 
+ * OrderStatusEnumFilter
+ * @export
+ * @interface OrderStatusEnumFilter
+ */
+export interface OrderStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof OrderStatusEnumFilter
+     */
+    eq?: OrderStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof OrderStatusEnumFilter
+     */
+    _in?: OrderStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof OrderStatusEnumFilter
+     */
+    notEq?: OrderStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace OrderStatusEnumFilter
+ */
+export namespace OrderStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        CANCELLED = 'CANCELLED',
+        PROMISED = 'PROMISED',
+        LOCKED = 'LOCKED',
+        OBSOLETE = 'OBSOLETE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        CANCELLED = 'CANCELLED',
+        PROMISED = 'PROMISED',
+        LOCKED = 'LOCKED',
+        OBSOLETE = 'OBSOLETE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        CANCELLED = 'CANCELLED',
+        PROMISED = 'PROMISED',
+        LOCKED = 'LOCKED',
+        OBSOLETE = 'OBSOLETE'
+    }
+}
+/**
+ * Order Status Reason.
  * @export
  * @interface OrderStatusReason
  */
@@ -17339,7 +25160,7 @@ export interface OrderStatusReason {
     status: OrderStatus;
 }
 /**
- * 
+ * OrderTagConfiguration
  * @export
  * @interface OrderTagConfiguration
  */
@@ -17364,7 +25185,33 @@ export interface OrderTagConfiguration extends VersionedResource {
     stickerConfiguration?: StickerConfiguration;
 }
 /**
- * 
+ * OrderTagsFilter
+ * @export
+ * @interface OrderTagsFilter
+ */
+export interface OrderTagsFilter {
+    /**
+     * Search by value
+     * @type {StringFilter}
+     * @memberof OrderTagsFilter
+     */
+    value?: StringFilter;
+}
+/**
+ * OrderTagsListFilter
+ * @export
+ * @interface OrderTagsListFilter
+ */
+export interface OrderTagsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {OrderTagsFilter}
+     * @memberof OrderTagsListFilter
+     */
+    contains?: OrderTagsFilter;
+}
+/**
+ * Action to unlock an order.
  * @export
  * @interface OrderUnlockActionParameter
  */
@@ -17375,6 +25222,12 @@ export interface OrderUnlockActionParameter extends AbstractOrderActionsParamete
      * @memberof OrderUnlockActionParameter
      */
     name: OrderUnlockActionParameter.NameEnum;
+    /**
+     * Time to be set as a targetTime for the devlivery preferences.
+     * @type {Date}
+     * @memberof OrderUnlockActionParameter
+     */
+    targetTime?: Date;
 }
 
 /**
@@ -17391,7 +25244,7 @@ export namespace OrderUnlockActionParameter {
     }
 }
 /**
- * 
+ * OrderUnlockedWebHookEvent
  * @export
  * @interface OrderUnlockedWebHookEvent
  */
@@ -17404,7 +25257,62 @@ export interface OrderUnlockedWebHookEvent extends WebHookEvent {
     payload: Order;
 }
 /**
+ * The PREORDER and RESTOCK can be only set, when the depending outOfStockConfig is provided. Also PREORDER and RESTOCK values are in Alpha status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#alpha\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />
+ * @export
+ * @enum {string}
+ */
+export enum OutOfStockBehaviour {
+    BACKORDER = 'BACKORDER',
+    PREORDER = 'PREORDER',
+    RESTOCK = 'RESTOCK'
+}
+/**
+ * OutOfStockConfig
+ * @export
+ * @interface OutOfStockConfig
+ */
+export interface OutOfStockConfig {
+    /**
+     * 
+     * @type {OutOfStockConfigPreorder}
+     * @memberof OutOfStockConfig
+     */
+    preorder?: OutOfStockConfigPreorder;
+    /**
+     * 
+     * @type {OutOfStockConfigRestock}
+     * @memberof OutOfStockConfig
+     */
+    restock?: OutOfStockConfigRestock;
+}
+/**
  * 
+ * @export
+ * @interface OutOfStockConfigPreorder
+ */
+export interface OutOfStockConfigPreorder {
+    /**
+     * 
+     * @type {AvailabilityTimeframe}
+     * @memberof OutOfStockConfigPreorder
+     */
+    availabilityTimeframe: AvailabilityTimeframe;
+}
+/**
+ * 
+ * @export
+ * @interface OutOfStockConfigRestock
+ */
+export interface OutOfStockConfigRestock {
+    /**
+     * 
+     * @type {number}
+     * @memberof OutOfStockConfigRestock
+     */
+    restockableInDays: number;
+}
+/**
+ * OutboundClearTrigger
  * @export
  * @interface OutboundClearTrigger
  */
@@ -17438,17 +25346,17 @@ export namespace OutboundClearTrigger {
     }
 }
 /**
- * 
+ * OutboundStockConfiguration
  * @export
  * @interface OutboundStockConfiguration
  */
 export interface OutboundStockConfiguration {
     /**
      * 
-     * @type {boolean}
+     * @type {Array<OutboundClearTrigger>}
      * @memberof OutboundStockConfiguration
      */
-    trackOutboundStock: boolean;
+    clearTrigger?: Array<OutboundClearTrigger>;
     /**
      * 
      * @type {string}
@@ -17457,13 +25365,13 @@ export interface OutboundStockConfiguration {
     locationRef: string;
     /**
      * 
-     * @type {Array<OutboundClearTrigger>}
+     * @type {boolean}
      * @memberof OutboundStockConfiguration
      */
-    clearTrigger?: Array<OutboundClearTrigger>;
+    trackOutboundStock: boolean;
 }
 /**
- * 
+ * OutboundTagFilter
  * @export
  * @interface OutboundTagFilter
  */
@@ -17482,7 +25390,7 @@ export interface OutboundTagFilter {
     tagId: string;
 }
 /**
- * 
+ * PackJob
  * @export
  * @interface PackJob
  */
@@ -17511,6 +25419,12 @@ export interface PackJob extends VersionedResource {
      * @memberof PackJob
      */
     pickJobRef?: string;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUser>}
+     * @memberof PackJob
+     */
+    assignedUsers?: Array<AssignedUser>;
     /**
      * 
      * @type {PackJobStatus}
@@ -17625,6 +25539,18 @@ export interface PackJob extends VersionedResource {
      * @memberof PackJob
      */
     transfers?: Array<OperativeTransfer>;
+    /**
+     * The id of the order
+     * @type {string}
+     * @memberof PackJob
+     */
+    orderRef?: string;
+    /**
+     * The name of the recipient
+     * @type {string}
+     * @memberof PackJob
+     */
+    recipientName?: string;
 }
 
 /**
@@ -17642,7 +25568,14 @@ export namespace PackJob {
     }
 }
 /**
- * 
+ * PackJobActionsParameter
+ * @export
+ * @interface PackJobActionsParameter
+ */
+export interface PackJobActionsParameter {
+}
+/**
+ * PackJobCanceledWebHookEvent
  * @export
  * @interface PackJobCanceledWebHookEvent
  */
@@ -17655,7 +25588,7 @@ export interface PackJobCanceledWebHookEvent extends WebHookEvent {
     payload: PackJob;
 }
 /**
- * 
+ * PackJobCreatedWebHookEvent
  * @export
  * @interface PackJobCreatedWebHookEvent
  */
@@ -17668,7 +25601,7 @@ export interface PackJobCreatedWebHookEvent extends WebHookEvent {
     payload: PackJob;
 }
 /**
- * 
+ * PackJobCreationPerTag
  * @export
  * @interface PackJobCreationPerTag
  */
@@ -17693,7 +25626,7 @@ export interface PackJobCreationPerTag {
     packJobCreationDisabled: boolean;
 }
 /**
- * 
+ * PackJobForCreation
  * @export
  * @interface PackJobForCreation
  */
@@ -17728,6 +25661,12 @@ export interface PackJobForCreation {
      * @memberof PackJobForCreation
      */
     lineItems: Array<PackLineItemForCreation>;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUserForCreationByName | AssignedUserForCreationById>}
+     * @memberof PackJobForCreation
+     */
+    assignedUsers?: Array<AssignedUserForCreationByName | AssignedUserForCreationById>;
     /**
      * Id of the global process related to this entity. For example used for starting the GDPR process and others.
      * @type {string}
@@ -17794,6 +25733,18 @@ export interface PackJobForCreation {
      * @memberof PackJobForCreation
      */
     transfers?: Array<OperativeTransfer>;
+    /**
+     * The id of the order
+     * @type {string}
+     * @memberof PackJobForCreation
+     */
+    orderRef?: string;
+    /**
+     * The name of the recipient
+     * @type {string}
+     * @memberof PackJobForCreation
+     */
+    recipientName?: string;
 }
 
 /**
@@ -17811,6 +25762,82 @@ export namespace PackJobForCreation {
     }
 }
 /**
+ * PackJobInvoiceFilter
+ * @export
+ * @interface PackJobInvoiceFilter
+ */
+export interface PackJobInvoiceFilter {
+    /**
+     * Search by companyName
+     * @type {StringSearchFilter}
+     * @memberof PackJobInvoiceFilter
+     */
+    companyName?: StringSearchFilter;
+    /**
+     * Search by email
+     * @type {StringSearchFilter}
+     * @memberof PackJobInvoiceFilter
+     */
+    email?: StringSearchFilter;
+    /**
+     * Search by firstName
+     * @type {StringSearchFilter}
+     * @memberof PackJobInvoiceFilter
+     */
+    firstName?: StringSearchFilter;
+    /**
+     * Search by lastName
+     * @type {StringSearchFilter}
+     * @memberof PackJobInvoiceFilter
+     */
+    lastName?: StringSearchFilter;
+}
+/**
+ * PackJobLineItemsArticleFilter
+ * @export
+ * @interface PackJobLineItemsArticleFilter
+ */
+export interface PackJobLineItemsArticleFilter {
+    /**
+     * Search by tenantArticleId
+     * @type {StringSearchFilter}
+     * @memberof PackJobLineItemsArticleFilter
+     */
+    tenantArticleId?: StringSearchFilter;
+    /**
+     * Search by title
+     * @type {StringSearchFilter}
+     * @memberof PackJobLineItemsArticleFilter
+     */
+    title?: StringSearchFilter;
+}
+/**
+ * PackJobLineItemsFilter
+ * @export
+ * @interface PackJobLineItemsFilter
+ */
+export interface PackJobLineItemsFilter {
+    /**
+     * Nested search by article
+     * @type {PackJobLineItemsArticleFilter}
+     * @memberof PackJobLineItemsFilter
+     */
+    article?: PackJobLineItemsArticleFilter;
+}
+/**
+ * PackJobLineItemsListFilter
+ * @export
+ * @interface PackJobLineItemsListFilter
+ */
+export interface PackJobLineItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {PackJobLineItemsFilter}
+     * @memberof PackJobLineItemsListFilter
+     */
+    contains?: PackJobLineItemsFilter;
+}
+/**
  * Attribute to order a packJobs by
  * @export
  * @enum {string}
@@ -17824,7 +25851,33 @@ export enum PackJobOrderBy {
     ORDERDATEASC = 'ORDER_DATE_ASC'
 }
 /**
- * 
+ * PackJobPackingSourceContainersFilter
+ * @export
+ * @interface PackJobPackingSourceContainersFilter
+ */
+export interface PackJobPackingSourceContainersFilter {
+    /**
+     * Search by codes
+     * @type {StringListFilter}
+     * @memberof PackJobPackingSourceContainersFilter
+     */
+    codes?: StringListFilter;
+}
+/**
+ * PackJobPackingSourceContainersListFilter
+ * @export
+ * @interface PackJobPackingSourceContainersListFilter
+ */
+export interface PackJobPackingSourceContainersListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {PackJobPackingSourceContainersFilter}
+     * @memberof PackJobPackingSourceContainersListFilter
+     */
+    contains?: PackJobPackingSourceContainersFilter;
+}
+/**
+ * PackJobPatchActions
  * @export
  * @interface PackJobPatchActions
  */
@@ -17843,6 +25896,306 @@ export interface PackJobPatchActions {
     version: number;
 }
 /**
+ * PackJobRecipientFilter
+ * @export
+ * @interface PackJobRecipientFilter
+ */
+export interface PackJobRecipientFilter {
+    /**
+     * Search by companyName
+     * @type {StringSearchFilter}
+     * @memberof PackJobRecipientFilter
+     */
+    companyName?: StringSearchFilter;
+    /**
+     * Search by email
+     * @type {StringSearchFilter}
+     * @memberof PackJobRecipientFilter
+     */
+    email?: StringSearchFilter;
+    /**
+     * Search by firstName
+     * @type {StringSearchFilter}
+     * @memberof PackJobRecipientFilter
+     */
+    firstName?: StringSearchFilter;
+    /**
+     * Search by lastName
+     * @type {StringSearchFilter}
+     * @memberof PackJobRecipientFilter
+     */
+    lastName?: StringSearchFilter;
+}
+/**
+ * PackJobReplaceAssignedUsersActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum PackJobReplaceAssignedUsersActionEnum {
+    REPLACEASSIGNEDUSERS = 'REPLACE_ASSIGNED_USERS'
+}
+/**
+ * Action to replace the assigned users.
+ * @export
+ * @interface PackJobReplaceAssignedUsersActionParameter
+ */
+export interface PackJobReplaceAssignedUsersActionParameter {
+    /**
+     * 
+     * @type {PackJobReplaceAssignedUsersActionEnum}
+     * @memberof PackJobReplaceAssignedUsersActionParameter
+     */
+    name: PackJobReplaceAssignedUsersActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof PackJobReplaceAssignedUsersActionParameter
+     */
+    version: number;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUserForCreationByName | AssignedUserForCreationById>}
+     * @memberof PackJobReplaceAssignedUsersActionParameter
+     */
+    assignedUsers: Array<AssignedUserForCreationByName | AssignedUserForCreationById>;
+}
+/**
+ * PackJobSearchPayload
+ * @export
+ * @interface PackJobSearchPayload
+ */
+export interface PackJobSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof PackJobSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {PackJobSearchQuery}
+     * @memberof PackJobSearchPayload
+     */
+    query: PackJobSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof PackJobSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<PackJobSort>}
+     * @memberof PackJobSearchPayload
+     */
+    sort?: Array<PackJobSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof PackJobSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * PackJobSearchQuery
+ * @export
+ * @interface PackJobSearchQuery
+ */
+export interface PackJobSearchQuery {
+    /**
+     * 
+     * @type {Array<PackJobSearchQuery>}
+     * @memberof PackJobSearchQuery
+     */
+    and?: Array<PackJobSearchQuery>;
+    /**
+     * Search by facilityRef
+     * @type {StringEqFilter}
+     * @memberof PackJobSearchQuery
+     */
+    facilityRef?: StringEqFilter;
+    /**
+     * Nested search by invoice
+     * @type {PackJobInvoiceFilter}
+     * @memberof PackJobSearchQuery
+     */
+    invoice?: PackJobInvoiceFilter;
+    /**
+     * Search by lastModified
+     * @type {DateFilter}
+     * @memberof PackJobSearchQuery
+     */
+    lastModified?: DateFilter;
+    /**
+     * Nested list search by lineItems
+     * @type {PackJobLineItemsListFilter}
+     * @memberof PackJobSearchQuery
+     */
+    lineItems?: PackJobLineItemsListFilter;
+    /**
+     * 
+     * @type {Array<PackJobSearchQuery>}
+     * @memberof PackJobSearchQuery
+     */
+    or?: Array<PackJobSearchQuery>;
+    /**
+     * Search by orderDate
+     * @type {DateFilter}
+     * @memberof PackJobSearchQuery
+     */
+    orderDate?: DateFilter;
+    /**
+     * Nested list search by packingSourceContainers
+     * @type {PackJobPackingSourceContainersListFilter}
+     * @memberof PackJobSearchQuery
+     */
+    packingSourceContainers?: PackJobPackingSourceContainersListFilter;
+    /**
+     * Nested search by recipient
+     * @type {PackJobRecipientFilter}
+     * @memberof PackJobSearchQuery
+     */
+    recipient?: PackJobRecipientFilter;
+    /**
+     * Search by shortId
+     * @type {StringSearchFilter}
+     * @memberof PackJobSearchQuery
+     */
+    shortId?: StringSearchFilter;
+    /**
+     * Search by status
+     * @type {PackJobStatusEnumFilter}
+     * @memberof PackJobSearchQuery
+     */
+    status?: PackJobStatusEnumFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof PackJobSearchQuery
+     */
+    targetTime?: DateFilter;
+    /**
+     * Search by tenantOrderId
+     * @type {StringSearchFilter}
+     * @memberof PackJobSearchQuery
+     */
+    tenantOrderId?: StringSearchFilter;
+}
+/**
+ * PackJobSort
+ * @export
+ * @interface PackJobSort
+ */
+export interface PackJobSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof PackJobSort
+     */
+    lastModified?: PackJobSort.LastModifiedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof PackJobSort
+     */
+    orderDate?: PackJobSort.OrderDateEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof PackJobSort
+     */
+    targetTime?: PackJobSort.TargetTimeEnum;
+}
+
+/**
+ * @export
+ * @namespace PackJobSort
+ */
+export namespace PackJobSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum OrderDateEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TargetTimeEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * PackJobSplitLineItemsActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum PackJobSplitLineItemsActionEnum {
+    SPLITLINESPACKJOB = 'SPLIT_LINES_PACK_JOB'
+}
+/**
+ * PackJobSplitLineItemsActionParameter
+ * @export
+ * @interface PackJobSplitLineItemsActionParameter
+ */
+export interface PackJobSplitLineItemsActionParameter {
+    /**
+     * 
+     * @type {PackJobSplitLineItemsActionEnum}
+     * @memberof PackJobSplitLineItemsActionParameter
+     */
+    name: PackJobSplitLineItemsActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof PackJobSplitLineItemsActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<PackJobSplitLineItemsInfo>}
+     * @memberof PackJobSplitLineItemsActionParameter
+     */
+    splitLineItemsInfo: Array<PackJobSplitLineItemsInfo>;
+}
+/**
+ * PackJobSplitLineItemsInfo
+ * @export
+ * @interface PackJobSplitLineItemsInfo
+ */
+export interface PackJobSplitLineItemsInfo {
+    /**
+     * references the id of the packLineItem of a packJob
+     * @type {string}
+     * @memberof PackJobSplitLineItemsInfo
+     */
+    lineItemId: string;
+    /**
+     * quantity of the specific item that has been ordered
+     * @type {number}
+     * @memberof PackJobSplitLineItemsInfo
+     */
+    quantity: number;
+    /**
+     * The amount of articles that were packed for this line item.
+     * @type {number}
+     * @memberof PackJobSplitLineItemsInfo
+     */
+    packed?: number;
+}
+/**
  * A pack job initially has the status OPEN and packing can start. When packing has started, the pack job changes its status to IN_PROGRESS. After a pack job has been completely packed its status becomes CLOSED.
  * @export
  * @enum {string}
@@ -17856,7 +26209,75 @@ export enum PackJobStatus {
     PAUSED = 'PAUSED'
 }
 /**
- * 
+ * PackJobStatusEnumFilter
+ * @export
+ * @interface PackJobStatusEnumFilter
+ */
+export interface PackJobStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof PackJobStatusEnumFilter
+     */
+    eq?: PackJobStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof PackJobStatusEnumFilter
+     */
+    _in?: PackJobStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof PackJobStatusEnumFilter
+     */
+    notEq?: PackJobStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace PackJobStatusEnumFilter
+ */
+export namespace PackJobStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        CLOSED = 'CLOSED',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        PAUSED = 'PAUSED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        CLOSED = 'CLOSED',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        PAUSED = 'PAUSED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        CLOSED = 'CLOSED',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        PAUSED = 'PAUSED'
+    }
+}
+/**
+ * PackJobTagConfiguration
  * @export
  * @interface PackJobTagConfiguration
  */
@@ -17893,7 +26314,40 @@ export interface PackJobTagConfiguration extends VersionedResource {
     packJobCreationPerTag: Array<PackJobCreationPerTag>;
 }
 /**
- * 
+ * PackJobUpdateRecordableAttributesActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum PackJobUpdateRecordableAttributesActionEnum {
+    UPDATERECORDABLEATTRIBUTESPACKJOB = 'UPDATE_RECORDABLE_ATTRIBUTES_PACK_JOB'
+}
+/**
+ * PackJobUpdateRecordableAttributesActionParameter
+ * @export
+ * @interface PackJobUpdateRecordableAttributesActionParameter
+ */
+export interface PackJobUpdateRecordableAttributesActionParameter {
+    /**
+     * 
+     * @type {PackJobUpdateRecordableAttributesActionEnum}
+     * @memberof PackJobUpdateRecordableAttributesActionParameter
+     */
+    name: PackJobUpdateRecordableAttributesActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof PackJobUpdateRecordableAttributesActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForUpdate>}
+     * @memberof PackJobUpdateRecordableAttributesActionParameter
+     */
+    recordableAttributeUpdates: Array<RecordableAttributeForUpdate>;
+}
+/**
+ * PackJobUpdatedWebHookEvent
  * @export
  * @interface PackJobUpdatedWebHookEvent
  */
@@ -17906,7 +26360,7 @@ export interface PackJobUpdatedWebHookEvent extends WebHookEvent {
     payload: PackJob;
 }
 /**
- * 
+ * PackJobWithSearchPath
  * @export
  * @interface PackJobWithSearchPath
  */
@@ -17926,7 +26380,7 @@ export interface PackJobWithSearchPath extends PackJob {
 export namespace PackJobWithSearchPath {
 }
 /**
- * 
+ * PackJobs
  * @export
  * @interface PackJobs
  */
@@ -17945,7 +26399,7 @@ export interface PackJobs {
     total?: number;
 }
 /**
- * 
+ * PackLineItem
  * @export
  * @interface PackLineItem
  */
@@ -17962,9 +26416,21 @@ export interface PackLineItem extends PackLineItemForCreation {
      * @memberof PackLineItem
      */
     packed?: number;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof PackLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
+    /**
+     * The id of the line item this line item was originated from, before any split has happened. This can be used to restore the ‘pre-split’ status.
+     * @type {string}
+     * @memberof PackLineItem
+     */
+    originId?: string;
 }
 /**
- * 
+ * PackLineItemArticle
  * @export
  * @interface PackLineItemArticle
  */
@@ -17977,7 +26443,7 @@ export interface PackLineItemArticle extends AbstractArticle {
     attributes?: Array<ArticleAttributeItem>;
 }
 /**
- * 
+ * PackLineItemForCreation
  * @export
  * @interface PackLineItemForCreation
  */
@@ -18024,9 +26490,15 @@ export interface PackLineItemForCreation {
      * @memberof PackLineItemForCreation
      */
     scannableCodes?: Array<string>;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof PackLineItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * PackLineItemForUpdate
  * @export
  * @interface PackLineItemForUpdate
  */
@@ -18045,7 +26517,7 @@ export interface PackLineItemForUpdate {
     packed: number;
 }
 /**
- * 
+ * PackingConfigurations
  * @export
  * @interface PackingConfigurations
  */
@@ -18076,7 +26548,7 @@ export interface PackingConfigurations extends VersionedResource {
     scanningConfiguration?: PackingScanningConfiguration;
 }
 /**
- * 
+ * Packing Container Required Configuration.
  * @export
  * @interface PackingContainerRequiredConfiguration
  */
@@ -18089,7 +26561,7 @@ export interface PackingContainerRequiredConfiguration {
     active: boolean;
 }
 /**
- * 
+ * PackingContainerType
  * @export
  * @interface PackingContainerType
  */
@@ -18150,7 +26622,7 @@ export interface PackingContainerType extends VersionedResource {
     weightLimitInG?: number;
 }
 /**
- * 
+ * PackingContainerTypeForCreation
  * @export
  * @interface PackingContainerTypeForCreation
  */
@@ -18193,7 +26665,7 @@ export interface PackingContainerTypeForCreation {
     weightLimitInG?: number;
 }
 /**
- * 
+ * PackingContainerTypePatchActions
  * @export
  * @interface PackingContainerTypePatchActions
  */
@@ -18225,7 +26697,7 @@ export interface PackingItemConfirmationNeededConfiguration {
     active: boolean;
 }
 /**
- * 
+ * Packing Scanning Configuration.
  * @export
  * @interface PackingScanningConfiguration
  */
@@ -18238,7 +26710,7 @@ export interface PackingScanningConfiguration {
     scanningType?: PackingScanningConfigurationEnum;
 }
 /**
- * 
+ * PackingScanningConfigurationEnum
  * @export
  * @enum {string}
  */
@@ -18247,7 +26719,7 @@ export enum PackingScanningConfigurationEnum {
     SCANNOTREQUIRED = 'SCAN_NOT_REQUIRED'
 }
 /**
- * 
+ * PackingSourceContainer
  * @export
  * @interface PackingSourceContainer
  */
@@ -18312,6 +26784,12 @@ export interface PackingSourceContainer extends VersionedResource {
      * @memberof PackingSourceContainer
      */
     codes?: Array<string>;
+    /**
+     * Attributes that can be added to the packing source container. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof PackingSourceContainer
+     */
+    customAttributes?: any;
 }
 /**
  * Can this tenant use the packing source container
@@ -18327,7 +26805,7 @@ export interface PackingSourceContainerConfiguration {
     active: boolean;
 }
 /**
- * 
+ * PackingSourceContainerForCreation
  * @export
  * @interface PackingSourceContainerForCreation
  */
@@ -18368,9 +26846,15 @@ export interface PackingSourceContainerForCreation {
      * @memberof PackingSourceContainerForCreation
      */
     codes?: Array<string>;
+    /**
+     * Attributes that can be added to the packing source container. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof PackingSourceContainerForCreation
+     */
+    customAttributes?: any;
 }
 /**
- * 
+ * PackingTargetContainer
  * @export
  * @interface PackingTargetContainer
  */
@@ -18388,11 +26872,17 @@ export interface PackingTargetContainer extends VersionedResource {
      */
     lineItems: Array<PackingTargetContainerLineItem>;
     /**
+     * deprecated - use operativeContainerTypeRef instead
+     * @type {string}
+     * @memberof PackingTargetContainer
+     */
+    packingContainerTypeRef?: string;
+    /**
      * 
      * @type {string}
      * @memberof PackingTargetContainer
      */
-    packingContainerTypeRef: string;
+    operativeContainerTypeRef?: string;
     /**
      * Reference to the documents collection from this entity
      * @type {string}
@@ -18479,14 +26969,14 @@ export interface PackingTargetContainer extends VersionedResource {
     parcels?: Array<Parcel>;
 }
 /**
- * 
+ * PackingTargetContainerActionsParameter
  * @export
  * @interface PackingTargetContainerActionsParameter
  */
 export interface PackingTargetContainerActionsParameter {
 }
 /**
- * 
+ * PackingTargetContainerAttributeItem
  * @export
  * @interface PackingTargetContainerAttributeItem
  */
@@ -18500,7 +26990,7 @@ export interface PackingTargetContainerAttributeItem extends ArticleAttributeIte
 export namespace PackingTargetContainerAttributeItem {
 }
 /**
- * 
+ * PackingTargetContainerForCreation
  * @export
  * @interface PackingTargetContainerForCreation
  */
@@ -18518,14 +27008,20 @@ export interface PackingTargetContainerForCreation {
      */
     lineItems?: Array<PackingTargetContainerLineItemForCreation>;
     /**
+     * deprecated - use operativeContainerTypeRef instead
+     * @type {string}
+     * @memberof PackingTargetContainerForCreation
+     */
+    packingContainerTypeRef?: string;
+    /**
      * 
      * @type {string}
      * @memberof PackingTargetContainerForCreation
      */
-    packingContainerTypeRef: string;
+    operativeContainerTypeRef?: string;
 }
 /**
- * 
+ * PackingTargetContainerLineItem
  * @export
  * @interface PackingTargetContainerLineItem
  */
@@ -18536,9 +27032,15 @@ export interface PackingTargetContainerLineItem extends PackingTargetContainerLi
      * @memberof PackingTargetContainerLineItem
      */
     id: string;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof PackingTargetContainerLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
 }
 /**
- * 
+ * PackingTargetContainerLineItemArticle
  * @export
  * @interface PackingTargetContainerLineItemArticle
  */
@@ -18551,7 +27053,7 @@ export interface PackingTargetContainerLineItemArticle extends AbstractArticle {
     attributes?: Array<PackingTargetContainerAttributeItem>;
 }
 /**
- * 
+ * PackingTargetContainerLineItemForCreation
  * @export
  * @interface PackingTargetContainerLineItemForCreation
  */
@@ -18586,19 +27088,25 @@ export interface PackingTargetContainerLineItemForCreation {
      * @memberof PackingTargetContainerLineItemForCreation
      */
     scannableCodes?: Array<string>;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof PackingTargetContainerLineItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * PackingTargetContainerPatchActions
  * @export
  * @interface PackingTargetContainerPatchActions
  */
 export interface PackingTargetContainerPatchActions {
     /**
      * 
-     * @type {Array<ReplaceCodesInPackingTargetContainerAction | AddLineItemToPackingTargetContainerAction | RemoveLineItemFromPackingTargetContainerAction | UpdateLineItemOnPackingTargetContainerAction>}
+     * @type {Array<ReplaceCodesInPackingTargetContainerAction | AddLineItemToPackingTargetContainerAction | RemoveLineItemFromPackingTargetContainerAction | UpdateLineItemOnPackingTargetContainerAction | UpdateRecordableAttributesPackingTargetContainerAction>}
      * @memberof PackingTargetContainerPatchActions
      */
-    actions: Array<ReplaceCodesInPackingTargetContainerAction | AddLineItemToPackingTargetContainerAction | RemoveLineItemFromPackingTargetContainerAction | UpdateLineItemOnPackingTargetContainerAction>;
+    actions: Array<ReplaceCodesInPackingTargetContainerAction | AddLineItemToPackingTargetContainerAction | RemoveLineItemFromPackingTargetContainerAction | UpdateLineItemOnPackingTargetContainerAction | UpdateRecordableAttributesPackingTargetContainerAction>;
     /**
      * The version of the document to be used in optimistic locking mechanisms.
      * @type {number}
@@ -18607,7 +27115,7 @@ export interface PackingTargetContainerPatchActions {
     version: number;
 }
 /**
- * 
+ * PaginatedPackingSourceContainers
  * @export
  * @interface PaginatedPackingSourceContainers
  */
@@ -18626,7 +27134,7 @@ export interface PaginatedPackingSourceContainers {
     total?: number;
 }
 /**
- * 
+ * Parcel
  * @export
  * @interface Parcel
  */
@@ -18770,11 +27278,29 @@ export interface Parcel extends VersionedResource {
      */
     pickUpInformation?: ParcelPickUpInformation;
     /**
-     * Monetary value of all goods in this parcel. Needed for sending cross border packages (customs) To be interpreted as money in the currency given under paymentInformation.currency
+     * Monetary value of all goods in this parcel. Needed for sending cross border packages (customs) To be interpreted as money in the currency given under paymentInformation.currency. This field uses the smallest denomination, e.g. Euro Cents. So a value of 1250 represents 12,50€.
      * @type {number}
      * @memberof Parcel
      */
     productValue?: number;
+    /**
+     * Set this value if you want to overwrite the calculated product value of the parcel. This field uses the smallest denomination, e.g. Euro Cents. So a value of 1250 represents 12,50€.
+     * @type {number}
+     * @memberof Parcel
+     */
+    customProductValue?: number;
+    /**
+     * 
+     * @type {ProductValueCurrency}
+     * @memberof Parcel
+     */
+    productValueCurrency?: ProductValueCurrency;
+    /**
+     * 
+     * @type {ProductValueType}
+     * @memberof Parcel
+     */
+    productValueType?: ProductValueType;
     /**
      * 
      * @type {string}
@@ -18789,7 +27315,14 @@ export interface Parcel extends VersionedResource {
     transfers?: Array<OperativeTransfer>;
 }
 /**
- * 
+ * ParcelActionsParameter
+ * @export
+ * @interface ParcelActionsParameter
+ */
+export interface ParcelActionsParameter {
+}
+/**
+ * ParcelArticleAttributeItemForUpdate
  * @export
  * @interface ParcelArticleAttributeItemForUpdate
  */
@@ -18803,7 +27336,7 @@ export interface ParcelArticleAttributeItemForUpdate extends ArticleAttributeIte
 export namespace ParcelArticleAttributeItemForUpdate {
 }
 /**
- * 
+ * ParcelCarrierAcknowledgedWebHookEvent
  * @export
  * @interface ParcelCarrierAcknowledgedWebHookEvent
  */
@@ -18816,7 +27349,7 @@ export interface ParcelCarrierAcknowledgedWebHookEvent extends WebHookEvent {
     payload: Parcel;
 }
 /**
- * 
+ * ParcelCarrierFailedWebHookEvent
  * @export
  * @interface ParcelCarrierFailedWebHookEvent
  */
@@ -18829,7 +27362,7 @@ export interface ParcelCarrierFailedWebHookEvent extends WebHookEvent {
     payload: Parcel;
 }
 /**
- * 
+ * ParcelCarrierRequestedWebHookEvent
  * @export
  * @interface ParcelCarrierRequestedWebHookEvent
  */
@@ -18842,7 +27375,7 @@ export interface ParcelCarrierRequestedWebHookEvent extends WebHookEvent {
     payload: Parcel;
 }
 /**
- * 
+ * ParcelDimensions
  * @export
  * @interface ParcelDimensions
  */
@@ -18871,9 +27404,15 @@ export interface ParcelDimensions {
      * @memberof ParcelDimensions
      */
     width?: number;
+    /**
+     * Set this value if you want to overwrite the calculated weight of the parcel (in g).
+     * @type {number}
+     * @memberof ParcelDimensions
+     */
+    customWeight?: number;
 }
 /**
- * 
+ * ParcelForCreation
  * @export
  * @interface ParcelForCreation
  */
@@ -18969,11 +27508,29 @@ export interface ParcelForCreation {
      */
     shortId?: string;
     /**
-     * Monetary value of all goods in this parcel. Needed for sending cross border packages (customs) To be interpreted as money in the currency given under paymentInformation.currency
+     * Monetary value of all goods in this parcel. Needed for sending cross border packages (customs) To be interpreted as money in the currency given under paymentInformation.currency. This value is calculated from the items in the parcel.
      * @type {number}
      * @memberof ParcelForCreation
      */
     productValue?: number;
+    /**
+     * Set this value if you want to overwrite the calculated product value of the parcel.
+     * @type {number}
+     * @memberof ParcelForCreation
+     */
+    customProductValue?: number;
+    /**
+     * 
+     * @type {ProductValueCurrency}
+     * @memberof ParcelForCreation
+     */
+    productValueCurrency?: ProductValueCurrency;
+    /**
+     * 
+     * @type {ProductValueType}
+     * @memberof ParcelForCreation
+     */
+    productValueType?: ProductValueType;
     /**
      * 
      * @type {ParcelResult}
@@ -18988,7 +27545,201 @@ export interface ParcelForCreation {
     transfers?: Array<OperativeTransfer>;
 }
 /**
- * 
+ * ParcelForDirectCreation
+ * @export
+ * @interface ParcelForDirectCreation
+ */
+export interface ParcelForDirectCreation {
+    /**
+     * 
+     * @type {ParcelStatus}
+     * @memberof ParcelForDirectCreation
+     */
+    status?: ParcelStatus;
+    /**
+     * Desired product of given carrier to choose when ordering a label
+     * @type {string}
+     * @memberof ParcelForDirectCreation
+     */
+    carrierProduct?: string;
+    /**
+     * references the carrier to be used for sending. Can not be set when creating a parcel for an existing shipment.
+     * @type {string}
+     * @memberof ParcelForDirectCreation
+     */
+    carrierRef: string;
+    /**
+     * Attributes that can be added to the parcel. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ParcelForDirectCreation
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {ParcelDimensions}
+     * @memberof ParcelForDirectCreation
+     */
+    dimensions?: ParcelDimensions;
+    /**
+     * 
+     * @type {ParcelServices}
+     * @memberof ParcelForDirectCreation
+     */
+    services?: ParcelServices;
+    /**
+     * Reference to array of load unit Refs
+     * @type {Array<string>}
+     * @memberof ParcelForDirectCreation
+     */
+    loadUnitRefs?: Array<string>;
+    /**
+     * 
+     * @type {Array<ParcelItemForCreation>}
+     * @memberof ParcelForDirectCreation
+     */
+    items?: Array<ParcelItemForCreation>;
+    /**
+     * 
+     * @type {ConsumerAddress}
+     * @memberof ParcelForDirectCreation
+     */
+    recipient: ConsumerAddress;
+    /**
+     * 
+     * @type {ConsumerAddress}
+     * @memberof ParcelForDirectCreation
+     */
+    invoice?: ConsumerAddress;
+    /**
+     * 
+     * @type {FacilityAddress}
+     * @memberof ParcelForDirectCreation
+     */
+    sender: FacilityAddress;
+    /**
+     * 
+     * @type {FacilityAddress}
+     * @memberof ParcelForDirectCreation
+     */
+    returnAddress?: FacilityAddress;
+    /**
+     * 
+     * @type {PaymentInformation}
+     * @memberof ParcelForDirectCreation
+     */
+    paymentInformation?: PaymentInformation;
+    /**
+     * 
+     * @type {ParcelPickUpInformation}
+     * @memberof ParcelForDirectCreation
+     */
+    pickUpInformation?: ParcelPickUpInformation;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParcelForDirectCreation
+     */
+    shortId?: string;
+    /**
+     * Monetary value of all goods in this parcel. Needed for sending cross border packages (customs) To be interpreted as money in the currency given under paymentInformation.currency. This value is calculated from the items in the parcel.
+     * @type {number}
+     * @memberof ParcelForDirectCreation
+     */
+    productValue?: number;
+    /**
+     * Set this value if you want to overwrite the calculated product value of the parcel.
+     * @type {number}
+     * @memberof ParcelForDirectCreation
+     */
+    customProductValue?: number;
+    /**
+     * 
+     * @type {ProductValueCurrency}
+     * @memberof ParcelForDirectCreation
+     */
+    productValueCurrency?: ProductValueCurrency;
+    /**
+     * 
+     * @type {ProductValueType}
+     * @memberof ParcelForDirectCreation
+     */
+    productValueType?: ProductValueType;
+    /**
+     * 
+     * @type {ParcelResult}
+     * @memberof ParcelForDirectCreation
+     */
+    result?: ParcelResult;
+    /**
+     * Reference to the facility this parcel is created for
+     * @type {string}
+     * @memberof ParcelForDirectCreation
+     */
+    facilityRef: string;
+    /**
+     * Reference to the shipment this parcel is created for. If non provided, a shipment will be created automatically.
+     * @type {string}
+     * @memberof ParcelForDirectCreation
+     */
+    shipmentRef?: string;
+    /**
+     * The target time for the parcel to be delivered. If not provided, the current time will be used.
+     * @type {Date}
+     * @memberof ParcelForDirectCreation
+     */
+    targetTime?: Date;
+    /**
+     * Date when the order for the given parcel has been placed Mandatory when no shipmentRef was provided
+     * @type {Date}
+     * @memberof ParcelForDirectCreation
+     */
+    orderDate?: Date;
+    /**
+     * Reference to the operative process this parcel is created for
+     * @type {string}
+     * @memberof ParcelForDirectCreation
+     */
+    operativeProcessRef?: string;
+    /**
+     * Reference to the process this parcel is created for
+     * @type {string}
+     * @memberof ParcelForDirectCreation
+     */
+    processRef?: string;
+}
+/**
+ * ParcelInvoiceFilter
+ * @export
+ * @interface ParcelInvoiceFilter
+ */
+export interface ParcelInvoiceFilter {
+    /**
+     * Search by companyName
+     * @type {StringSearchFilter}
+     * @memberof ParcelInvoiceFilter
+     */
+    companyName?: StringSearchFilter;
+    /**
+     * Search by email
+     * @type {StringSearchFilter}
+     * @memberof ParcelInvoiceFilter
+     */
+    email?: StringSearchFilter;
+    /**
+     * Search by firstName
+     * @type {StringSearchFilter}
+     * @memberof ParcelInvoiceFilter
+     */
+    firstName?: StringSearchFilter;
+    /**
+     * Search by lastName
+     * @type {StringSearchFilter}
+     * @memberof ParcelInvoiceFilter
+     */
+    lastName?: StringSearchFilter;
+}
+/**
+ * ParcelItem
  * @export
  * @interface ParcelItem
  */
@@ -19041,9 +27792,27 @@ export interface ParcelItem {
      * @memberof ParcelItem
      */
     article?: ParcelItemArticle;
+    /**
+     * Attributes that can be added to the parcelItem. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ParcelItem
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof ParcelItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
+    /**
+     * The id of the line item this line item was originated from, before any split has happened. This can be used to restore the ‘pre-split’ status.
+     * @type {string}
+     * @memberof ParcelItem
+     */
+    originId?: string;
 }
 /**
- * 
+ * ParcelItemArticle
  * @export
  * @interface ParcelItemArticle
  */
@@ -19056,7 +27825,7 @@ export interface ParcelItemArticle extends AbstractArticle {
     attributes?: Array<ArticleAttributeItem>;
 }
 /**
- * 
+ * ParcelItemForCreation
  * @export
  * @interface ParcelItemForCreation
  */
@@ -19103,9 +27872,21 @@ export interface ParcelItemForCreation {
      * @memberof ParcelItemForCreation
      */
     article?: ParcelItemArticle;
+    /**
+     * Attributes that can be added to the parcelItem. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ParcelItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof ParcelItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * ParcelItemForUpdate
  * @export
  * @interface ParcelItemForUpdate
  */
@@ -19136,7 +27917,7 @@ export interface ParcelItemForUpdate {
     weightInGram?: number;
 }
 /**
- * 
+ * deprecated, use MandatoryShippingArticleAttribute.attributes.pricePerUnit instead
  * @export
  * @interface ParcelItemValue
  */
@@ -19153,9 +27934,66 @@ export interface ParcelItemValue {
      * @memberof ParcelItemValue
      */
     currency: string;
+    /**
+     * Number of decimal places for the given currency
+     * @type {number}
+     * @memberof ParcelItemValue
+     */
+    decimalPlaces?: number;
+    /**
+     * 
+     * @type {ProductValueType}
+     * @memberof ParcelItemValue
+     */
+    type?: ProductValueType;
 }
 /**
- * 
+ * ParcelItemsArticleFilter
+ * @export
+ * @interface ParcelItemsArticleFilter
+ */
+export interface ParcelItemsArticleFilter {
+    /**
+     * Search by tenantArticleId
+     * @type {StringSearchFilter}
+     * @memberof ParcelItemsArticleFilter
+     */
+    tenantArticleId?: StringSearchFilter;
+    /**
+     * Search by title
+     * @type {StringSearchFilter}
+     * @memberof ParcelItemsArticleFilter
+     */
+    title?: StringSearchFilter;
+}
+/**
+ * ParcelItemsFilter
+ * @export
+ * @interface ParcelItemsFilter
+ */
+export interface ParcelItemsFilter {
+    /**
+     * Nested search by article
+     * @type {ParcelItemsArticleFilter}
+     * @memberof ParcelItemsFilter
+     */
+    article?: ParcelItemsArticleFilter;
+}
+/**
+ * ParcelItemsListFilter
+ * @export
+ * @interface ParcelItemsListFilter
+ */
+export interface ParcelItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {ParcelItemsFilter}
+     * @memberof ParcelItemsListFilter
+     */
+    contains?: ParcelItemsFilter;
+}
+/**
+ * ParcelLabelClassification
  * @export
  * @interface ParcelLabelClassification
  */
@@ -19186,7 +28024,7 @@ export interface ParcelLabelClassification {
     dimensions: ParcelDimensions;
 }
 /**
- * 
+ * ParcelLabelClassificationForCreation
  * @export
  * @interface ParcelLabelClassificationForCreation
  */
@@ -19211,7 +28049,7 @@ export interface ParcelLabelClassificationForCreation {
     dimensions: ParcelDimensions;
 }
 /**
- * 
+ * ParcelLabelClassificationServices
  * @export
  * @interface ParcelLabelClassificationServices
  */
@@ -19224,7 +28062,18 @@ export interface ParcelLabelClassificationServices {
     bulkyGoods?: boolean;
 }
 /**
- * 
+ * The type of possible Parcel Labels
+ * @export
+ * @enum {string}
+ */
+export enum ParcelLabelTypeEnum {
+    ReturnPdf = 'return.pdf',
+    AllPdf = 'all.pdf',
+    SendPdf = 'send.pdf',
+    CustomsPdf = 'customs.pdf'
+}
+/**
+ * ParcelPatchActions
  * @export
  * @interface ParcelPatchActions
  */
@@ -19243,7 +28092,7 @@ export interface ParcelPatchActions {
     version: number;
 }
 /**
- * 
+ * ParcelPickUpInformation
  * @export
  * @interface ParcelPickUpInformation
  */
@@ -19262,7 +28111,7 @@ export interface ParcelPickUpInformation {
     endTime: Date;
 }
 /**
- * 
+ * ParcelPostalCharge
  * @export
  * @interface ParcelPostalCharge
  */
@@ -19279,6 +28128,62 @@ export interface ParcelPostalCharge {
      * @memberof ParcelPostalCharge
      */
     currency: string;
+}
+/**
+ * ParcelProductValue
+ * @export
+ * @interface ParcelProductValue
+ */
+export interface ParcelProductValue {
+    /**
+     * Total value that should be shipped. Value is configured in the smallest subunit, e.g. cents.
+     * @type {number}
+     * @memberof ParcelProductValue
+     */
+    value: number;
+    /**
+     * The currency of the price as an ISO 4217 code.
+     * @type {CurrencyCode}
+     * @memberof ParcelProductValue
+     */
+    currency: CurrencyCode;
+    /**
+     * Number of decimal places for the given currency
+     * @type {number}
+     * @memberof ParcelProductValue
+     */
+    decimalPlaces: number;
+}
+/**
+ * ParcelRecipientFilter
+ * @export
+ * @interface ParcelRecipientFilter
+ */
+export interface ParcelRecipientFilter {
+    /**
+     * Search by companyName
+     * @type {StringSearchFilter}
+     * @memberof ParcelRecipientFilter
+     */
+    companyName?: StringSearchFilter;
+    /**
+     * Search by email
+     * @type {StringSearchFilter}
+     * @memberof ParcelRecipientFilter
+     */
+    email?: StringSearchFilter;
+    /**
+     * Search by firstName
+     * @type {StringSearchFilter}
+     * @memberof ParcelRecipientFilter
+     */
+    firstName?: StringSearchFilter;
+    /**
+     * Search by lastName
+     * @type {StringSearchFilter}
+     * @memberof ParcelRecipientFilter
+     */
+    lastName?: StringSearchFilter;
 }
 /**
  * Within this object you can find the result of the request after it has been processed (status = DONE or FAILED)
@@ -19305,6 +28210,12 @@ export interface ParcelResult {
      */
     proxyId?: string;
     /**
+     * The reference number of the parcel by the carrier
+     * @type {string}
+     * @memberof ParcelResult
+     */
+    carrierParcelRef?: string;
+    /**
      * The original return label id
      * @type {string}
      * @memberof ParcelResult
@@ -19316,6 +28227,12 @@ export interface ParcelResult {
      * @memberof ParcelResult
      */
     returnLabelUrl?: string;
+    /**
+     * The URL to track the return of this parcel
+     * @type {string}
+     * @memberof ParcelResult
+     */
+    returnTrackingUrl?: string;
     /**
      * The customs document id
      * @type {string}
@@ -19342,6 +28259,12 @@ export interface ParcelResult {
     summary: string;
     /**
      * 
+     * @type {TrackingStatus | DhlTrackingStatus}
+     * @memberof ParcelResult
+     */
+    carrierTrackingStatus?: TrackingStatus | DhlTrackingStatus;
+    /**
+     * 
      * @type {TrackingStatus}
      * @memberof ParcelResult
      */
@@ -19354,7 +28277,129 @@ export interface ParcelResult {
     trackingUrl?: string;
 }
 /**
- * 
+ * ParcelSearchPayload
+ * @export
+ * @interface ParcelSearchPayload
+ */
+export interface ParcelSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof ParcelSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {ParcelSearchQuery}
+     * @memberof ParcelSearchPayload
+     */
+    query: ParcelSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof ParcelSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<ParcelSort>}
+     * @memberof ParcelSearchPayload
+     */
+    sort?: Array<ParcelSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof ParcelSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * ParcelSearchQuery
+ * @export
+ * @interface ParcelSearchQuery
+ */
+export interface ParcelSearchQuery {
+    /**
+     * 
+     * @type {Array<ParcelSearchQuery>}
+     * @memberof ParcelSearchQuery
+     */
+    and?: Array<ParcelSearchQuery>;
+    /**
+     * Search by carrierRef
+     * @type {StringFilter}
+     * @memberof ParcelSearchQuery
+     */
+    carrierRef?: StringFilter;
+    /**
+     * Search by created
+     * @type {DateFilter}
+     * @memberof ParcelSearchQuery
+     */
+    created?: DateFilter;
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof ParcelSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof ParcelSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * Nested search by invoice
+     * @type {ParcelInvoiceFilter}
+     * @memberof ParcelSearchQuery
+     */
+    invoice?: ParcelInvoiceFilter;
+    /**
+     * Nested list search by items
+     * @type {ParcelItemsListFilter}
+     * @memberof ParcelSearchQuery
+     */
+    items?: ParcelItemsListFilter;
+    /**
+     * Search by lastModified
+     * @type {DateFilter}
+     * @memberof ParcelSearchQuery
+     */
+    lastModified?: DateFilter;
+    /**
+     * 
+     * @type {Array<ParcelSearchQuery>}
+     * @memberof ParcelSearchQuery
+     */
+    or?: Array<ParcelSearchQuery>;
+    /**
+     * Nested search by recipient
+     * @type {ParcelRecipientFilter}
+     * @memberof ParcelSearchQuery
+     */
+    recipient?: ParcelRecipientFilter;
+    /**
+     * Search by shipmentRef
+     * @type {StringFilter}
+     * @memberof ParcelSearchQuery
+     */
+    shipmentRef?: StringFilter;
+    /**
+     * Search by shortId
+     * @type {StringFilter}
+     * @memberof ParcelSearchQuery
+     */
+    shortId?: StringFilter;
+    /**
+     * Search by status
+     * @type {ParcelStatusEnumFilter}
+     * @memberof ParcelSearchQuery
+     */
+    status?: ParcelStatusEnumFilter;
+}
+/**
+ * ParcelServices
  * @export
  * @interface ParcelServices
  */
@@ -19391,7 +28436,101 @@ export interface ParcelServices {
     saturdayDelivery?: boolean;
 }
 /**
- * 
+ * ParcelSort
+ * @export
+ * @interface ParcelSort
+ */
+export interface ParcelSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof ParcelSort
+     */
+    created?: ParcelSort.CreatedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ParcelSort
+     */
+    lastModified?: ParcelSort.LastModifiedEnum;
+}
+
+/**
+ * @export
+ * @namespace ParcelSort
+ */
+export namespace ParcelSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CreatedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * ParcelSplitItemsActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum ParcelSplitItemsActionEnum {
+    SPLITLINESPARCEL = 'SPLIT_LINES_PARCEL'
+}
+/**
+ * ParcelSplitItemsActionParameter
+ * @export
+ * @interface ParcelSplitItemsActionParameter
+ */
+export interface ParcelSplitItemsActionParameter {
+    /**
+     * 
+     * @type {ParcelSplitItemsActionEnum}
+     * @memberof ParcelSplitItemsActionParameter
+     */
+    name: ParcelSplitItemsActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof ParcelSplitItemsActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<ParcelSplitItemsInfo>}
+     * @memberof ParcelSplitItemsActionParameter
+     */
+    splitItemsInfo: Array<ParcelSplitItemsInfo>;
+}
+/**
+ * ParcelSplitItemsInfo
+ * @export
+ * @interface ParcelSplitItemsInfo
+ */
+export interface ParcelSplitItemsInfo {
+    /**
+     * references the id of the item of a parcel
+     * @type {string}
+     * @memberof ParcelSplitItemsInfo
+     */
+    itemId: string;
+    /**
+     * quantity of the specific item that has been ordered
+     * @type {number}
+     * @memberof ParcelSplitItemsInfo
+     */
+    quantity: number;
+}
+/**
+ * ParcelStatus
  * @export
  * @enum {string}
  */
@@ -19405,7 +28544,78 @@ export enum ParcelStatus {
     WAITINGFORINPUT = 'WAITING_FOR_INPUT'
 }
 /**
- * 
+ * ParcelStatusEnumFilter
+ * @export
+ * @interface ParcelStatusEnumFilter
+ */
+export interface ParcelStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ParcelStatusEnumFilter
+     */
+    eq?: ParcelStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ParcelStatusEnumFilter
+     */
+    _in?: ParcelStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ParcelStatusEnumFilter
+     */
+    notEq?: ParcelStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace ParcelStatusEnumFilter
+ */
+export namespace ParcelStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        PROCESSING = 'PROCESSING',
+        DONE = 'DONE',
+        FAILED = 'FAILED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE',
+        WAITINGFORINPUT = 'WAITING_FOR_INPUT'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        PROCESSING = 'PROCESSING',
+        DONE = 'DONE',
+        FAILED = 'FAILED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE',
+        WAITINGFORINPUT = 'WAITING_FOR_INPUT'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        PROCESSING = 'PROCESSING',
+        DONE = 'DONE',
+        FAILED = 'FAILED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE',
+        WAITINGFORINPUT = 'WAITING_FOR_INPUT'
+    }
+}
+/**
+ * ParcelTagConfiguration
  * @export
  * @interface ParcelTagConfiguration
  */
@@ -19418,7 +28628,7 @@ export interface ParcelTagConfiguration extends VersionedResource {
     alternativeReturnAddressConfiguration: AlternativeReturnAddressConfiguration;
 }
 /**
- * 
+ * ParcelTagConfigurationForUpsert
  * @export
  * @interface ParcelTagConfigurationForUpsert
  */
@@ -19437,7 +28647,40 @@ export interface ParcelTagConfigurationForUpsert {
     alternativeReturnAddressConfiguration: AlternativeReturnAddressConfiguration;
 }
 /**
- * 
+ * ParcelUpdateRecordableAttributesActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum ParcelUpdateRecordableAttributesActionEnum {
+    UPDATERECORDABLEATTRIBUTESPARCEL = 'UPDATE_RECORDABLE_ATTRIBUTES_PARCEL'
+}
+/**
+ * ParcelUpdateRecordableAttributesActionParameter
+ * @export
+ * @interface ParcelUpdateRecordableAttributesActionParameter
+ */
+export interface ParcelUpdateRecordableAttributesActionParameter {
+    /**
+     * 
+     * @type {ParcelUpdateRecordableAttributesActionEnum}
+     * @memberof ParcelUpdateRecordableAttributesActionParameter
+     */
+    name: ParcelUpdateRecordableAttributesActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof ParcelUpdateRecordableAttributesActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForUpdate>}
+     * @memberof ParcelUpdateRecordableAttributesActionParameter
+     */
+    recordableAttributeUpdates: Array<RecordableAttributeForUpdate>;
+}
+/**
+ * PartialStock
  * @export
  * @interface PartialStock
  */
@@ -19456,7 +28699,7 @@ export interface PartialStock extends PartialStockForCreation {
     stockinformation: StockInformation;
 }
 /**
- * 
+ * PartialStockForCreation
  * @export
  * @interface PartialStockForCreation
  */
@@ -19487,7 +28730,7 @@ export interface PartialStockForCreation {
     location?: Location;
 }
 /**
- * 
+ * PartialStockPatchActions
  * @export
  * @interface PartialStockPatchActions
  */
@@ -19506,7 +28749,7 @@ export interface PartialStockPatchActions {
     version: number;
 }
 /**
- * 
+ * PartialStocksForReplacement
  * @export
  * @interface PartialStocksForReplacement
  */
@@ -19525,7 +28768,7 @@ export interface PartialStocksForReplacement {
     version: number;
 }
 /**
- * 
+ * PauseItemReturnActionEnum
  * @export
  * @enum {string}
  */
@@ -19533,7 +28776,7 @@ export enum PauseItemReturnActionEnum {
     PauseItemReturn = 'PauseItemReturn'
 }
 /**
- * 
+ * Action to pause an ItemReturn.
  * @export
  * @interface PauseItemReturnActionParameter
  */
@@ -19552,7 +28795,7 @@ export interface PauseItemReturnActionParameter {
     itemReturnJobVersion: number;
 }
 /**
- * 
+ * Action to pause a PackJob
  * @export
  * @interface PausePackJobAction
  */
@@ -19585,7 +28828,40 @@ export namespace PausePackJobAction {
     }
 }
 /**
- * 
+ * Sets the status of the stowjob to PAUSED
+ * @export
+ * @interface PauseStowJobAction
+ */
+export interface PauseStowJobAction {
+    /**
+     * The name of the action that should be performed
+     * @type {string}
+     * @memberof PauseStowJobAction
+     */
+    name: PauseStowJobAction.NameEnum;
+    /**
+     * The current version of the stow job that should be modified
+     * @type {number}
+     * @memberof PauseStowJobAction
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace PauseStowJobAction
+ */
+export namespace PauseStowJobAction {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        PAUSESTOWJOB = 'PAUSE_STOW_JOB'
+    }
+}
+/**
+ * PaymentInformation
  * @export
  * @interface PaymentInformation
  */
@@ -19598,7 +28874,7 @@ export interface PaymentInformation {
     currency?: string;
 }
 /**
- * 
+ * PdfBackgroundConfiguration
  * @export
  * @interface PdfBackgroundConfiguration
  */
@@ -19617,7 +28893,7 @@ export interface PdfBackgroundConfiguration {
     followingPageBackgroundFileUrl?: string;
 }
 /**
- * 
+ * PdfBackgroundConfigurationForUpsert
  * @export
  * @interface PdfBackgroundConfigurationForUpsert
  */
@@ -19636,7 +28912,7 @@ export interface PdfBackgroundConfigurationForUpsert {
     followingPageBackgroundFile?: NamedFile;
 }
 /**
- * 
+ * PickJob
  * @export
  * @interface PickJob
  */
@@ -19755,9 +29031,15 @@ export interface PickJob extends PickJobForCreation {
      * @memberof PickJob
      */
     pickingZones?: Array<PickingZone>;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUser>}
+     * @memberof PickJob
+     */
+    assignedUsers?: Array<AssignedUser>;
 }
 /**
- * 
+ * PickJobAbortActionEnum
  * @export
  * @enum {string}
  */
@@ -19765,7 +29047,7 @@ export enum PickJobAbortActionEnum {
     ABORT = 'ABORT'
 }
 /**
- * 
+ * Action to Abort a Pickjob.
  * @export
  * @interface PickJobAbortActionParameter
  */
@@ -19784,14 +29066,14 @@ export interface PickJobAbortActionParameter {
     version: number;
 }
 /**
- * 
+ * PickJobActionsParameter
  * @export
  * @interface PickJobActionsParameter
  */
 export interface PickJobActionsParameter {
 }
 /**
- * 
+ * PickJobForCreation
  * @export
  * @interface PickJobForCreation
  */
@@ -19910,9 +29192,15 @@ export interface PickJobForCreation {
      * @memberof PickJobForCreation
      */
     pickingTimes?: PickJobPickingTimes;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUserForCreationByName | AssignedUserForCreationById>}
+     * @memberof PickJobForCreation
+     */
+    assignedUsers?: Array<AssignedUserForCreationByName | AssignedUserForCreationById>;
 }
 /**
- * 
+ * PickJobLineItemPartialStockLocation
  * @export
  * @interface PickJobLineItemPartialStockLocation
  */
@@ -19943,7 +29231,7 @@ export interface PickJobLineItemPartialStockLocation extends PickJobLineItemPart
     zoneName?: string;
 }
 /**
- * 
+ * PickJobLineItemPartialStockLocationForCreation
  * @export
  * @interface PickJobLineItemPartialStockLocationForCreation
  */
@@ -19954,6 +29242,12 @@ export interface PickJobLineItemPartialStockLocationForCreation {
      * @memberof PickJobLineItemPartialStockLocationForCreation
      */
     tenantPartialStockId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PickJobLineItemPartialStockLocationForCreation
+     */
+    stockRef: string;
     /**
      * quantity of the specific article that should be picked from given stockLocation
      * @type {number}
@@ -19992,7 +29286,7 @@ export interface PickJobLineItemPartialStockLocationForCreation {
     stockProperties?: PickingStockPropertyPreset | PickingStockProperty;
 }
 /**
- * 
+ * PickJobLineItemPartialStockLocationForUpdate
  * @export
  * @interface PickJobLineItemPartialStockLocationForUpdate
  */
@@ -20003,6 +29297,12 @@ export interface PickJobLineItemPartialStockLocationForUpdate {
      * @memberof PickJobLineItemPartialStockLocationForUpdate
      */
     tenantPartialStockId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PickJobLineItemPartialStockLocationForUpdate
+     */
+    stockRef?: string;
     /**
      * 
      * @type {number}
@@ -20017,7 +29317,7 @@ export interface PickJobLineItemPartialStockLocationForUpdate {
     stockEmptied?: boolean;
 }
 /**
- * 
+ * PickJobObsoleteActionEnum
  * @export
  * @enum {string}
  */
@@ -20025,7 +29325,7 @@ export enum PickJobObsoleteActionEnum {
     OBSOLETE = 'OBSOLETE'
 }
 /**
- * 
+ * Action to set the status to Obsolete of a Pickjob.
  * @export
  * @interface PickJobObsoleteActionParameter
  */
@@ -20059,7 +29359,34 @@ export enum PickJobOrderBy {
     LASTMODIFIEDBYUSERASC = 'LAST_MODIFIED_BY_USER_ASC'
 }
 /**
- * 
+ * PickJobPauseActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum PickJobPauseActionEnum {
+    PAUSE = 'PAUSE'
+}
+/**
+ * Action to pause a Pickjob.
+ * @export
+ * @interface PickJobPauseActionParameter
+ */
+export interface PickJobPauseActionParameter {
+    /**
+     * 
+     * @type {PickJobPauseActionEnum}
+     * @memberof PickJobPauseActionParameter
+     */
+    name: PickJobPauseActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof PickJobPauseActionParameter
+     */
+    version: number;
+}
+/**
+ * PickJobPickingTimes
  * @export
  * @interface PickJobPickingTimes
  */
@@ -20072,7 +29399,40 @@ export interface PickJobPickingTimes {
     startLatestAt?: Date;
 }
 /**
- * 
+ * PickJobReplaceAssignedUsersActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum PickJobReplaceAssignedUsersActionEnum {
+    REPLACEASSIGNEDUSERS = 'REPLACE_ASSIGNED_USERS'
+}
+/**
+ * Action to replace the assigned users.
+ * @export
+ * @interface PickJobReplaceAssignedUsersActionParameter
+ */
+export interface PickJobReplaceAssignedUsersActionParameter {
+    /**
+     * 
+     * @type {PickJobReplaceAssignedUsersActionEnum}
+     * @memberof PickJobReplaceAssignedUsersActionParameter
+     */
+    name: PickJobReplaceAssignedUsersActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof PickJobReplaceAssignedUsersActionParameter
+     */
+    version: number;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUserForCreationByName | AssignedUserForCreationById>}
+     * @memberof PickJobReplaceAssignedUsersActionParameter
+     */
+    assignedUsers: Array<AssignedUserForCreationByName | AssignedUserForCreationById>;
+}
+/**
+ * PickJobResetActionEnum
  * @export
  * @enum {string}
  */
@@ -20080,7 +29440,7 @@ export enum PickJobResetActionEnum {
     RESET = 'RESET'
 }
 /**
- * 
+ * Action to reset a Pickjob.
  * @export
  * @interface PickJobResetActionParameter
  */
@@ -20099,7 +29459,7 @@ export interface PickJobResetActionParameter {
     version: number;
 }
 /**
- * 
+ * PickJobRestartActionEnum
  * @export
  * @enum {string}
  */
@@ -20107,7 +29467,7 @@ export enum PickJobRestartActionEnum {
     RESTART = 'RESTART'
 }
 /**
- * 
+ * Action to Restart a Pickjob.
  * @export
  * @interface PickJobRestartActionParameter
  */
@@ -20126,6 +29486,198 @@ export interface PickJobRestartActionParameter {
     version: number;
 }
 /**
+ * PickJobSearchPayload
+ * @export
+ * @interface PickJobSearchPayload
+ */
+export interface PickJobSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof PickJobSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {PickJobSearchQuery}
+     * @memberof PickJobSearchPayload
+     */
+    query: PickJobSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof PickJobSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<PickJobSort>}
+     * @memberof PickJobSearchPayload
+     */
+    sort?: Array<PickJobSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof PickJobSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * PickJobSearchQuery
+ * @export
+ * @interface PickJobSearchQuery
+ */
+export interface PickJobSearchQuery {
+    /**
+     * 
+     * @type {Array<PickJobSearchQuery>}
+     * @memberof PickJobSearchQuery
+     */
+    and?: Array<PickJobSearchQuery>;
+    /**
+     * Search by consumerName
+     * @type {StringSearchFilter}
+     * @memberof PickJobSearchQuery
+     */
+    consumerName?: StringSearchFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof PickJobSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * 
+     * @type {Array<PickJobSearchQuery>}
+     * @memberof PickJobSearchQuery
+     */
+    or?: Array<PickJobSearchQuery>;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof PickJobSearchQuery
+     */
+    targetTime?: DateFilter;
+    /**
+     * Search by tenantArticleIds
+     * @type {StringListFilter}
+     * @memberof PickJobSearchQuery
+     */
+    tenantArticleIds?: StringListFilter;
+    /**
+     * Search by tenantOrderId
+     * @type {StringFilter}
+     * @memberof PickJobSearchQuery
+     */
+    tenantOrderId?: StringFilter;
+    /**
+     * Nested list search by transfers
+     * @type {PickJobTransfersListFilter}
+     * @memberof PickJobSearchQuery
+     */
+    transfers?: PickJobTransfersListFilter;
+}
+/**
+ * PickJobSort
+ * @export
+ * @interface PickJobSort
+ */
+export interface PickJobSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof PickJobSort
+     */
+    targetTime?: PickJobSort.TargetTimeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof PickJobSort
+     */
+    tenantOrderId?: PickJobSort.TenantOrderIdEnum;
+}
+
+/**
+ * @export
+ * @namespace PickJobSort
+ */
+export namespace PickJobSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TargetTimeEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TenantOrderIdEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * PickJobSplitLineItemsActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum PickJobSplitLineItemsActionEnum {
+    SPLITLINESPICKJOB = 'SPLIT_LINES_PICK_JOB'
+}
+/**
+ * PickJobSplitLineItemsActionParameter
+ * @export
+ * @interface PickJobSplitLineItemsActionParameter
+ */
+export interface PickJobSplitLineItemsActionParameter {
+    /**
+     * 
+     * @type {PickJobSplitLineItemsActionEnum}
+     * @memberof PickJobSplitLineItemsActionParameter
+     */
+    name: PickJobSplitLineItemsActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof PickJobSplitLineItemsActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<PickJobSplitLineItemsInfo>}
+     * @memberof PickJobSplitLineItemsActionParameter
+     */
+    splitLineItemsInfo: Array<PickJobSplitLineItemsInfo>;
+}
+/**
+ * PickJobSplitLineItemsInfo
+ * @export
+ * @interface PickJobSplitLineItemsInfo
+ */
+export interface PickJobSplitLineItemsInfo {
+    /**
+     * references the id of the pickLineItem of a pickJob
+     * @type {string}
+     * @memberof PickJobSplitLineItemsInfo
+     */
+    lineItemId: string;
+    /**
+     * quantity of the specific item that has been ordered
+     * @type {number}
+     * @memberof PickJobSplitLineItemsInfo
+     */
+    quantity: number;
+    /**
+     * The amount of articles that were picked for this line item.
+     * @type {number}
+     * @memberof PickJobSplitLineItemsInfo
+     */
+    picked: number;
+}
+/**
  * The status of a pickjob.
  * @export
  * @enum {string}
@@ -20142,7 +29694,8 @@ export enum PickJobStatus {
     EXPIRED = 'EXPIRED',
     CANCELED = 'CANCELED',
     OBSOLETE = 'OBSOLETE',
-    WAITINGFORINPUT = 'WAITING_FOR_INPUT'
+    WAITINGFORINPUT = 'WAITING_FOR_INPUT',
+    PAUSED = 'PAUSED'
 }
 /**
  * The status of a pickjob. These are the status that are still allowed to be used in the deprecated status field of ModifyPickJob actions
@@ -20161,7 +29714,7 @@ export enum PickJobStatusUnprotected {
     WAITINGFORINPUT = 'WAITING_FOR_INPUT'
 }
 /**
- * 
+ * PickJobTagConfiguration
  * @export
  * @interface PickJobTagConfiguration
  */
@@ -20204,7 +29757,66 @@ export interface PickJobTagConfiguration extends VersionedResource {
     offeredDocumentsByDefault: Array<OfferedDocument>;
 }
 /**
- * 
+ * PickJobTransfersFilter
+ * @export
+ * @interface PickJobTransfersFilter
+ */
+export interface PickJobTransfersFilter {
+    /**
+     * Search by id
+     * @type {StringEqFilter}
+     * @memberof PickJobTransfersFilter
+     */
+    id?: StringEqFilter;
+}
+/**
+ * PickJobTransfersListFilter
+ * @export
+ * @interface PickJobTransfersListFilter
+ */
+export interface PickJobTransfersListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {PickJobTransfersFilter}
+     * @memberof PickJobTransfersListFilter
+     */
+    contains?: PickJobTransfersFilter;
+}
+/**
+ * PickJobUpdateRecordableAttributesActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum PickJobUpdateRecordableAttributesActionEnum {
+    UPDATERECORDABLEATTRIBUTESPICKJOB = 'UPDATE_RECORDABLE_ATTRIBUTES_PICK_JOB'
+}
+/**
+ * PickJobUpdateRecordableAttributesActionParameter
+ * @export
+ * @interface PickJobUpdateRecordableAttributesActionParameter
+ */
+export interface PickJobUpdateRecordableAttributesActionParameter {
+    /**
+     * 
+     * @type {PickJobUpdateRecordableAttributesActionEnum}
+     * @memberof PickJobUpdateRecordableAttributesActionParameter
+     */
+    name: PickJobUpdateRecordableAttributesActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof PickJobUpdateRecordableAttributesActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForUpdate>}
+     * @memberof PickJobUpdateRecordableAttributesActionParameter
+     */
+    recordableAttributeUpdates: Array<RecordableAttributeForUpdate>;
+}
+/**
+ * PickLineItem
  * @export
  * @interface PickLineItem
  */
@@ -20240,7 +29852,7 @@ export interface PickLineItem extends PickLineItemForCreation {
      */
     status: PickLineItemStatus;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />
+     * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />
      * @type {Array<SubstituteLineItem>}
      * @memberof PickLineItem
      */
@@ -20287,9 +29899,21 @@ export interface PickLineItem extends PickLineItemForCreation {
      * @memberof PickLineItem
      */
     shortPickReason?: PickLineShortPickReason;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof PickLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
+    /**
+     * The id of the line item this line item was originated from, before any split has happened. This can be used to restore the ‘pre-split’ status.
+     * @type {string}
+     * @memberof PickLineItem
+     */
+    originId?: string;
 }
 /**
- * 
+ * PickLineItemArticle
  * @export
  * @interface PickLineItemArticle
  */
@@ -20301,14 +29925,14 @@ export interface PickLineItemArticle extends AbstractArticle {
      */
     attributes?: Array<ArticleAttributeItem>;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />
      * @type {Array<ArticlePrice>}
      * @memberof PickLineItemArticle
      */
     prices?: Array<ArticlePrice>;
 }
 /**
- * 
+ * PickLineItemForCreation
  * @export
  * @interface PickLineItemForCreation
  */
@@ -20385,9 +30009,15 @@ export interface PickLineItemForCreation {
      * @memberof PickLineItemForCreation
      */
     allowedSubstitutes?: Array<Substitute>;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof PickLineItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * PickLineItemScannedCode
  * @export
  * @interface PickLineItemScannedCode
  */
@@ -20435,7 +30065,7 @@ export enum PickLineItemStatus {
     CLOSED = 'CLOSED'
 }
 /**
- * 
+ * PickLineItemUpdate
  * @export
  * @interface PickLineItemUpdate
  */
@@ -20501,7 +30131,7 @@ export interface PickLineItemUpdate {
      */
     secondaryPicked?: number;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />
+     * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />
      * @type {Array<SubstituteLineItemForCreation>}
      * @memberof PickLineItemUpdate
      */
@@ -20527,7 +30157,7 @@ export interface PickLineItemUpdateShortPickReason {
     reasonLocalized?: LocaleString;
 }
 /**
- * 
+ * PickLineShortPickReason
  * @export
  * @interface PickLineShortPickReason
  */
@@ -20546,17 +30176,17 @@ export interface PickLineShortPickReason {
     reasonLocalized: LocaleString;
 }
 /**
- * 
+ * PickRun
  * @export
  * @interface PickRun
  */
 export interface PickRun extends VersionedResource {
     /**
      * 
-     * @type {Array<PickLineItem>}
+     * @type {Array<PickRunLineItem>}
      * @memberof PickRun
      */
-    pickLineItems: Array<PickLineItem>;
+    pickLineItems: Array<PickRunLineItem>;
     /**
      * 
      * @type {Array<string>}
@@ -20595,14 +30225,14 @@ export interface PickRun extends VersionedResource {
     pickRunType?: PickRunType;
 }
 /**
- * 
+ * PickRunActionsParameter
  * @export
  * @interface PickRunActionsParameter
  */
 export interface PickRunActionsParameter {
 }
 /**
- * 
+ * PickRunCancelActionEnum
  * @export
  * @enum {string}
  */
@@ -20610,7 +30240,7 @@ export enum PickRunCancelActionEnum {
     CANCEL = 'CANCEL'
 }
 /**
- * 
+ * Action to cancel a PickRun.
  * @export
  * @interface PickRunCancelActionParameter
  */
@@ -20629,7 +30259,7 @@ export interface PickRunCancelActionParameter {
     version: number;
 }
 /**
- * 
+ * PickRunFinishActionEnum
  * @export
  * @enum {string}
  */
@@ -20637,7 +30267,7 @@ export enum PickRunFinishActionEnum {
     FINISH = 'FINISH'
 }
 /**
- * 
+ * Action to finish a PickRun.
  * @export
  * @interface PickRunFinishActionParameter
  */
@@ -20656,7 +30286,7 @@ export interface PickRunFinishActionParameter {
     version: number;
 }
 /**
- * 
+ * PickRunForCreation
  * @export
  * @interface PickRunForCreation
  */
@@ -20687,7 +30317,20 @@ export interface PickRunForCreation {
     pickRunType?: PickRunType;
 }
 /**
- * 
+ * PickRunLineItem
+ * @export
+ * @interface PickRunLineItem
+ */
+export interface PickRunLineItem extends PickLineItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof PickRunLineItem
+     */
+    pickJobRef?: string;
+}
+/**
+ * PickRunPatchAction
  * @export
  * @interface PickRunPatchAction
  */
@@ -20706,7 +30349,7 @@ export interface PickRunPatchAction {
     version: number;
 }
 /**
- * 
+ * PickRunPickJobsPatchAction
  * @export
  * @interface PickRunPickJobsPatchAction
  */
@@ -20725,7 +30368,7 @@ export interface PickRunPickJobsPatchAction {
     version: number;
 }
 /**
- * 
+ * PickRunRemovePickJobActionEnum
  * @export
  * @enum {string}
  */
@@ -20733,7 +30376,7 @@ export enum PickRunRemovePickJobActionEnum {
     REMOVEPICKJOB = 'REMOVE_PICK_JOB'
 }
 /**
- * 
+ * Action to Remove a Pickjob from a PickRun.
  * @export
  * @interface PickRunRemovePickJobActionParameter
  */
@@ -20771,7 +30414,65 @@ export interface PickRunRemovePickJobActionParameterPayload {
     pickJobId: string;
 }
 /**
- * 
+ * PickRunSplitLineItemsActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum PickRunSplitLineItemsActionEnum {
+    SPLITLINESPICKRUN = 'SPLIT_LINES_PICK_RUN'
+}
+/**
+ * PickRunSplitLineItemsActionParameter
+ * @export
+ * @interface PickRunSplitLineItemsActionParameter
+ */
+export interface PickRunSplitLineItemsActionParameter {
+    /**
+     * 
+     * @type {PickRunSplitLineItemsActionEnum}
+     * @memberof PickRunSplitLineItemsActionParameter
+     */
+    name: PickRunSplitLineItemsActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof PickRunSplitLineItemsActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<PickRunSplitLineItemsInfo>}
+     * @memberof PickRunSplitLineItemsActionParameter
+     */
+    splitLineItemsInfo: Array<PickRunSplitLineItemsInfo>;
+}
+/**
+ * PickRunSplitLineItemsInfo
+ * @export
+ * @interface PickRunSplitLineItemsInfo
+ */
+export interface PickRunSplitLineItemsInfo {
+    /**
+     * references the id of the pickLineItem of a pickRun
+     * @type {string}
+     * @memberof PickRunSplitLineItemsInfo
+     */
+    lineItemId: string;
+    /**
+     * quantity of the specific item that has been ordered
+     * @type {number}
+     * @memberof PickRunSplitLineItemsInfo
+     */
+    quantity: number;
+    /**
+     * The amount of articles that were picked for this line item.
+     * @type {number}
+     * @memberof PickRunSplitLineItemsInfo
+     */
+    picked: number;
+}
+/**
+ * PickRunStartActionEnum
  * @export
  * @enum {string}
  */
@@ -20779,7 +30480,7 @@ export enum PickRunStartActionEnum {
     START = 'START'
 }
 /**
- * 
+ * Action to start a PickRun.
  * @export
  * @interface PickRunStartActionParameter
  */
@@ -20806,7 +30507,8 @@ export enum PickRunStatus {
     OPEN = 'OPEN',
     INPROGRESS = 'IN_PROGRESS',
     CLOSED = 'CLOSED',
-    CANCELED = 'CANCELED'
+    CANCELED = 'CANCELED',
+    OBSOLETE = 'OBSOLETE'
 }
 /**
  * Deprecated: batchPick, use batch instead Deprecated: multiOrderPick, use multiOrder instead
@@ -20820,7 +30522,7 @@ export enum PickRunType {
     Batch = 'batch'
 }
 /**
- * 
+ * PickingConfigurations
  * @export
  * @interface PickingConfigurations
  */
@@ -20851,6 +30553,12 @@ export interface PickingConfigurations extends VersionedResource {
     takeOverPickJobConfiguration?: TakeOverPickJobConfiguration;
     /**
      * 
+     * @type {ScheduledPickJobReleaseConfiguration}
+     * @memberof PickingConfigurations
+     */
+    scheduledPickJobReleaseConfiguration?: ScheduledPickJobReleaseConfiguration;
+    /**
+     * 
      * @type {LoadUnitAssignmentConfiguration}
      * @memberof PickingConfigurations
      */
@@ -20879,9 +30587,21 @@ export interface PickingConfigurations extends VersionedResource {
      * @memberof PickingConfigurations
      */
     backofficePickingConfiguration?: BackofficePickingConfiguration;
+    /**
+     * 
+     * @type {MultiOrderPickingConfiguration}
+     * @memberof PickingConfigurations
+     */
+    multiOrderPickingConfiguration?: MultiOrderPickingConfiguration;
+    /**
+     * 
+     * @type {StorageLocationAssignmentConfiguration}
+     * @memberof PickingConfigurations
+     */
+    storageLocationAssignmentConfiguration?: StorageLocationAssignmentConfiguration;
 }
 /**
- * 
+ * PickingLoadUnit
  * @export
  * @interface PickingLoadUnit
  */
@@ -20897,7 +30617,7 @@ export interface PickingLoadUnit extends VersionedResource {
      * @type {string}
      * @memberof PickingLoadUnit
      */
-    loadUnitTypeRef: string;
+    loadUnitTypeRef?: string;
     /**
      * 
      * @type {Array<LoadUnitLineItem>}
@@ -20910,6 +30630,24 @@ export interface PickingLoadUnit extends VersionedResource {
      * @memberof PickingLoadUnit
      */
     customAttributes?: any;
+    /**
+     * the reference to the storage location this load unit as been placed into
+     * @type {string}
+     * @memberof PickingLoadUnit
+     */
+    storageLocationRef?: string;
+    /**
+     * the reference to the operativeContainerType
+     * @type {string}
+     * @memberof PickingLoadUnit
+     */
+    operativeContainerTypeRef?: string;
+    /**
+     * the reference to the stackRef this loadUnit is part of
+     * @type {string}
+     * @memberof PickingLoadUnit
+     */
+    stackRef?: string;
     /**
      * 
      * @type {string}
@@ -20954,7 +30692,7 @@ export interface PickingLoadUnit extends VersionedResource {
     nameLocalized: LocaleString;
 }
 /**
- * 
+ * PickingLoadUnitForCreation
  * @export
  * @interface PickingLoadUnitForCreation
  */
@@ -20970,7 +30708,7 @@ export interface PickingLoadUnitForCreation {
      * @type {string}
      * @memberof PickingLoadUnitForCreation
      */
-    loadUnitTypeRef: string;
+    loadUnitTypeRef?: string;
     /**
      * 
      * @type {Array<LoadUnitLineItemForCreation>}
@@ -20983,6 +30721,24 @@ export interface PickingLoadUnitForCreation {
      * @memberof PickingLoadUnitForCreation
      */
     customAttributes?: any;
+    /**
+     * the reference to the storage location this load unit as been placed into
+     * @type {string}
+     * @memberof PickingLoadUnitForCreation
+     */
+    storageLocationRef?: string;
+    /**
+     * the reference to the operativeContainerType
+     * @type {string}
+     * @memberof PickingLoadUnitForCreation
+     */
+    operativeContainerTypeRef?: string;
+    /**
+     * the reference to the stackRef this loadUnit is part of
+     * @type {string}
+     * @memberof PickingLoadUnitForCreation
+     */
+    stackRef?: string;
 }
 /**
  * Way in which the picking should be handled Deprecated: BATCH_PICKING, use BATCH instead
@@ -20996,7 +30752,7 @@ export enum PickingMethodEnum {
     BATCH = 'BATCH'
 }
 /**
- * 
+ * PickingMethodsConfiguration
  * @export
  * @interface PickingMethodsConfiguration
  */
@@ -21009,7 +30765,7 @@ export interface PickingMethodsConfiguration {
     defaultPickingMethod: PickingMethodEnum;
 }
 /**
- * 
+ * PickingPatchActions
  * @export
  * @interface PickingPatchActions
  */
@@ -21028,7 +30784,7 @@ export interface PickingPatchActions {
     version: number;
 }
 /**
- * 
+ * PickingScanCodeValidationConfiguration
  * @export
  * @interface PickingScanCodeValidationConfiguration
  */
@@ -21050,7 +30806,7 @@ export enum PickingScanCodeValidationEnum {
     CODEMUSTBEKNOWN = 'CODE_MUST_BE_KNOWN'
 }
 /**
- * 
+ * PickingScanningConfiguration
  * @export
  * @interface PickingScanningConfiguration
  */
@@ -21085,7 +30841,7 @@ export enum PickingScanningConfigurationEnum {
     SCANNOTREQUIRED = 'SCAN_NOT_REQUIRED'
 }
 /**
- * 
+ * PickingShortPickConfiguration
  * @export
  * @interface PickingShortPickConfiguration
  */
@@ -21104,7 +30860,26 @@ export interface PickingShortPickConfiguration {
     shortPickReasons?: Array<ShortPickReason>;
 }
 /**
- * 
+ * PickingStartBase
+ * @export
+ * @interface PickingStartBase
+ */
+export interface PickingStartBase {
+    /**
+     * 
+     * @type {Date}
+     * @memberof PickingStartBase
+     */
+    targetTime: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof PickingStartBase
+     */
+    carrierRef: string;
+}
+/**
+ * Picking Stock Property.
  * @export
  * @interface PickingStockProperty
  */
@@ -21113,7 +30888,7 @@ export interface PickingStockProperty {
 
 }
 /**
- * 
+ * Preset of Picking Stock Property.
  * @export
  * @interface PickingStockPropertyPreset
  */
@@ -21126,7 +30901,7 @@ export interface PickingStockPropertyPreset {
     expiry?: string;
 }
 /**
- * 
+ * PickingStockUpdateConfiguration
  * @export
  * @interface PickingStockUpdateConfiguration
  */
@@ -21139,7 +30914,7 @@ export interface PickingStockUpdateConfiguration {
     active: boolean;
 }
 /**
- * There must be no overlaps for time ranges on a day
+ * Time ranges defining the picking times per weekday. No overlapping ranges are allowed. There must be no overlaps for time ranges on a day
  * @export
  * @interface PickingTimes
  */
@@ -21201,7 +30976,7 @@ export interface PickingZone {
     zoneRef: string;
 }
 /**
- * 
+ * PickjobAbortedWebHookEvent
  * @export
  * @interface PickjobAbortedWebHookEvent
  */
@@ -21214,7 +30989,7 @@ export interface PickjobAbortedWebHookEvent extends WebHookEvent {
     payload: PickJob;
 }
 /**
- * 
+ * PickjobCanceledWebHookEvent
  * @export
  * @interface PickjobCanceledWebHookEvent
  */
@@ -21227,7 +31002,7 @@ export interface PickjobCanceledWebHookEvent extends WebHookEvent {
     payload: PickJob;
 }
 /**
- * 
+ * PickjobCreatedWebHookEvent
  * @export
  * @interface PickjobCreatedWebHookEvent
  */
@@ -21240,7 +31015,7 @@ export interface PickjobCreatedWebHookEvent extends WebHookEvent {
     payload: PickJob;
 }
 /**
- * 
+ * PickjobDeliveryInformation
  * @export
  * @interface PickjobDeliveryInformation
  */
@@ -21254,7 +31029,7 @@ export interface PickjobDeliveryInformation extends PickjobDeliveryInformationFo
 export namespace PickjobDeliveryInformation {
 }
 /**
- * 
+ * PickjobDeliveryInformationForCreation
  * @export
  * @interface PickjobDeliveryInformationForCreation
  */
@@ -21414,7 +31189,20 @@ export namespace PickjobDeliveryInformationForCreationDetailsShipping {
     }
 }
 /**
- * 
+ * PickjobOpenedWebHookEvent
+ * @export
+ * @interface PickjobOpenedWebHookEvent
+ */
+export interface PickjobOpenedWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {PickJob}
+     * @memberof PickjobOpenedWebHookEvent
+     */
+    payload: PickJob;
+}
+/**
+ * PickjobPickLinePickedWebHookEvent
  * @export
  * @interface PickjobPickLinePickedWebHookEvent
  */
@@ -21433,7 +31221,7 @@ export interface PickjobPickLinePickedWebHookEvent extends WebHookEvent {
     pickJobRef: string;
 }
 /**
- * 
+ * PickjobPickingCommencedWebHookEvent
  * @export
  * @interface PickjobPickingCommencedWebHookEvent
  */
@@ -21446,7 +31234,7 @@ export interface PickjobPickingCommencedWebHookEvent extends WebHookEvent {
     payload: PickJob;
 }
 /**
- * 
+ * PickjobPickingFinishedWebHookEvent
  * @export
  * @interface PickjobPickingFinishedWebHookEvent
  */
@@ -21459,7 +31247,7 @@ export interface PickjobPickingFinishedWebHookEvent extends WebHookEvent {
     payload: PickJob;
 }
 /**
- * 
+ * PickjobPickingPausedWebHookEvent
  * @export
  * @interface PickjobPickingPausedWebHookEvent
  */
@@ -21472,7 +31260,7 @@ export interface PickjobPickingPausedWebHookEvent extends WebHookEvent {
     payload: PickJob;
 }
 /**
- * 
+ * Post NL Carrier Credentials
  * @export
  * @interface PostNLCarrierCredentials
  */
@@ -21485,7 +31273,7 @@ export interface PostNLCarrierCredentials extends AbstractCarrierCredentials {
     apiKey: string;
 }
 /**
- * 
+ * Post NL Facility Carrier Configuration.
  * @export
  * @interface PostNLFacilityCarrierConfiguration
  */
@@ -21510,7 +31298,7 @@ export interface PostNLFacilityCarrierConfiguration extends AbstractFacilityCarr
     trackAndTraceUrl?: string;
 }
 /**
- * 
+ * Configuration of PostNL Carrier
  * @export
  * @interface PostNlCarrierConfiguration
  */
@@ -21523,7 +31311,7 @@ export interface PostNlCarrierConfiguration extends CarrierConfiguration {
     trackAndTraceUrl?: string;
 }
 /**
- * 
+ * PostalCodeValidation
  * @export
  * @interface PostalCodeValidation
  */
@@ -21547,7 +31335,7 @@ export interface PostalCodeValidation {
  */
 export type PreferredCarrier = string
 /**
- * 
+ * PreferredCarrierWithProduct
  * @export
  * @interface PreferredCarrierWithProduct
  */
@@ -21572,7 +31360,7 @@ export interface PreferredCarrierWithProduct {
     carrierServices?: Array<CarrierServices>;
 }
 /**
- * 
+ * PreferredPickingMethodsConfiguration
  * @export
  * @interface PreferredPickingMethodsConfiguration
  */
@@ -21585,7 +31373,7 @@ export interface PreferredPickingMethodsConfiguration {
     preferredPickingMethodsPerTag?: Array<PreferredPickingMethodsPerTag>;
 }
 /**
- * 
+ * PreferredPickingMethodsPerTag
  * @export
  * @interface PreferredPickingMethodsPerTag
  */
@@ -21610,7 +31398,7 @@ export interface PreferredPickingMethodsPerTag {
     pickingMethods: Array<PickingMethodEnum>;
 }
 /**
- * 
+ * PreselectedFacility
  * @export
  * @interface PreselectedFacility
  */
@@ -21623,26 +31411,38 @@ export interface PreselectedFacility {
     facilityRef: string;
 }
 /**
- * 
+ * PriceRange
  * @export
  * @interface PriceRange
  */
 export interface PriceRange {
     /**
-     * 
+     * Lowest total parcel value that this carrier will be selected for. Value is in configured in the smallest subunit, e.g. cents.
      * @type {number}
      * @memberof PriceRange
      */
     from: number;
     /**
-     * 
+     * Highest total parcel value that this carrier will be selected for. Value is configured in the smallest subunit, e.g. cents.
      * @type {number}
      * @memberof PriceRange
      */
     to: number;
+    /**
+     * The currency of the price as an ISO 4217 code.
+     * @type {CurrencyCode}
+     * @memberof PriceRange
+     */
+    currency: CurrencyCode;
+    /**
+     * Number of decimal places for the given currency
+     * @type {number}
+     * @memberof PriceRange
+     */
+    decimalPlaces: number;
 }
 /**
- * 
+ * PrintableDocument
  * @export
  * @interface PrintableDocument
  */
@@ -21695,9 +31495,15 @@ export interface PrintableDocument {
      * @memberof PrintableDocument
      */
     priority?: number;
+    /**
+     * Attributes that can be added to the document. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof PrintableDocument
+     */
+    customAttributes?: any;
 }
 /**
- * 
+ * PrintableDocumentForUpdate
  * @export
  * @interface PrintableDocumentForUpdate
  */
@@ -21714,6 +31520,18 @@ export interface PrintableDocumentForUpdate {
      * @memberof PrintableDocumentForUpdate
      */
     priority?: number;
+    /**
+     * 
+     * @type {DocumentStatus}
+     * @memberof PrintableDocumentForUpdate
+     */
+    status?: DocumentStatus;
+    /**
+     * Attributes that can be added to the document. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof PrintableDocumentForUpdate
+     */
+    customAttributes?: any;
     /**
      * Offered operations for this document
      * @type {Array<DocumentOperations>}
@@ -21753,7 +31571,7 @@ export interface PrioritizationRule {
     name: string;
 }
 /**
- * 
+ * PrioritizationRuleImplementation
  * @export
  * @enum {string}
  */
@@ -21761,7 +31579,7 @@ export enum PrioritizationRuleImplementation {
     CUSTOM = 'CUSTOM'
 }
 /**
- * 
+ * Process
  * @export
  * @interface Process
  */
@@ -21924,7 +31742,7 @@ export interface Process extends VersionedResource {
     externalActionRefs?: Array<string>;
 }
 /**
- * 
+ * ProcessPatchActions
  * @export
  * @interface ProcessPatchActions
  */
@@ -21943,7 +31761,7 @@ export interface ProcessPatchActions {
     version: number;
 }
 /**
- * 
+ * ProcessProgressLog
  * @export
  * @interface ProcessProgressLog
  */
@@ -22002,9 +31820,319 @@ export interface ProcessProgressLog extends VersionedResource {
      * @memberof ProcessProgressLog
      */
     attributes?: any;
+    /**
+     * This property captures the reason for the entity’s status change. Each domain can define its own set of reasons, represented as an ENUM
+     * @type {string}
+     * @memberof ProcessProgressLog
+     */
+    statusChangeReasonKey?: string;
 }
 /**
- * 
+ * ProcessReferencedCarrierFilter
+ * @export
+ * @interface ProcessReferencedCarrierFilter
+ */
+export interface ProcessReferencedCarrierFilter {
+    /**
+     * Search by name
+     * @type {StringSearchFilter}
+     * @memberof ProcessReferencedCarrierFilter
+     */
+    name?: StringSearchFilter;
+}
+/**
+ * ProcessReferencedConsumerAddressFilter
+ * @export
+ * @interface ProcessReferencedConsumerAddressFilter
+ */
+export interface ProcessReferencedConsumerAddressFilter {
+    /**
+     * Search by country
+     * @type {StringSearchFilter}
+     * @memberof ProcessReferencedConsumerAddressFilter
+     */
+    country?: StringSearchFilter;
+}
+/**
+ * ProcessReferencedFacilityAddressFilter
+ * @export
+ * @interface ProcessReferencedFacilityAddressFilter
+ */
+export interface ProcessReferencedFacilityAddressFilter {
+    /**
+     * Search by country
+     * @type {StringSearchFilter}
+     * @memberof ProcessReferencedFacilityAddressFilter
+     */
+    country?: StringSearchFilter;
+}
+/**
+ * ProcessReferencedFacilityFilter
+ * @export
+ * @interface ProcessReferencedFacilityFilter
+ */
+export interface ProcessReferencedFacilityFilter {
+    /**
+     * Nested search by address
+     * @type {ProcessReferencedFacilityAddressFilter}
+     * @memberof ProcessReferencedFacilityFilter
+     */
+    address?: ProcessReferencedFacilityAddressFilter;
+    /**
+     * Search by name
+     * @type {StringSearchFilter}
+     * @memberof ProcessReferencedFacilityFilter
+     */
+    name?: StringSearchFilter;
+}
+/**
+ * ProcessReferencedFilter
+ * @export
+ * @interface ProcessReferencedFilter
+ */
+export interface ProcessReferencedFilter {
+    /**
+     * Nested search by carrier
+     * @type {ProcessReferencedCarrierFilter}
+     * @memberof ProcessReferencedFilter
+     */
+    carrier?: ProcessReferencedCarrierFilter;
+    /**
+     * Nested search by consumerAddress
+     * @type {ProcessReferencedConsumerAddressFilter}
+     * @memberof ProcessReferencedFilter
+     */
+    consumerAddress?: ProcessReferencedConsumerAddressFilter;
+    /**
+     * Nested search by facility
+     * @type {ProcessReferencedFacilityFilter}
+     * @memberof ProcessReferencedFilter
+     */
+    facility?: ProcessReferencedFacilityFilter;
+    /**
+     * Nested search by order
+     * @type {ProcessReferencedOrderFilter}
+     * @memberof ProcessReferencedFilter
+     */
+    order?: ProcessReferencedOrderFilter;
+    /**
+     * Nested search by pickjob
+     * @type {ProcessReferencedPickjobFilter}
+     * @memberof ProcessReferencedFilter
+     */
+    pickjob?: ProcessReferencedPickjobFilter;
+}
+/**
+ * ProcessReferencedOrderFilter
+ * @export
+ * @interface ProcessReferencedOrderFilter
+ */
+export interface ProcessReferencedOrderFilter {
+    /**
+     * Search by orderDate
+     * @type {DateFilter}
+     * @memberof ProcessReferencedOrderFilter
+     */
+    orderDate?: DateFilter;
+}
+/**
+ * ProcessReferencedPickjobDeliveryInformationFilter
+ * @export
+ * @interface ProcessReferencedPickjobDeliveryInformationFilter
+ */
+export interface ProcessReferencedPickjobDeliveryInformationFilter {
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof ProcessReferencedPickjobDeliveryInformationFilter
+     */
+    targetTime?: DateFilter;
+}
+/**
+ * ProcessReferencedPickjobFilter
+ * @export
+ * @interface ProcessReferencedPickjobFilter
+ */
+export interface ProcessReferencedPickjobFilter {
+    /**
+     * Nested search by deliveryInformation
+     * @type {ProcessReferencedPickjobDeliveryInformationFilter}
+     * @memberof ProcessReferencedPickjobFilter
+     */
+    deliveryInformation?: ProcessReferencedPickjobDeliveryInformationFilter;
+}
+/**
+ * ProcessSearchPayload
+ * @export
+ * @interface ProcessSearchPayload
+ */
+export interface ProcessSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof ProcessSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {ProcessSearchQuery}
+     * @memberof ProcessSearchPayload
+     */
+    query: ProcessSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof ProcessSearchPayload
+     */
+    size?: number;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof ProcessSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * ProcessSearchQuery
+ * @export
+ * @interface ProcessSearchQuery
+ */
+export interface ProcessSearchQuery {
+    /**
+     * 
+     * @type {Array<ProcessSearchQuery>}
+     * @memberof ProcessSearchQuery
+     */
+    and?: Array<ProcessSearchQuery>;
+    /**
+     * Search by documentRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    documentRefs?: StringListFilter;
+    /**
+     * Search by domsStatus
+     * @type {ProcessStatusEnumFilter}
+     * @memberof ProcessSearchQuery
+     */
+    domsStatus?: ProcessStatusEnumFilter;
+    /**
+     * Search by externalActionRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    externalActionRefs?: StringListFilter;
+    /**
+     * Search by facilityRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    facilityRefs?: StringListFilter;
+    /**
+     * Search by flatRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    flatRefs?: StringListFilter;
+    /**
+     * Search by handoverJobRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    handoverJobRefs?: StringListFilter;
+    /**
+     * Search by itemReturnJobsRef
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    itemReturnJobsRef?: StringListFilter;
+    /**
+     * Search by operativeStatus
+     * @type {ProcessStatusEnumFilter}
+     * @memberof ProcessSearchQuery
+     */
+    operativeStatus?: ProcessStatusEnumFilter;
+    /**
+     * 
+     * @type {Array<ProcessSearchQuery>}
+     * @memberof ProcessSearchQuery
+     */
+    or?: Array<ProcessSearchQuery>;
+    /**
+     * Search by orderRef
+     * @type {StringFilter}
+     * @memberof ProcessSearchQuery
+     */
+    orderRef?: StringFilter;
+    /**
+     * Search by packJobRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    packJobRefs?: StringListFilter;
+    /**
+     * Search by pickJobRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    pickJobRefs?: StringListFilter;
+    /**
+     * Search by processId
+     * @type {StringSearchFilter}
+     * @memberof ProcessSearchQuery
+     */
+    processId?: StringSearchFilter;
+    /**
+     * Nested search by referenced
+     * @type {ProcessReferencedFilter}
+     * @memberof ProcessSearchQuery
+     */
+    referenced?: ProcessReferencedFilter;
+    /**
+     * Search by returnRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    returnRefs?: StringListFilter;
+    /**
+     * Search by returnStatus
+     * @type {ProcessStatusEnumFilter}
+     * @memberof ProcessSearchQuery
+     */
+    returnStatus?: ProcessStatusEnumFilter;
+    /**
+     * Search by routingPlanRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    routingPlanRefs?: StringListFilter;
+    /**
+     * Full-text search for this entity
+     * @type {SearchFilter}
+     * @memberof ProcessSearchQuery
+     */
+    searchTerm?: SearchFilter;
+    /**
+     * Search by serviceJobRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    serviceJobRefs?: StringListFilter;
+    /**
+     * Search by shipmentRefs
+     * @type {StringListFilter}
+     * @memberof ProcessSearchQuery
+     */
+    shipmentRefs?: StringListFilter;
+    /**
+     * Search by status
+     * @type {ProcessStatusEnumFilter}
+     * @memberof ProcessSearchQuery
+     */
+    status?: ProcessStatusEnumFilter;
+}
+/**
+ * ProcessStatus
  * @export
  * @enum {string}
  */
@@ -22017,7 +32145,75 @@ export enum ProcessStatus {
     NOTAVAILABLE = 'NOT_AVAILABLE'
 }
 /**
- * 
+ * ProcessStatusEnumFilter
+ * @export
+ * @interface ProcessStatusEnumFilter
+ */
+export interface ProcessStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ProcessStatusEnumFilter
+     */
+    eq?: ProcessStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ProcessStatusEnumFilter
+     */
+    _in?: ProcessStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ProcessStatusEnumFilter
+     */
+    notEq?: ProcessStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace ProcessStatusEnumFilter
+ */
+export namespace ProcessStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        CREATED = 'CREATED',
+        INPROGRESS = 'IN_PROGRESS',
+        FINISHED = 'FINISHED',
+        CANCELED = 'CANCELED',
+        ERROR = 'ERROR',
+        NOTAVAILABLE = 'NOT_AVAILABLE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        CREATED = 'CREATED',
+        INPROGRESS = 'IN_PROGRESS',
+        FINISHED = 'FINISHED',
+        CANCELED = 'CANCELED',
+        ERROR = 'ERROR',
+        NOTAVAILABLE = 'NOT_AVAILABLE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        CREATED = 'CREATED',
+        INPROGRESS = 'IN_PROGRESS',
+        FINISHED = 'FINISHED',
+        CANCELED = 'CANCELED',
+        ERROR = 'ERROR',
+        NOTAVAILABLE = 'NOT_AVAILABLE'
+    }
+}
+/**
+ * Processes
  * @export
  * @interface Processes
  */
@@ -22036,7 +32232,7 @@ export interface Processes {
     total?: number;
 }
 /**
- * 
+ * ProductInformation
  * @export
  * @interface ProductInformation
  */
@@ -22047,6 +32243,12 @@ export interface ProductInformation {
      * @memberof ProductInformation
      */
     productName?: string;
+    /**
+     * Id of the used CarrierCountryServiceMapping
+     * @type {string}
+     * @memberof ProductInformation
+     */
+    carrierCountryServiceMappingRef?: string;
     /**
      * 
      * @type {Array<MandatoryShippingAttribute>}
@@ -22061,13 +32263,54 @@ export interface ProductInformation {
     mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
     /**
      * 
+     * @type {Array<AdditionalShippingAttribute>}
+     * @memberof ProductInformation
+     */
+    additionalShippingAttributes?: Array<AdditionalShippingAttribute>;
+    /**
+     * 
+     * @type {Array<AdditionalShippingArticleAttribute>}
+     * @memberof ProductInformation
+     */
+    additionalShippingArticleAttributes?: Array<AdditionalShippingArticleAttribute>;
+    /**
+     * 
      * @type {Array<MandatoryShippingItemAttribute>}
      * @memberof ProductInformation
      */
     mandatoryShippingItemAttributes?: Array<MandatoryShippingItemAttribute>;
 }
 /**
- * 
+ * ProductValueCurrency
+ * @export
+ * @interface ProductValueCurrency
+ */
+export interface ProductValueCurrency {
+    /**
+     * Currency of the given value
+     * @type {string}
+     * @memberof ProductValueCurrency
+     */
+    currency: string;
+    /**
+     * Number of decimal places for the given currency
+     * @type {number}
+     * @memberof ProductValueCurrency
+     */
+    decimalPlaces?: number;
+}
+/**
+ * ProductValueType
+ * @export
+ * @enum {string}
+ */
+export enum ProductValueType {
+    INSURANCE = 'INSURANCE',
+    CUSTOMS = 'CUSTOMS',
+    SHOPPRICE = 'SHOP_PRICE'
+}
+/**
+ * PromiseCarrier
  * @export
  * @interface PromiseCarrier
  */
@@ -22104,7 +32347,7 @@ export interface PromiseCarrier {
     deliveryPromiseValidUntil?: Date;
 }
 /**
- * 
+ * Action to confirm a promise.
  * @export
  * @interface PromiseConfirmActionParameter
  */
@@ -22131,7 +32374,7 @@ export namespace PromiseConfirmActionParameter {
     }
 }
 /**
- * 
+ * PromiseDeliveryOptions
  * @export
  * @interface PromiseDeliveryOptions
  */
@@ -22162,7 +32405,7 @@ export interface PromiseDeliveryOptions {
     deliveryCosts: Array<DeliveryCost>;
 }
 /**
- * 
+ * Action to extend a promise.
  * @export
  * @interface PromiseExtendActionParameter
  */
@@ -22189,7 +32432,7 @@ export namespace PromiseExtendActionParameter {
     }
 }
 /**
- * 
+ * PromisesConfiguration
  * @export
  * @interface PromisesConfiguration
  */
@@ -22208,11 +32451,35 @@ export interface PromisesConfiguration extends VersionedResource {
     id?: string;
 }
 /**
- * 
+ * PurchaseOrder
  * @export
  * @interface PurchaseOrder
  */
 export interface PurchaseOrder {
+    /**
+     * This field is deprecated. Set the status to 'CANCELED' Set the purchaseOrder to 'cancelled'. No further deliveries will be expected. Already received goods are unaffected.
+     * @type {boolean}
+     * @memberof PurchaseOrder
+     */
+    cancelled: boolean;
+    /**
+     * 
+     * @type {Date}
+     * @memberof PurchaseOrder
+     */
+    created: Date;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof PurchaseOrder
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseOrder
+     */
+    facilityRef: string;
     /**
      * 
      * @type {string}
@@ -22221,10 +32488,10 @@ export interface PurchaseOrder {
     id: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof PurchaseOrder
      */
-    created: Date;
+    inboundProcessRef: string;
     /**
      * 
      * @type {Date}
@@ -22232,19 +32499,19 @@ export interface PurchaseOrder {
      */
     lastModified: Date;
     /**
-     * 
+     * Time and date at which the order was placed. Note: This does not refer to the creation date of this entity in the system.
      * @type {Date}
      * @memberof PurchaseOrder
      */
     orderDate: Date;
     /**
-     * 
-     * @type {RequestedDate}
+     * Time and date at which the order is expected to arrive. Use 'ASAP' for deliveries with unknown date, but be aware that some features will not include these orders.
+     * @type {InputRequestedDate}
      * @memberof PurchaseOrder
      */
-    requestedDate: RequestedDate;
+    requestedDate: InputRequestedDate;
     /**
-     * 
+     * Line items which are expected to be delivered.
      * @type {Array<InboundLineItem>}
      * @memberof PurchaseOrder
      */
@@ -22257,46 +32524,22 @@ export interface PurchaseOrder {
     status: PurchaseOrder.StatusEnum;
     /**
      * 
-     * @type {boolean}
-     * @memberof PurchaseOrder
-     */
-    cancelled: boolean;
-    /**
-     * 
      * @type {InboundProcessPurchaseOrderSupplier}
      * @memberof PurchaseOrder
      */
     supplier?: InboundProcessPurchaseOrderSupplier;
     /**
-     * 
+     * Includes data about transfer between different facilities in the tenant's network.
      * @type {InboundProcessPurchaseOrderTransfer}
      * @memberof PurchaseOrder
      */
     transfer?: InboundProcessPurchaseOrderTransfer;
-    /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof PurchaseOrder
-     */
-    customAttributes?: any;
     /**
      * 
      * @type {number}
      * @memberof PurchaseOrder
      */
     version: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PurchaseOrder
-     */
-    facilityRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PurchaseOrder
-     */
-    inboundProcessRef: string;
 }
 
 /**
@@ -22309,51 +32552,119 @@ export namespace PurchaseOrder {
      * @enum {string}
      */
     export enum StatusEnum {
-        OPEN = 'OPEN'
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
     }
 }
 /**
- * 
+ * PurchaseOrderEventPayload
  * @export
- * @interface PurchaseOrderForCreation
+ * @interface PurchaseOrderEventPayload
  */
-export interface PurchaseOrderForCreation {
+export interface PurchaseOrderEventPayload {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PurchaseOrderEventPayload
+     */
+    canceled: boolean;
     /**
      * 
      * @type {Date}
-     * @memberof PurchaseOrderForCreation
+     * @memberof PurchaseOrderEventPayload
+     */
+    created: Date;
+    /**
+     * 
+     * @type {any}
+     * @memberof PurchaseOrderEventPayload
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseOrderEventPayload
+     */
+    facilityRef: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseOrderEventPayload
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseOrderEventPayload
+     */
+    inboundProcessRef: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof PurchaseOrderEventPayload
+     */
+    lastModified: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof PurchaseOrderEventPayload
      */
     orderDate: Date;
     /**
      * 
-     * @type {InputRequestedDate}
-     * @memberof PurchaseOrderForCreation
+     * @type {RequestedDate}
+     * @memberof PurchaseOrderEventPayload
      */
-    requestedDate: InputRequestedDate;
+    requestedDate: RequestedDate;
     /**
      * 
      * @type {Array<InboundLineItem>}
-     * @memberof PurchaseOrderForCreation
+     * @memberof PurchaseOrderEventPayload
      */
     requestedItems: Array<InboundLineItem>;
     /**
      * 
      * @type {string}
-     * @memberof PurchaseOrderForCreation
+     * @memberof PurchaseOrderEventPayload
      */
-    status?: PurchaseOrderForCreation.StatusEnum;
+    status: string;
     /**
      * 
+     * @type {PurchaseOrderSupplier}
+     * @memberof PurchaseOrderEventPayload
+     */
+    supplier?: PurchaseOrderSupplier;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseOrderEventPayload
+     */
+    tenantInboundProcessId?: string;
+    /**
+     * 
+     * @type {PurchaseOrderTransfer}
+     * @memberof PurchaseOrderEventPayload
+     */
+    transfer?: PurchaseOrderTransfer;
+    /**
+     * 
+     * @type {number}
+     * @memberof PurchaseOrderEventPayload
+     */
+    version: number;
+}
+/**
+ * PurchaseOrderForCreation
+ * @export
+ * @interface PurchaseOrderForCreation
+ */
+export interface PurchaseOrderForCreation {
+    /**
+     * This field is deprecated. Set the status to 'CANCELED' Set the purchaseOrder to 'cancelled'. No further deliveries will be expected. Already received goods are unaffected.
      * @type {boolean}
      * @memberof PurchaseOrderForCreation
      */
     cancelled?: boolean;
-    /**
-     * 
-     * @type {InboundProcessPurchaseOrderSupplier}
-     * @memberof PurchaseOrderForCreation
-     */
-    supplier?: InboundProcessPurchaseOrderSupplier;
     /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
@@ -22366,6 +32677,36 @@ export interface PurchaseOrderForCreation {
      * @memberof PurchaseOrderForCreation
      */
     facilityRef: string;
+    /**
+     * Time and date at which the order was placed. Note: This does not refer to the creation date of this entity in the system.
+     * @type {Date}
+     * @memberof PurchaseOrderForCreation
+     */
+    orderDate: Date;
+    /**
+     * Time and date at which the order is expected to arrive. Use 'ASAP' for deliveries with unknown date, but be aware that some features will not include these orders.
+     * @type {InputRequestedDate}
+     * @memberof PurchaseOrderForCreation
+     */
+    requestedDate: InputRequestedDate;
+    /**
+     * Line items which are expected to be delivered.
+     * @type {Array<InboundLineItem>}
+     * @memberof PurchaseOrderForCreation
+     */
+    requestedItems: Array<InboundLineItem>;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseOrderForCreation
+     */
+    status?: PurchaseOrderForCreation.StatusEnum;
+    /**
+     * 
+     * @type {InboundProcessPurchaseOrderSupplier}
+     * @memberof PurchaseOrderForCreation
+     */
+    supplier?: InboundProcessPurchaseOrderSupplier;
 }
 
 /**
@@ -22378,21 +32719,28 @@ export namespace PurchaseOrderForCreation {
      * @enum {string}
      */
     export enum StatusEnum {
-        OPEN = 'OPEN'
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
     }
 }
 /**
- * 
+ * PurchaseOrderForPartialUpdate
  * @export
  * @interface PurchaseOrderForPartialUpdate
  */
 export interface PurchaseOrderForPartialUpdate {
     /**
-     * 
-     * @type {number}
+     * This field is deprecated. Set the status to 'CANCELED' Set the purchaseOrder to 'cancelled'. No further deliveries will be expected. Already received goods are unaffected.
+     * @type {boolean}
      * @memberof PurchaseOrderForPartialUpdate
      */
-    version: number;
+    cancelled?: boolean;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof PurchaseOrderForPartialUpdate
+     */
+    customAttributes?: any;
     /**
      * 
      * @type {Date}
@@ -22419,16 +32767,16 @@ export interface PurchaseOrderForPartialUpdate {
     status?: PurchaseOrderForPartialUpdate.StatusEnum;
     /**
      * 
-     * @type {boolean}
-     * @memberof PurchaseOrderForPartialUpdate
-     */
-    cancelled?: boolean;
-    /**
-     * 
      * @type {InboundProcessPurchaseOrderSupplier}
      * @memberof PurchaseOrderForPartialUpdate
      */
     supplier?: InboundProcessPurchaseOrderSupplier;
+    /**
+     * 
+     * @type {number}
+     * @memberof PurchaseOrderForPartialUpdate
+     */
+    version: number;
 }
 
 /**
@@ -22441,29 +32789,42 @@ export namespace PurchaseOrderForPartialUpdate {
      * @enum {string}
      */
     export enum StatusEnum {
-        OPEN = 'OPEN'
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
     }
 }
 /**
- * 
+ * PurchaseOrderForUpdate
  * @export
  * @interface PurchaseOrderForUpdate
  */
 export interface PurchaseOrderForUpdate {
     /**
-     * 
+     * This field is deprecated. Set the status to 'CANCELED' Set the purchaseOrder to 'cancelled'. No further deliveries will be expected. Already received goods are unaffected.
+     * @type {boolean}
+     * @memberof PurchaseOrderForUpdate
+     */
+    cancelled?: boolean;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof PurchaseOrderForUpdate
+     */
+    customAttributes?: any;
+    /**
+     * Time and date at which the order was placed. Note: This does not refer to the creation date of this entity in the system.
      * @type {Date}
      * @memberof PurchaseOrderForUpdate
      */
     orderDate: Date;
     /**
-     * 
+     * Time and date at which the order is expected to arrive. Use 'ASAP' for deliveries with unknown date, but be aware that some features will not include these orders.
      * @type {InputRequestedDate}
      * @memberof PurchaseOrderForUpdate
      */
     requestedDate: InputRequestedDate;
     /**
-     * 
+     * Line items which are expected to be delivered.
      * @type {Array<InboundLineItem>}
      * @memberof PurchaseOrderForUpdate
      */
@@ -22476,22 +32837,10 @@ export interface PurchaseOrderForUpdate {
     status?: PurchaseOrderForUpdate.StatusEnum;
     /**
      * 
-     * @type {boolean}
-     * @memberof PurchaseOrderForUpdate
-     */
-    cancelled?: boolean;
-    /**
-     * 
      * @type {InboundProcessPurchaseOrderSupplier}
      * @memberof PurchaseOrderForUpdate
      */
     supplier?: InboundProcessPurchaseOrderSupplier;
-    /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof PurchaseOrderForUpdate
-     */
-    customAttributes?: any;
     /**
      * 
      * @type {number}
@@ -22510,11 +32859,12 @@ export namespace PurchaseOrderForUpdate {
      * @enum {string}
      */
     export enum StatusEnum {
-        OPEN = 'OPEN'
+        OPEN = 'OPEN',
+        CANCELED = 'CANCELED'
     }
 }
 /**
- * 
+ * PurchaseOrderSupplier
  * @export
  * @interface PurchaseOrderSupplier
  */
@@ -22524,28 +32874,54 @@ export interface PurchaseOrderSupplier {
      * @type {string}
      * @memberof PurchaseOrderSupplier
      */
-    name?: string;
+    facilityRef?: string;
     /**
      * 
      * @type {string}
      * @memberof PurchaseOrderSupplier
      */
-    facilityRef?: string;
+    name?: string;
 }
 /**
- * 
+ * PurchaseOrderTransfer
+ * @export
+ * @interface PurchaseOrderTransfer
+ */
+export interface PurchaseOrderTransfer {
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseOrderTransfer
+     */
+    id: string;
+}
+/**
+ * PurchaseOrderWebHookEvent
+ * @export
+ * @interface PurchaseOrderWebHookEvent
+ */
+export interface PurchaseOrderWebHookEvent {
+    /**
+     * 
+     * @type {PurchaseOrderEventPayload}
+     * @memberof PurchaseOrderWebHookEvent
+     */
+    payload: PurchaseOrderEventPayload;
+}
+/**
+ * Quantity
  * @export
  * @interface Quantity
  */
 export interface Quantity {
     /**
-     * 
+     * The unit of the quantity. In some purchaseOrder and receipt it is validated to match again the measurement unit of the article as provided in the listing, if present.
      * @type {string}
      * @memberof Quantity
      */
     unit?: string;
     /**
-     * 
+     * The amount, provided in the unit of the quantity.
      * @type {number}
      * @memberof Quantity
      */
@@ -22601,7 +32977,7 @@ export interface Rating {
     name: string;
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />
+ * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />
  * @export
  * @enum {string}
  */
@@ -22621,7 +32997,7 @@ export enum RatingImplementation {
     DELIVERYTIME = 'DELIVERY-TIME'
 }
 /**
- * 
+ * RatingStatistic
  * @export
  * @interface RatingStatistic
  */
@@ -22658,7 +33034,7 @@ export interface RatingStatistic {
     durationMs: number;
 }
 /**
- * 
+ * ReactiveErrorReason
  * @export
  * @enum {string}
  */
@@ -22667,7 +33043,7 @@ export enum ReactiveErrorReason {
     PREORDERLISTING = 'PREORDER_LISTING'
 }
 /**
- * 
+ * ReassignmentInformation
  * @export
  * @interface ReassignmentInformation
  */
@@ -22686,41 +33062,29 @@ export interface ReassignmentInformation {
     reassignedItems: Array<AssignmentItem>;
 }
 /**
- * 
+ * Receipt
  * @export
  * @interface Receipt
  */
 export interface Receipt {
     /**
-     * 
+     * enables mapping a receipt to one of the ASNs in this inbound process
      * @type {string}
      * @memberof Receipt
      */
     asnRef?: string;
     /**
-     * 
-     * @type {Date}
-     * @memberof Receipt
-     */
-    receivedDate: Date;
-    /**
-     * 
-     * @type {Array<InboundReceiptLineItem>}
-     * @memberof Receipt
-     */
-    receivedItems: Array<InboundReceiptLineItem>;
-    /**
-     * 
+     * comments regarding the receipt itself
      * @type {Array<InboundReceiptComment>}
      * @memberof Receipt
      */
     comments: Array<InboundReceiptComment>;
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof Receipt
      */
-    status?: Receipt.StatusEnum;
+    created: Date;
     /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
@@ -22741,22 +33105,34 @@ export interface Receipt {
     inboundProcessRef: string;
     /**
      * 
-     * @type {number}
-     * @memberof Receipt
-     */
-    version: number;
-    /**
-     * 
-     * @type {Date}
-     * @memberof Receipt
-     */
-    created: Date;
-    /**
-     * 
      * @type {Date}
      * @memberof Receipt
      */
     lastModified: Date;
+    /**
+     * date-time of the arrival of the items in the facility
+     * @type {Date}
+     * @memberof Receipt
+     */
+    receivedDate: Date;
+    /**
+     * list of item that arrived in the facility
+     * @type {Array<InboundReceiptLineItem>}
+     * @memberof Receipt
+     */
+    receivedItems: Array<InboundReceiptLineItem>;
+    /**
+     * status of this receipt, only receipts with status 'FINISHED' are booked. IN_PROGRESS can be used to save partial receipts.
+     * @type {string}
+     * @memberof Receipt
+     */
+    status?: Receipt.StatusEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof Receipt
+     */
+    version: number;
 }
 
 /**
@@ -22769,46 +33145,29 @@ export namespace Receipt {
      * @enum {string}
      */
     export enum StatusEnum {
+        OPEN = 'OPEN',
         INPROGRESS = 'IN_PROGRESS',
         FINISHED = 'FINISHED'
     }
 }
 /**
- * 
+ * ReceiptForCreation
  * @export
  * @interface ReceiptForCreation
  */
 export interface ReceiptForCreation {
     /**
-     * 
+     * enables mapping a receipt to one of the ASNs in this inbound process
      * @type {string}
      * @memberof ReceiptForCreation
      */
     asnRef?: string;
     /**
-     * 
-     * @type {Date}
+     * comments regarding the receipt itself
+     * @type {Array<InboundReceiptCommentForCreation>}
      * @memberof ReceiptForCreation
      */
-    receivedDate: Date;
-    /**
-     * 
-     * @type {Array<InboundReceiptLineItem>}
-     * @memberof ReceiptForCreation
-     */
-    receivedItems: Array<InboundReceiptLineItem>;
-    /**
-     * 
-     * @type {Array<InboundReceiptComment>}
-     * @memberof ReceiptForCreation
-     */
-    comments: Array<InboundReceiptComment>;
-    /**
-     * 
-     * @type {string}
-     * @memberof ReceiptForCreation
-     */
-    status?: ReceiptForCreation.StatusEnum;
+    comments: Array<InboundReceiptCommentForCreation>;
     /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
@@ -22821,6 +33180,24 @@ export interface ReceiptForCreation {
      * @memberof ReceiptForCreation
      */
     facilityRef: string;
+    /**
+     * date-time of the arrival of the items in the facility
+     * @type {Date}
+     * @memberof ReceiptForCreation
+     */
+    receivedDate: Date;
+    /**
+     * list of item that arrived in the facility
+     * @type {Array<InboundReceiptLineItemForCreation>}
+     * @memberof ReceiptForCreation
+     */
+    receivedItems: Array<InboundReceiptLineItemForCreation>;
+    /**
+     * status of this receipt, only receipts with status 'FINISHED' are booked. IN_PROGRESS can be used to save partial receipts.
+     * @type {string}
+     * @memberof ReceiptForCreation
+     */
+    status?: ReceiptForCreation.StatusEnum;
 }
 
 /**
@@ -22833,12 +33210,212 @@ export namespace ReceiptForCreation {
      * @enum {string}
      */
     export enum StatusEnum {
+        OPEN = 'OPEN',
         INPROGRESS = 'IN_PROGRESS',
         FINISHED = 'FINISHED'
     }
 }
 /**
- * 
+ * RecordableAttribute
+ * @export
+ * @interface RecordableAttribute
+ */
+export interface RecordableAttribute {
+    /**
+     * The group of the attribute
+     * @type {string}
+     * @memberof RecordableAttribute
+     */
+    group?: string;
+    /**
+     * id of the recordable attribute
+     * @type {string}
+     * @memberof RecordableAttribute
+     */
+    id: string;
+    /**
+     * The translated key of the attribute. This field gets filled automatically on request
+     * @type {string}
+     * @memberof RecordableAttribute
+     */
+    key?: string;
+    /**
+     * The translations of the key
+     * @type {LocaleString}
+     * @memberof RecordableAttribute
+     */
+    keyLocalized: LocaleString;
+    /**
+     * The id of the original lineItem the attribute was split from.
+     * @type {string}
+     * @memberof RecordableAttribute
+     */
+    originId?: string;
+    /**
+     * Indicates whether the value has to be recorded or not
+     * @type {string}
+     * @memberof RecordableAttribute
+     */
+    recordingRule: RecordableAttribute.RecordingRuleEnum;
+    /**
+     * The value of the attribute
+     * @type {string}
+     * @memberof RecordableAttribute
+     */
+    value?: string;
+}
+
+/**
+ * @export
+ * @namespace RecordableAttribute
+ */
+export namespace RecordableAttribute {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum RecordingRuleEnum {
+        OPTIONAL = 'OPTIONAL',
+        MANDATORY = 'MANDATORY'
+    }
+}
+/**
+ * RecordableAttributeForCreation
+ * @export
+ * @interface RecordableAttributeForCreation
+ */
+export interface RecordableAttributeForCreation {
+    /**
+     * The group of the attribute
+     * @type {string}
+     * @memberof RecordableAttributeForCreation
+     */
+    group?: string;
+    /**
+     * The translations of the key
+     * @type {LocaleString}
+     * @memberof RecordableAttributeForCreation
+     */
+    keyLocalized: LocaleString;
+    /**
+     * Indicates whether the value has to be recorded or not
+     * @type {string}
+     * @memberof RecordableAttributeForCreation
+     */
+    recordingRule: RecordableAttributeForCreation.RecordingRuleEnum;
+    /**
+     * The value of the attribute
+     * @type {string}
+     * @memberof RecordableAttributeForCreation
+     */
+    value?: string;
+}
+
+/**
+ * @export
+ * @namespace RecordableAttributeForCreation
+ */
+export namespace RecordableAttributeForCreation {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum RecordingRuleEnum {
+        OPTIONAL = 'OPTIONAL',
+        MANDATORY = 'MANDATORY'
+    }
+}
+/**
+ * RecordableAttributeForUpdate
+ * @export
+ * @interface RecordableAttributeForUpdate
+ */
+export interface RecordableAttributeForUpdate {
+    /**
+     * The group of the attribute to set
+     * @type {string}
+     * @memberof RecordableAttributeForUpdate
+     */
+    group?: string;
+    /**
+     * id of the recordable attribute to update
+     * @type {string}
+     * @memberof RecordableAttributeForUpdate
+     */
+    id: string;
+    /**
+     * The translations of the key
+     * @type {LocaleString}
+     * @memberof RecordableAttributeForUpdate
+     */
+    keyLocalized?: LocaleString;
+    /**
+     * Indicates whether the value has to be recorded or not
+     * @type {string}
+     * @memberof RecordableAttributeForUpdate
+     */
+    recordingRule?: RecordableAttributeForUpdate.RecordingRuleEnum;
+    /**
+     * The value of the attribute to set
+     * @type {string}
+     * @memberof RecordableAttributeForUpdate
+     */
+    value?: string;
+}
+
+/**
+ * @export
+ * @namespace RecordableAttributeForUpdate
+ */
+export namespace RecordableAttributeForUpdate {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum RecordingRuleEnum {
+        OPTIONAL = 'OPTIONAL',
+        MANDATORY = 'MANDATORY'
+    }
+}
+/**
+ * RefundTrigger
+ * @export
+ * @interface RefundTrigger
+ */
+export interface RefundTrigger {
+    /**
+     * The tenant order id of the order that should be refunded
+     * @type {string}
+     * @memberof RefundTrigger
+     */
+    tenantOrderId?: string;
+    /**
+     * The line items that should be refunded
+     * @type {Array<ItemReturnLineItem>}
+     * @memberof RefundTrigger
+     */
+    refundedLineItems: Array<ItemReturnLineItem>;
+    /**
+     * reference to the item return that should be refunded
+     * @type {string}
+     * @memberof RefundTrigger
+     */
+    itemReturnRef: string;
+    /**
+     * Date when the refund was triggered
+     * @type {Date}
+     * @memberof RefundTrigger
+     */
+    created: Date;
+    /**
+     * The facility where the return was processed
+     * @type {string}
+     * @memberof RefundTrigger
+     */
+    returnFacilityRef: string;
+}
+/**
+ * RefundTriggerWebHookEvent
  * @export
  * @interface RefundTriggerWebHookEvent
  */
@@ -22851,7 +33428,7 @@ export interface RefundTriggerWebHookEvent extends WebHookEvent {
     payload: ItemReturn;
 }
 /**
- * 
+ * RefusedItem
  * @export
  * @interface RefusedItem
  */
@@ -22882,7 +33459,7 @@ export interface RefusedItem {
     comment?: string;
 }
 /**
- * 
+ * RefusedItemForUpdate
  * @export
  * @interface RefusedItemForUpdate
  */
@@ -22907,7 +33484,7 @@ export interface RefusedItemForUpdate {
     comment?: string;
 }
 /**
- * 
+ * RegionInformation
  * @export
  * @interface RegionInformation
  */
@@ -22926,7 +33503,7 @@ export interface RegionInformation {
     postalCodes?: Array<string>;
 }
 /**
- * 
+ * RemoteConfiguration
  * @export
  * @interface RemoteConfiguration
  */
@@ -22975,7 +33552,7 @@ export interface RemoteConfiguration extends VersionedResource {
     flattenScopeIds: Array<string>;
 }
 /**
- * 
+ * RemoteConfigurationForCreation
  * @export
  * @interface RemoteConfigurationForCreation
  */
@@ -23012,7 +33589,7 @@ export interface RemoteConfigurationForCreation {
     groups: Array<string>;
 }
 /**
- * 
+ * RemoteConfigurationForPut
  * @export
  * @interface RemoteConfigurationForPut
  */
@@ -23049,7 +33626,7 @@ export interface RemoteConfigurationForPut {
     groups: Array<string>;
 }
 /**
- * 
+ * RemoteConfigurationForUpdate
  * @export
  * @interface RemoteConfigurationForUpdate
  */
@@ -23086,7 +33663,7 @@ export interface RemoteConfigurationForUpdate {
     groups?: Array<string>;
 }
 /**
- * 
+ * RemoteConfigurationScope
  * @export
  * @interface RemoteConfigurationScope
  */
@@ -23099,7 +33676,7 @@ export interface RemoteConfigurationScope extends RemoteConfigurationScopeForCre
     id: string;
 }
 /**
- * 
+ * RemoteConfigurationScopeForCreation
  * @export
  * @interface RemoteConfigurationScopeForCreation
  */
@@ -23118,7 +33695,7 @@ export interface RemoteConfigurationScopeForCreation {
     userRefs?: Array<string>;
 }
 /**
- * 
+ * RemoteConfigurationValueType
  * @export
  * @enum {string}
  */
@@ -23130,7 +33707,7 @@ export enum RemoteConfigurationValueType {
     INT = 'INT'
 }
 /**
- * 
+ * RemoteConfigurations
  * @export
  * @interface RemoteConfigurations
  */
@@ -23149,7 +33726,7 @@ export interface RemoteConfigurations {
     total?: number;
 }
 /**
- * 
+ * Remove facility Coorindates.
  * @export
  * @interface RemoveFacilityCoordinatesActionParameter
  */
@@ -23176,7 +33753,7 @@ export namespace RemoveFacilityCoordinatesActionParameter {
     }
 }
 /**
- * 
+ * Action to a remove a line item from a packing target container.
  * @export
  * @interface RemoveLineItemFromPackingTargetContainerAction
  */
@@ -23209,7 +33786,7 @@ export namespace RemoveLineItemFromPackingTargetContainerAction {
     }
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use /api/pickruns/{pickRunId}/actions instead
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use /api/pickruns/{pickRunId}/actions instead
  * @export
  * @interface RemovePickJobFromPickRunAction
  */
@@ -23242,7 +33819,40 @@ export namespace RemovePickJobFromPickRunAction {
     }
 }
 /**
- * 
+ * Sets the status of the stowjob to OPEN
+ * @export
+ * @interface ReopenStowJobAction
+ */
+export interface ReopenStowJobAction {
+    /**
+     * The name of the action that should be performed
+     * @type {string}
+     * @memberof ReopenStowJobAction
+     */
+    name: ReopenStowJobAction.NameEnum;
+    /**
+     * The current version of the stow job that should be modified
+     * @type {number}
+     * @memberof ReopenStowJobAction
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace ReopenStowJobAction
+ */
+export namespace ReopenStowJobAction {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        OPENSTOWJOB = 'OPEN_STOW_JOB'
+    }
+}
+/**
+ * Action to replace codes in packing target container.
  * @export
  * @interface ReplaceCodesInPackingTargetContainerAction
  */
@@ -23275,7 +33885,7 @@ export namespace ReplaceCodesInPackingTargetContainerAction {
     }
 }
 /**
- * 
+ * ReplaceLoadUnitLineItemsAction
  * @export
  * @interface ReplaceLoadUnitLineItemsAction
  */
@@ -23308,7 +33918,7 @@ export namespace ReplaceLoadUnitLineItemsAction {
     }
 }
 /**
- * 
+ * Action to replace packing target container codes of a line item.
  * @export
  * @interface ReplacePackingTargetContainerLineItemCodesAction
  */
@@ -23346,7 +33956,7 @@ export interface ReplacePackingTargetContainerLineItemCodesActionPayload {
     codes: Array<string>;
 }
 /**
- * 
+ * ReplacePackingTargetContainerLineItemCodesEnum
  * @export
  * @enum {string}
  */
@@ -23354,7 +33964,7 @@ export enum ReplacePackingTargetContainerLineItemCodesEnum {
     ReplaceLineItemCodes = 'ReplaceLineItemCodes'
 }
 /**
- * 
+ * ReplaceReturnedLineItems
  * @export
  * @interface ReplaceReturnedLineItems
  */
@@ -23373,7 +33983,7 @@ export interface ReplaceReturnedLineItems {
     returnedLineItems: Array<ItemReturnLineItemForCreation>;
 }
 /**
- * 
+ * RequestedDate
  * @export
  * @interface RequestedDate
  */
@@ -23407,7 +34017,7 @@ export namespace RequestedDate {
     }
 }
 /**
- * 
+ * RequestedDateASAP
  * @export
  * @interface RequestedDateASAP
  */
@@ -23435,7 +34045,7 @@ export namespace RequestedDateASAP {
     }
 }
 /**
- * 
+ * RequestedDateTimePoint
  * @export
  * @interface RequestedDateTimePoint
  */
@@ -23469,7 +34079,7 @@ export namespace RequestedDateTimePoint {
     }
 }
 /**
- * 
+ * RerouteConfiguration
  * @export
  * @interface RerouteConfiguration
  */
@@ -23498,9 +34108,15 @@ export interface RerouteConfiguration {
      * @memberof RerouteConfiguration
      */
     leadTimeBeforeTimeTriggeredReroute?: number;
+    /**
+     * 
+     * @type {RerouteStartedJobsConfiguration}
+     * @memberof RerouteConfiguration
+     */
+    rerouteStartedJobs?: RerouteStartedJobsConfiguration;
 }
 /**
- * 
+ * RerouteDescription
  * @export
  * @interface RerouteDescription
  */
@@ -23527,21 +34143,21 @@ export namespace RerouteDescription {
     }
 }
 /**
- * 
+ * RerouteDescriptionForCreation
  * @export
  * @interface RerouteDescriptionForCreation
  */
 export interface RerouteDescriptionForCreation extends AbstractReasonForCreation {
 }
 /**
- * 
+ * RerouteDescriptionForModification
  * @export
  * @interface RerouteDescriptionForModification
  */
 export interface RerouteDescriptionForModification extends AbstractReasonForModification {
 }
 /**
- * 
+ * RerouteDescriptions
  * @export
  * @interface RerouteDescriptions
  */
@@ -23560,7 +34176,7 @@ export interface RerouteDescriptions extends AbstractReasons {
     reasons: Array<RerouteDescription>;
 }
 /**
- * 
+ * RerouteReason
  * @export
  * @enum {string}
  */
@@ -23574,7 +34190,7 @@ export enum RerouteReason {
     RECALCULATION = 'RECALCULATION'
 }
 /**
- * 
+ * RerouteRoutingPlan
  * @export
  * @interface RerouteRoutingPlan
  */
@@ -23605,7 +34221,7 @@ export interface RerouteRoutingPlan {
     tenantOrderIds?: Array<string>;
 }
 /**
- * 
+ * Reroute ShortPick Configuration
  * @export
  * @interface RerouteShortPickConfiguration
  */
@@ -23641,14 +34257,33 @@ export interface RerouteShortPickConfiguration extends VersionedResource {
      */
     id?: string;
     /**
-     * Whether or not only pickjobs with zero items picked may be rerouted
+     * Specifies whether only pick jobs with zero items picked are eligible for rerouting.
      * @type {boolean}
      * @memberof RerouteShortPickConfiguration
      */
     rerouteZeroPicksOnly?: boolean;
 }
 /**
- * 
+ * RerouteStartedJobsConfiguration
+ * @export
+ * @interface RerouteStartedJobsConfiguration
+ */
+export interface RerouteStartedJobsConfiguration {
+    /**
+     * If true, the reroute will be executed for jobs that are already started.
+     * @type {boolean}
+     * @memberof RerouteStartedJobsConfiguration
+     */
+    active: boolean;
+    /**
+     * The minimum time in minutes that a job must be in a started status (eg. PAUSED, IN_PROGRESS) before it should be rerouted. This is to ensure that jobs are not rerouted too quickly after they have last been modified. Minimum value is 60 minutes.
+     * @type {number}
+     * @memberof RerouteStartedJobsConfiguration
+     */
+    minimumStartedTimeInMinutes?: number;
+}
+/**
+ * RerouteTimeTriggeredConfiguration
  * @export
  * @interface RerouteTimeTriggeredConfiguration
  */
@@ -23688,7 +34323,7 @@ export enum RerouteType {
     ORDERSPLIT = 'ORDERSPLIT'
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use api/pickjobs/:id/actions instead
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use api/pickjobs/:id/actions instead
  * @export
  * @interface ResetPickJobAction
  */
@@ -23715,7 +34350,7 @@ export namespace ResetPickJobAction {
     }
 }
 /**
- * 
+ * ResolvedSubstitutes
  * @export
  * @interface ResolvedSubstitutes
  */
@@ -23734,7 +34369,20 @@ export interface ResolvedSubstitutes {
     tenantArticleId: string;
 }
 /**
- * 
+ * How much resources should be invested during the optimization?
+ * @export
+ * @interface ResourceInvestment
+ */
+export interface ResourceInvestment {
+    /**
+     * [abstract values]: how many resources should we invest in optimization. With a higher level the results will be better, nevertheless we need to invest more time for the optimization.
+     * @type {number}
+     * @memberof ResourceInvestment
+     */
+    level: number;
+}
+/**
+ * The Response body for Click&Collect Checkout Options.
  * @export
  * @interface ResponseForCNCCheckoutOptions
  */
@@ -23747,7 +34395,7 @@ export interface ResponseForCNCCheckoutOptions {
     facilities: Array<CheckoutOptionsFacilityForCNC>;
 }
 /**
- * 
+ * ResponseForDeliveryPromise
  * @export
  * @interface ResponseForDeliveryPromise
  */
@@ -23796,7 +34444,7 @@ export interface ResponseForDeliveryPromise {
     backOrdered?: Backordered;
 }
 /**
- * 
+ * The Response body for Ship from Store Checkout Options.
  * @export
  * @interface ResponseForSFSCheckoutOptions
  */
@@ -23809,7 +34457,7 @@ export interface ResponseForSFSCheckoutOptions {
     facilities: Array<CheckoutOptionsFacilityForSFS>;
 }
 /**
- * 
+ * RestartItemReturnJobActionEnum
  * @export
  * @enum {string}
  */
@@ -23817,7 +34465,7 @@ export enum RestartItemReturnJobActionEnum {
     RestartItemReturnJob = 'RestartItemReturnJob'
 }
 /**
- * 
+ * Action to restart a ItemReturnJob.
  * @export
  * @interface RestartItemReturnJobActionParameter
  */
@@ -23836,7 +34484,7 @@ export interface RestartItemReturnJobActionParameter {
     version: number;
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use api/pickjobs/:id/actions instead
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use api/pickjobs/:id/actions instead
  * @export
  * @interface RestartPickJobAction
  */
@@ -23863,7 +34511,7 @@ export namespace RestartPickJobAction {
     }
 }
 /**
- * 
+ * RestartPickJobConfiguration
  * @export
  * @interface RestartPickJobConfiguration
  */
@@ -23876,7 +34524,7 @@ export interface RestartPickJobConfiguration {
     active: boolean;
 }
 /**
- * 
+ * RestowAttributeItem
  * @export
  * @interface RestowAttributeItem
  */
@@ -23890,7 +34538,7 @@ export interface RestowAttributeItem extends ArticleAttributeItem {
 export namespace RestowAttributeItem {
 }
 /**
- * 
+ * RestowItem
  * @export
  * @interface RestowItem
  */
@@ -23907,6 +34555,18 @@ export interface RestowItem extends VersionedResource {
      * @memberof RestowItem
      */
     quantity: number;
+    /**
+     * id of the connected operative process if available
+     * @type {string}
+     * @memberof RestowItem
+     */
+    operativeProcessRef?: string;
+    /**
+     * id of the connected process if available
+     * @type {string}
+     * @memberof RestowItem
+     */
+    processRef?: string;
     /**
      * Identifier for items unit of measurement.
      * @type {string}
@@ -23943,9 +34603,34 @@ export interface RestowItem extends VersionedResource {
      * @memberof RestowItem
      */
     location?: Location;
+    /**
+     * id of the stock entity for this line item
+     * @type {string}
+     * @memberof RestowItem
+     */
+    stockRef?: string;
+    /**
+     * 
+     * @type {RestowItemStatus}
+     * @memberof RestowItem
+     */
+    status: RestowItemStatus;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof RestowItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
 }
 /**
- * 
+ * RestowItemActionsParameter
+ * @export
+ * @interface RestowItemActionsParameter
+ */
+export interface RestowItemActionsParameter {
+}
+/**
+ * RestowItemArticle
  * @export
  * @interface RestowItemArticle
  */
@@ -23958,7 +34643,34 @@ export interface RestowItemArticle extends AbstractArticle {
     attributes?: Array<RestowAttributeItem>;
 }
 /**
- * 
+ * RestowItemCancelActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum RestowItemCancelActionEnum {
+    CANCEL = 'CANCEL'
+}
+/**
+ * Action to cancel a RestowItem.
+ * @export
+ * @interface RestowItemCancelActionParameter
+ */
+export interface RestowItemCancelActionParameter {
+    /**
+     * 
+     * @type {RestowItemCancelActionEnum}
+     * @memberof RestowItemCancelActionParameter
+     */
+    name: RestowItemCancelActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof RestowItemCancelActionParameter
+     */
+    version: number;
+}
+/**
+ * RestowItemForCreation
  * @export
  * @interface RestowItemForCreation
  */
@@ -24005,9 +34717,15 @@ export interface RestowItemForCreation {
      * @memberof RestowItemForCreation
      */
     location?: Location;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof RestowItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * Deprecated Actions to modify restow items - please use /api/restowitem/{id}/actions
  * @export
  * @interface RestowItemPatchActions
  */
@@ -24026,7 +34744,61 @@ export interface RestowItemPatchActions {
     version: number;
 }
 /**
- * 
+ * RestowItemRestowActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum RestowItemRestowActionEnum {
+    RESTOW = 'RESTOW'
+}
+/**
+ * Action to restow a RestowItem.
+ * @export
+ * @interface RestowItemRestowActionParameter
+ */
+export interface RestowItemRestowActionParameter {
+    /**
+     * 
+     * @type {RestowItemRestowActionEnum}
+     * @memberof RestowItemRestowActionParameter
+     */
+    name: RestowItemRestowActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof RestowItemRestowActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Location}
+     * @memberof RestowItemRestowActionParameter
+     */
+    location?: Location;
+}
+/**
+ * Status of the restow item
+ * @export
+ * @enum {string}
+ */
+export enum RestowItemStatus {
+    CANCELED = 'CANCELED',
+    CLOSED = 'CLOSED',
+    OPEN = 'OPEN'
+}
+/**
+ * RestowItemsSortOptionsEnum
+ * @export
+ * @enum {string}
+ */
+export enum RestowItemsSortOptionsEnum {
+    CREATEDDESC = 'CREATED_DESC',
+    CREATEDASC = 'CREATED_ASC',
+    LASTMODIFIEDDESC = 'LAST_MODIFIED_DESC',
+    LASTMODIFIEDASC = 'LAST_MODIFIED_ASC'
+}
+/**
+ * RestowedItems
  * @export
  * @interface RestowedItems
  */
@@ -24045,7 +34817,30 @@ export interface RestowedItems {
     total?: number;
 }
 /**
- * 
+ * RestowingProcessConfiguration
+ * @export
+ * @interface RestowingProcessConfiguration
+ */
+export interface RestowingProcessConfiguration {
+    /**
+     * 
+     * @type {Array<RestowingProcessTypeEnum>}
+     * @memberof RestowingProcessConfiguration
+     */
+    restowingProcessTypes: Array<RestowingProcessTypeEnum>;
+}
+/**
+ * Where restow items should be created during the operational process
+ * @export
+ * @enum {string}
+ */
+export enum RestowingProcessTypeEnum {
+    PICKING = 'PICKING',
+    PACKING = 'PACKING',
+    HANDOVER = 'HANDOVER'
+}
+/**
+ * ReturnArticleAttributeItem
  * @export
  * @interface ReturnArticleAttributeItem
  */
@@ -24059,13 +34854,13 @@ export interface ReturnArticleAttributeItem extends ArticleAttributeItem {
 export namespace ReturnArticleAttributeItem {
 }
 /**
- * 
+ * ReturnConfiguration
  * @export
  * @interface ReturnConfiguration
  */
 export interface ReturnConfiguration extends VersionedResource {
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />Enable or disable legacy returns. Use returnTypeConfiguration instead
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Enable or disable legacy returns. Use returnTypeConfiguration instead
      * @type {boolean}
      * @memberof ReturnConfiguration
      */
@@ -24088,9 +34883,15 @@ export interface ReturnConfiguration extends VersionedResource {
      * @memberof ReturnConfiguration
      */
     availableReturnReasons?: Array<AvailableReturnReason>;
+    /**
+     * If true, a refund can be triggered. If false, the endpoints to trigger a refund are disabled.
+     * @type {boolean}
+     * @memberof ReturnConfiguration
+     */
+    allowTriggerRefund?: boolean;
 }
 /**
- * 
+ * ReturnConfigurationType
  * @export
  * @enum {string}
  */
@@ -24099,7 +34900,7 @@ export enum ReturnConfigurationType {
     ITEMRETURN = 'ITEM_RETURN'
 }
 /**
- * 
+ * ReturnItemArticle
  * @export
  * @interface ReturnItemArticle
  */
@@ -24112,7 +34913,7 @@ export interface ReturnItemArticle extends AbstractArticle {
     attributes?: Array<ReturnArticleAttributeItem>;
 }
 /**
- * 
+ * ReturnJob
  * @export
  * @interface ReturnJob
  */
@@ -24155,7 +34956,7 @@ export interface ReturnJob extends ReturnJobForCreation {
     id: string;
 }
 /**
- * 
+ * ReturnJobCanceledWebHookEvent
  * @export
  * @interface ReturnJobCanceledWebHookEvent
  */
@@ -24168,7 +34969,7 @@ export interface ReturnJobCanceledWebHookEvent extends WebHookEvent {
     payload: ReturnJob;
 }
 /**
- * 
+ * ReturnJobClaimedWebHookEvent
  * @export
  * @interface ReturnJobClaimedWebHookEvent
  */
@@ -24181,7 +34982,7 @@ export interface ReturnJobClaimedWebHookEvent extends WebHookEvent {
     payload: ReturnJob;
 }
 /**
- * 
+ * ReturnJobClosedWebHookEvent
  * @export
  * @interface ReturnJobClosedWebHookEvent
  */
@@ -24194,7 +34995,7 @@ export interface ReturnJobClosedWebHookEvent extends WebHookEvent {
     payload: ReturnJob;
 }
 /**
- * 
+ * ReturnJobCreatedWebHookEvent
  * @export
  * @interface ReturnJobCreatedWebHookEvent
  */
@@ -24207,7 +35008,7 @@ export interface ReturnJobCreatedWebHookEvent extends WebHookEvent {
     payload: ReturnJob;
 }
 /**
- * 
+ * ReturnJobForCreation
  * @export
  * @interface ReturnJobForCreation
  */
@@ -24274,7 +35075,7 @@ export interface ReturnJobForCreation {
     customAttributes?: any;
 }
 /**
- * 
+ * ReturnJobs
  * @export
  * @interface ReturnJobs
  */
@@ -24293,7 +35094,7 @@ export interface ReturnJobs {
     total: number;
 }
 /**
- * 
+ * ReturnLine
  * @export
  * @interface ReturnLine
  */
@@ -24360,7 +35161,7 @@ export enum ReturnLineStatus {
     CANCELED = 'CANCELED'
 }
 /**
- * 
+ * ReturnNote
  * @export
  * @interface ReturnNote
  */
@@ -24403,7 +35204,7 @@ export interface ReturnNote {
     items: Array<ReturnNoteItem>;
 }
 /**
- * 
+ * Return Note Configuration
  * @export
  * @interface ReturnNoteConfiguration
  */
@@ -24524,7 +35325,7 @@ export interface ReturnNoteConfiguration extends VersionedResource {
     substituteText?: LocaleString;
 }
 /**
- * 
+ * ReturnNoteConfigurationForUpsert
  * @export
  * @interface ReturnNoteConfigurationForUpsert
  */
@@ -24645,7 +35446,7 @@ export interface ReturnNoteConfigurationForUpsert {
     version: number;
 }
 /**
- * 
+ * ReturnNoteItem
  * @export
  * @interface ReturnNoteItem
  */
@@ -24704,10 +35505,11 @@ export enum ReturnStatus {
     INPROGRESS = 'IN_PROGRESS',
     CLAIMED = 'CLAIMED',
     CLOSED = 'CLOSED',
-    CANCELED = 'CANCELED'
+    CANCELED = 'CANCELED',
+    OBSOLETE = 'OBSOLETE'
 }
 /**
- * 
+ * ReturnTypeConfiguration
  * @export
  * @interface ReturnTypeConfiguration
  */
@@ -24720,7 +35522,7 @@ export interface ReturnTypeConfiguration {
     type: ReturnConfigurationType;
 }
 /**
- * 
+ * Returned
  * @export
  * @interface Returned
  */
@@ -24764,7 +35566,7 @@ export interface ReturnedLineItemRefund {
     percent?: number;
 }
 /**
- * 
+ * ReturnedLineItemRefundPrice
  * @export
  * @interface ReturnedLineItemRefundPrice
  */
@@ -24783,7 +35585,7 @@ export interface ReturnedLineItemRefundPrice {
     currency: CurrencyCode;
 }
 /**
- * 
+ * ReturnedLineItemRefundStatus
  * @export
  * @enum {string}
  */
@@ -24793,37 +35595,7 @@ export enum ReturnedLineItemRefundStatus {
     CLOSED = 'CLOSED'
 }
 /**
- * A list of all rolenames and permissions assigned to the user
- * @export
- */
-export type Roles = Array<RolesInner>
-/**
- * 
- * @export
- * @interface RolesInner
- */
-export interface RolesInner {
-    /**
-     * 
-     * @type {UserRoleNames}
-     * @memberof RolesInner
-     */
-    name: UserRoleNames;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof RolesInner
-     */
-    facilityRefs?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof RolesInner
-     */
-    permissions: Array<string>;
-}
-/**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />This is the configuration for the distributing order management system. By changing the configuration you are able to change the behavior of the routing of orders henceforth.
+ * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />This is the configuration for the distributing order management system. By changing the configuration you are able to change the behavior of the routing of orders henceforth.
  * @export
  * @interface RoutingConfiguration
  */
@@ -24847,7 +35619,7 @@ export interface RoutingConfiguration {
      */
     lastModified?: Date;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Contains the routing configuration for prioritization & routing for the whole tenant
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Contains the routing configuration for prioritization & routing for the whole tenant
      * @type {Array<PrioritizationRule>}
      * @memberof RoutingConfiguration
      */
@@ -24897,7 +35669,7 @@ export interface RoutingConfigurationTiming {
     type: RoutingConfigurationTimingType;
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />The available types for routing timing.
+ * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />The available types for routing timing.
  * @export
  * @enum {string}
  */
@@ -24906,7 +35678,7 @@ export enum RoutingConfigurationTimingType {
     MANUAL = 'MANUAL'
 }
 /**
- * 
+ * RoutingConfigurationsPatchActions
  * @export
  * @interface RoutingConfigurationsPatchActions
  */
@@ -24925,7 +35697,7 @@ export interface RoutingConfigurationsPatchActions {
     version: number;
 }
 /**
- * 
+ * RoutingDecisionContext
  * @export
  * @enum {string}
  */
@@ -24934,11 +35706,17 @@ export enum RoutingDecisionContext {
     CARRIER = 'CARRIER'
 }
 /**
- * 
+ * RoutingPlan
  * @export
  * @interface RoutingPlan
  */
 export interface RoutingPlan extends VersionedResource {
+    /**
+     * 
+     * @type {RoutingStrategyNodeConfig}
+     * @memberof RoutingPlan
+     */
+    activeConfig?: RoutingStrategyNodeConfig;
     /**
      * 
      * @type {Array<Transfer>}
@@ -25030,6 +35808,18 @@ export interface RoutingPlan extends VersionedResource {
      */
     childRoutingPlanRef?: string;
     /**
+     * Refs of the predecessor routing plans, in the case of a reroute.
+     * @type {Array<string>}
+     * @memberof RoutingPlan
+     */
+    predecessorRerouteRoutingPlanRefs: Array<string>;
+    /**
+     * Refs of the succeeding routing plans, in the case of a reroute.
+     * @type {Array<string>}
+     * @memberof RoutingPlan
+     */
+    successorRerouteRoutingPlanRefs: Array<string>;
+    /**
      * The id of the pickjob that has been created from the routing plan.
      * @type {string}
      * @memberof RoutingPlan
@@ -25096,7 +35886,7 @@ export interface RoutingPlan extends VersionedResource {
      */
     status: RoutingPlanStatus;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated  For more detailed information, use the History field. Saves all status changes when creating or updating a routing plan
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated  For more detailed information, use the History field. Saves all status changes when creating or updating a routing plan
      * @type {Array<RoutingPlanStatus>}
      * @memberof RoutingPlan
      */
@@ -25156,6 +35946,12 @@ export interface RoutingPlan extends VersionedResource {
      */
     latestPickingStart?: LatestPickingStart;
     /**
+     * 
+     * @type {EarliestPickingStart}
+     * @memberof RoutingPlan
+     */
+    earliestPickingStart?: EarliestPickingStart;
+    /**
      * The point in time by which the order is supposed to be provisioned.
      * @type {Date}
      * @memberof RoutingPlan
@@ -25182,7 +35978,307 @@ export namespace RoutingPlan {
     }
 }
 /**
- * 
+ * RoutingPlanCustomServicesArticleItemsFilter
+ * @export
+ * @interface RoutingPlanCustomServicesArticleItemsFilter
+ */
+export interface RoutingPlanCustomServicesArticleItemsFilter {
+    /**
+     * Search by tenantArticleRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanCustomServicesArticleItemsFilter
+     */
+    tenantArticleRef?: StringFilter;
+}
+/**
+ * RoutingPlanCustomServicesArticleItemsListFilter
+ * @export
+ * @interface RoutingPlanCustomServicesArticleItemsListFilter
+ */
+export interface RoutingPlanCustomServicesArticleItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanCustomServicesArticleItemsFilter}
+     * @memberof RoutingPlanCustomServicesArticleItemsListFilter
+     */
+    contains?: RoutingPlanCustomServicesArticleItemsFilter;
+}
+/**
+ * RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationFilter
+ * @export
+ * @interface RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationFilter
+ */
+export interface RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationFilter {
+    /**
+     * Search by additionalInformationRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationFilter
+     */
+    additionalInformationRef?: StringFilter;
+}
+/**
+ * RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationListFilter
+ * @export
+ * @interface RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationListFilter
+ */
+export interface RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationFilter}
+     * @memberof RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationListFilter
+     */
+    contains?: RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationFilter;
+}
+/**
+ * RoutingPlanCustomServicesCustomServiceDefinitionFilter
+ * @export
+ * @interface RoutingPlanCustomServicesCustomServiceDefinitionFilter
+ */
+export interface RoutingPlanCustomServicesCustomServiceDefinitionFilter {
+    /**
+     * Nested list search by additionalInformation
+     * @type {RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationListFilter}
+     * @memberof RoutingPlanCustomServicesCustomServiceDefinitionFilter
+     */
+    additionalInformation?: RoutingPlanCustomServicesCustomServiceDefinitionAdditionalInformationListFilter;
+    /**
+     * Search by customServiceRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanCustomServicesCustomServiceDefinitionFilter
+     */
+    customServiceRef?: StringFilter;
+}
+/**
+ * RoutingPlanCustomServicesCustomServiceItemsArticleItemsFilter
+ * @export
+ * @interface RoutingPlanCustomServicesCustomServiceItemsArticleItemsFilter
+ */
+export interface RoutingPlanCustomServicesCustomServiceItemsArticleItemsFilter {
+    /**
+     * Search by tenantArticleRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanCustomServicesCustomServiceItemsArticleItemsFilter
+     */
+    tenantArticleRef?: StringFilter;
+}
+/**
+ * RoutingPlanCustomServicesCustomServiceItemsArticleItemsListFilter
+ * @export
+ * @interface RoutingPlanCustomServicesCustomServiceItemsArticleItemsListFilter
+ */
+export interface RoutingPlanCustomServicesCustomServiceItemsArticleItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanCustomServicesCustomServiceItemsArticleItemsFilter}
+     * @memberof RoutingPlanCustomServicesCustomServiceItemsArticleItemsListFilter
+     */
+    contains?: RoutingPlanCustomServicesCustomServiceItemsArticleItemsFilter;
+}
+/**
+ * RoutingPlanCustomServicesCustomServiceItemsFilter
+ * @export
+ * @interface RoutingPlanCustomServicesCustomServiceItemsFilter
+ */
+export interface RoutingPlanCustomServicesCustomServiceItemsFilter {
+    /**
+     * Nested list search by articleItems
+     * @type {RoutingPlanCustomServicesCustomServiceItemsArticleItemsListFilter}
+     * @memberof RoutingPlanCustomServicesCustomServiceItemsFilter
+     */
+    articleItems?: RoutingPlanCustomServicesCustomServiceItemsArticleItemsListFilter;
+}
+/**
+ * RoutingPlanCustomServicesCustomServiceItemsListFilter
+ * @export
+ * @interface RoutingPlanCustomServicesCustomServiceItemsListFilter
+ */
+export interface RoutingPlanCustomServicesCustomServiceItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanCustomServicesCustomServiceItemsFilter}
+     * @memberof RoutingPlanCustomServicesCustomServiceItemsListFilter
+     */
+    contains?: RoutingPlanCustomServicesCustomServiceItemsFilter;
+}
+/**
+ * RoutingPlanCustomServicesFilter
+ * @export
+ * @interface RoutingPlanCustomServicesFilter
+ */
+export interface RoutingPlanCustomServicesFilter {
+    /**
+     * Nested list search by articleItems
+     * @type {RoutingPlanCustomServicesArticleItemsListFilter}
+     * @memberof RoutingPlanCustomServicesFilter
+     */
+    articleItems?: RoutingPlanCustomServicesArticleItemsListFilter;
+    /**
+     * Nested search by customServiceDefinition
+     * @type {RoutingPlanCustomServicesCustomServiceDefinitionFilter}
+     * @memberof RoutingPlanCustomServicesFilter
+     */
+    customServiceDefinition?: RoutingPlanCustomServicesCustomServiceDefinitionFilter;
+    /**
+     * Nested list search by customServiceItems
+     * @type {RoutingPlanCustomServicesCustomServiceItemsListFilter}
+     * @memberof RoutingPlanCustomServicesFilter
+     */
+    customServiceItems?: RoutingPlanCustomServicesCustomServiceItemsListFilter;
+}
+/**
+ * RoutingPlanCustomServicesListFilter
+ * @export
+ * @interface RoutingPlanCustomServicesListFilter
+ */
+export interface RoutingPlanCustomServicesListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanCustomServicesFilter}
+     * @memberof RoutingPlanCustomServicesListFilter
+     */
+    contains?: RoutingPlanCustomServicesFilter;
+}
+/**
+ * RoutingPlanDeliveryPreferencesCollectFilter
+ * @export
+ * @interface RoutingPlanDeliveryPreferencesCollectFilter
+ */
+export interface RoutingPlanDeliveryPreferencesCollectFilter {
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanDeliveryPreferencesCollectFilter
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by paid
+     * @type {BooleanFilter}
+     * @memberof RoutingPlanDeliveryPreferencesCollectFilter
+     */
+    paid?: BooleanFilter;
+    /**
+     * Search by supplyingFacilities
+     * @type {StringListFilter}
+     * @memberof RoutingPlanDeliveryPreferencesCollectFilter
+     */
+    supplyingFacilities?: StringListFilter;
+}
+/**
+ * RoutingPlanDeliveryPreferencesCollectListFilter
+ * @export
+ * @interface RoutingPlanDeliveryPreferencesCollectListFilter
+ */
+export interface RoutingPlanDeliveryPreferencesCollectListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanDeliveryPreferencesCollectFilter}
+     * @memberof RoutingPlanDeliveryPreferencesCollectListFilter
+     */
+    contains?: RoutingPlanDeliveryPreferencesCollectFilter;
+}
+/**
+ * RoutingPlanDeliveryPreferencesFilter
+ * @export
+ * @interface RoutingPlanDeliveryPreferencesFilter
+ */
+export interface RoutingPlanDeliveryPreferencesFilter {
+    /**
+     * Nested list search by collect
+     * @type {RoutingPlanDeliveryPreferencesCollectListFilter}
+     * @memberof RoutingPlanDeliveryPreferencesFilter
+     */
+    collect?: RoutingPlanDeliveryPreferencesCollectListFilter;
+    /**
+     * Nested search by shipping
+     * @type {RoutingPlanDeliveryPreferencesShippingFilter}
+     * @memberof RoutingPlanDeliveryPreferencesFilter
+     */
+    shipping?: RoutingPlanDeliveryPreferencesShippingFilter;
+    /**
+     * Search by supplyingFacilities
+     * @type {StringListFilter}
+     * @memberof RoutingPlanDeliveryPreferencesFilter
+     */
+    supplyingFacilities?: StringListFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof RoutingPlanDeliveryPreferencesFilter
+     */
+    targetTime?: DateFilter;
+}
+/**
+ * RoutingPlanDeliveryPreferencesShippingFilter
+ * @export
+ * @interface RoutingPlanDeliveryPreferencesShippingFilter
+ */
+export interface RoutingPlanDeliveryPreferencesShippingFilter {
+    /**
+     * Search by preferredCarriers
+     * @type {StringListFilter}
+     * @memberof RoutingPlanDeliveryPreferencesShippingFilter
+     */
+    preferredCarriers?: StringListFilter;
+    /**
+     * Nested list search by preferredCarriersWithProduct
+     * @type {RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductListFilter}
+     * @memberof RoutingPlanDeliveryPreferencesShippingFilter
+     */
+    preferredCarriersWithProduct?: RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductListFilter;
+}
+/**
+ * RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductFilter
+ * @export
+ * @interface RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductFilter
+ */
+export interface RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductFilter {
+    /**
+     * Search by carrierKey
+     * @type {StringFilter}
+     * @memberof RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductFilter
+     */
+    carrierKey?: StringFilter;
+}
+/**
+ * RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductListFilter
+ * @export
+ * @interface RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductListFilter
+ */
+export interface RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductFilter}
+     * @memberof RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductListFilter
+     */
+    contains?: RoutingPlanDeliveryPreferencesShippingPreferredCarriersWithProductFilter;
+}
+/**
+ * RoutingPlanEarliestPickingStartFilter
+ * @export
+ * @interface RoutingPlanEarliestPickingStartFilter
+ */
+export interface RoutingPlanEarliestPickingStartFilter {
+    /**
+     * Search by carrierRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanEarliestPickingStartFilter
+     */
+    carrierRef?: StringFilter;
+    /**
+     * Search by earliestPickingStartDate
+     * @type {DateFilter}
+     * @memberof RoutingPlanEarliestPickingStartFilter
+     */
+    earliestPickingStartDate?: DateFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof RoutingPlanEarliestPickingStartFilter
+     */
+    targetTime?: DateFilter;
+}
+/**
+ * RoutingPlanFallbackRoutingWebHookEvent
  * @export
  * @interface RoutingPlanFallbackRoutingWebHookEvent
  */
@@ -25195,7 +36291,7 @@ export interface RoutingPlanFallbackRoutingWebHookEvent extends WebHookEvent {
     payload: RoutingPlan;
 }
 /**
- * 
+ * RoutingPlanHistory
  * @export
  * @interface RoutingPlanHistory
  */
@@ -25214,7 +36310,171 @@ export interface RoutingPlanHistory {
     created: Date;
 }
 /**
- * 
+ * RoutingPlanHistoryFilter
+ * @export
+ * @interface RoutingPlanHistoryFilter
+ */
+export interface RoutingPlanHistoryFilter {
+    /**
+     * Search by created
+     * @type {DateFilter}
+     * @memberof RoutingPlanHistoryFilter
+     */
+    created?: DateFilter;
+    /**
+     * Search by status
+     * @type {RoutingPlanHistoryRoutingPlanStatusEnumFilter}
+     * @memberof RoutingPlanHistoryFilter
+     */
+    status?: RoutingPlanHistoryRoutingPlanStatusEnumFilter;
+}
+/**
+ * RoutingPlanHistoryListFilter
+ * @export
+ * @interface RoutingPlanHistoryListFilter
+ */
+export interface RoutingPlanHistoryListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanHistoryFilter}
+     * @memberof RoutingPlanHistoryListFilter
+     */
+    contains?: RoutingPlanHistoryFilter;
+}
+/**
+ * RoutingPlanHistoryRoutingPlanStatusEnumFilter
+ * @export
+ * @interface RoutingPlanHistoryRoutingPlanStatusEnumFilter
+ */
+export interface RoutingPlanHistoryRoutingPlanStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanHistoryRoutingPlanStatusEnumFilter
+     */
+    eq?: RoutingPlanHistoryRoutingPlanStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanHistoryRoutingPlanStatusEnumFilter
+     */
+    _in?: RoutingPlanHistoryRoutingPlanStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanHistoryRoutingPlanStatusEnumFilter
+     */
+    notEq?: RoutingPlanHistoryRoutingPlanStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace RoutingPlanHistoryRoutingPlanStatusEnumFilter
+ */
+export namespace RoutingPlanHistoryRoutingPlanStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        INITIAL = 'INITIAL',
+        PRIORITIZED = 'PRIORITIZED',
+        ROUTING = 'ROUTING',
+        PROPOSED = 'PROPOSED',
+        PLANNED = 'PLANNED',
+        ROUTED = 'ROUTED',
+        NOTROUTABLE = 'NOT_ROUTABLE',
+        MANUALPLANNED = 'MANUAL_PLANNED',
+        FAILED = 'FAILED',
+        REDUNDANTREROUTE = 'REDUNDANT_REROUTE',
+        FAILEDREROUTE = 'FAILED_REROUTE',
+        RETRYABLE = 'RETRYABLE',
+        FALLBACKROUTING = 'FALLBACK_ROUTING',
+        WAITING = 'WAITING',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        LOCKED = 'LOCKED',
+        PROMISED = 'PROMISED',
+        REROUTED = 'REROUTED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        INITIAL = 'INITIAL',
+        PRIORITIZED = 'PRIORITIZED',
+        ROUTING = 'ROUTING',
+        PROPOSED = 'PROPOSED',
+        PLANNED = 'PLANNED',
+        ROUTED = 'ROUTED',
+        NOTROUTABLE = 'NOT_ROUTABLE',
+        MANUALPLANNED = 'MANUAL_PLANNED',
+        FAILED = 'FAILED',
+        REDUNDANTREROUTE = 'REDUNDANT_REROUTE',
+        FAILEDREROUTE = 'FAILED_REROUTE',
+        RETRYABLE = 'RETRYABLE',
+        FALLBACKROUTING = 'FALLBACK_ROUTING',
+        WAITING = 'WAITING',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        LOCKED = 'LOCKED',
+        PROMISED = 'PROMISED',
+        REROUTED = 'REROUTED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        INITIAL = 'INITIAL',
+        PRIORITIZED = 'PRIORITIZED',
+        ROUTING = 'ROUTING',
+        PROPOSED = 'PROPOSED',
+        PLANNED = 'PLANNED',
+        ROUTED = 'ROUTED',
+        NOTROUTABLE = 'NOT_ROUTABLE',
+        MANUALPLANNED = 'MANUAL_PLANNED',
+        FAILED = 'FAILED',
+        REDUNDANTREROUTE = 'REDUNDANT_REROUTE',
+        FAILEDREROUTE = 'FAILED_REROUTE',
+        RETRYABLE = 'RETRYABLE',
+        FALLBACKROUTING = 'FALLBACK_ROUTING',
+        WAITING = 'WAITING',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        LOCKED = 'LOCKED',
+        PROMISED = 'PROMISED',
+        REROUTED = 'REROUTED'
+    }
+}
+/**
+ * RoutingPlanLatestPickingStartFilter
+ * @export
+ * @interface RoutingPlanLatestPickingStartFilter
+ */
+export interface RoutingPlanLatestPickingStartFilter {
+    /**
+     * Search by carrierRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanLatestPickingStartFilter
+     */
+    carrierRef?: StringFilter;
+    /**
+     * Search by latestPickingStartDate
+     * @type {DateFilter}
+     * @memberof RoutingPlanLatestPickingStartFilter
+     */
+    latestPickingStartDate?: DateFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof RoutingPlanLatestPickingStartFilter
+     */
+    targetTime?: DateFilter;
+}
+/**
+ * RoutingPlanLineItem
  * @export
  * @interface RoutingPlanLineItem
  */
@@ -25232,17 +36492,17 @@ export interface RoutingPlanLineItem extends OrderLineItem {
      */
     available?: number;
     /**
-     * 
+     * @deprecated This property has been deprecated and has no meaning.
      * @type {Array<RoutingPlanLineItemPiece>}
      * @memberof RoutingPlanLineItem
      */
     pieces?: Array<RoutingPlanLineItemPiece>;
     /**
      * 
-     * @type {string}
+     * @type {OutOfStockBehaviour}
      * @memberof RoutingPlanLineItem
      */
-    outOfStockBehaviour?: RoutingPlanLineItem.OutOfStockBehaviourEnum;
+    outOfStockBehaviour?: OutOfStockBehaviour;
     /**
      * 
      * @type {AvailabilityTimeframe}
@@ -25250,22 +36510,8 @@ export interface RoutingPlanLineItem extends OrderLineItem {
      */
     availabilityTimeframe?: AvailabilityTimeframe;
 }
-
 /**
- * @export
- * @namespace RoutingPlanLineItem
- */
-export namespace RoutingPlanLineItem {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum OutOfStockBehaviourEnum {
-        BACKORDER = 'BACKORDER'
-    }
-}
-/**
- * 
+ * RoutingPlanLineItemPiece
  * @export
  * @interface RoutingPlanLineItemPiece
  */
@@ -25314,7 +36560,7 @@ export interface RoutingPlanLineItemPiece {
     picked?: number;
 }
 /**
- * 
+ * RoutingPlanNotRoutableWebHookEvent
  * @export
  * @interface RoutingPlanNotRoutableWebHookEvent
  */
@@ -25327,49 +36573,33 @@ export interface RoutingPlanNotRoutableWebHookEvent extends WebHookEvent {
     payload: RoutingPlan;
 }
 /**
- * 
+ * RoutingPlanOrderLineItemsFilter
  * @export
- * @interface RoutingPlanObsoleteStatusReason
+ * @interface RoutingPlanOrderLineItemsFilter
  */
-export interface RoutingPlanObsoleteStatusReason {
+export interface RoutingPlanOrderLineItemsFilter {
     /**
-     * 
-     * @type {string}
-     * @memberof RoutingPlanObsoleteStatusReason
+     * Search by id
+     * @type {StringFilter}
+     * @memberof RoutingPlanOrderLineItemsFilter
      */
-    reason: RoutingPlanObsoleteStatusReason.ReasonEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof RoutingPlanObsoleteStatusReason
-     */
-    status: RoutingPlanObsoleteStatusReason.StatusEnum;
-}
-
-/**
- * @export
- * @namespace RoutingPlanObsoleteStatusReason
- */
-export namespace RoutingPlanObsoleteStatusReason {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum ReasonEnum {
-        REROUTEAFTERSHORTPICK = 'REROUTE_AFTER_SHORTPICK',
-        MANUALLYREROUTED = 'MANUALLY_REROUTED',
-        MANUALLYASSIGNED = 'MANUALLY_ASSIGNED'
-    }
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum StatusEnum {
-        OBSOLETE = 'OBSOLETE'
-    }
+    id?: StringFilter;
 }
 /**
- * 
+ * RoutingPlanOrderLineItemsListFilter
+ * @export
+ * @interface RoutingPlanOrderLineItemsListFilter
+ */
+export interface RoutingPlanOrderLineItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanOrderLineItemsFilter}
+     * @memberof RoutingPlanOrderLineItemsListFilter
+     */
+    contains?: RoutingPlanOrderLineItemsFilter;
+}
+/**
+ * RoutingPlanPatchActions
  * @export
  * @interface RoutingPlanPatchActions
  */
@@ -25388,7 +36618,7 @@ export interface RoutingPlanPatchActions {
     version: number;
 }
 /**
- * 
+ * RoutingPlanRerouteCreatedWebHookEvent
  * @export
  * @interface RoutingPlanRerouteCreatedWebHookEvent
  */
@@ -25401,7 +36631,7 @@ export interface RoutingPlanRerouteCreatedWebHookEvent extends WebHookEvent {
     payload: RoutingPlan;
 }
 /**
- * 
+ * RoutingPlanRoutedWebHookEvent
  * @export
  * @interface RoutingPlanRoutedWebHookEvent
  */
@@ -25414,7 +36644,269 @@ export interface RoutingPlanRoutedWebHookEvent extends WebHookEvent {
     payload: RoutingPlan;
 }
 /**
- * 
+ * RoutingPlanSearchPayload
+ * @export
+ * @interface RoutingPlanSearchPayload
+ */
+export interface RoutingPlanSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof RoutingPlanSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {RoutingPlanSearchQuery}
+     * @memberof RoutingPlanSearchPayload
+     */
+    query: RoutingPlanSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof RoutingPlanSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<RoutingPlanSort>}
+     * @memberof RoutingPlanSearchPayload
+     */
+    sort?: Array<RoutingPlanSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof RoutingPlanSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * RoutingPlanSearchQuery
+ * @export
+ * @interface RoutingPlanSearchQuery
+ */
+export interface RoutingPlanSearchQuery {
+    /**
+     * 
+     * @type {Array<RoutingPlanSearchQuery>}
+     * @memberof RoutingPlanSearchQuery
+     */
+    and?: Array<RoutingPlanSearchQuery>;
+    /**
+     * Search by anonymized
+     * @type {BooleanFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    anonymized?: BooleanFilter;
+    /**
+     * Nested list search by customServices
+     * @type {RoutingPlanCustomServicesListFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    customServices?: RoutingPlanCustomServicesListFilter;
+    /**
+     * Nested search by deliveryPreferences
+     * @type {RoutingPlanDeliveryPreferencesFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    deliveryPreferences?: RoutingPlanDeliveryPreferencesFilter;
+    /**
+     * Nested search by earliestPickingStart
+     * @type {RoutingPlanEarliestPickingStartFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    earliestPickingStart?: RoutingPlanEarliestPickingStartFilter;
+    /**
+     * Nested list search by history
+     * @type {RoutingPlanHistoryListFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    history?: RoutingPlanHistoryListFilter;
+    /**
+     * Nested search by latestPickingStart
+     * @type {RoutingPlanLatestPickingStartFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    latestPickingStart?: RoutingPlanLatestPickingStartFilter;
+    /**
+     * 
+     * @type {Array<RoutingPlanSearchQuery>}
+     * @memberof RoutingPlanSearchQuery
+     */
+    or?: Array<RoutingPlanSearchQuery>;
+    /**
+     * Search by orderDate
+     * @type {DateFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    orderDate?: DateFilter;
+    /**
+     * Nested list search by orderLineItems
+     * @type {RoutingPlanOrderLineItemsListFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    orderLineItems?: RoutingPlanOrderLineItemsListFilter;
+    /**
+     * Search by orderRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    orderRef?: StringFilter;
+    /**
+     * Search by pickJobRef
+     * @type {StringFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    pickJobRef?: StringFilter;
+    /**
+     * Search by priority
+     * @type {NumberFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    priority?: NumberFilter;
+    /**
+     * Search by processId
+     * @type {StringFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    processId?: StringFilter;
+    /**
+     * Search by provisioningTime
+     * @type {DateFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    provisioningTime?: DateFilter;
+    /**
+     * Search by reRouteReason
+     * @type {StringFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    reRouteReason?: StringFilter;
+    /**
+     * Search by splitCount
+     * @type {NumberFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    splitCount?: NumberFilter;
+    /**
+     * Search by status
+     * @type {RoutingPlanStatusEnumFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    status?: RoutingPlanStatusEnumFilter;
+    /**
+     * Nested list search by statusReasons
+     * @type {RoutingPlanStatusReasonsListFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    statusReasons?: RoutingPlanStatusReasonsListFilter;
+    /**
+     * Nested search by targetAddress
+     * @type {RoutingPlanTargetAddressFilter}
+     * @memberof RoutingPlanSearchQuery
+     */
+    targetAddress?: RoutingPlanTargetAddressFilter;
+}
+/**
+ * RoutingPlanSort
+ * @export
+ * @interface RoutingPlanSort
+ */
+export interface RoutingPlanSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlanSort
+     */
+    anonymized?: RoutingPlanSort.AnonymizedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlanSort
+     */
+    orderDate?: RoutingPlanSort.OrderDateEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlanSort
+     */
+    orderRef?: RoutingPlanSort.OrderRefEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlanSort
+     */
+    processId?: RoutingPlanSort.ProcessIdEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlanSort
+     */
+    provisioningTime?: RoutingPlanSort.ProvisioningTimeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlanSort
+     */
+    status?: RoutingPlanSort.StatusEnum;
+}
+
+/**
+ * @export
+ * @namespace RoutingPlanSort
+ */
+export namespace RoutingPlanSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum AnonymizedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum OrderDateEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum OrderRefEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ProcessIdEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ProvisioningTimeEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum StatusEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * RoutingPlanSplittedWebHookEvent
  * @export
  * @interface RoutingPlanSplittedWebHookEvent
  */
@@ -25453,14 +36945,332 @@ export enum RoutingPlanStatus {
     REROUTED = 'REROUTED'
 }
 /**
- * 
+ * RoutingPlanStatusEnumFilter
+ * @export
+ * @interface RoutingPlanStatusEnumFilter
+ */
+export interface RoutingPlanStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanStatusEnumFilter
+     */
+    eq?: RoutingPlanStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanStatusEnumFilter
+     */
+    _in?: RoutingPlanStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanStatusEnumFilter
+     */
+    notEq?: RoutingPlanStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace RoutingPlanStatusEnumFilter
+ */
+export namespace RoutingPlanStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        INITIAL = 'INITIAL',
+        PRIORITIZED = 'PRIORITIZED',
+        ROUTING = 'ROUTING',
+        PROPOSED = 'PROPOSED',
+        PLANNED = 'PLANNED',
+        ROUTED = 'ROUTED',
+        NOTROUTABLE = 'NOT_ROUTABLE',
+        MANUALPLANNED = 'MANUAL_PLANNED',
+        FAILED = 'FAILED',
+        REDUNDANTREROUTE = 'REDUNDANT_REROUTE',
+        FAILEDREROUTE = 'FAILED_REROUTE',
+        RETRYABLE = 'RETRYABLE',
+        FALLBACKROUTING = 'FALLBACK_ROUTING',
+        WAITING = 'WAITING',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        LOCKED = 'LOCKED',
+        PROMISED = 'PROMISED',
+        REROUTED = 'REROUTED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        INITIAL = 'INITIAL',
+        PRIORITIZED = 'PRIORITIZED',
+        ROUTING = 'ROUTING',
+        PROPOSED = 'PROPOSED',
+        PLANNED = 'PLANNED',
+        ROUTED = 'ROUTED',
+        NOTROUTABLE = 'NOT_ROUTABLE',
+        MANUALPLANNED = 'MANUAL_PLANNED',
+        FAILED = 'FAILED',
+        REDUNDANTREROUTE = 'REDUNDANT_REROUTE',
+        FAILEDREROUTE = 'FAILED_REROUTE',
+        RETRYABLE = 'RETRYABLE',
+        FALLBACKROUTING = 'FALLBACK_ROUTING',
+        WAITING = 'WAITING',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        LOCKED = 'LOCKED',
+        PROMISED = 'PROMISED',
+        REROUTED = 'REROUTED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        INITIAL = 'INITIAL',
+        PRIORITIZED = 'PRIORITIZED',
+        ROUTING = 'ROUTING',
+        PROPOSED = 'PROPOSED',
+        PLANNED = 'PLANNED',
+        ROUTED = 'ROUTED',
+        NOTROUTABLE = 'NOT_ROUTABLE',
+        MANUALPLANNED = 'MANUAL_PLANNED',
+        FAILED = 'FAILED',
+        REDUNDANTREROUTE = 'REDUNDANT_REROUTE',
+        FAILEDREROUTE = 'FAILED_REROUTE',
+        RETRYABLE = 'RETRYABLE',
+        FALLBACKROUTING = 'FALLBACK_ROUTING',
+        WAITING = 'WAITING',
+        OBSOLETE = 'OBSOLETE',
+        CANCELED = 'CANCELED',
+        LOCKED = 'LOCKED',
+        PROMISED = 'PROMISED',
+        REROUTED = 'REROUTED'
+    }
+}
+/**
+ * Obsolete Status Reason
  * @export
  * @interface RoutingPlanStatusReason
  */
 export interface RoutingPlanStatusReason {
+    /**
+     * 
+     * @type {RoutingPlanStatusReasonReason}
+     * @memberof RoutingPlanStatusReason
+     */
+    reason: RoutingPlanStatusReasonReason;
+    /**
+     * 
+     * @type {RoutingPlanStatusReasonStatus}
+     * @memberof RoutingPlanStatusReason
+     */
+    status: RoutingPlanStatusReasonStatus;
 }
 /**
- * 
+ * RoutingPlanStatusReasonReason
+ * @export
+ * @enum {string}
+ */
+export enum RoutingPlanStatusReasonReason {
+    REROUTEAFTERSHORTPICK = 'REROUTE_AFTER_SHORTPICK',
+    MANUALLYREROUTED = 'MANUALLY_REROUTED',
+    MANUALLYASSIGNED = 'MANUALLY_ASSIGNED'
+}
+/**
+ * RoutingPlanStatusReasonStatus
+ * @export
+ * @enum {string}
+ */
+export enum RoutingPlanStatusReasonStatus {
+    OBSOLETE = 'OBSOLETE'
+}
+/**
+ * RoutingPlanStatusReasonsFilter
+ * @export
+ * @interface RoutingPlanStatusReasonsFilter
+ */
+export interface RoutingPlanStatusReasonsFilter {
+    /**
+     * Search by reason
+     * @type {RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter}
+     * @memberof RoutingPlanStatusReasonsFilter
+     */
+    reason?: RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter;
+    /**
+     * Search by status
+     * @type {RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter}
+     * @memberof RoutingPlanStatusReasonsFilter
+     */
+    status?: RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter;
+}
+/**
+ * RoutingPlanStatusReasonsListFilter
+ * @export
+ * @interface RoutingPlanStatusReasonsListFilter
+ */
+export interface RoutingPlanStatusReasonsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {RoutingPlanStatusReasonsFilter}
+     * @memberof RoutingPlanStatusReasonsListFilter
+     */
+    contains?: RoutingPlanStatusReasonsFilter;
+}
+/**
+ * RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter
+ * @export
+ * @interface RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter
+ */
+export interface RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter {
+    /**
+     * Search by reason
+     * @type {string}
+     * @memberof RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter
+     */
+    eq?: RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter.EqEnum;
+    /**
+     * Search by reason
+     * @type {string}
+     * @memberof RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter
+     */
+    _in?: RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter.InEnum;
+    /**
+     * Search by reason
+     * @type {string}
+     * @memberof RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter
+     */
+    notEq?: RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter
+ */
+export namespace RoutingPlanStatusReasonsRoutingPlanStatusReasonReasonEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        REROUTEAFTERSHORTPICK = 'REROUTE_AFTER_SHORTPICK',
+        MANUALLYREROUTED = 'MANUALLY_REROUTED',
+        MANUALLYASSIGNED = 'MANUALLY_ASSIGNED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        REROUTEAFTERSHORTPICK = 'REROUTE_AFTER_SHORTPICK',
+        MANUALLYREROUTED = 'MANUALLY_REROUTED',
+        MANUALLYASSIGNED = 'MANUALLY_ASSIGNED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        REROUTEAFTERSHORTPICK = 'REROUTE_AFTER_SHORTPICK',
+        MANUALLYREROUTED = 'MANUALLY_REROUTED',
+        MANUALLYASSIGNED = 'MANUALLY_ASSIGNED'
+    }
+}
+/**
+ * RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter
+ * @export
+ * @interface RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter
+ */
+export interface RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter
+     */
+    eq?: RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter
+     */
+    _in?: RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter
+     */
+    notEq?: RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter
+ */
+export namespace RoutingPlanStatusReasonsRoutingPlanStatusReasonStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OBSOLETE = 'OBSOLETE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OBSOLETE = 'OBSOLETE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OBSOLETE = 'OBSOLETE'
+    }
+}
+/**
+ * RoutingPlanTargetAddressFilter
+ * @export
+ * @interface RoutingPlanTargetAddressFilter
+ */
+export interface RoutingPlanTargetAddressFilter {
+    /**
+     * Search by city
+     * @type {StringFilter}
+     * @memberof RoutingPlanTargetAddressFilter
+     */
+    city?: StringFilter;
+    /**
+     * Search by country
+     * @type {StringFilter}
+     * @memberof RoutingPlanTargetAddressFilter
+     */
+    country?: StringFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof RoutingPlanTargetAddressFilter
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by province
+     * @type {StringFilter}
+     * @memberof RoutingPlanTargetAddressFilter
+     */
+    province?: StringFilter;
+    /**
+     * Search by street
+     * @type {StringFilter}
+     * @memberof RoutingPlanTargetAddressFilter
+     */
+    street?: StringFilter;
+}
+/**
+ * RoutingPlanWaitingWebHookEvent
  * @export
  * @interface RoutingPlanWaitingWebHookEvent
  */
@@ -25473,7 +37283,7 @@ export interface RoutingPlanWaitingWebHookEvent extends WebHookEvent {
     payload: RoutingPlan;
 }
 /**
- * 
+ * RoutingPlans
  * @export
  * @interface RoutingPlans
  */
@@ -25492,7 +37302,74 @@ export interface RoutingPlans {
     total?: number;
 }
 /**
- * 
+ * A graph representation of the routing plans. The nodes are the routing plans and the edges are the rerouting reasons.
+ * @export
+ * @interface RoutingPlansGraph
+ */
+export interface RoutingPlansGraph {
+    /**
+     * 
+     * @type {Array<RoutingPlansGraphNode>}
+     * @memberof RoutingPlansGraph
+     */
+    nodes: Array<RoutingPlansGraphNode>;
+    /**
+     * 
+     * @type {Array<RoutingPlansGraphEdge>}
+     * @memberof RoutingPlansGraph
+     */
+    edges: Array<RoutingPlansGraphEdge>;
+}
+/**
+ * RoutingPlansGraphEdge
+ * @export
+ * @interface RoutingPlansGraphEdge
+ */
+export interface RoutingPlansGraphEdge {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlansGraphEdge
+     */
+    from: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlansGraphEdge
+     */
+    to: string;
+    /**
+     * 
+     * @type {RoutingPlansGraphEdgeReason}
+     * @memberof RoutingPlansGraphEdge
+     */
+    reason: RoutingPlansGraphEdgeReason;
+}
+/**
+ * RoutingPlansGraphEdgeReason
+ * @export
+ * @enum {string}
+ */
+export enum RoutingPlansGraphEdgeReason {
+    SPLIT = 'SPLIT',
+    REROUTE = 'REROUTE',
+    INTERFACILITYTRANSFER = 'INTER_FACILITY_TRANSFER'
+}
+/**
+ * RoutingPlansGraphNode
+ * @export
+ * @interface RoutingPlansGraphNode
+ */
+export interface RoutingPlansGraphNode {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingPlansGraphNode
+     */
+    routingPlanRef: string;
+}
+/**
+ * RoutingResults
  * @export
  * @interface RoutingResults
  */
@@ -25529,7 +37406,7 @@ export interface RoutingResults {
     routingPlanStatus?: RoutingPlanStatus;
 }
 /**
- * 
+ * RoutingRule
  * @export
  * @interface RoutingRule
  */
@@ -25554,7 +37431,7 @@ export interface RoutingRule {
     ratings: Array<Rating>;
 }
 /**
- * 
+ * RoutingStatistics
  * @export
  * @interface RoutingStatistics
  */
@@ -25579,35 +37456,1353 @@ export interface RoutingStatistics {
     durationMs?: number;
 }
 /**
- * 
+ * RoutingStrategy
+ * @export
+ * @interface RoutingStrategy
+ */
+export interface RoutingStrategy extends VersionedResource {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategy
+     */
+    id: string;
+    /**
+     * The revision of the routing strategy
+     * @type {number}
+     * @memberof RoutingStrategy
+     */
+    revision: number;
+    /**
+     * Only one strategy can be inUse
+     * @type {boolean}
+     * @memberof RoutingStrategy
+     */
+    inUse: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategy
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategy
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {RoutingStrategyNode}
+     * @memberof RoutingStrategy
+     */
+    rootNode: RoutingStrategyNode;
+    /**
+     * 
+     * @type {RoutingStrategyGlobalConfiguration}
+     * @memberof RoutingStrategy
+     */
+    globalConfiguration: RoutingStrategyGlobalConfiguration;
+}
+/**
+ * RoutingStrategyActionsParameter
+ * @export
+ * @interface RoutingStrategyActionsParameter
+ */
+export interface RoutingStrategyActionsParameter {
+}
+/**
+ * Action to activate a routing strategy.
+ * @export
+ * @interface RoutingStrategyActivateActionParameter
+ */
+export interface RoutingStrategyActivateActionParameter extends AbstractRoutingStrategyActionsParameter {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyActivateActionParameter
+     */
+    name: RoutingStrategyActivateActionParameter.NameEnum;
+}
+
+/**
+ * @export
+ * @namespace RoutingStrategyActivateActionParameter
+ */
+export namespace RoutingStrategyActivateActionParameter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        ACTIVATE = 'ACTIVATE'
+    }
+}
+/**
+ * RoutingStrategyCondition
+ * @export
+ * @interface RoutingStrategyCondition
+ */
+export interface RoutingStrategyCondition {
+    /**
+     * 
+     * @type {Array<ActivationTimeFrame>}
+     * @memberof RoutingStrategyCondition
+     */
+    activationTimeFrames?: Array<ActivationTimeFrame>;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyCondition
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyCondition
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyCondition
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyCondition
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyCondition
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyCondition
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {ToolkitRulePart}
+     * @memberof RoutingStrategyCondition
+     */
+    rule: ToolkitRulePart;
+    /**
+     * 
+     * @type {RoutingStrategyNode}
+     * @memberof RoutingStrategyCondition
+     */
+    nextNode: RoutingStrategyNode;
+    /**
+     * 
+     * @type {RoutingStrategyCondition}
+     * @memberof RoutingStrategyCondition
+     */
+    nextCondition?: RoutingStrategyCondition;
+}
+/**
+ * RoutingStrategyConditionForCreation
+ * @export
+ * @interface RoutingStrategyConditionForCreation
+ */
+export interface RoutingStrategyConditionForCreation {
+    /**
+     * 
+     * @type {Array<ActivationTimeFrame>}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    activationTimeFrames?: Array<ActivationTimeFrame>;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {ToolkitRulePart}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    rule: ToolkitRulePart;
+    /**
+     * 
+     * @type {RoutingStrategyNodeForCreation}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    nextNode: RoutingStrategyNodeForCreation;
+    /**
+     * 
+     * @type {RoutingStrategyConditionForCreation}
+     * @memberof RoutingStrategyConditionForCreation
+     */
+    nextCondition?: RoutingStrategyConditionForCreation;
+}
+/**
+ * RoutingStrategyConditionForModification
+ * @export
+ * @interface RoutingStrategyConditionForModification
+ */
+export interface RoutingStrategyConditionForModification {
+    /**
+     * 
+     * @type {Array<ActivationTimeFrame>}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    activationTimeFrames?: Array<ActivationTimeFrame>;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {ToolkitRulePart}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    rule: ToolkitRulePart;
+    /**
+     * 
+     * @type {RoutingStrategyNodeForModification}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    nextNode: RoutingStrategyNodeForModification;
+    /**
+     * 
+     * @type {RoutingStrategyConditionForModification}
+     * @memberof RoutingStrategyConditionForModification
+     */
+    nextCondition?: RoutingStrategyConditionForModification;
+}
+/**
+ * Action to create a copy of a routing strategy.
+ * @export
+ * @interface RoutingStrategyCreateCopyActionParameter
+ */
+export interface RoutingStrategyCreateCopyActionParameter extends AbstractRoutingStrategyActionsParameter {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyCreateCopyActionParameter
+     */
+    name: RoutingStrategyCreateCopyActionParameter.NameEnum;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyCreateCopyActionParameter
+     */
+    nameLocalized: LocaleString;
+}
+
+/**
+ * @export
+ * @namespace RoutingStrategyCreateCopyActionParameter
+ */
+export namespace RoutingStrategyCreateCopyActionParameter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        COPY = 'COPY'
+    }
+}
+/**
+ * RoutingStrategyEvaluationResult
+ * @export
+ * @interface RoutingStrategyEvaluationResult
+ */
+export interface RoutingStrategyEvaluationResult {
+    /**
+     * 
+     * @type {Array<RoutingStrategyPathElement>}
+     * @memberof RoutingStrategyEvaluationResult
+     */
+    evaluatedPath: Array<RoutingStrategyPathElement>;
+    /**
+     * 
+     * @type {RoutingStrategyNodeConfig}
+     * @memberof RoutingStrategyEvaluationResult
+     */
+    evaluatedConfig: RoutingStrategyNodeConfig;
+}
+/**
+ * RoutingStrategyEvaluationResultType
+ * @export
+ * @enum {string}
+ */
+export enum RoutingStrategyEvaluationResultType {
+    NODEINACTIVE = 'NODE_INACTIVE',
+    NODEACTIVE = 'NODE_ACTIVE',
+    CONDITIONINACTIVE = 'CONDITION_INACTIVE',
+    CONDITIONFALSE = 'CONDITION_FALSE',
+    CONDITIONTRUE = 'CONDITION_TRUE'
+}
+/**
+ * RoutingStrategyFacilityRerouteConfig
+ * @export
+ * @interface RoutingStrategyFacilityRerouteConfig
+ */
+export interface RoutingStrategyFacilityRerouteConfig {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyFacilityRerouteConfig
+     */
+    active?: boolean;
+    /**
+     * 
+     * @type {RoutingStrategyRerouteType}
+     * @memberof RoutingStrategyFacilityRerouteConfig
+     */
+    rerouteType: RoutingStrategyRerouteType;
+}
+/**
+ * RoutingStrategyFallbackFacilityConfig
+ * @export
+ * @interface RoutingStrategyFallbackFacilityConfig
+ */
+export interface RoutingStrategyFallbackFacilityConfig {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof RoutingStrategyFallbackFacilityConfig
+     */
+    facilityRefs: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyFallbackFacilityConfig
+     */
+    active: boolean;
+    /**
+     * Default amount of time in ISO 8601 duration format after which a not routable routingplan is routed to a configured fallback facility.
+     * @type {string}
+     * @memberof RoutingStrategyFallbackFacilityConfig
+     */
+    fallbackAfterTime: string;
+}
+/**
+ * RoutingStrategyForCreation
+ * @export
+ * @interface RoutingStrategyForCreation
+ */
+export interface RoutingStrategyForCreation {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyForCreation
+     */
+    nameLocalized: LocaleString;
+}
+/**
+ * RoutingStrategyForModification
+ * @export
+ * @interface RoutingStrategyForModification
+ */
+export interface RoutingStrategyForModification {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyForModification
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {RoutingStrategyNodeForModification}
+     * @memberof RoutingStrategyForModification
+     */
+    rootNode: RoutingStrategyNodeForModification;
+    /**
+     * 
+     * @type {number}
+     * @memberof RoutingStrategyForModification
+     */
+    version: number;
+    /**
+     * 
+     * @type {RoutingStrategyGlobalConfiguration}
+     * @memberof RoutingStrategyForModification
+     */
+    globalConfiguration?: RoutingStrategyGlobalConfiguration;
+}
+/**
+ * RoutingStrategyGlobalConfiguration
+ * @export
+ * @interface RoutingStrategyGlobalConfiguration
+ */
+export interface RoutingStrategyGlobalConfiguration {
+    /**
+     * The amount of time, specified in ISO 8601 duration format, after which a routing plan is considered not routable. Note: The duration must be a multiple of 60 seconds.
+     * @type {string}
+     * @memberof RoutingStrategyGlobalConfiguration
+     */
+    stopRoutingAttemptsAfterTime?: string;
+    /**
+     * The price applied when no specific price is defined in the order or listing
+     * @type {number}
+     * @memberof RoutingStrategyGlobalConfiguration
+     */
+    defaultPrice: number;
+    /**
+     * 
+     * @type {RoutingStrategyRerouteTimeTriggeredConfig}
+     * @memberof RoutingStrategyGlobalConfiguration
+     */
+    timeTriggered?: RoutingStrategyRerouteTimeTriggeredConfig;
+}
+/**
+ * RoutingStrategyNode
+ * @export
+ * @interface RoutingStrategyNode
+ */
+export interface RoutingStrategyNode {
+    /**
+     * 
+     * @type {Array<ActivationTimeFrame>}
+     * @memberof RoutingStrategyNode
+     */
+    activationTimeFrames?: Array<ActivationTimeFrame>;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNode
+     */
+    id: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyNode
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNode
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyNode
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNode
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyNode
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {RoutingStrategyNodeConfig}
+     * @memberof RoutingStrategyNode
+     */
+    config: RoutingStrategyNodeConfig;
+    /**
+     * 
+     * @type {RoutingStrategyCondition}
+     * @memberof RoutingStrategyNode
+     */
+    nextCondition?: RoutingStrategyCondition;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNode
+     */
+    categoryRef?: string;
+}
+/**
+ * RoutingStrategyNodeConfig
+ * @export
+ * @interface RoutingStrategyNodeConfig
+ */
+export interface RoutingStrategyNodeConfig {
+    /**
+     * 
+     * @type {RoutingStrategyRerouteConfig}
+     * @memberof RoutingStrategyNodeConfig
+     */
+    reroute?: RoutingStrategyRerouteConfig;
+    /**
+     * 
+     * @type {RoutingStrategyOrderSplitConfig}
+     * @memberof RoutingStrategyNodeConfig
+     */
+    orderSplit?: RoutingStrategyOrderSplitConfig;
+    /**
+     * 
+     * @type {RoutingStrategyFallbackFacilityConfig}
+     * @memberof RoutingStrategyNodeConfig
+     */
+    fallbackFacility?: RoutingStrategyFallbackFacilityConfig;
+    /**
+     * 
+     * @type {Array<RoutingStrategyStandardFence | RoutingStrategyToolkitFence>}
+     * @memberof RoutingStrategyNodeConfig
+     */
+    fences: Array<RoutingStrategyStandardFence | RoutingStrategyToolkitFence>;
+    /**
+     * 
+     * @type {Array<RoutingStrategyStandardRating | RoutingStrategyToolkitRating>}
+     * @memberof RoutingStrategyNodeConfig
+     */
+    ratings: Array<RoutingStrategyStandardRating | RoutingStrategyToolkitRating>;
+}
+/**
+ * RoutingStrategyNodeConfigCategory
+ * @export
+ * @interface RoutingStrategyNodeConfigCategory
+ */
+export interface RoutingStrategyNodeConfigCategory extends RoutingStrategyNodeConfigCategoryForCreation {
+    /**
+     * The date this entity was created at the platform. This value is generated by the service.
+     * @type {Date}
+     * @memberof RoutingStrategyNodeConfigCategory
+     */
+    created?: Date;
+    /**
+     * The date this entity was modified last. This value is generated by the service.
+     * @type {Date}
+     * @memberof RoutingStrategyNodeConfigCategory
+     */
+    lastModified?: Date;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof RoutingStrategyNodeConfigCategory
+     */
+    version: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeConfigCategory
+     */
+    id: string;
+}
+/**
+ * RoutingStrategyNodeConfigCategoryForCreation
+ * @export
+ * @interface RoutingStrategyNodeConfigCategoryForCreation
+ */
+export interface RoutingStrategyNodeConfigCategoryForCreation {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyNodeConfigCategoryForCreation
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeConfigCategoryForCreation
+     */
+    color: string;
+}
+/**
+ * RoutingStrategyNodeConfigCategoryForModification
+ * @export
+ * @interface RoutingStrategyNodeConfigCategoryForModification
+ */
+export interface RoutingStrategyNodeConfigCategoryForModification {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyNodeConfigCategoryForModification
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeConfigCategoryForModification
+     */
+    color: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof RoutingStrategyNodeConfigCategoryForModification
+     */
+    version: number;
+}
+/**
+ * RoutingStrategyNodeConfigCategoryForResponse
+ * @export
+ * @interface RoutingStrategyNodeConfigCategoryForResponse
+ */
+export interface RoutingStrategyNodeConfigCategoryForResponse extends RoutingStrategyNodeConfigCategory {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeConfigCategoryForResponse
+     */
+    name?: string;
+}
+/**
+ * RoutingStrategyNodeConfigCategoryTransporter
+ * @export
+ * @interface RoutingStrategyNodeConfigCategoryTransporter
+ */
+export interface RoutingStrategyNodeConfigCategoryTransporter {
+    /**
+     * 
+     * @type {Array<RoutingStrategyNodeConfigCategoryForResponse>}
+     * @memberof RoutingStrategyNodeConfigCategoryTransporter
+     */
+    routingStrategyNodeConfigCategories: Array<RoutingStrategyNodeConfigCategoryForResponse>;
+    /**
+     * Total number of entities found for this query
+     * @type {number}
+     * @memberof RoutingStrategyNodeConfigCategoryTransporter
+     */
+    total: number;
+}
+/**
+ * RoutingStrategyNodeConfigForUpsert
+ * @export
+ * @interface RoutingStrategyNodeConfigForUpsert
+ */
+export interface RoutingStrategyNodeConfigForUpsert {
+    /**
+     * 
+     * @type {RoutingStrategyRerouteConfig}
+     * @memberof RoutingStrategyNodeConfigForUpsert
+     */
+    reroute?: RoutingStrategyRerouteConfig;
+    /**
+     * 
+     * @type {RoutingStrategyOrderSplitConfig}
+     * @memberof RoutingStrategyNodeConfigForUpsert
+     */
+    orderSplit?: RoutingStrategyOrderSplitConfig;
+    /**
+     * 
+     * @type {RoutingStrategyFallbackFacilityConfig}
+     * @memberof RoutingStrategyNodeConfigForUpsert
+     */
+    fallbackFacility?: RoutingStrategyFallbackFacilityConfig;
+    /**
+     * 
+     * @type {Array<RoutingStrategyStandardFenceForUpsert | RoutingStrategyToolkitFence>}
+     * @memberof RoutingStrategyNodeConfigForUpsert
+     */
+    fences: Array<RoutingStrategyStandardFenceForUpsert | RoutingStrategyToolkitFence>;
+    /**
+     * 
+     * @type {Array<RoutingStrategyRatingForUpsert | RoutingStrategyToolkitRating>}
+     * @memberof RoutingStrategyNodeConfigForUpsert
+     */
+    ratings: Array<RoutingStrategyRatingForUpsert | RoutingStrategyToolkitRating>;
+}
+/**
+ * RoutingStrategyNodeForCreation
+ * @export
+ * @interface RoutingStrategyNodeForCreation
+ */
+export interface RoutingStrategyNodeForCreation {
+    /**
+     * 
+     * @type {Array<ActivationTimeFrame>}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    activationTimeFrames?: Array<ActivationTimeFrame>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {RoutingStrategyNodeConfigForUpsert}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    config: RoutingStrategyNodeConfigForUpsert;
+    /**
+     * 
+     * @type {RoutingStrategyConditionForCreation}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    nextCondition?: RoutingStrategyConditionForCreation;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeForCreation
+     */
+    categoryRef?: string;
+}
+/**
+ * RoutingStrategyNodeForModification
+ * @export
+ * @interface RoutingStrategyNodeForModification
+ */
+export interface RoutingStrategyNodeForModification {
+    /**
+     * 
+     * @type {Array<ActivationTimeFrame>}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    activationTimeFrames?: Array<ActivationTimeFrame>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * 
+     * @type {RoutingStrategyNodeConfigForUpsert}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    config: RoutingStrategyNodeConfigForUpsert;
+    /**
+     * 
+     * @type {RoutingStrategyConditionForModification}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    nextCondition?: RoutingStrategyConditionForModification;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyNodeForModification
+     */
+    categoryRef?: string;
+}
+/**
+ * RoutingStrategyOrderSplitConfig
+ * @export
+ * @interface RoutingStrategyOrderSplitConfig
+ */
+export interface RoutingStrategyOrderSplitConfig {
+    /**
+     * 
+     * @type {number}
+     * @memberof RoutingStrategyOrderSplitConfig
+     */
+    maxSplitCount: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyOrderSplitConfig
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyOrderSplitConfig
+     */
+    activeForSameday: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyOrderSplitConfig
+     */
+    shouldUseWaitingRoomForPreBackOrderItems: boolean;
+}
+/**
+ * RoutingStrategyPathElement
+ * @export
+ * @interface RoutingStrategyPathElement
+ */
+export interface RoutingStrategyPathElement {
+    /**
+     * 
+     * @type {RoutingStrategyPathElementType}
+     * @memberof RoutingStrategyPathElement
+     */
+    type: RoutingStrategyPathElementType;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyPathElement
+     */
+    ref: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyPathElement
+     */
+    nameLocalized: LocaleString;
+    /**
+     * 
+     * @type {RoutingStrategyEvaluationResultType}
+     * @memberof RoutingStrategyPathElement
+     */
+    evaluationResult: RoutingStrategyEvaluationResultType;
+}
+/**
+ * RoutingStrategyPathElementType
+ * @export
+ * @enum {string}
+ */
+export enum RoutingStrategyPathElementType {
+    CONDITION = 'CONDITION',
+    NODE = 'NODE'
+}
+/**
+ * A rating is used to rate a set of possible facilities against each other during routing of orders.
+ * @export
+ * @interface RoutingStrategyRatingForUpsert
+ */
+export interface RoutingStrategyRatingForUpsert {
+    /**
+     * 
+     * @type {RoutingStrategyStandardRatingType}
+     * @memberof RoutingStrategyRatingForUpsert
+     */
+    type: RoutingStrategyStandardRatingType;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyRatingForUpsert
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {AbstractRatingConfiguration}
+     * @memberof RoutingStrategyRatingForUpsert
+     */
+    configuration?: AbstractRatingConfiguration;
+    /**
+     * 
+     * @type {RatingImplementation}
+     * @memberof RoutingStrategyRatingForUpsert
+     */
+    implementation: RatingImplementation;
+    /**
+     * 
+     * @type {number}
+     * @memberof RoutingStrategyRatingForUpsert
+     */
+    maxPenalty: number;
+}
+/**
+ * RoutingStrategyRerouteConfig
+ * @export
+ * @interface RoutingStrategyRerouteConfig
+ */
+export interface RoutingStrategyRerouteConfig {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyRerouteConfig
+     */
+    manualReroute?: boolean;
+    /**
+     * Specifies whether only pick jobs with zero items picked are eligible for rerouting.
+     * @type {boolean}
+     * @memberof RoutingStrategyRerouteConfig
+     */
+    rerouteZeroPicksOnly?: boolean;
+    /**
+     * 
+     * @type {RoutingStrategyFacilityRerouteConfig}
+     * @memberof RoutingStrategyRerouteConfig
+     */
+    shipFromStore?: RoutingStrategyFacilityRerouteConfig;
+    /**
+     * 
+     * @type {RoutingStrategyFacilityRerouteConfig}
+     * @memberof RoutingStrategyRerouteConfig
+     */
+    clickAndCollect?: RoutingStrategyFacilityRerouteConfig;
+}
+/**
+ * RoutingStrategyRerouteTimeTriggeredConfig
+ * @export
+ * @interface RoutingStrategyRerouteTimeTriggeredConfig
+ */
+export interface RoutingStrategyRerouteTimeTriggeredConfig {
+    /**
+     * 
+     * @type {RerouteConfiguration}
+     * @memberof RoutingStrategyRerouteTimeTriggeredConfig
+     */
+    clickAndCollectReroute: RerouteConfiguration;
+    /**
+     * 
+     * @type {RerouteConfiguration}
+     * @memberof RoutingStrategyRerouteTimeTriggeredConfig
+     */
+    shipFromStoreDeliveryReroute: RerouteConfiguration;
+    /**
+     * 
+     * @type {RerouteConfiguration}
+     * @memberof RoutingStrategyRerouteTimeTriggeredConfig
+     */
+    shipFromStoreSamedayReroute: RerouteConfiguration;
+}
+/**
+ * The type of reroute to apply to the order   * `REROUTE`- the complete routing plan is rerouted.   * `ORDERSPLIT`- the order is splitted. The split line items will be moved to a new routing plan and rerouted.
+ * @export
+ * @enum {string}
+ */
+export enum RoutingStrategyRerouteType {
+    REROUTE = 'REROUTE',
+    ORDERSPLIT = 'ORDERSPLIT'
+}
+/**
+ * Routing Strategy Fence.
+ * @export
+ * @interface RoutingStrategyStandardFence
+ */
+export interface RoutingStrategyStandardFence {
+    /**
+     * 
+     * @type {RoutingStrategyStandardFenceType}
+     * @memberof RoutingStrategyStandardFence
+     */
+    type: RoutingStrategyStandardFenceType;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyStandardFence
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyStandardFence
+     */
+    description?: string;
+    /**
+     * 
+     * @type {FenceImplementation}
+     * @memberof RoutingStrategyStandardFence
+     */
+    implementation: FenceImplementation;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyStandardFence
+     */
+    name?: string;
+    /**
+     * 
+     * @type {Array<FenceMode>}
+     * @memberof RoutingStrategyStandardFence
+     */
+    supportedModes?: Array<FenceMode>;
+    /**
+     * 
+     * @type {FenceMode}
+     * @memberof RoutingStrategyStandardFence
+     */
+    activeMode?: FenceMode;
+}
+/**
+ * Routing Strategy Fence.
+ * @export
+ * @interface RoutingStrategyStandardFenceForUpsert
+ */
+export interface RoutingStrategyStandardFenceForUpsert {
+    /**
+     * 
+     * @type {RoutingStrategyStandardFenceType}
+     * @memberof RoutingStrategyStandardFenceForUpsert
+     */
+    type: RoutingStrategyStandardFenceType;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyStandardFenceForUpsert
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {FenceMode}
+     * @memberof RoutingStrategyStandardFenceForUpsert
+     */
+    activeMode?: FenceMode;
+    /**
+     * 
+     * @type {FenceImplementation}
+     * @memberof RoutingStrategyStandardFenceForUpsert
+     */
+    implementation: FenceImplementation;
+}
+/**
+ * RoutingStrategyStandardFenceType
+ * @export
+ * @enum {string}
+ */
+export enum RoutingStrategyStandardFenceType {
+    StandardFence = 'StandardFence'
+}
+/**
+ * A rating is used to rate a set of possible facilities against each other during routing of orders.
+ * @export
+ * @interface RoutingStrategyStandardRating
+ */
+export interface RoutingStrategyStandardRating {
+    /**
+     * 
+     * @type {RoutingStrategyStandardRatingType}
+     * @memberof RoutingStrategyStandardRating
+     */
+    type: RoutingStrategyStandardRatingType;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RoutingStrategyStandardRating
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {AbstractRatingConfiguration}
+     * @memberof RoutingStrategyStandardRating
+     */
+    configuration?: AbstractRatingConfiguration;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyStandardRating
+     */
+    description?: string;
+    /**
+     * 
+     * @type {RatingImplementation}
+     * @memberof RoutingStrategyStandardRating
+     */
+    implementation: RatingImplementation;
+    /**
+     * 
+     * @type {number}
+     * @memberof RoutingStrategyStandardRating
+     */
+    maxPenalty: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyStandardRating
+     */
+    name?: string;
+}
+/**
+ * RoutingStrategyStandardRatingType
+ * @export
+ * @enum {string}
+ */
+export enum RoutingStrategyStandardRatingType {
+    StandardRating = 'StandardRating'
+}
+/**
+ * Routing Strategy Toolkit Fence.
+ * @export
+ * @interface RoutingStrategyToolkitFence
+ */
+export interface RoutingStrategyToolkitFence {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    referenceId: string;
+    /**
+     * 
+     * @type {RoutingStrategyToolkitFenceType}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    type: RoutingStrategyToolkitFenceType;
+    /**
+     * The name of the fence.
+     * @type {string}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    nameLocalized: LocaleString;
+    /**
+     * The description of this fence.
+     * @type {string}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * Indicates whether this fence is active or not.
+     * @type {boolean}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    active: boolean;
+    /**
+     * Order in which this fence is executed
+     * @type {number}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    order: number;
+    /**
+     * 
+     * @type {ToolkitAllowedEntities}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    entity1: ToolkitAllowedEntities;
+    /**
+     * 
+     * @type {ToolkitAllowedEntities}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    entity2: ToolkitAllowedEntities;
+    /**
+     * 
+     * @type {ToolkitRule}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    rule?: ToolkitRule;
+    /**
+     * 
+     * @type {ToolkitComparisonRule}
+     * @memberof RoutingStrategyToolkitFence
+     */
+    comparisonRule?: ToolkitComparisonRule;
+}
+/**
+ * RoutingStrategyToolkitFenceType
+ * @export
+ * @enum {string}
+ */
+export enum RoutingStrategyToolkitFenceType {
+    ToolkitFence = 'ToolkitFence'
+}
+/**
+ * Routing Strategy Toolkit Rating.
+ * @export
+ * @interface RoutingStrategyToolkitRating
+ */
+export interface RoutingStrategyToolkitRating {
+    /**
+     * 
+     * @type {string}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    referenceId: string;
+    /**
+     * The name of the rating
+     * @type {string}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    name?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    nameLocalized: LocaleString;
+    /**
+     * The description of this rating
+     * @type {string}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    description?: string;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    descriptionLocalized?: LocaleString;
+    /**
+     * Indicates whether this fence is active or not
+     * @type {boolean}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {ToolkitAllowedEntities}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    entity1: ToolkitAllowedEntities;
+    /**
+     * 
+     * @type {ToolkitAllowedEntities}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    entity2: ToolkitAllowedEntities;
+    /**
+     * 
+     * @type {ToolkitRule}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    rule?: ToolkitRule;
+    /**
+     * 
+     * @type {ToolkitComparisonRule}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    comparisonRule?: ToolkitComparisonRule;
+    /**
+     * The maximum penalty this rating can have
+     * @type {number}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    maxPenalty: number;
+    /**
+     * 
+     * @type {RoutingStrategyToolkitRatingType}
+     * @memberof RoutingStrategyToolkitRating
+     */
+    type: RoutingStrategyToolkitRatingType;
+}
+/**
+ * RoutingStrategyToolkitRatingType
+ * @export
+ * @enum {string}
+ */
+export enum RoutingStrategyToolkitRatingType {
+    ToolkitRating = 'ToolkitRating'
+}
+/**
+ * RoutingStrategyTransporter
+ * @export
+ * @interface RoutingStrategyTransporter
+ */
+export interface RoutingStrategyTransporter {
+    /**
+     * 
+     * @type {Array<RoutingStrategy>}
+     * @memberof RoutingStrategyTransporter
+     */
+    routingStrategies: Array<RoutingStrategy>;
+    /**
+     * Total number of entities found for this query
+     * @type {number}
+     * @memberof RoutingStrategyTransporter
+     */
+    total: number;
+}
+/**
+ * SafetyStock
  * @export
  * @interface SafetyStock
  */
 export interface SafetyStock {
     /**
      * 
-     * @type {string}
+     * @type {Date}
      * @memberof SafetyStock
      */
-    tenantArticleId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof SafetyStock
-     */
-    value: number;
+    created: Date;
     /**
      * 
      * @type {string}
      * @memberof SafetyStock
      */
     facilityRef?: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof SafetyStock
-     */
-    created: Date;
     /**
      * 
      * @type {string}
@@ -25622,13 +38817,25 @@ export interface SafetyStock {
     lastModified: Date;
     /**
      * 
+     * @type {string}
+     * @memberof SafetyStock
+     */
+    tenantArticleId: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SafetyStock
+     */
+    value: number;
+    /**
+     * 
      * @type {number}
      * @memberof SafetyStock
      */
     version: number;
 }
 /**
- * 
+ * SafetyStockBulkOperation
  * @export
  * @interface SafetyStockBulkOperation
  */
@@ -25638,6 +38845,12 @@ export interface SafetyStockBulkOperation {
      * @type {string}
      * @memberof SafetyStockBulkOperation
      */
+    facilityRef?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SafetyStockBulkOperation
+     */
     tenantArticleId: string;
     /**
      * 
@@ -25645,25 +38858,19 @@ export interface SafetyStockBulkOperation {
      * @memberof SafetyStockBulkOperation
      */
     value: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof SafetyStockBulkOperation
-     */
-    facilityRef?: string;
 }
 /**
- * 
+ * SafetyStockBulkOperationResult
  * @export
  * @interface SafetyStockBulkOperationResult
  */
 export interface SafetyStockBulkOperationResult {
     /**
      * 
-     * @type {string}
+     * @type {BulkOperationError}
      * @memberof SafetyStockBulkOperationResult
      */
-    tenantArticleId: string;
+    error?: BulkOperationError;
     /**
      * 
      * @type {string}
@@ -25672,22 +38879,22 @@ export interface SafetyStockBulkOperationResult {
     facilityRef: string;
     /**
      * 
-     * @type {number}
-     * @memberof SafetyStockBulkOperationResult
-     */
-    value: number;
-    /**
-     * 
      * @type {string}
      * @memberof SafetyStockBulkOperationResult
      */
     status: SafetyStockBulkOperationResult.StatusEnum;
     /**
      * 
-     * @type {BulkOperationError}
+     * @type {string}
      * @memberof SafetyStockBulkOperationResult
      */
-    error?: BulkOperationError;
+    tenantArticleId: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SafetyStockBulkOperationResult
+     */
+    value: number;
 }
 
 /**
@@ -25706,7 +38913,7 @@ export namespace SafetyStockBulkOperationResult {
     }
 }
 /**
- * 
+ * SafetyStockBulkOperations
  * @export
  * @interface SafetyStockBulkOperations
  */
@@ -25719,23 +38926,42 @@ export interface SafetyStockBulkOperations {
     operations: Array<SafetyStockBulkOperation>;
 }
 /**
- * 
+ * SafetyStocksPaginatedResult
  * @export
  * @interface SafetyStocksPaginatedResult
  */
 export interface SafetyStocksPaginatedResult {
     /**
      * 
-     * @type {number}
-     * @memberof SafetyStocksPaginatedResult
-     */
-    total: number;
-    /**
-     * 
      * @type {Array<SafetyStock>}
      * @memberof SafetyStocksPaginatedResult
      */
     safetyStocks: Array<SafetyStock>;
+    /**
+     * 
+     * @type {number}
+     * @memberof SafetyStocksPaginatedResult
+     */
+    total: number;
+}
+/**
+ * ScannableIdentifier
+ * @export
+ * @interface ScannableIdentifier
+ */
+export interface ScannableIdentifier {
+    /**
+     * 
+     * @type {SearchType}
+     * @memberof ScannableIdentifier
+     */
+    searchType?: SearchType;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ScannableIdentifier
+     */
+    identifiers: Array<string>;
 }
 /**
  * Configuration to show the client how the items should be scanned during picking
@@ -25760,7 +38986,7 @@ export enum ScanningRuleTypeEnum {
     LOCATION = 'LOCATION'
 }
 /**
- * 
+ * ScanningRuleValue
  * @export
  * @interface ScanningRuleValue
  */
@@ -25779,26 +39005,20 @@ export interface ScanningRuleValue {
     scanningRuleType: ScanningRuleTypeEnum;
 }
 /**
- * 
+ * ScheduledPickJobReleaseConfiguration
  * @export
- * @interface ScopedCapabilities
+ * @interface ScheduledPickJobReleaseConfiguration
  */
-export interface ScopedCapabilities {
+export interface ScheduledPickJobReleaseConfiguration {
     /**
-     * 
-     * @type {Array<ScopedCapability>}
-     * @memberof ScopedCapabilities
-     */
-    capabilities?: Array<ScopedCapability>;
-    /**
-     * Total number of found entities for this query
+     * This config describes when a scheduled PickJob should be released and made available for picking (pickjob.pickingTimes.latest - openPickJobLeadTimeInMinutes = time when the PickJob should be released).
      * @type {number}
-     * @memberof ScopedCapabilities
+     * @memberof ScheduledPickJobReleaseConfiguration
      */
-    total?: number;
+    openPickJobLeadTimeInMinutes: number;
 }
 /**
- * 
+ * ScopedCapability
  * @export
  * @interface ScopedCapability
  */
@@ -25829,7 +39049,7 @@ export interface ScopedCapability extends VersionedResource {
     configurations?: Array<SubstitutionConfiguration | CarrierConfiguration | RerouteShortPickConfiguration | ReturnNoteConfiguration>;
 }
 /**
- * 
+ * Score
  * @export
  * @interface Score
  */
@@ -25875,7 +39095,43 @@ export enum ScoreType {
     SEQUENCE = 'SEQUENCE'
 }
 /**
- * 
+ * SearchFilter
+ * @export
+ * @interface SearchFilter
+ */
+export interface SearchFilter {
+    /**
+     * Search by regex pattern
+     * @type {string}
+     * @memberof SearchFilter
+     */
+    like?: string;
+}
+/**
+ * SearchOptions
+ * @export
+ * @interface SearchOptions
+ */
+export interface SearchOptions {
+    /**
+     * Set to true to include the total count of items in the search result.
+     * @type {boolean}
+     * @memberof SearchOptions
+     */
+    withTotal?: boolean;
+}
+/**
+ * SearchType
+ * @export
+ * @enum {string}
+ */
+export enum SearchType {
+    PREFIX = 'PREFIX',
+    SUFFIX = 'SUFFIX',
+    CONTAINS = 'CONTAINS'
+}
+/**
+ * Section
  * @export
  * @enum {string}
  */
@@ -25888,11 +39144,17 @@ export enum Section {
     PACKINGTARGETCONTAINER = 'PACKING_TARGET_CONTAINER'
 }
 /**
- * 
+ * ServiceJob
  * @export
  * @interface ServiceJob
  */
 export interface ServiceJob extends VersionedResource {
+    /**
+     * 
+     * @type {Editor}
+     * @memberof ServiceJob
+     */
+    editor?: Editor;
     /**
      * 
      * @type {string}
@@ -25941,6 +39203,12 @@ export interface ServiceJob extends VersionedResource {
      * @memberof ServiceJob
      */
     status: ServiceJobStatus;
+    /**
+     * 
+     * @type {ServiceJobStatusInformation}
+     * @memberof ServiceJob
+     */
+    statusInformation?: ServiceJobStatusInformation;
     /**
      * 
      * @type {LocaleString}
@@ -26002,6 +39270,12 @@ export interface ServiceJob extends VersionedResource {
      */
     customServiceRef: string;
     /**
+     * Tenant Id of the customService this ServiceJob was created from.
+     * @type {string}
+     * @memberof ServiceJob
+     */
+    tenantCustomServiceId?: string;
+    /**
      * ID of the Linked Service Job, the Service Job should reference.
      * @type {string}
      * @memberof ServiceJob
@@ -26019,16 +39293,22 @@ export interface ServiceJob extends VersionedResource {
      * @memberof ServiceJob
      */
     inheritedLineItems?: Array<InheritedServiceJobLineItem>;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUser>}
+     * @memberof ServiceJob
+     */
+    assignedUsers?: Array<AssignedUser>;
 }
 /**
- * 
+ * ServiceJobActionsParameter
  * @export
  * @interface ServiceJobActionsParameter
  */
 export interface ServiceJobActionsParameter {
 }
 /**
- * 
+ * ServiceJobAdditionalInformation
  * @export
  * @interface ServiceJobAdditionalInformation
  */
@@ -26041,17 +39321,23 @@ export interface ServiceJobAdditionalInformation extends AdditionalInformation {
     value?: string | number | boolean;
 }
 /**
- * 
+ * ServiceJobAdditionalInformationForCreation
  * @export
  * @interface ServiceJobAdditionalInformationForCreation
  */
 export interface ServiceJobAdditionalInformationForCreation {
     /**
-     * ID of the additional information
+     * ID of the additional information. Either tenantAdditionalInformationId or additionalInformationRef must be set.
      * @type {string}
      * @memberof ServiceJobAdditionalInformationForCreation
      */
-    additionalInformationRef: string;
+    additionalInformationRef?: string;
+    /**
+     * external ID of the additional information. Either tenantAdditionalInformationId or additionalInformationRef must be set.
+     * @type {string}
+     * @memberof ServiceJobAdditionalInformationForCreation
+     */
+    tenantAdditionalInformationRef?: string;
     /**
      * Value of the additional information
      * @type {string | number | boolean}
@@ -26060,7 +39346,7 @@ export interface ServiceJobAdditionalInformationForCreation {
     value?: string | number | boolean;
 }
 /**
- * 
+ * ServiceJobAdditionalInformationForUpdate
  * @export
  * @interface ServiceJobAdditionalInformationForUpdate
  */
@@ -26070,7 +39356,13 @@ export interface ServiceJobAdditionalInformationForUpdate {
      * @type {string}
      * @memberof ServiceJobAdditionalInformationForUpdate
      */
-    additionalInformationRef: string;
+    additionalInformationRef?: string;
+    /**
+     * external ID of the additional information
+     * @type {string}
+     * @memberof ServiceJobAdditionalInformationForUpdate
+     */
+    tenantAdditionalInformationRef?: string;
     /**
      * Value of the additional information
      * @type {string | number | boolean}
@@ -26079,7 +39371,32 @@ export interface ServiceJobAdditionalInformationForUpdate {
     value?: string | number | boolean;
 }
 /**
- * 
+ * ServiceJobCancelReason
+ * @export
+ * @interface ServiceJobCancelReason
+ */
+export interface ServiceJobCancelReason {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServiceJobCancelReason
+     */
+    active: boolean;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof ServiceJobCancelReason
+     */
+    cancelReasonLocalized: LocaleString;
+    /**
+     * translated cancelReason selected from cancelReasonLocalized
+     * @type {string}
+     * @memberof ServiceJobCancelReason
+     */
+    cancelReason?: string;
+}
+/**
+ * ServiceJobCancelledActionEnum
  * @export
  * @enum {string}
  */
@@ -26087,7 +39404,7 @@ export enum ServiceJobCancelledActionEnum {
     CancelServiceJob = 'CancelServiceJob'
 }
 /**
- * 
+ * ServiceJobCancelledActionParameter
  * @export
  * @interface ServiceJobCancelledActionParameter
  */
@@ -26110,9 +39427,15 @@ export interface ServiceJobCancelledActionParameter {
      * @memberof ServiceJobCancelledActionParameter
      */
     additionalInformation?: Array<ServiceJobAdditionalInformationForUpdate>;
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof ServiceJobCancelledActionParameter
+     */
+    cancelReason?: LocaleString;
 }
 /**
- * 
+ * ServiceJobCreatedWebHookEvent
  * @export
  * @interface ServiceJobCreatedWebHookEvent
  */
@@ -26125,7 +39448,7 @@ export interface ServiceJobCreatedWebHookEvent extends WebHookEvent {
     payload: ServiceJob;
 }
 /**
- * 
+ * ServiceJobFilterChannel
  * @export
  * @enum {string}
  */
@@ -26134,7 +39457,7 @@ export enum ServiceJobFilterChannel {
     SHIPPING = 'SHIPPING'
 }
 /**
- * 
+ * ServiceJobFinishedActionEnum
  * @export
  * @enum {string}
  */
@@ -26142,7 +39465,7 @@ export enum ServiceJobFinishedActionEnum {
     FinishServiceJob = 'FinishServiceJob'
 }
 /**
- * 
+ * ServiceJobFinishedActionParameter
  * @export
  * @interface ServiceJobFinishedActionParameter
  */
@@ -26167,7 +39490,7 @@ export interface ServiceJobFinishedActionParameter {
     additionalInformation?: Array<ServiceJobAdditionalInformationForUpdate>;
 }
 /**
- * 
+ * ServiceJobFinishedWebHookEvent
  * @export
  * @interface ServiceJobFinishedWebHookEvent
  */
@@ -26180,7 +39503,7 @@ export interface ServiceJobFinishedWebHookEvent extends WebHookEvent {
     payload: ServiceJob;
 }
 /**
- * 
+ * ServiceJobForCreation
  * @export
  * @interface ServiceJobForCreation
  */
@@ -26192,11 +39515,17 @@ export interface ServiceJobForCreation {
      */
     operativeProcessRef?: string;
     /**
-     * ID of the Custom Service, the Service Job should reference.
+     * ID of the Custom Service, the Service Job should reference. Either this and/or the tenantCustomServiceId must passed.
      * @type {string}
      * @memberof ServiceJobForCreation
      */
-    customServiceRef: string;
+    customServiceRef?: string;
+    /**
+     * Tenant ID of the Custom Service, the Service Job should reference. Either this and/or the customServiceRef must passed.
+     * @type {string}
+     * @memberof ServiceJobForCreation
+     */
+    tenantCustomServiceId?: string;
     /**
      * ID of the Process, the Service Job belongs to.
      * @type {string}
@@ -26251,9 +39580,15 @@ export interface ServiceJobForCreation {
      * @memberof ServiceJobForCreation
      */
     serviceJobLinkRef?: string;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUserForCreationByName | AssignedUserForCreationById>}
+     * @memberof ServiceJobForCreation
+     */
+    assignedUsers?: Array<AssignedUserForCreationByName | AssignedUserForCreationById>;
 }
 /**
- * 
+ * ServiceJobInProgressActionEnum
  * @export
  * @enum {string}
  */
@@ -26261,7 +39596,7 @@ export enum ServiceJobInProgressActionEnum {
     StartServiceJob = 'StartServiceJob'
 }
 /**
- * 
+ * ServiceJobInProgressActionParameter
  * @export
  * @interface ServiceJobInProgressActionParameter
  */
@@ -26286,7 +39621,7 @@ export interface ServiceJobInProgressActionParameter {
     additionalInformation?: Array<ServiceJobAdditionalInformationForUpdate>;
 }
 /**
- * 
+ * ServiceJobLineItem
  * @export
  * @interface ServiceJobLineItem
  */
@@ -26297,9 +39632,21 @@ export interface ServiceJobLineItem extends ServiceJobLineItemForCreation {
      * @memberof ServiceJobLineItem
      */
     id: string;
+    /**
+     * 
+     * @type {Array<RecordableAttribute>}
+     * @memberof ServiceJobLineItem
+     */
+    recordableAttributes?: Array<RecordableAttribute>;
+    /**
+     * The id of the line item this line item was originated from, before any split has happened. This can be used to restore the ‘pre-split’ status.
+     * @type {string}
+     * @memberof ServiceJobLineItem
+     */
+    originId?: string;
 }
 /**
- * 
+ * ServiceJobLineItemArticle
  * @export
  * @interface ServiceJobLineItemArticle
  */
@@ -26312,7 +39659,7 @@ export interface ServiceJobLineItemArticle extends AbstractArticle {
     attributes?: Array<ArticleAttributeItem>;
 }
 /**
- * 
+ * ServiceJobLineItemForCreation
  * @export
  * @interface ServiceJobLineItemForCreation
  */
@@ -26335,9 +39682,21 @@ export interface ServiceJobLineItemForCreation {
      * @memberof ServiceJobLineItemForCreation
      */
     article: ServiceJobLineItemArticle;
+    /**
+     * Attributes that can be added to the service job line item. These attributes cannot be used within fulfillment processes, but it could be useful to have the information carried here.
+     * @type {any}
+     * @memberof ServiceJobLineItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForCreation>}
+     * @memberof ServiceJobLineItemForCreation
+     */
+    recordableAttributes?: Array<RecordableAttributeForCreation>;
 }
 /**
- * 
+ * ServiceJobLink
  * @export
  * @interface ServiceJobLink
  */
@@ -26374,7 +39733,7 @@ export interface ServiceJobLink {
     nextServiceJobLinks: Array<ServiceJobLink>;
 }
 /**
- * 
+ * ServiceJobLinkForAdding
  * @export
  * @interface ServiceJobLinkForAdding
  */
@@ -26387,7 +39746,7 @@ export interface ServiceJobLinkForAdding {
     serviceJobRef: string;
 }
 /**
- * 
+ * ServiceJobLinkForCreation
  * @export
  * @interface ServiceJobLinkForCreation
  */
@@ -26412,7 +39771,7 @@ export interface ServiceJobLinkForCreation {
     nextServiceJobLinks: Array<ServiceJobLinkForCreation>;
 }
 /**
- * 
+ * ServiceJobObsoleteActionEnum
  * @export
  * @enum {string}
  */
@@ -26420,7 +39779,7 @@ export enum ServiceJobObsoleteActionEnum {
     ObsoleteServiceJob = 'ObsoleteServiceJob'
 }
 /**
- * 
+ * ServiceJobObsoleteActionParameter
  * @export
  * @interface ServiceJobObsoleteActionParameter
  */
@@ -26439,7 +39798,7 @@ export interface ServiceJobObsoleteActionParameter {
     version: number;
 }
 /**
- * 
+ * ServiceJobOpenActionEnum
  * @export
  * @enum {string}
  */
@@ -26447,7 +39806,7 @@ export enum ServiceJobOpenActionEnum {
     OpenServiceJob = 'OpenServiceJob'
 }
 /**
- * 
+ * ServiceJobOpenActionParameter
  * @export
  * @interface ServiceJobOpenActionParameter
  */
@@ -26483,7 +39842,92 @@ export enum ServiceJobOrderBy {
     LASTMODIFIEDDESC = 'LAST_MODIFIED_DESC'
 }
 /**
- * 
+ * ServiceJobReplaceAssignedUsersActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum ServiceJobReplaceAssignedUsersActionEnum {
+    REPLACEASSIGNEDUSERS = 'REPLACE_ASSIGNED_USERS'
+}
+/**
+ * Action to replace the assigned users.
+ * @export
+ * @interface ServiceJobReplaceAssignedUsersActionParameter
+ */
+export interface ServiceJobReplaceAssignedUsersActionParameter {
+    /**
+     * 
+     * @type {ServiceJobReplaceAssignedUsersActionEnum}
+     * @memberof ServiceJobReplaceAssignedUsersActionParameter
+     */
+    name: ServiceJobReplaceAssignedUsersActionEnum;
+    /**
+     * Version of the entity to be changed
+     * @type {number}
+     * @memberof ServiceJobReplaceAssignedUsersActionParameter
+     */
+    version: number;
+    /**
+     * Assigned users for this entity
+     * @type {Array<AssignedUserForCreationByName | AssignedUserForCreationById>}
+     * @memberof ServiceJobReplaceAssignedUsersActionParameter
+     */
+    assignedUsers: Array<AssignedUserForCreationByName | AssignedUserForCreationById>;
+}
+/**
+ * ServiceJobSplitLineItemsActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum ServiceJobSplitLineItemsActionEnum {
+    SPLITLINESSERVICEJOB = 'SPLIT_LINES_SERVICE_JOB'
+}
+/**
+ * ServiceJobSplitLineItemsActionParameter
+ * @export
+ * @interface ServiceJobSplitLineItemsActionParameter
+ */
+export interface ServiceJobSplitLineItemsActionParameter {
+    /**
+     * 
+     * @type {ServiceJobSplitLineItemsActionEnum}
+     * @memberof ServiceJobSplitLineItemsActionParameter
+     */
+    name: ServiceJobSplitLineItemsActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof ServiceJobSplitLineItemsActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<ServiceJobSplitLineItemsInfo>}
+     * @memberof ServiceJobSplitLineItemsActionParameter
+     */
+    splitLineItemsInfo: Array<ServiceJobSplitLineItemsInfo>;
+}
+/**
+ * ServiceJobSplitLineItemsInfo
+ * @export
+ * @interface ServiceJobSplitLineItemsInfo
+ */
+export interface ServiceJobSplitLineItemsInfo {
+    /**
+     * references the id of the lineItem of a serviceJob
+     * @type {string}
+     * @memberof ServiceJobSplitLineItemsInfo
+     */
+    lineItemId: string;
+    /**
+     * quantity of the specific item that has been ordered
+     * @type {number}
+     * @memberof ServiceJobSplitLineItemsInfo
+     */
+    quantity: number;
+}
+/**
+ * ServiceJobStatus
  * @export
  * @enum {string}
  */
@@ -26497,7 +39941,53 @@ export enum ServiceJobStatus {
     NOTREADY = 'NOT_READY'
 }
 /**
- * 
+ * ServiceJobStatusInformation
+ * @export
+ * @interface ServiceJobStatusInformation
+ */
+export interface ServiceJobStatusInformation {
+    /**
+     * 
+     * @type {StatusReason}
+     * @memberof ServiceJobStatusInformation
+     */
+    cancelReason?: StatusReason;
+}
+/**
+ * ServiceJobUpdateRecordableAttributesActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum ServiceJobUpdateRecordableAttributesActionEnum {
+    UPDATERECORDABLEATTRIBUTESSERVICEJOB = 'UPDATE_RECORDABLE_ATTRIBUTES_SERVICE_JOB'
+}
+/**
+ * ServiceJobUpdateRecordableAttributesActionParameter
+ * @export
+ * @interface ServiceJobUpdateRecordableAttributesActionParameter
+ */
+export interface ServiceJobUpdateRecordableAttributesActionParameter {
+    /**
+     * 
+     * @type {ServiceJobUpdateRecordableAttributesActionEnum}
+     * @memberof ServiceJobUpdateRecordableAttributesActionParameter
+     */
+    name: ServiceJobUpdateRecordableAttributesActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof ServiceJobUpdateRecordableAttributesActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForUpdate>}
+     * @memberof ServiceJobUpdateRecordableAttributesActionParameter
+     */
+    recordableAttributeUpdates: Array<RecordableAttributeForUpdate>;
+}
+/**
+ * ServiceJobWaitingForInputActionEnum
  * @export
  * @enum {string}
  */
@@ -26505,7 +39995,7 @@ export enum ServiceJobWaitingForInputActionEnum {
     HoldServiceJob = 'HoldServiceJob'
 }
 /**
- * 
+ * ServiceJobWaitingForInputActionParameter
  * @export
  * @interface ServiceJobWaitingForInputActionParameter
  */
@@ -26530,7 +40020,7 @@ export interface ServiceJobWaitingForInputActionParameter {
     additionalInformation?: Array<ServiceJobAdditionalInformationForUpdate>;
 }
 /**
- * 
+ * ServiceJobWithSearchPaths
  * @export
  * @interface ServiceJobWithSearchPaths
  */
@@ -26543,7 +40033,7 @@ export interface ServiceJobWithSearchPaths extends ServiceJob {
     searchPaths: Array<string>;
 }
 /**
- * 
+ * ServiceJobs
  * @export
  * @interface ServiceJobs
  */
@@ -26562,7 +40052,7 @@ export interface ServiceJobs {
     total?: number;
 }
 /**
- * 
+ * ShipFromStoreRerouteConfiguration
  * @export
  * @interface ShipFromStoreRerouteConfiguration
  */
@@ -26599,7 +40089,7 @@ export interface ShipFromStoreRerouteConfiguration {
     rerouteType: RerouteType;
 }
 /**
- * 
+ * Shipment
  * @export
  * @interface Shipment
  */
@@ -26666,7 +40156,14 @@ export interface Shipment extends ShipmentForCreation {
     status: ShipmentStatus;
 }
 /**
- * 
+ * ShipmentActionsParameter
+ * @export
+ * @interface ShipmentActionsParameter
+ */
+export interface ShipmentActionsParameter {
+}
+/**
+ * ShipmentCreatedWebHookEvent
  * @export
  * @interface ShipmentCreatedWebHookEvent
  */
@@ -26679,7 +40176,7 @@ export interface ShipmentCreatedWebHookEvent extends WebHookEvent {
     payload: Shipment;
 }
 /**
- * 
+ * ShipmentForCreation
  * @export
  * @interface ShipmentForCreation
  */
@@ -26818,7 +40315,7 @@ export interface ShipmentForCreation {
     transfers?: Array<OperativeTransfer>;
 }
 /**
- * 
+ * ShipmentLineItem
  * @export
  * @interface ShipmentLineItem
  */
@@ -26831,7 +40328,7 @@ export interface ShipmentLineItem extends ShipmentLineItemForCreation {
     id: string;
 }
 /**
- * 
+ * ShipmentLineItemArticle
  * @export
  * @interface ShipmentLineItemArticle
  */
@@ -26844,7 +40341,7 @@ export interface ShipmentLineItemArticle extends AbstractArticle {
     attributes?: Array<ArticleAttributeItem>;
 }
 /**
- * 
+ * ShipmentLineItemForCreation
  * @export
  * @interface ShipmentLineItemForCreation
  */
@@ -26895,7 +40392,104 @@ export enum ShipmentOrderBy {
     STATUSTARGETTIMEORDERDATE = 'STATUS_TARGET_TIME_ORDER_DATE'
 }
 /**
- * 
+ * ShipmentParcelsFilter
+ * @export
+ * @interface ShipmentParcelsFilter
+ */
+export interface ShipmentParcelsFilter {
+    /**
+     * Search by status
+     * @type {ShipmentParcelsParcelStatusEnumFilter}
+     * @memberof ShipmentParcelsFilter
+     */
+    status?: ShipmentParcelsParcelStatusEnumFilter;
+}
+/**
+ * ShipmentParcelsListFilter
+ * @export
+ * @interface ShipmentParcelsListFilter
+ */
+export interface ShipmentParcelsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {ShipmentParcelsFilter}
+     * @memberof ShipmentParcelsListFilter
+     */
+    contains?: ShipmentParcelsFilter;
+}
+/**
+ * ShipmentParcelsParcelStatusEnumFilter
+ * @export
+ * @interface ShipmentParcelsParcelStatusEnumFilter
+ */
+export interface ShipmentParcelsParcelStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ShipmentParcelsParcelStatusEnumFilter
+     */
+    eq?: ShipmentParcelsParcelStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ShipmentParcelsParcelStatusEnumFilter
+     */
+    _in?: ShipmentParcelsParcelStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ShipmentParcelsParcelStatusEnumFilter
+     */
+    notEq?: ShipmentParcelsParcelStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace ShipmentParcelsParcelStatusEnumFilter
+ */
+export namespace ShipmentParcelsParcelStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        PROCESSING = 'PROCESSING',
+        DONE = 'DONE',
+        FAILED = 'FAILED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE',
+        WAITINGFORINPUT = 'WAITING_FOR_INPUT'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        PROCESSING = 'PROCESSING',
+        DONE = 'DONE',
+        FAILED = 'FAILED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE',
+        WAITINGFORINPUT = 'WAITING_FOR_INPUT'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        PROCESSING = 'PROCESSING',
+        DONE = 'DONE',
+        FAILED = 'FAILED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE',
+        WAITINGFORINPUT = 'WAITING_FOR_INPUT'
+    }
+}
+/**
+ * ShipmentPatchActions
  * @export
  * @interface ShipmentPatchActions
  */
@@ -26914,6 +40508,307 @@ export interface ShipmentPatchActions {
     version: number;
 }
 /**
+ * ShipmentSearchPayload
+ * @export
+ * @interface ShipmentSearchPayload
+ */
+export interface ShipmentSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof ShipmentSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {ShipmentSearchQueryWrapper}
+     * @memberof ShipmentSearchPayload
+     */
+    query: ShipmentSearchQueryWrapper;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof ShipmentSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<ShipmentSort>}
+     * @memberof ShipmentSearchPayload
+     */
+    sort?: Array<ShipmentSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof ShipmentSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * ShipmentSearchQuery
+ * @export
+ * @interface ShipmentSearchQuery
+ */
+export interface ShipmentSearchQuery {
+    /**
+     * 
+     * @type {Array<ShipmentSearchQuery>}
+     * @memberof ShipmentSearchQuery
+     */
+    and?: Array<ShipmentSearchQuery>;
+    /**
+     * Search by anonymized
+     * @type {BooleanFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    anonymized?: BooleanFilter;
+    /**
+     * Search by carrierKey
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    carrierKey?: StringFilter;
+    /**
+     * Search by carrierRef
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    carrierRef?: StringFilter;
+    /**
+     * Search by created
+     * @type {DateFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    created?: DateFilter;
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * 
+     * @type {Array<ShipmentSearchQuery>}
+     * @memberof ShipmentSearchQuery
+     */
+    or?: Array<ShipmentSearchQuery>;
+    /**
+     * Nested list search by parcels
+     * @type {ShipmentParcelsListFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    parcels?: ShipmentParcelsListFilter;
+    /**
+     * Search by pickJobRef
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    pickJobRef?: StringFilter;
+    /**
+     * Search by status
+     * @type {ShipmentStatusEnumFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    status?: ShipmentStatusEnumFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    targetTime?: DateFilter;
+    /**
+     * Search by tenantOrderId
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQuery
+     */
+    tenantOrderId?: StringFilter;
+}
+/**
+ * ShipmentSearchQueryWrapper
+ * @export
+ * @interface ShipmentSearchQueryWrapper
+ */
+export interface ShipmentSearchQueryWrapper {
+    /**
+     * 
+     * @type {Array<ShipmentSearchQuery>}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    and?: Array<ShipmentSearchQuery>;
+    /**
+     * Search by anonymized
+     * @type {BooleanFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    anonymized?: BooleanFilter;
+    /**
+     * Search by carrierKey
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    carrierKey?: StringFilter;
+    /**
+     * Search by carrierRef
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    carrierRef?: StringFilter;
+    /**
+     * Search by created
+     * @type {DateFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    created: DateFilter;
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    id?: StringFilter;
+    /**
+     * 
+     * @type {Array<ShipmentSearchQuery>}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    or?: Array<ShipmentSearchQuery>;
+    /**
+     * Nested list search by parcels
+     * @type {ShipmentParcelsListFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    parcels?: ShipmentParcelsListFilter;
+    /**
+     * Search by pickJobRef
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    pickJobRef?: StringFilter;
+    /**
+     * Search by status
+     * @type {ShipmentStatusEnumFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    status?: ShipmentStatusEnumFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    targetTime?: DateFilter;
+    /**
+     * Search by tenantOrderId
+     * @type {StringFilter}
+     * @memberof ShipmentSearchQueryWrapper
+     */
+    tenantOrderId?: StringFilter;
+}
+/**
+ * ShipmentSort
+ * @export
+ * @interface ShipmentSort
+ */
+export interface ShipmentSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof ShipmentSort
+     */
+    created?: ShipmentSort.CreatedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof ShipmentSort
+     */
+    targetTime?: ShipmentSort.TargetTimeEnum;
+}
+
+/**
+ * @export
+ * @namespace ShipmentSort
+ */
+export namespace ShipmentSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CreatedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TargetTimeEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * ShipmentSplitLineItemsActionEnum
+ * @export
+ * @enum {string}
+ */
+export enum ShipmentSplitLineItemsActionEnum {
+    SPLITLINELINESSHIPMENT = 'SPLIT_LINE_LINES_SHIPMENT'
+}
+/**
+ * ShipmentSplitLineItemsActionParameter
+ * @export
+ * @interface ShipmentSplitLineItemsActionParameter
+ */
+export interface ShipmentSplitLineItemsActionParameter {
+    /**
+     * 
+     * @type {ShipmentSplitLineItemsActionEnum}
+     * @memberof ShipmentSplitLineItemsActionParameter
+     */
+    name: ShipmentSplitLineItemsActionEnum;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof ShipmentSplitLineItemsActionParameter
+     */
+    version: number;
+    /**
+     * 
+     * @type {Array<ShipmentSplitLineItemsInfo>}
+     * @memberof ShipmentSplitLineItemsActionParameter
+     */
+    splitLineItemsInfo: Array<ShipmentSplitLineItemsInfo>;
+}
+/**
+ * ShipmentSplitLineItemsInfo
+ * @export
+ * @interface ShipmentSplitLineItemsInfo
+ */
+export interface ShipmentSplitLineItemsInfo {
+    /**
+     * references the id of the item of a shipment
+     * @type {string}
+     * @memberof ShipmentSplitLineItemsInfo
+     */
+    lineItemId: string;
+    /**
+     * quantity of the specific item that has been shipped
+     * @type {number}
+     * @memberof ShipmentSplitLineItemsInfo
+     */
+    quantity: number;
+}
+/**
  * Every newly created shipment is in state INITIAL. When the parcel labels should be requested the state changes to REQUEST and as soon as all parcel labels are successfully requested the state changes to CONFIRMED. The state COMPLETED is set in the end or the process
  * @export
  * @enum {string}
@@ -26928,7 +40823,78 @@ export enum ShipmentStatus {
     OBSOLETE = 'OBSOLETE'
 }
 /**
- * 
+ * ShipmentStatusEnumFilter
+ * @export
+ * @interface ShipmentStatusEnumFilter
+ */
+export interface ShipmentStatusEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ShipmentStatusEnumFilter
+     */
+    eq?: ShipmentStatusEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ShipmentStatusEnumFilter
+     */
+    _in?: ShipmentStatusEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof ShipmentStatusEnumFilter
+     */
+    notEq?: ShipmentStatusEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace ShipmentStatusEnumFilter
+ */
+export namespace ShipmentStatusEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        INITIAL = 'INITIAL',
+        REQUEST = 'REQUEST',
+        RETRYABLE = 'RETRYABLE',
+        CONFIRMED = 'CONFIRMED',
+        COMPLETED = 'COMPLETED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        INITIAL = 'INITIAL',
+        REQUEST = 'REQUEST',
+        RETRYABLE = 'RETRYABLE',
+        CONFIRMED = 'CONFIRMED',
+        COMPLETED = 'COMPLETED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        INITIAL = 'INITIAL',
+        REQUEST = 'REQUEST',
+        RETRYABLE = 'RETRYABLE',
+        CONFIRMED = 'CONFIRMED',
+        COMPLETED = 'COMPLETED',
+        CANCELED = 'CANCELED',
+        OBSOLETE = 'OBSOLETE'
+    }
+}
+/**
+ * ShipmentUpdatedWebHookEvent
  * @export
  * @interface ShipmentUpdatedWebHookEvent
  */
@@ -26941,7 +40907,7 @@ export interface ShipmentUpdatedWebHookEvent extends WebHookEvent {
     payload: Shipment;
 }
 /**
- * 
+ * ShipmentWithSearchPath
  * @export
  * @interface ShipmentWithSearchPath
  */
@@ -26954,7 +40920,7 @@ export interface ShipmentWithSearchPath extends Shipment {
     searchPaths?: Array<string>;
 }
 /**
- * 
+ * ShortPickReason
  * @export
  * @interface ShortPickReason
  */
@@ -26979,7 +40945,20 @@ export interface ShortPickReason {
     reasonLocalized: LocaleString;
 }
 /**
- * 
+ * ShortPickReasonForUpsert
+ * @export
+ * @interface ShortPickReasonForUpsert
+ */
+export interface ShortPickReasonForUpsert {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof ShortPickReasonForUpsert
+     */
+    reasonLocalized?: LocaleString;
+}
+/**
+ * SortDirection
  * @export
  * @enum {string}
  */
@@ -26988,7 +40967,7 @@ export enum SortDirection {
     DESCENDING = 'DESCENDING'
 }
 /**
- * 
+ * SortParameter
  * @export
  * @interface SortParameter
  */
@@ -27007,7 +40986,7 @@ export interface SortParameter {
     sortParameterName: SortParameterName;
 }
 /**
- * 
+ * SortParameterName
  * @export
  * @enum {string}
  */
@@ -27022,7 +41001,182 @@ export enum SortParameterName {
     ORDERID = 'ORDERID'
 }
 /**
+ * SourcingOption
+ * @export
+ * @interface SourcingOption
+ */
+export interface SourcingOption {
+    /**
+     * 
+     * @type {string}
+     * @memberof SourcingOption
+     */
+    id: string;
+    /**
+     * 
+     * @type {DeliveryCost}
+     * @memberof SourcingOption
+     */
+    totalCosts?: DeliveryCost;
+    /**
+     * The total calculated penalty we calculated for this option
+     * @type {number}
+     * @memberof SourcingOption
+     */
+    totalPenalty?: number;
+    /**
+     * Duration of the total delivery time. Defined in ISO-8601 duration notation in working days.
+     * @type {string}
+     * @memberof SourcingOption
+     */
+    totalDeliveryTime?: string;
+    /**
+     * 
+     * @type {Array<SourcingOptionNode>}
+     * @memberof SourcingOption
+     */
+    nodes: Array<SourcingOptionNode>;
+    /**
+     * 
+     * @type {Array<SourcingOptionTransfer>}
+     * @memberof SourcingOption
+     */
+    transfers: Array<SourcingOptionTransfer>;
+}
+/**
+ * SourcingOptionNode
+ * @export
+ * @interface SourcingOptionNode
+ */
+export interface SourcingOptionNode {
+    /**
+     * 
+     * @type {string}
+     * @memberof SourcingOptionNode
+     */
+    id: string;
+    /**
+     * id of this node, unique for this Sourcing Option Responses
+     * @type {string}
+     * @memberof SourcingOptionNode
+     */
+    facilityRef?: string;
+    /**
+     * 
+     * @type {NodeType}
+     * @memberof SourcingOptionNode
+     */
+    type: NodeType;
+    /**
+     * 
+     * @type {Array<HandledItem>}
+     * @memberof SourcingOptionNode
+     */
+    lineItems: Array<HandledItem>;
+}
+/**
+ * SourcingOptionTransfer
+ * @export
+ * @interface SourcingOptionTransfer
+ */
+export interface SourcingOptionTransfer {
+    /**
+     * 
+     * @type {string}
+     * @memberof SourcingOptionTransfer
+     */
+    sourceNodeRef: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SourcingOptionTransfer
+     */
+    targetNodeRef: string;
+    /**
+     * 
+     * @type {SourcingOptionTransferCarrier}
+     * @memberof SourcingOptionTransfer
+     */
+    carrier?: SourcingOptionTransferCarrier;
+    /**
+     * 
+     * @type {Array<HandledItem>}
+     * @memberof SourcingOptionTransfer
+     */
+    lineItems: Array<HandledItem>;
+}
+/**
  * 
+ * @export
+ * @interface SourcingOptionTransferCarrier
+ */
+export interface SourcingOptionTransferCarrier {
+    /**
+     * 
+     * @type {string}
+     * @memberof SourcingOptionTransferCarrier
+     */
+    carrierRef?: string;
+}
+/**
+ * SourcingOptionsRequest
+ * @export
+ * @interface SourcingOptionsRequest
+ */
+export interface SourcingOptionsRequest {
+    /**
+     * 
+     * @type {ResourceInvestment}
+     * @memberof SourcingOptionsRequest
+     */
+    resourceInvestment?: ResourceInvestment;
+    /**
+     * 
+     * @type {OrderForSourcingOptionsRequest}
+     * @memberof SourcingOptionsRequest
+     */
+    order: OrderForSourcingOptionsRequest;
+    /**
+     * 
+     * @type {OptimzationHints}
+     * @memberof SourcingOptionsRequest
+     */
+    optimizationHints?: OptimzationHints;
+}
+/**
+ * SourcingOptionsResponse
+ * @export
+ * @interface SourcingOptionsResponse
+ */
+export interface SourcingOptionsResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof SourcingOptionsResponse
+     */
+    id: string;
+    /**
+     * 
+     * @type {SourcingOptionsResult}
+     * @memberof SourcingOptionsResponse
+     */
+    result: SourcingOptionsResult;
+}
+/**
+ * SourcingOptionsResult
+ * @export
+ * @interface SourcingOptionsResult
+ */
+export interface SourcingOptionsResult {
+    /**
+     * 
+     * @type {Array<SourcingOption>}
+     * @memberof SourcingOptionsResult
+     */
+    options: Array<SourcingOption>;
+}
+/**
+ * SplitInformation
  * @export
  * @interface SplitInformation
  */
@@ -27053,7 +41207,7 @@ export interface SplitInformation {
     splittedItems: Array<AssignmentItem>;
 }
 /**
- * 
+ * SplitResultType
  * @export
  * @enum {string}
  */
@@ -27070,7 +41224,76 @@ export enum SplitResultType {
     PARKINWAITINGROOM = 'PARK_IN_WAITING_ROOM'
 }
 /**
- * 
+ * Stack
+ * @export
+ * @interface Stack
+ */
+export interface Stack extends StackForCreation {
+    /**
+     * 
+     * @type {string}
+     * @memberof Stack
+     */
+    id: string;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof Stack
+     */
+    version: number;
+    /**
+     * The date this entity was created at the platform. This value is generated by the service.
+     * @type {Date}
+     * @memberof Stack
+     */
+    created: Date;
+    /**
+     * The date this entity was modified last. This value is generated by the service.
+     * @type {Date}
+     * @memberof Stack
+     */
+    lastModified: Date;
+}
+/**
+ * StackForCreation
+ * @export
+ * @interface StackForCreation
+ */
+export interface StackForCreation {
+    /**
+     * Linked Facilities through reference
+     * @type {Array<string>}
+     * @memberof StackForCreation
+     */
+    facilityRefs: Array<string>;
+    /**
+     * Linked Processes through reference
+     * @type {Array<string>}
+     * @memberof StackForCreation
+     */
+    processRefs: Array<string>;
+}
+/**
+ * StacksResponse
+ * @export
+ * @interface StacksResponse
+ */
+export interface StacksResponse {
+    /**
+     * total number for the given filter
+     * @type {number}
+     * @memberof StacksResponse
+     */
+    total: number;
+    /**
+     * 
+     * @type {Array<Stack>}
+     * @memberof StacksResponse
+     */
+    stacks: Array<Stack>;
+}
+/**
+ * StartItemReturnActionEnum
  * @export
  * @enum {string}
  */
@@ -27078,7 +41301,7 @@ export enum StartItemReturnActionEnum {
     StartItemReturn = 'StartItemReturn'
 }
 /**
- * 
+ * Action to start an ItemReturn.
  * @export
  * @interface StartItemReturnActionParameter
  */
@@ -27097,7 +41320,7 @@ export interface StartItemReturnActionParameter {
     itemReturnJobVersion: number;
 }
 /**
- * 
+ * StartItemReturnJobActionEnum
  * @export
  * @enum {string}
  */
@@ -27105,7 +41328,7 @@ export enum StartItemReturnJobActionEnum {
     StartItemReturnJob = 'StartItemReturnJob'
 }
 /**
- * 
+ * Action to start a ItemReturnJob.
  * @export
  * @interface StartItemReturnJobActionParameter
  */
@@ -27124,7 +41347,7 @@ export interface StartItemReturnJobActionParameter {
     version: number;
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated Use api/pickruns/:id/actions instead
+ * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Use api/pickruns/:id/actions instead
  * @export
  * @interface StartPickRunAction
  */
@@ -27151,74 +41374,40 @@ export namespace StartPickRunAction {
     }
 }
 /**
- * 
+ * Sets the status of the stowjob to IN_PROGRESS
  * @export
- * @interface StaticCarrierCountryServiceMapping
+ * @interface StartStowJobAction
  */
-export interface StaticCarrierCountryServiceMapping {
+export interface StartStowJobAction {
     /**
-     * 
-     * @type {RegionInformation}
-     * @memberof StaticCarrierCountryServiceMapping
+     * The name of the action that should be performed
+     * @type {string}
+     * @memberof StartStowJobAction
      */
-    source: RegionInformation;
+    name: StartStowJobAction.NameEnum;
     /**
-     * The destination regions this mapping should be applied to.
-     * @type {Array<RegionInformation>}
-     * @memberof StaticCarrierCountryServiceMapping
+     * The current version of the stow job that should be modified
+     * @type {number}
+     * @memberof StartStowJobAction
      */
-    destinations: Array<RegionInformation>;
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace StartStowJobAction
+ */
+export namespace StartStowJobAction {
     /**
-     * 
-     * @type {Array<MandatoryShippingArticleAttribute>}
-     * @memberof StaticCarrierCountryServiceMapping
+     * @export
+     * @enum {string}
      */
-    mandatoryShippingArticleAttributes?: Array<MandatoryShippingArticleAttribute>;
-    /**
-     * 
-     * @type {Array<MandatoryShippingAttribute>}
-     * @memberof StaticCarrierCountryServiceMapping
-     */
-    mandatoryShippingAttributes?: Array<MandatoryShippingAttribute>;
-    /**
-     * Deprecated - use mandatoryShippingArticleAttributes instead
-     * @type {Array<MandatoryShippingItemAttribute>}
-     * @memberof StaticCarrierCountryServiceMapping
-     */
-    mandatoryShippingItemAttributes?: Array<MandatoryShippingItemAttribute>;
-    /**
-     * Array of products for the given mapping
-     * @type {Array<string>}
-     * @memberof StaticCarrierCountryServiceMapping
-     */
-    products?: Array<string>;
-    /**
-     * Services which can be provided by the carrier
-     * @type {Array<CarrierServices>}
-     * @memberof StaticCarrierCountryServiceMapping
-     */
-    carrierServices?: Array<CarrierServices>;
-    /**
-     * 
-     * @type {CarrierProductCategory}
-     * @memberof StaticCarrierCountryServiceMapping
-     */
-    carrierProductCategory?: CarrierProductCategory;
-    /**
-     * 
-     * @type {CarrierTransitTime}
-     * @memberof StaticCarrierCountryServiceMapping
-     */
-    transitTime?: CarrierTransitTime;
-    /**
-     * 
-     * @type {Array<DeliveryCost>}
-     * @memberof StaticCarrierCountryServiceMapping
-     */
-    deliveryCosts?: Array<DeliveryCost>;
+    export enum NameEnum {
+        STARTSTOWJOB = 'START_STOW_JOB'
+    }
 }
 /**
- * 
+ * Status
  * @export
  * @interface Status
  */
@@ -27247,7 +41436,39 @@ export namespace Status {
     }
 }
 /**
- * 
+ * StatusReason
+ * @export
+ * @interface StatusReason
+ */
+export interface StatusReason {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof StatusReason
+     */
+    reasonLocalized: LocaleString;
+    /**
+     * translated reason selected from reasonLocalized
+     * @type {string}
+     * @memberof StatusReason
+     */
+    reason?: string;
+}
+/**
+ * StatusReasonInternal
+ * @export
+ * @interface StatusReasonInternal
+ */
+export interface StatusReasonInternal {
+    /**
+     * 
+     * @type {LocaleString}
+     * @memberof StatusReasonInternal
+     */
+    cancelReasonLocalized: LocaleString;
+}
+/**
+ * Sticker
  * @export
  * @interface Sticker
  */
@@ -27284,7 +41505,7 @@ export interface Sticker {
     color?: string;
 }
 /**
- * 
+ * StickerConfiguration
  * @export
  * @interface StickerConfiguration
  */
@@ -27297,7 +41518,7 @@ export interface StickerConfiguration {
     offeredStickersByTag?: Array<OfferedStickersByTag>;
 }
 /**
- * 
+ * Stock
  * @export
  * @interface Stock
  */
@@ -27307,7 +41528,37 @@ export interface Stock {
      * @type {number}
      * @memberof Stock
      */
-    reserved: number;
+    available: number;
+    /**
+     * defines until when a stock is included in the stock availability as available and used for routing
+     * @type {Date}
+     * @memberof Stock
+     */
+    availableUntil?: Date;
+    /**
+     * Describes conditions of a stock     *`DEFECTIVE` - stock is defective, not usable for customer orders
+     * @type {Array<string>}
+     * @memberof Stock
+     */
+    conditions?: Array<Stock.ConditionsEnum>;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Stock
+     */
+    created: Date;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof Stock
+     */
+    customAttributes?: any;
+    /**
+     * facility in which the stock is located
+     * @type {string}
+     * @memberof Stock
+     */
+    facilityRef: string;
     /**
      * 
      * @type {number}
@@ -27316,52 +41567,82 @@ export interface Stock {
     facilityWideReserved: number;
     /**
      * 
-     * @type {number}
-     * @memberof Stock
-     */
-    available: number;
-    /**
-     * 
      * @type {string}
      * @memberof Stock
      */
     id: string;
     /**
      * 
-     * @type {number}
+     * @type {Date}
      * @memberof Stock
      */
-    version: number;
+    lastModified: Date;
     /**
-     * 
+     * location on which the stock is placed
      * @type {string}
      * @memberof Stock
      */
-    facilityRef: string;
+    locationRef?: string;
     /**
-     * 
+     * allow tracking of specific values such as expiry dates on a set of items. They should describe physical identifiable properties of the stock and are not meant to be used for metadata (see \"customAttributes\" for that).
+     * @type {StockPropertyPreset}
+     * @memberof Stock
+     */
+    properties?: StockPropertyPreset;
+    /**
+     * date-time when stock has entered the system, defaults to the creation date
+     * @type {Date}
+     * @memberof Stock
+     */
+    receiptDate?: Date;
+    /**
+     * amount of this stock for customer orders
+     * @type {number}
+     * @memberof Stock
+     */
+    reserved: number;
+    /**
+     * scannableCodes such as barcodes that identify this stock
+     * @type {Array<string>}
+     * @memberof Stock
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * stock with a high score can used preferably over stock with a lower score in routing, depending on configuration. The score can represent different attributes of the stock like zone, storage location, expiry date or receipt date.
+     * @type {Array<string>}
+     * @memberof Stock
+     */
+    scores?: Array<string>;
+    /**
+     * properties object serialized as JSON string, sorted alphabetically by key
+     * @type {string}
+     * @memberof Stock
+     */
+    serializedProperties: string;
+    /**
+     * tenantArticleId of the stock
      * @type {string}
      * @memberof Stock
      */
     tenantArticleId: string;
     /**
-     * 
+     * tenantStockId is an optional identifier for the stock in the tenant system, only set on stocks synced from listings
      * @type {string}
      * @memberof Stock
      */
     tenantStockId?: string;
     /**
-     * 
-     * @type {Date}
+     * defines the traits of the stock, overrules the storage location traits
+     * @type {Array<StorageLocationTraitConfigEntry>}
      * @memberof Stock
      */
-    created: Date;
+    traitConfig?: Array<StorageLocationTraitConfigEntry>;
     /**
-     * 
-     * @type {Date}
+     * provide information on how storage locations and stocks are to be handled in operational processes. Can only be set via storageLocation. 
+     * @type {Array<string>}
      * @memberof Stock
      */
-    lastModified: Date;
+    traits: Array<Stock.TraitsEnum>;
     /**
      * 
      * @type {number}
@@ -27370,58 +41651,10 @@ export interface Stock {
     value: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof Stock
      */
-    locationRef?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Stock
-     */
-    traits: Array<Stock.TraitsEnum>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Stock
-     */
-    scores?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Stock
-     */
-    scannableCodes?: Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof Stock
-     */
-    properties?: { [key: string]: string; };
-    /**
-     * 
-     * @type {string}
-     * @memberof Stock
-     */
-    serializedProperties: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof Stock
-     */
-    receiptDate: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof Stock
-     */
-    availableUntil?: Date;
-    /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof Stock
-     */
-    customAttributes?: any;
+    version: number;
 }
 
 /**
@@ -27433,34 +41666,42 @@ export namespace Stock {
      * @export
      * @enum {string}
      */
+    export enum ConditionsEnum {
+        DEFECTIVE = 'DEFECTIVE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
     export enum TraitsEnum {
         PICKABLE = 'PICKABLE',
         ACCESSIBLE = 'ACCESSIBLE',
         KEEPONZERO = 'KEEP_ON_ZERO',
-        OUTBOUND = 'OUTBOUND'
+        OUTBOUND = 'OUTBOUND',
+        INMOTION = 'IN_MOTION'
     }
 }
 /**
- * 
+ * StockAction
  * @export
  * @interface StockAction
  */
 export interface StockAction {
-    /**
-     * Deprecated. Use 'action' with a single action input instead.
-     * @type {Array<StockDeleteByLocations | StockDeleteByProducts | StockDeleteByIds>}
-     * @memberof StockAction
-     */
-    actions?: Array<StockDeleteByLocations | StockDeleteByProducts | StockDeleteByIds>;
     /**
      * 
      * @type {StockDeleteByLocations | StockDeleteByProducts | StockDeleteByIds | StockMoveToLocation}
      * @memberof StockAction
      */
     action?: StockDeleteByLocations | StockDeleteByProducts | StockDeleteByIds | StockMoveToLocation;
+    /**
+     * Deprecated. Use 'action' with a single action input instead.
+     * @type {Array<StockDeleteByLocations | StockDeleteByProducts | StockDeleteByIds>}
+     * @memberof StockAction
+     */
+    actions?: Array<StockDeleteByLocations | StockDeleteByProducts | StockDeleteByIds>;
 }
 /**
- * 
+ * StockActionResult
  * @export
  * @interface StockActionResult
  */
@@ -27496,13 +41737,79 @@ export namespace StockActionResult {
     }
 }
 /**
- * 
+ * StockConditionEnumFilter
+ * @export
+ * @interface StockConditionEnumFilter
+ */
+export interface StockConditionEnumFilter {
+    /**
+     * Search by conditions
+     * @type {string}
+     * @memberof StockConditionEnumFilter
+     */
+    eq?: StockConditionEnumFilter.EqEnum;
+    /**
+     * Search by conditions
+     * @type {string}
+     * @memberof StockConditionEnumFilter
+     */
+    _in?: StockConditionEnumFilter.InEnum;
+    /**
+     * Search by conditions
+     * @type {string}
+     * @memberof StockConditionEnumFilter
+     */
+    notEq?: StockConditionEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace StockConditionEnumFilter
+ */
+export namespace StockConditionEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        DEFECTIVE = 'DEFECTIVE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        DEFECTIVE = 'DEFECTIVE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        DEFECTIVE = 'DEFECTIVE'
+    }
+}
+/**
+ * StockConditionEnumListFilter
+ * @export
+ * @interface StockConditionEnumListFilter
+ */
+export interface StockConditionEnumListFilter {
+    /**
+     * Search by conditions
+     * @type {StockConditionEnumFilter}
+     * @memberof StockConditionEnumListFilter
+     */
+    contains?: StockConditionEnumFilter;
+}
+/**
+ * StockConfiguration
  * @export
  * @interface StockConfiguration
  */
 export interface StockConfiguration extends VersionedResource {
     /**
-     * Indicates if manual stock modification is allowed
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated Indicates if manual stock modification is allowed - will be moved to remoteConfig
      * @type {boolean}
      * @memberof StockConfiguration
      */
@@ -27515,7 +41822,7 @@ export interface StockConfiguration extends VersionedResource {
     id?: string;
 }
 /**
- * 
+ * StockConfigurationPatchActions
  * @export
  * @interface StockConfigurationPatchActions
  */
@@ -27534,7 +41841,7 @@ export interface StockConfigurationPatchActions {
     version: number;
 }
 /**
- * 
+ * StockDeleteActionResult
  * @export
  * @interface StockDeleteActionResult
  */
@@ -27547,23 +41854,23 @@ export interface StockDeleteActionResult {
     ids: Array<string>;
 }
 /**
- * 
+ * StockDeleteByIds
  * @export
  * @interface StockDeleteByIds
  */
 export interface StockDeleteByIds {
     /**
      * 
-     * @type {string}
-     * @memberof StockDeleteByIds
-     */
-    name: StockDeleteByIds.NameEnum;
-    /**
-     * 
      * @type {Array<string>}
      * @memberof StockDeleteByIds
      */
     ids: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof StockDeleteByIds
+     */
+    name: StockDeleteByIds.NameEnum;
 }
 
 /**
@@ -27580,23 +41887,23 @@ export namespace StockDeleteByIds {
     }
 }
 /**
- * 
+ * StockDeleteByLocations
  * @export
  * @interface StockDeleteByLocations
  */
 export interface StockDeleteByLocations {
     /**
      * 
-     * @type {string}
-     * @memberof StockDeleteByLocations
-     */
-    name: StockDeleteByLocations.NameEnum;
-    /**
-     * 
      * @type {Array<string>}
      * @memberof StockDeleteByLocations
      */
     locationRefs: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof StockDeleteByLocations
+     */
+    name: StockDeleteByLocations.NameEnum;
 }
 
 /**
@@ -27613,7 +41920,7 @@ export namespace StockDeleteByLocations {
     }
 }
 /**
- * 
+ * StockDeleteByProducts
  * @export
  * @interface StockDeleteByProducts
  */
@@ -27623,13 +41930,13 @@ export interface StockDeleteByProducts {
      * @type {string}
      * @memberof StockDeleteByProducts
      */
-    name: StockDeleteByProducts.NameEnum;
+    facilityRef: string;
     /**
      * 
      * @type {string}
      * @memberof StockDeleteByProducts
      */
-    facilityRef: string;
+    name: StockDeleteByProducts.NameEnum;
     /**
      * 
      * @type {Array<string>}
@@ -27652,17 +41959,17 @@ export namespace StockDeleteByProducts {
     }
 }
 /**
- * 
+ * StockDistribution
  * @export
  * @interface StockDistribution
  */
 export interface StockDistribution {
     /**
      * 
-     * @type {string}
+     * @type {Array<FacilityStockDistribution>}
      * @memberof StockDistribution
      */
-    tenantArticleId: string;
+    facilityStocks: Array<FacilityStockDistribution>;
     /**
      * 
      * @type {StockSummaryDetails}
@@ -27671,78 +41978,110 @@ export interface StockDistribution {
     summary: StockSummaryDetails;
     /**
      * 
-     * @type {Array<FacilityStockDistribution>}
+     * @type {string}
      * @memberof StockDistribution
      */
-    facilityStocks: Array<FacilityStockDistribution>;
+    tenantArticleId: string;
 }
 /**
- * 
+ * StockForCreation
  * @export
  * @interface StockForCreation
  */
 export interface StockForCreation {
     /**
-     * 
-     * @type {string}
-     * @memberof StockForCreation
-     */
-    facilityRef: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StockForCreation
-     */
-    tenantArticleId: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof StockForCreation
-     */
-    value: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof StockForCreation
-     */
-    locationRef?: string;
-    /**
-     * 
-     * @type {StockPropertyPreset}
-     * @memberof StockForCreation
-     */
-    properties?: StockPropertyPreset;
-    /**
-     * 
-     * @type {Date}
-     * @memberof StockForCreation
-     */
-    receiptDate?: Date;
-    /**
-     * 
+     * defines until when a stock is included in the stock availability as available and used for routing
      * @type {Date}
      * @memberof StockForCreation
      */
     availableUntil?: Date;
     /**
+     * Describes conditions of a stock     *`DEFECTIVE` - stock is defective, not usable for customer orders
+     * @type {Array<string>}
+     * @memberof StockForCreation
+     */
+    conditions?: Array<StockForCreation.ConditionsEnum>;
+    /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
      * @memberof StockForCreation
      */
     customAttributes?: any;
+    /**
+     * facility in which the stock is located
+     * @type {string}
+     * @memberof StockForCreation
+     */
+    facilityRef: string;
+    /**
+     * location on which the stock is placed
+     * @type {string}
+     * @memberof StockForCreation
+     */
+    locationRef?: string;
+    /**
+     * allow tracking of specific values such as expiry dates on a set of items. They should describe physical identifiable properties of the stock and are not meant to be used for metadata (see \"customAttributes\" for that).
+     * @type {StockPropertyPreset}
+     * @memberof StockForCreation
+     */
+    properties?: StockPropertyPreset;
+    /**
+     * date-time when stock has entered the system, defaults to the creation date
+     * @type {Date}
+     * @memberof StockForCreation
+     */
+    receiptDate?: Date;
+    /**
+     * tenantArticleId of the stock
+     * @type {string}
+     * @memberof StockForCreation
+     */
+    tenantArticleId: string;
+    /**
+     * defines the traits of the stock, overrules the storage location traits
+     * @type {Array<StorageLocationTraitConfigEntry>}
+     * @memberof StockForCreation
+     */
+    traitConfig?: Array<StorageLocationTraitConfigEntry>;
+    /**
+     * 
+     * @type {number}
+     * @memberof StockForCreation
+     */
+    value: number;
+}
+
+/**
+ * @export
+ * @namespace StockForCreation
+ */
+export namespace StockForCreation {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ConditionsEnum {
+        DEFECTIVE = 'DEFECTIVE'
+    }
 }
 /**
- * 
+ * StockForUpdate
  * @export
  * @interface StockForUpdate
  */
 export interface StockForUpdate {
     /**
-     * 
-     * @type {number}
+     * Describes conditions of a stock     *`DEFECTIVE` - stock is defective, not usable for customer orders
+     * @type {Array<string>}
      * @memberof StockForUpdate
      */
-    value: number;
+    conditions?: Array<StockForUpdate.ConditionsEnum>;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StockForUpdate
+     */
+    customAttributes?: any;
     /**
      * 
      * @type {string}
@@ -27750,11 +42089,17 @@ export interface StockForUpdate {
      */
     locationRef?: string;
     /**
-     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
+     * defines the traits of the stock, overrules the storage location traits
+     * @type {Array<StorageLocationTraitConfigEntry>}
      * @memberof StockForUpdate
      */
-    customAttributes?: any;
+    traitConfig?: Array<StorageLocationTraitConfigEntry>;
+    /**
+     * 
+     * @type {number}
+     * @memberof StockForUpdate
+     */
+    value: number;
     /**
      * 
      * @type {number}
@@ -27762,24 +42107,32 @@ export interface StockForUpdate {
      */
     version: number;
 }
+
 /**
- * 
+ * @export
+ * @namespace StockForUpdate
+ */
+export namespace StockForUpdate {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ConditionsEnum {
+        DEFECTIVE = 'DEFECTIVE'
+    }
+}
+/**
+ * StockForUpsertUpdate
  * @export
  * @interface StockForUpsertUpdate
  */
 export interface StockForUpsertUpdate {
     /**
-     * 
-     * @type {number}
+     * Describes conditions of a stock     *`DEFECTIVE` - stock is defective, not usable for customer orders
+     * @type {Array<string>}
      * @memberof StockForUpsertUpdate
      */
-    value: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof StockForUpsertUpdate
-     */
-    locationRef?: string;
+    conditions?: Array<StockForUpsertUpdate.ConditionsEnum>;
     /**
      * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
      * @type {any}
@@ -27794,13 +42147,45 @@ export interface StockForUpsertUpdate {
     id: string;
     /**
      * 
+     * @type {string}
+     * @memberof StockForUpsertUpdate
+     */
+    locationRef?: string;
+    /**
+     * defines the traits of the stock, overrules the storage location traits
+     * @type {Array<StorageLocationTraitConfigEntry>}
+     * @memberof StockForUpsertUpdate
+     */
+    traitConfig?: Array<StorageLocationTraitConfigEntry>;
+    /**
+     * 
+     * @type {number}
+     * @memberof StockForUpsertUpdate
+     */
+    value: number;
+    /**
+     * 
      * @type {number}
      * @memberof StockForUpsertUpdate
      */
     version: number;
 }
+
 /**
- * 
+ * @export
+ * @namespace StockForUpsertUpdate
+ */
+export namespace StockForUpsertUpdate {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ConditionsEnum {
+        DEFECTIVE = 'DEFECTIVE'
+    }
+}
+/**
+ * @deprecated This object is deprecated since 11th of September 2023.
  * @export
  * @interface StockInformation
  */
@@ -27825,7 +42210,7 @@ export interface StockInformation extends StockInformationForCreation {
  */
 export interface StockInformationForCreation {
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated This field is deprecated since 8th of February 2023. Reserved can't be overridden by the API, because its internally now handled by open PickJobs (or other upcoming ways to reserve Stock) Any Value provided will be ignored upon arrival.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 8th of February 2023. Reserved can't be overridden by the API, because its internally now handled by open PickJobs (or other upcoming ways to reserve Stock) Any Value provided will be ignored upon arrival.
      * @type {number}
      * @memberof StockInformationForCreation
      */
@@ -27838,17 +42223,17 @@ export interface StockInformationForCreation {
     stock: number;
 }
 /**
- * 
+ * StockMoveToLocation
  * @export
  * @interface StockMoveToLocation
  */
 export interface StockMoveToLocation {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof StockMoveToLocation
      */
-    name: StockMoveToLocation.NameEnum;
+    amount: number;
     /**
      * 
      * @type {string}
@@ -27860,19 +42245,19 @@ export interface StockMoveToLocation {
      * @type {string}
      * @memberof StockMoveToLocation
      */
-    toLocationRef: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof StockMoveToLocation
-     */
-    amount: number;
+    name: StockMoveToLocation.NameEnum;
     /**
      * 
      * @type {MoveStockToLocationOptions}
      * @memberof StockMoveToLocation
      */
     options?: MoveStockToLocationOptions;
+    /**
+     * 
+     * @type {string}
+     * @memberof StockMoveToLocation
+     */
+    toLocationRef: string;
 }
 
 /**
@@ -27889,7 +42274,7 @@ export namespace StockMoveToLocation {
     }
 }
 /**
- * 
+ * StockMoveToLocationActionResult
  * @export
  * @interface StockMoveToLocationActionResult
  */
@@ -27908,26 +42293,26 @@ export interface StockMoveToLocationActionResult {
     toStock: Stock;
 }
 /**
- * 
+ * StockPaginatedResult
  * @export
  * @interface StockPaginatedResult
  */
 export interface StockPaginatedResult {
     /**
      * 
-     * @type {number}
-     * @memberof StockPaginatedResult
-     */
-    total: number;
-    /**
-     * 
      * @type {Array<Stock>}
      * @memberof StockPaginatedResult
      */
     stocks: Array<Stock>;
+    /**
+     * The total number of items matching the search criteria. Only filled, if withTotal is set to true in the search options.
+     * @type {number}
+     * @memberof StockPaginatedResult
+     */
+    total?: number;
 }
 /**
- * 
+ * StockPropertyDefinition
  * @export
  * @interface StockPropertyDefinition
  */
@@ -27945,7 +42330,7 @@ export interface StockPropertyDefinition {
      */
     required: boolean;
     /**
-     * <i><center>   <img src='https://storage.googleapis.com/ocff-assets/api/fft-alpha_174x51.png'/>   </center> <br /> This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a>   </i><br /><br />If {{NOW}} is provided, this will be replaced with a timestamp.
+     * This part of the API is in Alpha status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#alpha\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />If {{NOW}} is provided, this will be replaced with a timestamp.
      * @type {string}
      * @memberof StockPropertyDefinition
      */
@@ -27961,7 +42346,7 @@ export enum StockPropertyInputType {
     TEXT = 'TEXT'
 }
 /**
- * 
+ * StockPropertyPreset
  * @export
  * @interface StockPropertyPreset
  */
@@ -27972,44 +42357,320 @@ export interface StockPropertyPreset {
      * @memberof StockPropertyPreset
      */
     expiry?: string;
+}
+/**
+ * StockSearchPayload
+ * @export
+ * @interface StockSearchPayload
+ */
+export interface StockSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof StockSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {StockSearchQuery}
+     * @memberof StockSearchPayload
+     */
+    query: StockSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof StockSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<StockSort>}
+     * @memberof StockSearchPayload
+     */
+    sort?: Array<StockSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof StockSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * StockSearchQuery
+ * @export
+ * @interface StockSearchQuery
+ */
+export interface StockSearchQuery {
+    /**
+     * 
+     * @type {Array<StockSearchQuery>}
+     * @memberof StockSearchQuery
+     */
+    and?: Array<StockSearchQuery>;
+    /**
+     * Search by availableUntil
+     * @type {DateFilter}
+     * @memberof StockSearchQuery
+     */
+    availableUntil?: DateFilter;
+    /**
+     * Search by conditions
+     * @type {StockConditionEnumListFilter}
+     * @memberof StockSearchQuery
+     */
+    conditions?: StockConditionEnumListFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof StockSearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof StockSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof StockSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * Search by locationRef
+     * @type {StringFilter}
+     * @memberof StockSearchQuery
+     */
+    locationRef?: StringFilter;
+    /**
+     * 
+     * @type {Array<StockSearchQuery>}
+     * @memberof StockSearchQuery
+     */
+    or?: Array<StockSearchQuery>;
+    /**
+     * Search by properties
+     * @type {{ [key: string]: StringFilter | DateFilter | KeyExistsFilter; }}
+     * @memberof StockSearchQuery
+     */
+    properties?: { [key: string]: StringFilter | DateFilter | KeyExistsFilter; };
+    /**
+     * Search by receiptDate
+     * @type {DateFilter}
+     * @memberof StockSearchQuery
+     */
+    receiptDate?: DateFilter;
+    /**
+     * Search by scannableCodes
+     * @type {StringListFilter}
+     * @memberof StockSearchQuery
+     */
+    scannableCodes?: StringListFilter;
+    /**
+     * Search by tenantArticleId
+     * @type {StringFilter}
+     * @memberof StockSearchQuery
+     */
+    tenantArticleId?: StringFilter;
+    /**
+     * Search by tenantStockId
+     * @type {StringFilter}
+     * @memberof StockSearchQuery
+     */
+    tenantStockId?: StringFilter;
+    /**
+     * Search by traits
+     * @type {StockStorageLocationTraitEnumListFilter}
+     * @memberof StockSearchQuery
+     */
+    traits?: StockStorageLocationTraitEnumListFilter;
+    /**
+     * Search by value
+     * @type {NumberFilter}
+     * @memberof StockSearchQuery
+     */
+    value?: NumberFilter;
+}
+/**
+ * StockSort
+ * @export
+ * @interface StockSort
+ */
+export interface StockSort {
+    /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof StockSort
+     */
+    customAttributes?: { [key: string]: any; };
     /**
      * 
      * @type {string}
-     * @memberof StockPropertyPreset
+     * @memberof StockSort
      */
-    batch?: string;
+    lastModified?: StockSort.LastModifiedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StockSort
+     */
+    locationName?: StockSort.LocationNameEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StockSort
+     */
+    tenantArticleId?: StockSort.TenantArticleIdEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StockSort
+     */
+    value?: StockSort.ValueEnum;
+}
+
+/**
+ * @export
+ * @namespace StockSort
+ */
+export namespace StockSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LocationNameEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TenantArticleIdEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ValueEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
 }
 /**
- * 
+ * StockStorageLocationTraitEnumFilter
+ * @export
+ * @interface StockStorageLocationTraitEnumFilter
+ */
+export interface StockStorageLocationTraitEnumFilter {
+    /**
+     * Search by traits
+     * @type {string}
+     * @memberof StockStorageLocationTraitEnumFilter
+     */
+    eq?: StockStorageLocationTraitEnumFilter.EqEnum;
+    /**
+     * Search by traits
+     * @type {string}
+     * @memberof StockStorageLocationTraitEnumFilter
+     */
+    _in?: StockStorageLocationTraitEnumFilter.InEnum;
+    /**
+     * Search by traits
+     * @type {string}
+     * @memberof StockStorageLocationTraitEnumFilter
+     */
+    notEq?: StockStorageLocationTraitEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace StockStorageLocationTraitEnumFilter
+ */
+export namespace StockStorageLocationTraitEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        PICKABLE = 'PICKABLE',
+        ACCESSIBLE = 'ACCESSIBLE',
+        KEEPONZERO = 'KEEP_ON_ZERO',
+        OUTBOUND = 'OUTBOUND',
+        INMOTION = 'IN_MOTION'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        PICKABLE = 'PICKABLE',
+        ACCESSIBLE = 'ACCESSIBLE',
+        KEEPONZERO = 'KEEP_ON_ZERO',
+        OUTBOUND = 'OUTBOUND',
+        INMOTION = 'IN_MOTION'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        PICKABLE = 'PICKABLE',
+        ACCESSIBLE = 'ACCESSIBLE',
+        KEEPONZERO = 'KEEP_ON_ZERO',
+        OUTBOUND = 'OUTBOUND',
+        INMOTION = 'IN_MOTION'
+    }
+}
+/**
+ * StockStorageLocationTraitEnumListFilter
+ * @export
+ * @interface StockStorageLocationTraitEnumListFilter
+ */
+export interface StockStorageLocationTraitEnumListFilter {
+    /**
+     * Search by traits
+     * @type {StockStorageLocationTraitEnumFilter}
+     * @memberof StockStorageLocationTraitEnumListFilter
+     */
+    contains?: StockStorageLocationTraitEnumFilter;
+}
+/**
+ * StockSummaries
  * @export
  * @interface StockSummaries
  */
 export interface StockSummaries {
     /**
      * 
-     * @type {number}
-     * @memberof StockSummaries
-     */
-    total: number;
-    /**
-     * 
      * @type {Array<StockSummary>}
      * @memberof StockSummaries
      */
     stockSummaries: Array<StockSummary>;
+    /**
+     * 
+     * @type {number}
+     * @memberof StockSummaries
+     */
+    total: number;
 }
 /**
- * 
+ * StockSummary
  * @export
  * @interface StockSummary
  */
 export interface StockSummary {
-    /**
-     * ALPHA Status!. The facilityRefs that are included in the stock summary.
-     * @type {Array<string>}
-     * @memberof StockSummary
-     */
-    includedFacilityRefs: Array<string>;
     /**
      * 
      * @type {StockSummaryArticle}
@@ -28022,13 +42683,25 @@ export interface StockSummary {
      * @memberof StockSummary
      */
     details: StockSummaryDetails;
+    /**
+     * ALPHA Status!. The facilityRefs that are included in the stock summary.
+     * @type {Array<string>}
+     * @memberof StockSummary
+     */
+    includedFacilityRefs: Array<string>;
 }
 /**
- * 
+ * StockSummaryArticle
  * @export
  * @interface StockSummaryArticle
  */
 export interface StockSummaryArticle {
+    /**
+     * 
+     * @type {string}
+     * @memberof StockSummaryArticle
+     */
+    imageUrl?: string;
     /**
      * 
      * @type {string}
@@ -28041,31 +42714,13 @@ export interface StockSummaryArticle {
      * @memberof StockSummaryArticle
      */
     title: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StockSummaryArticle
-     */
-    imageUrl?: string;
 }
 /**
- * 
+ * StockSummaryDetails
  * @export
  * @interface StockSummaryDetails
  */
 export interface StockSummaryDetails {
-    /**
-     * 
-     * @type {number}
-     * @memberof StockSummaryDetails
-     */
-    reserved: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof StockSummaryDetails
-     */
-    totalAmount: number;
     /**
      * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
@@ -28077,7 +42732,19 @@ export interface StockSummaryDetails {
      * @type {number}
      * @memberof StockSummaryDetails
      */
-    safetyStock: number;
+    availableForPicking: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StockSummaryDetails
+     */
+    availableOnStock: number;
+    /**
+     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
+     * @type {number}
+     * @memberof StockSummaryDetails
+     */
+    availableToPromise: number;
     /**
      * 
      * @type {ByTrait}
@@ -28086,16 +42753,10 @@ export interface StockSummaryDetails {
     byTrait: ByTrait;
     /**
      * 
-     * @type {number}
+     * @type {Array<ChannelStockAvailability>}
      * @memberof StockSummaryDetails
      */
-    availableForPicking: number;
-    /**
-     * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
-     * @type {number}
-     * @memberof StockSummaryDetails
-     */
-    availableToPromise: number;
+    channelAdjusted?: Array<ChannelStockAvailability>;
     /**
      * This field is deprecated and replaced by new availability concepts. Please see https://docs.fulfillmenttools.com/api-docs/use-cases/inventory-management/global-inventory/availability for more information.
      * @type {number}
@@ -28107,7 +42768,13 @@ export interface StockSummaryDetails {
      * @type {number}
      * @memberof StockSummaryDetails
      */
-    availableOnStock: number;
+    reserved: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StockSummaryDetails
+     */
+    safetyStock: number;
     /**
      * 
      * @type {number}
@@ -28116,29 +42783,29 @@ export interface StockSummaryDetails {
     stockOnHand: number;
     /**
      * 
-     * @type {Array<ChannelStockAvailability>}
+     * @type {number}
      * @memberof StockSummaryDetails
      */
-    channelAdjusted?: Array<ChannelStockAvailability>;
+    totalAmount: number;
 }
 /**
- * 
+ * StockUpsertOperationResult
  * @export
  * @interface StockUpsertOperationResult
  */
 export interface StockUpsertOperationResult {
     /**
      * 
-     * @type {Stock}
-     * @memberof StockUpsertOperationResult
-     */
-    stock: Stock;
-    /**
-     * 
      * @type {string}
      * @memberof StockUpsertOperationResult
      */
     status: StockUpsertOperationResult.StatusEnum;
+    /**
+     * 
+     * @type {Stock}
+     * @memberof StockUpsertOperationResult
+     */
+    stock: Stock;
 }
 
 /**
@@ -28156,7 +42823,7 @@ export namespace StockUpsertOperationResult {
     }
 }
 /**
- * 
+ * StocksForUpsert
  * @export
  * @interface StocksForUpsert
  */
@@ -28176,7 +42843,7 @@ export interface StocksForUpsert {
 export interface StocksStockIdBody {
 }
 /**
- * 
+ * StorageLocation
  * @export
  * @interface StorageLocation
  */
@@ -28237,11 +42904,219 @@ export interface StorageLocation extends StorageLocationForReplacement {
     schemaVersion?: number;
 }
 /**
- * 
+ * StorageLocationAssignmentConfiguration
+ * @export
+ * @interface StorageLocationAssignmentConfiguration
+ */
+export interface StorageLocationAssignmentConfiguration {
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationAssignmentConfiguration
+     */
+    storageLocationRequired: StorageLocationAssignmentConfiguration.StorageLocationRequiredEnum;
+}
+
+/**
+ * @export
+ * @namespace StorageLocationAssignmentConfiguration
+ */
+export namespace StorageLocationAssignmentConfiguration {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum StorageLocationRequiredEnum {
+        ALL = 'ALL',
+        SOME = 'SOME',
+        NONE = 'NONE'
+    }
+}
+/**
+ * StorageLocationBulkEventPayload
+ * @export
+ * @interface StorageLocationBulkEventPayload
+ */
+export interface StorageLocationBulkEventPayload {
+    /**
+     * 
+     * @type {Array<StorageLocationEventPayload>}
+     * @memberof StorageLocationBulkEventPayload
+     */
+    items: Array<StorageLocationEventPayload>;
+}
+/**
+ * StorageLocationBulkWebHookEvent
+ * @export
+ * @interface StorageLocationBulkWebHookEvent
+ */
+export interface StorageLocationBulkWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {StorageLocationBulkEventPayload}
+     * @memberof StorageLocationBulkWebHookEvent
+     */
+    payload: StorageLocationBulkEventPayload;
+}
+/**
+ * StorageLocationEventPayload
+ * @export
+ * @interface StorageLocationEventPayload
+ */
+export interface StorageLocationEventPayload {
+    /**
+     * The date this entity was created at the platform. This value is generated by the service.
+     * @type {Date}
+     * @memberof StorageLocationEventPayload
+     */
+    created?: Date;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StorageLocationEventPayload
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventPayload
+     */
+    facilityRef: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventPayload
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventPayload
+     */
+    information?: string;
+    /**
+     * The date this entity was modified last. This value is generated by the service.
+     * @type {Date}
+     * @memberof StorageLocationEventPayload
+     */
+    lastModified?: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventPayload
+     */
+    name: string;
+    /**
+     * 
+     * @type {Array<StorageLocationEventSequenceItem>}
+     * @memberof StorageLocationEventPayload
+     */
+    runningSequences: Array<StorageLocationEventSequenceItem>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof StorageLocationEventPayload
+     */
+    scannableCodes: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventPayload
+     */
+    tenantLocationId?: string;
+    /**
+     * 
+     * @type {Array<StorageLocationEventTraitConfigInner>}
+     * @memberof StorageLocationEventPayload
+     */
+    traitConfig?: Array<StorageLocationEventTraitConfigInner>;
+    /**
+     * 
+     * @type {Array<StorageLocationTrait>}
+     * @memberof StorageLocationEventPayload
+     */
+    traits: Array<StorageLocationTrait>;
+    /**
+     * 
+     * @type {StorageLocationType}
+     * @memberof StorageLocationEventPayload
+     */
+    type: StorageLocationType;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof StorageLocationEventPayload
+     */
+    version: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventPayload
+     */
+    zoneName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventPayload
+     */
+    zoneRef?: string;
+}
+/**
+ * StorageLocationEventSequenceItem
+ * @export
+ * @interface StorageLocationEventSequenceItem
+ */
+export interface StorageLocationEventSequenceItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventSequenceItem
+     */
+    nextStorageLocationRef?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationEventSequenceItem
+     */
+    previousStorageLocationRef?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof StorageLocationEventSequenceItem
+     */
+    score?: number;
+    /**
+     * 
+     * @type {StorageLocationSequenceType}
+     * @memberof StorageLocationEventSequenceItem
+     */
+    type: StorageLocationSequenceType;
+}
+/**
+ * StorageLocationEventTraitConfigInner
+ * @export
+ * @interface StorageLocationEventTraitConfigInner
+ */
+export interface StorageLocationEventTraitConfigInner {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof StorageLocationEventTraitConfigInner
+     */
+    enabled: boolean;
+    /**
+     * 
+     * @type {StorageLocationTrait}
+     * @memberof StorageLocationEventTraitConfigInner
+     */
+    trait: StorageLocationTrait;
+}
+/**
+ * StorageLocationForCreation
  * @export
  * @interface StorageLocationForCreation
  */
-export interface StorageLocationForCreation {
+export interface StorageLocationForCreation extends CustomAttributesResource {
     /**
      * The name of this storage location
      * @type {string}
@@ -28302,15 +43177,9 @@ export interface StorageLocationForCreation {
      * @memberof StorageLocationForCreation
      */
     information?: string;
-    /**
-     * Attributes that can be added to the storage location. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
-     * @type {any}
-     * @memberof StorageLocationForCreation
-     */
-    customAttributes?: any;
 }
 /**
- * 
+ * StorageLocationForReplacement
  * @export
  * @interface StorageLocationForReplacement
  */
@@ -28323,7 +43192,7 @@ export interface StorageLocationForReplacement extends StorageLocationForCreatio
     version: number;
 }
 /**
- * 
+ * StorageLocationPatchActions
  * @export
  * @interface StorageLocationPatchActions
  */
@@ -28342,26 +43211,180 @@ export interface StorageLocationPatchActions {
     version: number;
 }
 /**
- * 
+ * StorageLocationRecommendation
  * @export
  * @interface StorageLocationRecommendation
  */
 export interface StorageLocationRecommendation {
     /**
      * 
-     * @type {StorageLocation}
-     * @memberof StorageLocationRecommendation
-     */
-    storageLocation: StorageLocation;
-    /**
-     * 
      * @type {number}
      * @memberof StorageLocationRecommendation
      */
     stockCount: number;
+    /**
+     * 
+     * @type {StorageLocation}
+     * @memberof StorageLocationRecommendation
+     */
+    storageLocation: StorageLocation;
 }
 /**
- * 
+ * StorageLocationReferencedFilter
+ * @export
+ * @interface StorageLocationReferencedFilter
+ */
+export interface StorageLocationReferencedFilter {
+    /**
+     * Nested search by stock
+     * @type {StorageLocationReferencedStockFilter}
+     * @memberof StorageLocationReferencedFilter
+     */
+    stock?: StorageLocationReferencedStockFilter;
+}
+/**
+ * StorageLocationReferencedStockFilter
+ * @export
+ * @interface StorageLocationReferencedStockFilter
+ */
+export interface StorageLocationReferencedStockFilter {
+    /**
+     * Whether the storage locations has any stocks on it.
+     * @type {BooleanFilter}
+     * @memberof StorageLocationReferencedStockFilter
+     */
+    hasStocks?: BooleanFilter;
+    /**
+     * The sum of all stock values in this storage location, i.e. how much stock is stored in this location.
+     * @type {NumberFilter}
+     * @memberof StorageLocationReferencedStockFilter
+     */
+    sumOfValues?: NumberFilter;
+}
+/**
+ * StorageLocationSearchPayload
+ * @export
+ * @interface StorageLocationSearchPayload
+ */
+export interface StorageLocationSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof StorageLocationSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {StorageLocationSearchQuery}
+     * @memberof StorageLocationSearchPayload
+     */
+    query: StorageLocationSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof StorageLocationSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<StorageLocationSort>}
+     * @memberof StorageLocationSearchPayload
+     */
+    sort?: Array<StorageLocationSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof StorageLocationSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * StorageLocationSearchQuery
+ * @export
+ * @interface StorageLocationSearchQuery
+ */
+export interface StorageLocationSearchQuery {
+    /**
+     * 
+     * @type {Array<StorageLocationSearchQuery>}
+     * @memberof StorageLocationSearchQuery
+     */
+    and?: Array<StorageLocationSearchQuery>;
+    /**
+     * Search by created
+     * @type {DateFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    created?: DateFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof StorageLocationSearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * Search by name
+     * @type {StringFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    name?: StringFilter;
+    /**
+     * 
+     * @type {Array<StorageLocationSearchQuery>}
+     * @memberof StorageLocationSearchQuery
+     */
+    or?: Array<StorageLocationSearchQuery>;
+    /**
+     * Nested search by referenced
+     * @type {StorageLocationReferencedFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    referenced?: StorageLocationReferencedFilter;
+    /**
+     * Search by scannableCodes
+     * @type {StringListFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    scannableCodes?: StringListFilter;
+    /**
+     * Search by tenantLocationId
+     * @type {StringFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    tenantLocationId?: StringFilter;
+    /**
+     * Search by traits
+     * @type {StorageLocationTraitEnumListFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    traits?: StorageLocationTraitEnumListFilter;
+    /**
+     * Search by type
+     * @type {StorageLocationTypeEnumFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    type?: StorageLocationTypeEnumFilter;
+    /**
+     * Search by zoneRef
+     * @type {StringFilter}
+     * @memberof StorageLocationSearchQuery
+     */
+    zoneRef?: StringFilter;
+}
+/**
+ * StorageLocationSequenceItem
  * @export
  * @interface StorageLocationSequenceItem
  */
@@ -28401,7 +43424,97 @@ export enum StorageLocationSequenceType {
     RESTOWSEQUENCE = 'RESTOW_SEQUENCE'
 }
 /**
- * Describes what kind of actions this stock is available for   * `PICKABLE`- The stock is available for picking   * `ACCESSIBLE`- The stock is available for stock movements (stowing, inbound, etc)   * `KEEP_ON_ZERO`- The stock will not be deleted when emptied   * `OUTBOUND`- The stock is intended for outbound processes
+ * StorageLocationSort
+ * @export
+ * @interface StorageLocationSort
+ */
+export interface StorageLocationSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationSort
+     */
+    created?: StorageLocationSort.CreatedEnum;
+    /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof StorageLocationSort
+     */
+    customAttributes?: { [key: string]: any; };
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationSort
+     */
+    lastModified?: StorageLocationSort.LastModifiedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationSort
+     */
+    name?: StorageLocationSort.NameEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationSort
+     */
+    tenantLocationId?: StorageLocationSort.TenantLocationIdEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StorageLocationSort
+     */
+    zoneRef?: StorageLocationSort.ZoneRefEnum;
+}
+
+/**
+ * @export
+ * @namespace StorageLocationSort
+ */
+export namespace StorageLocationSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CreatedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TenantLocationIdEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ZoneRefEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * Describes what kind of actions this stock is available for   * `PICKABLE`- The stock is available for picking   * `ACCESSIBLE`- The stock is available for stock movements (stowing, inbound, etc)   * `KEEP_ON_ZERO`- The stock will not be deleted when emptied   * `OUTBOUND`- The stock is intended for outbound processes   * `IN_MOTION`- The stock is in motion, used by StowJobs.
  * @export
  * @enum {string}
  */
@@ -28409,13 +43522,33 @@ export enum StorageLocationTrait {
     PICKABLE = 'PICKABLE',
     ACCESSIBLE = 'ACCESSIBLE',
     KEEPONZERO = 'KEEP_ON_ZERO',
-    OUTBOUND = 'OUTBOUND'
+    OUTBOUND = 'OUTBOUND',
+    INMOTION = 'IN_MOTION'
 }
 /**
  * The configuration of the traits of this storage location
  * @export
  */
 export type StorageLocationTraitConfig = Array<StorageLocationTraitConfigInner>
+/**
+ * StorageLocationTraitConfigEntry
+ * @export
+ * @interface StorageLocationTraitConfigEntry
+ */
+export interface StorageLocationTraitConfigEntry {
+    /**
+     * whether the trait is enabled or not
+     * @type {boolean}
+     * @memberof StorageLocationTraitConfigEntry
+     */
+    enabled: boolean;
+    /**
+     * Describes what kind of actions this stock is available for      * `PICKABLE`- The stock is available for picking      * `ACCESSIBLE`- The stock is available for stock movements (stowing, inbound, etc)      * `KEEP_ON_ZERO`- The stock will not be deleted when emptied      * `OUTBOUND`- The stock is intended for outbound processes
+     * @type {string}
+     * @memberof StorageLocationTraitConfigEntry
+     */
+    trait: string;
+}
 /**
  * 
  * @export
@@ -28436,6 +43569,84 @@ export interface StorageLocationTraitConfigInner {
     enabled: boolean;
 }
 /**
+ * StorageLocationTraitEnumFilter
+ * @export
+ * @interface StorageLocationTraitEnumFilter
+ */
+export interface StorageLocationTraitEnumFilter {
+    /**
+     * Search by traits
+     * @type {string}
+     * @memberof StorageLocationTraitEnumFilter
+     */
+    eq?: StorageLocationTraitEnumFilter.EqEnum;
+    /**
+     * Search by traits
+     * @type {string}
+     * @memberof StorageLocationTraitEnumFilter
+     */
+    _in?: StorageLocationTraitEnumFilter.InEnum;
+    /**
+     * Search by traits
+     * @type {string}
+     * @memberof StorageLocationTraitEnumFilter
+     */
+    notEq?: StorageLocationTraitEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace StorageLocationTraitEnumFilter
+ */
+export namespace StorageLocationTraitEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        PICKABLE = 'PICKABLE',
+        ACCESSIBLE = 'ACCESSIBLE',
+        KEEPONZERO = 'KEEP_ON_ZERO',
+        OUTBOUND = 'OUTBOUND',
+        INMOTION = 'IN_MOTION'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        PICKABLE = 'PICKABLE',
+        ACCESSIBLE = 'ACCESSIBLE',
+        KEEPONZERO = 'KEEP_ON_ZERO',
+        OUTBOUND = 'OUTBOUND',
+        INMOTION = 'IN_MOTION'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        PICKABLE = 'PICKABLE',
+        ACCESSIBLE = 'ACCESSIBLE',
+        KEEPONZERO = 'KEEP_ON_ZERO',
+        OUTBOUND = 'OUTBOUND',
+        INMOTION = 'IN_MOTION'
+    }
+}
+/**
+ * StorageLocationTraitEnumListFilter
+ * @export
+ * @interface StorageLocationTraitEnumListFilter
+ */
+export interface StorageLocationTraitEnumListFilter {
+    /**
+     * Search by traits
+     * @type {StorageLocationTraitEnumFilter}
+     * @memberof StorageLocationTraitEnumListFilter
+     */
+    contains?: StorageLocationTraitEnumFilter;
+}
+/**
  * Describes the kind of a storage location:   * `SINGLE_STORAGE`- it is only allowed to store stock with the same tenantArticleId here   * `BULK_STORAGE`- stocks belonging to different tenantArticleIds can be stored here
  * @export
  * @enum {string}
@@ -28445,7 +43656,1568 @@ export enum StorageLocationType {
     BULKSTORAGE = 'BULK_STORAGE'
 }
 /**
+ * StorageLocationTypeEnumFilter
+ * @export
+ * @interface StorageLocationTypeEnumFilter
+ */
+export interface StorageLocationTypeEnumFilter {
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof StorageLocationTypeEnumFilter
+     */
+    eq?: StorageLocationTypeEnumFilter.EqEnum;
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof StorageLocationTypeEnumFilter
+     */
+    _in?: StorageLocationTypeEnumFilter.InEnum;
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof StorageLocationTypeEnumFilter
+     */
+    notEq?: StorageLocationTypeEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace StorageLocationTypeEnumFilter
+ */
+export namespace StorageLocationTypeEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        SINGLESTORAGE = 'SINGLE_STORAGE',
+        BULKSTORAGE = 'BULK_STORAGE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        SINGLESTORAGE = 'SINGLE_STORAGE',
+        BULKSTORAGE = 'BULK_STORAGE'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        SINGLESTORAGE = 'SINGLE_STORAGE',
+        BULKSTORAGE = 'BULK_STORAGE'
+    }
+}
+/**
+ * StowJob
+ * @export
+ * @interface StowJob
+ */
+export interface StowJob {
+    /**
+     * The users that are assigned to the stow job
+     * @type {Array<AssignedUser>}
+     * @memberof StowJob
+     */
+    assignedUsers?: Array<AssignedUser>;
+    /**
+     * Creation date of the entity, auto-generated if not provided
+     * @type {Date}
+     * @memberof StowJob
+     */
+    created?: Date;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StowJob
+     */
+    customAttributes?: any;
+    /**
+     * Non-human-readable reference to the facility where the stow job is executed
+     * @type {string}
+     * @memberof StowJob
+     */
+    facilityRef: string;
+    /**
+     * Auto-generated, unique primary identifier of the stow job
+     * @type {string}
+     * @memberof StowJob
+     */
+    id: string;
+    /**
+     * Service-generated last modification date of the entity
+     * @type {Date}
+     * @memberof StowJob
+     */
+    lastModified?: Date;
+    /**
+     * Priority level of the job
+     * @type {number}
+     * @memberof StowJob
+     */
+    priority?: number;
+    /**
+     * Readable identifier for display purposes, not unique.
+     * @type {string}
+     * @memberof StowJob
+     */
+    shortId?: string;
+    /**
+     * The status of the stowJob
+     * @type {string}
+     * @memberof StowJob
+     */
+    status: StowJob.StatusEnum;
+    /**
+     * The line items that should be stowed
+     * @type {Array<StowLineItem>}
+     * @memberof StowJob
+     */
+    stowLineItems: Array<StowLineItem>;
+    /**
+     * The time by which the job should be completed. Use for prioritization and scheduling
+     * @type {Date}
+     * @memberof StowJob
+     */
+    targetTime?: Date;
+    /**
+     * The version of the entity, used for optimistic locking mechanisms
+     * @type {number}
+     * @memberof StowJob
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace StowJob
+ */
+export namespace StowJob {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum StatusEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        CLOSED = 'CLOSED',
+        CANCELED = 'CANCELED',
+        PAUSED = 'PAUSED'
+    }
+}
+/**
+ * The name of the action that should be performed
+ * @export
+ * @enum {string}
+ */
+export enum StowJobActionName {
+    STARTSTOWJOB = 'START_STOW_JOB',
+    PAUSESTOWJOB = 'PAUSE_STOW_JOB',
+    OPENSTOWJOB = 'OPEN_STOW_JOB',
+    CANCELSTOWJOB = 'CANCEL_STOW_JOB',
+    CLOSESTOWJOB = 'CLOSE_STOW_JOB',
+    MODIFYSTOWLINEITEMS = 'MODIFY_STOW_LINE_ITEMS',
+    REPLACEASSIGNEDUSERS = 'REPLACE_ASSIGNED_USERS'
+}
+/**
+ * StowJobForCreation
+ * @export
+ * @interface StowJobForCreation
+ */
+export interface StowJobForCreation {
+    /**
+     * The users that are assigned to the stow job
+     * @type {Array<AssignedUserForCreationById | AssignedUserForCreationByName | AssignedUser>}
+     * @memberof StowJobForCreation
+     */
+    assignedUsers?: Array<AssignedUserForCreationById | AssignedUserForCreationByName | AssignedUser>;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StowJobForCreation
+     */
+    customAttributes?: any;
+    /**
+     * Non-human-readable reference to the facility where the stow job is executed
+     * @type {string}
+     * @memberof StowJobForCreation
+     */
+    facilityRef: string;
+    /**
+     * Priority level of the job
+     * @type {number}
+     * @memberof StowJobForCreation
+     */
+    priority?: number;
+    /**
+     * Readable identifier for display purposes, not unique.
+     * @type {string}
+     * @memberof StowJobForCreation
+     */
+    shortId?: string;
+    /**
+     * The status of the stowJob
+     * @type {string}
+     * @memberof StowJobForCreation
+     */
+    status: StowJobForCreation.StatusEnum;
+    /**
+     * The line items that should be stowed
+     * @type {Array<StowLineItemForCreation>}
+     * @memberof StowJobForCreation
+     */
+    stowLineItems: Array<StowLineItemForCreation>;
+    /**
+     * The time by which the job should be completed. Use for prioritization and scheduling
+     * @type {Date}
+     * @memberof StowJobForCreation
+     */
+    targetTime?: Date;
+}
+
+/**
+ * @export
+ * @namespace StowJobForCreation
+ */
+export namespace StowJobForCreation {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum StatusEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        CLOSED = 'CLOSED',
+        CANCELED = 'CANCELED',
+        PAUSED = 'PAUSED'
+    }
+}
+/**
+ * StowJobForPatch
+ * @export
+ * @interface StowJobForPatch
+ */
+export interface StowJobForPatch {
+    /**
+     * The users that are assigned to the stow job
+     * @type {Array<AssignedUserForCreationById | AssignedUserForCreationByName | AssignedUser>}
+     * @memberof StowJobForPatch
+     */
+    assignedUsers?: Array<AssignedUserForCreationById | AssignedUserForCreationByName | AssignedUser>;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StowJobForPatch
+     */
+    customAttributes?: any;
+    /**
+     * Information for user about which job should be started first
+     * @type {number}
+     * @memberof StowJobForPatch
+     */
+    priority?: number;
+    /**
+     * 
+     * @type {Date}
+     * @memberof StowJobForPatch
+     */
+    targetTime?: Date;
+    /**
+     * The version of the document to be used in optimistic locking mechanisms
+     * @type {number}
+     * @memberof StowJobForPatch
+     */
+    version: number;
+}
+/**
  * 
+ * @export
+ * @interface StowJobIdActionsBody
+ */
+export interface StowJobIdActionsBody {
+}
+/**
+ * StowJobPaginatedResult
+ * @export
+ * @interface StowJobPaginatedResult
+ */
+export interface StowJobPaginatedResult {
+    /**
+     * 
+     * @type {Array<StowJob>}
+     * @memberof StowJobPaginatedResult
+     */
+    stowJobs: Array<StowJob>;
+    /**
+     * The total number of items matching the search criteria. Only filled, if withTotal is set to true in the search options.
+     * @type {number}
+     * @memberof StowJobPaginatedResult
+     */
+    total?: number;
+}
+/**
+ * REPLACE_ASSIGNED_USERS replaces the assigned users of the stow job
+ * @export
+ * @interface StowJobReplaceAssignedUsersAction
+ */
+export interface StowJobReplaceAssignedUsersAction {
+    /**
+     * The users are assigned to the stow job
+     * @type {Array<AssignedUserForCreationById | AssignedUserForCreationByName | AssignedUser>}
+     * @memberof StowJobReplaceAssignedUsersAction
+     */
+    assignedUsers: Array<AssignedUserForCreationById | AssignedUserForCreationByName | AssignedUser>;
+    /**
+     * The name of the action that should be performed
+     * @type {string}
+     * @memberof StowJobReplaceAssignedUsersAction
+     */
+    name: StowJobReplaceAssignedUsersAction.NameEnum;
+    /**
+     * The current version of the stow job that should be modified
+     * @type {number}
+     * @memberof StowJobReplaceAssignedUsersAction
+     */
+    version: number;
+}
+
+/**
+ * @export
+ * @namespace StowJobReplaceAssignedUsersAction
+ */
+export namespace StowJobReplaceAssignedUsersAction {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NameEnum {
+        REPLACEASSIGNEDUSERS = 'REPLACE_ASSIGNED_USERS'
+    }
+}
+/**
+ * StowJobSearchPayload
+ * @export
+ * @interface StowJobSearchPayload
+ */
+export interface StowJobSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof StowJobSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {StowJobSearchQueryWrapper}
+     * @memberof StowJobSearchPayload
+     */
+    query: StowJobSearchQueryWrapper;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof StowJobSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<StowJobSort>}
+     * @memberof StowJobSearchPayload
+     */
+    sort?: Array<StowJobSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof StowJobSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * StowJobSearchQuery
+ * @export
+ * @interface StowJobSearchQuery
+ */
+export interface StowJobSearchQuery {
+    /**
+     * 
+     * @type {Array<StowJobSearchQuery>}
+     * @memberof StowJobSearchQuery
+     */
+    and?: Array<StowJobSearchQuery>;
+    /**
+     * Search by created
+     * @type {DateFilter}
+     * @memberof StowJobSearchQuery
+     */
+    created?: DateFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof StowJobSearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof StowJobSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof StowJobSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * 
+     * @type {Array<StowJobSearchQuery>}
+     * @memberof StowJobSearchQuery
+     */
+    or?: Array<StowJobSearchQuery>;
+    /**
+     * Search by priority
+     * @type {NumberFilter}
+     * @memberof StowJobSearchQuery
+     */
+    priority?: NumberFilter;
+    /**
+     * Search by shortId
+     * @type {StringFilter}
+     * @memberof StowJobSearchQuery
+     */
+    shortId?: StringFilter;
+    /**
+     * Search by status
+     * @type {StowJobStatusTypeEnumFilter}
+     * @memberof StowJobSearchQuery
+     */
+    status?: StowJobStatusTypeEnumFilter;
+    /**
+     * Nested list search by stowLineItems
+     * @type {StowJobStowLineItemsListFilter}
+     * @memberof StowJobSearchQuery
+     */
+    stowLineItems?: StowJobStowLineItemsListFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof StowJobSearchQuery
+     */
+    targetTime?: DateFilter;
+}
+/**
+ * StowJobSearchQueryWrapper
+ * @export
+ * @interface StowJobSearchQueryWrapper
+ */
+export interface StowJobSearchQueryWrapper {
+    /**
+     * 
+     * @type {Array<StowJobSearchQuery>}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    and?: Array<StowJobSearchQuery>;
+    /**
+     * Search by created
+     * @type {DateFilter}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    created: DateFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    id?: StringFilter;
+    /**
+     * 
+     * @type {Array<StowJobSearchQuery>}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    or?: Array<StowJobSearchQuery>;
+    /**
+     * Search by priority
+     * @type {NumberFilter}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    priority?: NumberFilter;
+    /**
+     * Search by shortId
+     * @type {StringFilter}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    shortId?: StringFilter;
+    /**
+     * Search by status
+     * @type {StowJobStatusTypeEnumFilter}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    status?: StowJobStatusTypeEnumFilter;
+    /**
+     * Nested list search by stowLineItems
+     * @type {StowJobStowLineItemsListFilter}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    stowLineItems?: StowJobStowLineItemsListFilter;
+    /**
+     * Search by targetTime
+     * @type {DateFilter}
+     * @memberof StowJobSearchQueryWrapper
+     */
+    targetTime?: DateFilter;
+}
+/**
+ * StowJobSort
+ * @export
+ * @interface StowJobSort
+ */
+export interface StowJobSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof StowJobSort
+     */
+    created?: StowJobSort.CreatedEnum;
+    /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof StowJobSort
+     */
+    customAttributes?: { [key: string]: any; };
+    /**
+     * 
+     * @type {string}
+     * @memberof StowJobSort
+     */
+    lastModified?: StowJobSort.LastModifiedEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StowJobSort
+     */
+    targetTime?: StowJobSort.TargetTimeEnum;
+}
+
+/**
+ * @export
+ * @namespace StowJobSort
+ */
+export namespace StowJobSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum CreatedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TargetTimeEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * The status of the stowJob
+ * @export
+ * @enum {string}
+ */
+export enum StowJobStatus {
+    OPEN = 'OPEN',
+    INPROGRESS = 'IN_PROGRESS',
+    CLOSED = 'CLOSED',
+    CANCELED = 'CANCELED',
+    PAUSED = 'PAUSED'
+}
+/**
+ * StowJobStatusTypeEnumFilter
+ * @export
+ * @interface StowJobStatusTypeEnumFilter
+ */
+export interface StowJobStatusTypeEnumFilter {
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof StowJobStatusTypeEnumFilter
+     */
+    eq?: StowJobStatusTypeEnumFilter.EqEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof StowJobStatusTypeEnumFilter
+     */
+    _in?: StowJobStatusTypeEnumFilter.InEnum;
+    /**
+     * Search by status
+     * @type {string}
+     * @memberof StowJobStatusTypeEnumFilter
+     */
+    notEq?: StowJobStatusTypeEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace StowJobStatusTypeEnumFilter
+ */
+export namespace StowJobStatusTypeEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        CLOSED = 'CLOSED',
+        CANCELED = 'CANCELED',
+        PAUSED = 'PAUSED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        CLOSED = 'CLOSED',
+        CANCELED = 'CANCELED',
+        PAUSED = 'PAUSED'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        OPEN = 'OPEN',
+        INPROGRESS = 'IN_PROGRESS',
+        CLOSED = 'CLOSED',
+        CANCELED = 'CANCELED',
+        PAUSED = 'PAUSED'
+    }
+}
+/**
+ * StowJobStockInformation
+ * @export
+ * @interface StowJobStockInformation
+ */
+export interface StowJobStockInformation {
+    /**
+     * allow tracking of specific values such as expiry dates on a set of items. They should describe physical identifiable properties of the stock and are not meant to be used for metadata (see \"customAttributes\" for that).
+     * @type {StockPropertyPreset}
+     * @memberof StowJobStockInformation
+     */
+    properties?: StockPropertyPreset;
+    /**
+     * 
+     * @type {Array<StorageLocationTraitConfigEntry>}
+     * @memberof StowJobStockInformation
+     */
+    traitConfig?: Array<StorageLocationTraitConfigEntry>;
+}
+/**
+ * StowJobStowLineItemsArticleFilter
+ * @export
+ * @interface StowJobStowLineItemsArticleFilter
+ */
+export interface StowJobStowLineItemsArticleFilter {
+    /**
+     * Search by tenantArticleId
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsArticleFilter
+     */
+    tenantArticleId?: StringFilter;
+}
+/**
+ * StowJobStowLineItemsFilter
+ * @export
+ * @interface StowJobStowLineItemsFilter
+ */
+export interface StowJobStowLineItemsFilter {
+    /**
+     * Nested search by article
+     * @type {StowJobStowLineItemsArticleFilter}
+     * @memberof StowJobStowLineItemsFilter
+     */
+    article?: StowJobStowLineItemsArticleFilter;
+    /**
+     * Search by heldStockRef
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsFilter
+     */
+    heldStockRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsFilter
+     */
+    id?: StringFilter;
+    /**
+     * Nested list search by stowTo
+     * @type {StowJobStowLineItemsStowToListFilter}
+     * @memberof StowJobStowLineItemsFilter
+     */
+    stowTo?: StowJobStowLineItemsStowToListFilter;
+    /**
+     * Nested search by takeFrom
+     * @type {StowJobStowLineItemsTakeFromFilter}
+     * @memberof StowJobStowLineItemsFilter
+     */
+    takeFrom?: StowJobStowLineItemsTakeFromFilter;
+}
+/**
+ * StowJobStowLineItemsListFilter
+ * @export
+ * @interface StowJobStowLineItemsListFilter
+ */
+export interface StowJobStowLineItemsListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {StowJobStowLineItemsFilter}
+     * @memberof StowJobStowLineItemsListFilter
+     */
+    contains?: StowJobStowLineItemsFilter;
+}
+/**
+ * StowJobStowLineItemsStowToFilter
+ * @export
+ * @interface StowJobStowLineItemsStowToFilter
+ */
+export interface StowJobStowLineItemsStowToFilter {
+    /**
+     * Search by storageLocationRef
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsStowToFilter
+     */
+    storageLocationRef?: StringFilter;
+    /**
+     * Nested search by stowed
+     * @type {StowJobStowLineItemsStowToStowedFilter}
+     * @memberof StowJobStowLineItemsStowToFilter
+     */
+    stowed?: StowJobStowLineItemsStowToStowedFilter;
+    /**
+     * Search by type
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsStowToFilter
+     */
+    type?: StringFilter;
+}
+/**
+ * StowJobStowLineItemsStowToListFilter
+ * @export
+ * @interface StowJobStowLineItemsStowToListFilter
+ */
+export interface StowJobStowLineItemsStowToListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {StowJobStowLineItemsStowToFilter}
+     * @memberof StowJobStowLineItemsStowToListFilter
+     */
+    contains?: StowJobStowLineItemsStowToFilter;
+}
+/**
+ * StowJobStowLineItemsStowToStowedFilter
+ * @export
+ * @interface StowJobStowLineItemsStowToStowedFilter
+ */
+export interface StowJobStowLineItemsStowToStowedFilter {
+    /**
+     * Search by stowedStockRef
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsStowToStowedFilter
+     */
+    stowedStockRef?: StringFilter;
+    /**
+     * Search by stowedStorageLocationRef
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsStowToStowedFilter
+     */
+    stowedStorageLocationRef?: StringFilter;
+}
+/**
+ * StowJobStowLineItemsTakeFromFilter
+ * @export
+ * @interface StowJobStowLineItemsTakeFromFilter
+ */
+export interface StowJobStowLineItemsTakeFromFilter {
+    /**
+     * Search by storageLocationRef
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsTakeFromFilter
+     */
+    storageLocationRef?: StringFilter;
+    /**
+     * Nested search by taken
+     * @type {StowJobStowLineItemsTakeFromTakenFilter}
+     * @memberof StowJobStowLineItemsTakeFromFilter
+     */
+    taken?: StowJobStowLineItemsTakeFromTakenFilter;
+    /**
+     * Search by type
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsTakeFromFilter
+     */
+    type?: StringFilter;
+}
+/**
+ * StowJobStowLineItemsTakeFromTakenFilter
+ * @export
+ * @interface StowJobStowLineItemsTakeFromTakenFilter
+ */
+export interface StowJobStowLineItemsTakeFromTakenFilter {
+    /**
+     * Search by takenStockRef
+     * @type {StringFilter}
+     * @memberof StowJobStowLineItemsTakeFromTakenFilter
+     */
+    takenStockRef?: StringFilter;
+}
+/**
+ * StowJobWebHookEvent
+ * @export
+ * @interface StowJobWebHookEvent
+ */
+export interface StowJobWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {StowJob}
+     * @memberof StowJobWebHookEvent
+     */
+    payload: StowJob;
+}
+/**
+ * StowLineItem
+ * @export
+ * @interface StowLineItem
+ */
+export interface StowLineItem {
+    /**
+     * 
+     * @type {StowLineItemArticle}
+     * @memberof StowLineItem
+     */
+    article: StowLineItemArticle;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StowLineItem
+     */
+    customAttributes?: any;
+    /**
+     * Reference to a stock holding the goods after a take and before a stow has taken place
+     * @type {string}
+     * @memberof StowLineItem
+     */
+    heldStockRef?: string;
+    /**
+     * The ID of the stowLineItem. It is generated automatically during creation and serves as primary identifier of the entity
+     * @type {string}
+     * @memberof StowLineItem
+     */
+    id: string;
+    /**
+     * The reasons for the stow operation
+     * @type {Array<ExternalStockChangeReasonOutput>}
+     * @memberof StowLineItem
+     */
+    reasons?: Array<ExternalStockChangeReasonOutput>;
+    /**
+     * Instructions on how and where to stow the item
+     * @type {Array<StowLineItemStowToWithId> | StowLineItemStowTo}
+     * @memberof StowLineItem
+     */
+    stowTo: Array<StowLineItemStowToWithId> | StowLineItemStowTo;
+    /**
+     * Instructions on how and where to take the item from
+     * @type {StowLineItemTakeFromForCreation}
+     * @memberof StowLineItem
+     */
+    takeFrom: StowLineItemTakeFromForCreation;
+}
+/**
+ * StowLineItemArticle
+ * @export
+ * @interface StowLineItemArticle
+ */
+export interface StowLineItemArticle {
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StowLineItemArticle
+     */
+    customAttributes?: any;
+    /**
+     * A web link to a picture of this item. Please make sure that no authentication is required to fetch the image!
+     * @type {string}
+     * @memberof StowLineItemArticle
+     */
+    imageUrl?: string;
+    /**
+     * Identifier for the item's unit of measurement
+     * @type {string}
+     * @memberof StowLineItemArticle
+     */
+    measurementUnitKey?: string;
+    /**
+     * ScannableCodes such as barcodes related to the item
+     * @type {Array<string>}
+     * @memberof StowLineItemArticle
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * Identifier for a certain product which the StowLineItem refers to
+     * @type {string}
+     * @memberof StowLineItemArticle
+     */
+    tenantArticleId: string;
+    /**
+     * The title of the item
+     * @type {string}
+     * @memberof StowLineItemArticle
+     */
+    title?: string;
+    /**
+     * The translations for the title of the item
+     * @type {any}
+     * @memberof StowLineItemArticle
+     */
+    titleLocalized?: any;
+}
+/**
+ * StowLineItemForCreation
+ * @export
+ * @interface StowLineItemForCreation
+ */
+export interface StowLineItemForCreation {
+    /**
+     * 
+     * @type {StowLineItemArticle}
+     * @memberof StowLineItemForCreation
+     */
+    article: StowLineItemArticle;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StowLineItemForCreation
+     */
+    customAttributes?: any;
+    /**
+     * The reasons for the stow operation. Each reason can either be a stand-alone reason, or a preconfigured reasons by specifying the tenantReasonId and/or the id of the reason. If tenantReasonId and id are specified, they have to match.
+     * @type {Array<ExternalStockChangeReasonInput>}
+     * @memberof StowLineItemForCreation
+     */
+    reasons?: Array<ExternalStockChangeReasonInput>;
+    /**
+     * Instructions on how and where to stow the item
+     * @type {Array<StowLineItemStowToForUpdate> | StowLineItemStowToForCreation}
+     * @memberof StowLineItemForCreation
+     */
+    stowTo: Array<StowLineItemStowToForUpdate> | StowLineItemStowToForCreation;
+    /**
+     * Instructions on how and where to take the item from
+     * @type {StowLineItemTakeFromForCreation}
+     * @memberof StowLineItemForCreation
+     */
+    takeFrom: StowLineItemTakeFromForCreation;
+}
+/**
+ * StowLineItemForUpdate
+ * @export
+ * @interface StowLineItemForUpdate
+ */
+export interface StowLineItemForUpdate {
+    /**
+     * The article that should be stowed
+     * @type {StowLineItemArticle}
+     * @memberof StowLineItemForUpdate
+     */
+    article?: StowLineItemArticle;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof StowLineItemForUpdate
+     */
+    customAttributes?: any;
+    /**
+     * The ID of the stowLineItem. Leave empty for creation
+     * @type {string}
+     * @memberof StowLineItemForUpdate
+     */
+    id?: string;
+    /**
+     * The reasons for the stow operation
+     * @type {Array<ExternalStockChangeReasonInput>}
+     * @memberof StowLineItemForUpdate
+     */
+    reasons?: Array<ExternalStockChangeReasonInput>;
+    /**
+     * Instructions on how and where to stow the item
+     * @type {Array<StowLineItemStowToForUpdate> | StowLineItemStowToForCreation}
+     * @memberof StowLineItemForUpdate
+     */
+    stowTo?: Array<StowLineItemStowToForUpdate> | StowLineItemStowToForCreation;
+    /**
+     * Instructions on how and where to take the item from
+     * @type {StowLineItemTakeFromForCreation}
+     * @memberof StowLineItemForUpdate
+     */
+    takeFrom?: StowLineItemTakeFromForCreation;
+}
+/**
+ * StowLineItemStowTo
+ * @export
+ * @interface StowLineItemStowTo
+ */
+export interface StowLineItemStowTo {
+    /**
+     * Quantity that should be taken / stowed
+     * @type {number}
+     * @memberof StowLineItemStowTo
+     */
+    quantity: number;
+    /**
+     * ScannableCodes such as barcodes relevant for taking or stowing the item
+     * @type {Array<string>}
+     * @memberof StowLineItemStowTo
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * Stock from which the item should be taken / stowed to. Leave empty for type UNREGISTERED / DISCARD.
+     * @type {string}
+     * @memberof StowLineItemStowTo
+     */
+    stockRef?: string;
+    /**
+     * Storage location from which the item should be taken or to which the item should be stowed
+     * @type {string}
+     * @memberof StowLineItemStowTo
+     */
+    storageLocationRef?: string;
+    /**
+     * Operative data holding information about the stowing progress. **As for now stocks will *not* be updated even if the numbers indicate so because the stow job feature is still under development.**
+     * @type {StowedStowLineItemStowToForCreation}
+     * @memberof StowLineItemStowTo
+     */
+    stowed?: StowedStowLineItemStowToForCreation;
+    /**
+     * Define if items should be stowed on a specific stock or storage location. Use type DISCARD if the item should be booked out of the system
+     * @type {string}
+     * @memberof StowLineItemStowTo
+     */
+    type: StowLineItemStowTo.TypeEnum;
+}
+
+/**
+ * @export
+ * @namespace StowLineItemStowTo
+ */
+export namespace StowLineItemStowTo {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        STOCK = 'STOCK',
+        LOCATION = 'LOCATION',
+        DISCARD = 'DISCARD'
+    }
+}
+/**
+ * StowLineItemStowToForCreation
+ * @export
+ * @interface StowLineItemStowToForCreation
+ */
+export interface StowLineItemStowToForCreation {
+    /**
+     * Quantity that should be taken / stowed
+     * @type {number}
+     * @memberof StowLineItemStowToForCreation
+     */
+    quantity: number;
+    /**
+     * ScannableCodes such as barcodes relevant for taking or stowing the item
+     * @type {Array<string>}
+     * @memberof StowLineItemStowToForCreation
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * Stock from which the item should be taken / stowed to. Leave empty for type UNREGISTERED / DISCARD.
+     * @type {string}
+     * @memberof StowLineItemStowToForCreation
+     */
+    stockRef?: string;
+    /**
+     * Storage location from which the item should be taken or to which the item should be stowed
+     * @type {string}
+     * @memberof StowLineItemStowToForCreation
+     */
+    storageLocationRef?: string;
+    /**
+     * Operative data holding information about the stowing progress. **As for now stocks will *not* be updated even if the numbers indicate so because the stow job feature is still under development.**
+     * @type {StowedStowLineItemStowToForCreation}
+     * @memberof StowLineItemStowToForCreation
+     */
+    stowed?: StowedStowLineItemStowToForCreation;
+    /**
+     * Define if items should be stowed on a specific stock or storage location. Use type DISCARD if the item should be booked out of the system
+     * @type {string}
+     * @memberof StowLineItemStowToForCreation
+     */
+    type: StowLineItemStowToForCreation.TypeEnum;
+}
+
+/**
+ * @export
+ * @namespace StowLineItemStowToForCreation
+ */
+export namespace StowLineItemStowToForCreation {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        STOCK = 'STOCK',
+        LOCATION = 'LOCATION',
+        DISCARD = 'DISCARD'
+    }
+}
+/**
+ * StowLineItemStowToForUpdate
+ * @export
+ * @interface StowLineItemStowToForUpdate
+ */
+export interface StowLineItemStowToForUpdate {
+    /**
+     * 
+     * @type {string}
+     * @memberof StowLineItemStowToForUpdate
+     */
+    id?: string;
+    /**
+     * Quantity that should be taken / stowed
+     * @type {number}
+     * @memberof StowLineItemStowToForUpdate
+     */
+    quantity: number;
+    /**
+     * ScannableCodes such as barcodes relevant for taking or stowing the item
+     * @type {Array<string>}
+     * @memberof StowLineItemStowToForUpdate
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * Stock from which the item should be taken / stowed to. Leave empty for type UNREGISTERED / DISCARD.
+     * @type {string}
+     * @memberof StowLineItemStowToForUpdate
+     */
+    stockRef?: string;
+    /**
+     * Storage location from which the item should be taken or to which the item should be stowed
+     * @type {string}
+     * @memberof StowLineItemStowToForUpdate
+     */
+    storageLocationRef?: string;
+    /**
+     * Operative data holding information about the stowing progress. **As for now stocks will *not* be updated even if the numbers indicate so because the stow job feature is still under development.**
+     * @type {StowedStowLineItemStowToForCreation}
+     * @memberof StowLineItemStowToForUpdate
+     */
+    stowed?: StowedStowLineItemStowToForCreation;
+    /**
+     * Define if items should be stowed on a specific stock or storage location. Use type DISCARD if the item should be booked out of the system
+     * @type {string}
+     * @memberof StowLineItemStowToForUpdate
+     */
+    type: StowLineItemStowToForUpdate.TypeEnum;
+}
+
+/**
+ * @export
+ * @namespace StowLineItemStowToForUpdate
+ */
+export namespace StowLineItemStowToForUpdate {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        STOCK = 'STOCK',
+        LOCATION = 'LOCATION',
+        DISCARD = 'DISCARD'
+    }
+}
+/**
+ * Define if items should be stowed on a specific stock or storage location. Use type DISCARD if the item should be booked out of the system
+ * @export
+ * @enum {string}
+ */
+export enum StowLineItemStowToType {
+    STOCK = 'STOCK',
+    LOCATION = 'LOCATION',
+    DISCARD = 'DISCARD'
+}
+/**
+ * StowLineItemStowToWithId
+ * @export
+ * @interface StowLineItemStowToWithId
+ */
+export interface StowLineItemStowToWithId {
+    /**
+     * The ID of the stowTo instruction
+     * @type {string}
+     * @memberof StowLineItemStowToWithId
+     */
+    id: string;
+    /**
+     * Quantity that should be taken / stowed
+     * @type {number}
+     * @memberof StowLineItemStowToWithId
+     */
+    quantity: number;
+    /**
+     * ScannableCodes such as barcodes relevant for taking or stowing the item
+     * @type {Array<string>}
+     * @memberof StowLineItemStowToWithId
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * Stock from which the item should be taken / stowed to. Leave empty for type UNREGISTERED / DISCARD.
+     * @type {string}
+     * @memberof StowLineItemStowToWithId
+     */
+    stockRef?: string;
+    /**
+     * Storage location from which the item should be taken or to which the item should be stowed
+     * @type {string}
+     * @memberof StowLineItemStowToWithId
+     */
+    storageLocationRef?: string;
+    /**
+     * Operative data holding information about the stowing progress. **As for now stocks will *not* be updated even if the numbers indicate so because the stow job feature is still under development.**
+     * @type {StowedStowLineItemStowToForCreation}
+     * @memberof StowLineItemStowToWithId
+     */
+    stowed?: StowedStowLineItemStowToForCreation;
+    /**
+     * Define if items should be stowed on a specific stock or storage location. Use type DISCARD if the item should be booked out of the system
+     * @type {string}
+     * @memberof StowLineItemStowToWithId
+     */
+    type: StowLineItemStowToWithId.TypeEnum;
+}
+
+/**
+ * @export
+ * @namespace StowLineItemStowToWithId
+ */
+export namespace StowLineItemStowToWithId {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        STOCK = 'STOCK',
+        LOCATION = 'LOCATION',
+        DISCARD = 'DISCARD'
+    }
+}
+/**
+ * StowLineItemTakeFrom
+ * @export
+ * @interface StowLineItemTakeFrom
+ */
+export interface StowLineItemTakeFrom {
+    /**
+     * Quantity that should be taken / stowed
+     * @type {number}
+     * @memberof StowLineItemTakeFrom
+     */
+    quantity: number;
+    /**
+     * ScannableCodes such as barcodes relevant for taking or stowing the item
+     * @type {Array<string>}
+     * @memberof StowLineItemTakeFrom
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * Additional information about the newly created stock. **Only allowed for type UNREGISTERED**
+     * @type {StowJobStockInformation}
+     * @memberof StowLineItemTakeFrom
+     */
+    stockInformation?: StowJobStockInformation;
+    /**
+     * Stock from which the item should be taken / stowed to. Leave empty for type UNREGISTERED / DISCARD.
+     * @type {string}
+     * @memberof StowLineItemTakeFrom
+     */
+    stockRef?: string;
+    /**
+     * Storage location from which the item should be taken or to which the item should be stowed
+     * @type {string}
+     * @memberof StowLineItemTakeFrom
+     */
+    storageLocationRef?: string;
+    /**
+     * Operative data holding information about the stowing progress. **As for now stocks will *not* be updated even if the numbers indicate so because the stow job feature is still under development.**
+     * @type {TakenStowLineItemTakeFromForCreation}
+     * @memberof StowLineItemTakeFrom
+     */
+    taken?: TakenStowLineItemTakeFromForCreation;
+    /**
+     * Define if items should be taken from specific stock or storage location. Use type UNREGISTERED if a new item should be booked into the system
+     * @type {string}
+     * @memberof StowLineItemTakeFrom
+     */
+    type: StowLineItemTakeFrom.TypeEnum;
+}
+
+/**
+ * @export
+ * @namespace StowLineItemTakeFrom
+ */
+export namespace StowLineItemTakeFrom {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        STOCK = 'STOCK',
+        LOCATION = 'LOCATION',
+        UNREGISTERED = 'UNREGISTERED'
+    }
+}
+/**
+ * StowLineItemTakeFromForCreation
+ * @export
+ * @interface StowLineItemTakeFromForCreation
+ */
+export interface StowLineItemTakeFromForCreation {
+    /**
+     * Quantity that should be taken / stowed
+     * @type {number}
+     * @memberof StowLineItemTakeFromForCreation
+     */
+    quantity: number;
+    /**
+     * ScannableCodes such as barcodes relevant for taking or stowing the item
+     * @type {Array<string>}
+     * @memberof StowLineItemTakeFromForCreation
+     */
+    scannableCodes?: Array<string>;
+    /**
+     * Additional information about the newly created stock. **Only allowed for type UNREGISTERED**
+     * @type {StowJobStockInformation}
+     * @memberof StowLineItemTakeFromForCreation
+     */
+    stockInformation?: StowJobStockInformation;
+    /**
+     * Stock from which the item should be taken / stowed to. Leave empty for type UNREGISTERED / DISCARD.
+     * @type {string}
+     * @memberof StowLineItemTakeFromForCreation
+     */
+    stockRef?: string;
+    /**
+     * Storage location from which the item should be taken or to which the item should be stowed
+     * @type {string}
+     * @memberof StowLineItemTakeFromForCreation
+     */
+    storageLocationRef?: string;
+    /**
+     * Operative data holding information about the stowing progress. **As for now stocks will *not* be updated even if the numbers indicate so because the stow job feature is still under development.**
+     * @type {TakenStowLineItemTakeFromForCreation}
+     * @memberof StowLineItemTakeFromForCreation
+     */
+    taken?: TakenStowLineItemTakeFromForCreation;
+    /**
+     * Define if items should be taken from specific stock or storage location. Use type UNREGISTERED if a new item should be booked into the system
+     * @type {string}
+     * @memberof StowLineItemTakeFromForCreation
+     */
+    type: StowLineItemTakeFromForCreation.TypeEnum;
+}
+
+/**
+ * @export
+ * @namespace StowLineItemTakeFromForCreation
+ */
+export namespace StowLineItemTakeFromForCreation {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum TypeEnum {
+        STOCK = 'STOCK',
+        LOCATION = 'LOCATION',
+        UNREGISTERED = 'UNREGISTERED'
+    }
+}
+/**
+ * Define if items should be taken from specific stock or storage location. Use type UNREGISTERED if a new item should be booked into the system.
+ * @export
+ * @enum {string}
+ */
+export enum StowLineItemTakeFromType {
+    STOCK = 'STOCK',
+    LOCATION = 'LOCATION',
+    UNREGISTERED = 'UNREGISTERED'
+}
+/**
+ * StowedStowLineItemStowToForCreation
+ * @export
+ * @interface StowedStowLineItemStowToForCreation
+ */
+export interface StowedStowLineItemStowToForCreation {
+    /**
+     * Time and date on which the item was stowed. Will be set to the current time if not provided.
+     * @type {Date}
+     * @memberof StowedStowLineItemStowToForCreation
+     */
+    stowedAt?: Date;
+    /**
+     * Quantity that was stowed
+     * @type {number}
+     * @memberof StowedStowLineItemStowToForCreation
+     */
+    stowedQuantity: number;
+    /**
+     * Specifies the stock where the item will be stowed. Set this to null to explicitly create a new stock.   Exception: If stowTo.type is \"DISCARD\", a new stock will not be created when set to `null`. However, if a stock is specified, its quantity will be increased regardless of the type.
+     * @type {string}
+     * @memberof StowedStowLineItemStowToForCreation
+     */
+    stowedStockRef: string;
+    /**
+     * If a new stock is created via stowedStockRef = null, this is used to set the storage location of the new stock.   If a stock is specified, this field will be ignored.
+     * @type {string}
+     * @memberof StowedStowLineItemStowToForCreation
+     */
+    stowedStorageLocationRef?: string;
+}
+/**
+ * StringEqFilter
+ * @export
+ * @interface StringEqFilter
+ */
+export interface StringEqFilter {
+    /**
+     * 
+     * @type {string}
+     * @memberof StringEqFilter
+     */
+    eq?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StringEqFilter
+     */
+    notEq?: string;
+}
+/**
+ * StringFilter
+ * @export
+ * @interface StringFilter
+ */
+export interface StringFilter {
+    /**
+     * 
+     * @type {string}
+     * @memberof StringFilter
+     */
+    eq?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof StringFilter
+     */
+    _in?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof StringFilter
+     */
+    notEq?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof StringFilter
+     */
+    notIn?: Array<string>;
+}
+/**
+ * StringListFilter
+ * @export
+ * @interface StringListFilter
+ */
+export interface StringListFilter {
+    /**
+     * 
+     * @type {StringEqFilter}
+     * @memberof StringListFilter
+     */
+    contains?: StringEqFilter;
+}
+/**
+ * StringSearchFilter
+ * @export
+ * @interface StringSearchFilter
+ */
+export interface StringSearchFilter {
+    /**
+     * 
+     * @type {string}
+     * @memberof StringSearchFilter
+     */
+    eq?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof StringSearchFilter
+     */
+    _in?: Array<string>;
+    /**
+     * Search by regex pattern
+     * @type {string}
+     * @memberof StringSearchFilter
+     */
+    like?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StringSearchFilter
+     */
+    notEq?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof StringSearchFilter
+     */
+    notIn?: Array<string>;
+}
+/**
+ * Validate input as string.
  * @export
  * @interface StringValidation
  */
@@ -28471,7 +45243,7 @@ export interface StringValidation extends BaseValidation {
 export namespace StringValidation {
 }
 /**
- * 
+ * StrippedBrands
  * @export
  * @interface StrippedBrands
  */
@@ -28490,7 +45262,7 @@ export interface StrippedBrands {
     brands?: Array<Brand>;
 }
 /**
- * 
+ * StrippedCarrier
  * @export
  * @interface StrippedCarrier
  */
@@ -28533,7 +45305,7 @@ export interface StrippedCarrier extends VersionedResource {
     status?: CarrierStatus;
 }
 /**
- * 
+ * StrippedCarriers
  * @export
  * @interface StrippedCarriers
  */
@@ -28552,7 +45324,7 @@ export interface StrippedCarriers {
     total?: number;
 }
 /**
- * 
+ * StrippedCustomServices
  * @export
  * @interface StrippedCustomServices
  */
@@ -28571,17 +45343,17 @@ export interface StrippedCustomServices {
     total?: number;
 }
 /**
- * 
+ * StrippedFacilities
  * @export
  * @interface StrippedFacilities
  */
 export interface StrippedFacilities {
     /**
      * 
-     * @type {Array<StrippedFacility>}
+     * @type {Array<StrippedManagedFacility | Supplier>}
      * @memberof StrippedFacilities
      */
-    facilities?: Array<StrippedFacility>;
+    facilities?: Array<StrippedManagedFacility | Supplier>;
     /**
      * Total number of found entities for this query
      * @type {number}
@@ -28590,92 +45362,7 @@ export interface StrippedFacilities {
     total?: number;
 }
 /**
- * 
- * @export
- * @interface StrippedFacility
- */
-export interface StrippedFacility extends VersionedResource {
-    /**
-     * 
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    additionalAddressInfo?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    city: string;
-    /**
-     * A two-digit country code as per ISO 3166-1 alpha-2
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    country: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    province?: string;
-    /**
-     * Attributes that can be added to the address. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
-     * @type {any}
-     * @memberof StrippedFacility
-     */
-    customAttributes?: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    houseNumber?: string;
-    /**
-     * 
-     * @type {Array<AddressPhoneNumbers>}
-     * @memberof StrippedFacility
-     */
-    phoneNumbers?: Array<AddressPhoneNumbers>;
-    /**
-     * 
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    postalCode: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    street: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    id: string;
-    /**
-     * name of the facility
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    name?: string;
-    /**
-     * 
-     * @type {FacilityStatus}
-     * @memberof StrippedFacility
-     */
-    status: FacilityStatus;
-    /**
-     * The id of the facility in the tenants own system
-     * @type {string}
-     * @memberof StrippedFacility
-     */
-    tenantFacilityId?: string;
-}
-/**
- * 
+ * StrippedFacilityCustomServiceConnections
  * @export
  * @interface StrippedFacilityCustomServiceConnections
  */
@@ -28694,7 +45381,7 @@ export interface StrippedFacilityCustomServiceConnections {
     total?: number;
 }
 /**
- * 
+ * StrippedFilterEntities
  * @export
  * @interface StrippedFilterEntities
  */
@@ -28713,17 +45400,42 @@ export interface StrippedFilterEntities {
     filterEntities?: Array<FilterEntity>;
 }
 /**
- * 
+ * StrippedHandoverContainer
+ * @export
+ * @interface StrippedHandoverContainer
+ */
+export interface StrippedHandoverContainer {
+    /**
+     * total number for the given filter
+     * @type {number}
+     * @memberof StrippedHandoverContainer
+     */
+    total: number;
+    /**
+     * 
+     * @type {Array<HandoverContainer>}
+     * @memberof StrippedHandoverContainer
+     */
+    handoverContainer: Array<HandoverContainer>;
+}
+/**
+ * StrippedHandoverjob
  * @export
  * @interface StrippedHandoverjob
  */
 export interface StrippedHandoverjob extends VersionedResource {
     /**
-     * 
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo
      * @type {string}
      * @memberof StrippedHandoverjob
      */
     carrierRef?: string;
+    /**
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo
+     * @type {string}
+     * @memberof StrippedHandoverjob
+     */
+    carrierKey?: string;
     /**
      * 
      * @type {string}
@@ -28755,7 +45467,7 @@ export interface StrippedHandoverjob extends VersionedResource {
      */
     orderDate?: Date;
     /**
-     * The reference to the parcel.
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo
      * @type {string}
      * @memberof StrippedHandoverjob
      */
@@ -28767,7 +45479,7 @@ export interface StrippedHandoverjob extends VersionedResource {
      */
     pickJobRef?: string;
     /**
-     * The reference to the shipment belonging to the handoverjob
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />@deprecated This field is deprecated since 28 November 2024. Use nested object handoverJobParcelInfo
      * @type {string}
      * @memberof StrippedHandoverjob
      */
@@ -28790,6 +45502,30 @@ export interface StrippedHandoverjob extends VersionedResource {
      * @memberof StrippedHandoverjob
      */
     searchPaths?: Array<string>;
+    /**
+     * 
+     * @type {ConsumerAddress}
+     * @memberof StrippedHandoverjob
+     */
+    invoiceAddress?: ConsumerAddress;
+    /**
+     * 
+     * @type {ConsumerAddress}
+     * @memberof StrippedHandoverjob
+     */
+    recipientAddress?: ConsumerAddress;
+    /**
+     * An information to identify the recipient
+     * @type {string}
+     * @memberof StrippedHandoverjob
+     */
+    fullIdentifier?: string;
+    /**
+     * 
+     * @type {HandoverJobParcelInfo}
+     * @memberof StrippedHandoverjob
+     */
+    handoverJobParcelInfo?: HandoverJobParcelInfo;
 }
 
 /**
@@ -28807,7 +45543,7 @@ export namespace StrippedHandoverjob {
     }
 }
 /**
- * 
+ * StrippedHandoverjobs
  * @export
  * @interface StrippedHandoverjobs
  */
@@ -28826,23 +45562,17 @@ export interface StrippedHandoverjobs {
     total?: number;
 }
 /**
- * 
+ * StrippedInboundProcess
  * @export
  * @interface StrippedInboundProcess
  */
 export interface StrippedInboundProcess {
     /**
-     * 
-     * @type {string}
+     * Indicates the inbound process was anonymized acording to configured GDPR retention time.
+     * @type {boolean}
      * @memberof StrippedInboundProcess
      */
-    id: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof StrippedInboundProcess
-     */
-    version: number;
+    anonymized: boolean;
     /**
      * 
      * @type {Date}
@@ -28850,17 +45580,11 @@ export interface StrippedInboundProcess {
      */
     created: Date;
     /**
-     * 
-     * @type {Date}
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
      * @memberof StrippedInboundProcess
      */
-    lastModified: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof StrippedInboundProcess
-     */
-    tenantInboundProcessId?: string;
+    customAttributes?: any;
     /**
      * 
      * @type {string}
@@ -28872,37 +45596,55 @@ export interface StrippedInboundProcess {
      * @type {string}
      * @memberof StrippedInboundProcess
      */
-    status: StrippedInboundProcess.StatusEnum;
+    id: string;
     /**
-     * 
-     * @type {boolean}
-     * @memberof StrippedInboundProcess
-     */
-    onHold: boolean;
-    /**
-     * 
+     * Aggregated dates from sources which advise incoming stock. Currently that is \"purchaseOrder\"
      * @type {Array<Date>}
      * @memberof StrippedInboundProcess
      */
     inboundDate: Array<Date>;
     /**
      * 
+     * @type {Date}
+     * @memberof StrippedInboundProcess
+     */
+    lastModified: Date;
+    /**
+     * Indicates if the inbound process is on hold and will not be processed further
+     * @type {boolean}
+     * @memberof StrippedInboundProcess
+     */
+    onHold: boolean;
+    /**
+     * Aggregated origin data from sources which advise incoming stock. Currently that is just  \"purchaseOrder\"
      * @type {Array<InboundProcessOrigin>}
      * @memberof StrippedInboundProcess
      */
     origin: Array<InboundProcessOrigin>;
     /**
-     * 
+     * scannableCodes such as barcodes that are relevant in the inboundProcess, e.g. , barcode of the delivery note
      * @type {Array<string>}
      * @memberof StrippedInboundProcess
      */
     scannableCodes: Array<string>;
     /**
      * 
-     * @type {boolean}
+     * @type {string}
      * @memberof StrippedInboundProcess
      */
-    anonymized: boolean;
+    status: StrippedInboundProcess.StatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedInboundProcess
+     */
+    tenantInboundProcessId?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrippedInboundProcess
+     */
+    version: number;
 }
 
 /**
@@ -28922,7 +45664,7 @@ export namespace StrippedInboundProcess {
     }
 }
 /**
- * 
+ * StrippedListing
  * @export
  * @interface StrippedListing
  */
@@ -28962,7 +45704,7 @@ export namespace StrippedListing {
     }
 }
 /**
- * 
+ * StrippedListings
  * @export
  * @interface StrippedListings
  */
@@ -28981,7 +45723,98 @@ export interface StrippedListings {
     total?: number;
 }
 /**
- * 
+ * StrippedManagedFacility
+ * @export
+ * @interface StrippedManagedFacility
+ */
+export interface StrippedManagedFacility extends VersionedResource {
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    additionalAddressInfo?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    city: string;
+    /**
+     * A two-digit country code as per ISO 3166-1 alpha-2
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    country: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    province?: string;
+    /**
+     * Attributes that can be added to the address. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof StrippedManagedFacility
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    houseNumber?: string;
+    /**
+     * 
+     * @type {Array<AddressPhoneNumbers>}
+     * @memberof StrippedManagedFacility
+     */
+    phoneNumbers?: Array<AddressPhoneNumbers>;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    postalCode: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    street: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    id: string;
+    /**
+     * name of the facility
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    name?: string;
+    /**
+     * 
+     * @type {FacilityStatus}
+     * @memberof StrippedManagedFacility
+     */
+    status: FacilityStatus;
+    /**
+     * The id of the facility in the tenants own system
+     * @type {string}
+     * @memberof StrippedManagedFacility
+     */
+    tenantFacilityId?: string;
+    /**
+     * 
+     * @type {FacilityType}
+     * @memberof StrippedManagedFacility
+     */
+    type: FacilityType;
+}
+/**
+ * StrippedOidcProvider
  * @export
  * @interface StrippedOidcProvider
  */
@@ -29030,7 +45863,7 @@ export interface StrippedOidcProvider extends VersionedResource {
     assignedGroups: Array<AssignedGroup>;
 }
 /**
- * 
+ * StrippedOrder
  * @export
  * @interface StrippedOrder
  */
@@ -29065,6 +45898,12 @@ export interface StrippedOrder extends VersionedResource {
      * @memberof StrippedOrder
      */
     stickers?: Array<Sticker>;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrippedOrder
+     */
+    processRef?: string;
 }
 /**
  * 
@@ -29086,7 +45925,7 @@ export interface StrippedOrderOrderLineItems {
     title: string;
 }
 /**
- * 
+ * StrippedOrders
  * @export
  * @interface StrippedOrders
  */
@@ -29105,7 +45944,7 @@ export interface StrippedOrders {
     total?: number;
 }
 /**
- * 
+ * StrippedPackingSourceContainer
  * @export
  * @interface StrippedPackingSourceContainer
  */
@@ -29130,7 +45969,7 @@ export interface StrippedPackingSourceContainer {
     codes?: Array<string>;
 }
 /**
- * 
+ * StrippedParcel
  * @export
  * @interface StrippedParcel
  */
@@ -29161,7 +46000,7 @@ export interface StrippedParcel {
     carrierTrackingNumber?: string;
 }
 /**
- * 
+ * StrippedParcels
  * @export
  * @interface StrippedParcels
  */
@@ -29180,7 +46019,7 @@ export interface StrippedParcels {
     total?: number;
 }
 /**
- * 
+ * StrippedPickJob
  * @export
  * @interface StrippedPickJob
  */
@@ -29229,7 +46068,7 @@ export interface StrippedPickJob extends VersionedResource {
     status: PickJobStatus;
 }
 /**
- * 
+ * StrippedPickJobs
  * @export
  * @interface StrippedPickJobs
  */
@@ -29248,7 +46087,7 @@ export interface StrippedPickJobs {
     total?: number;
 }
 /**
- * 
+ * StrippedShipments
  * @export
  * @interface StrippedShipments
  */
@@ -29267,7 +46106,7 @@ export interface StrippedShipments {
     total?: number;
 }
 /**
- * 
+ * StrippedShippingTargetAddress
  * @export
  * @interface StrippedShippingTargetAddress
  */
@@ -29286,7 +46125,7 @@ export interface StrippedShippingTargetAddress {
     postalCode?: string;
 }
 /**
- * 
+ * StrippedTags
  * @export
  * @interface StrippedTags
  */
@@ -29305,26 +46144,7 @@ export interface StrippedTags {
     total?: number;
 }
 /**
- * 
- * @export
- * @interface StrippedUsers
- */
-export interface StrippedUsers {
-    /**
-     * Total number of found entities for this query
-     * @type {number}
-     * @memberof StrippedUsers
-     */
-    total?: number;
-    /**
-     * 
-     * @type {Array<User>}
-     * @memberof StrippedUsers
-     */
-    users?: Array<User>;
-}
-/**
- * 
+ * Subscription
  * @export
  * @interface Subscription
  */
@@ -29343,38 +46163,128 @@ export interface Subscription extends SubscriptionForCreation {
     id: string;
 }
 /**
- * 
+ * SubscriptionForCreation
  * @export
  * @interface SubscriptionForCreation
  */
 export interface SubscriptionForCreation {
     /**
-     * 
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Deprecated: Use new 'target' object instead.
      * @type {string}
      * @memberof SubscriptionForCreation
      */
-    callbackUrl: string;
+    callbackUrl?: string;
     /**
-     * 
+     * Name of the event in the fulfillmenttools platform.
      * @type {string}
      * @memberof SubscriptionForCreation
      */
     event: string;
     /**
-     * 
+     * This part of the API is deprecated. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#deprecated\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />Deprecated: Use new 'target' object instead.
      * @type {Array<CallbackHeader>}
      * @memberof SubscriptionForCreation
      */
-    headers: Array<CallbackHeader>;
+    headers?: Array<CallbackHeader>;
     /**
-     * 
+     * Name of the event, this is freely selectable.
      * @type {string}
      * @memberof SubscriptionForCreation
      */
     name: string;
+    /**
+     * 
+     * @type {SubscriptionTargetWebhook | SubscriptionTargetMicrosoftAzureServiceBus}
+     * @memberof SubscriptionForCreation
+     */
+    target?: SubscriptionTargetWebhook | SubscriptionTargetMicrosoftAzureServiceBus;
 }
 /**
- * 
+ * Subscriptions model for a Microsoft Azure Service Bus target.
+ * @export
+ * @interface SubscriptionTargetMicrosoftAzureServiceBus
+ */
+export interface SubscriptionTargetMicrosoftAzureServiceBus {
+    /**
+     * 
+     * @type {SubscriptionTargetMicrosoftAzureServiceBusEnum}
+     * @memberof SubscriptionTargetMicrosoftAzureServiceBus
+     */
+    type: SubscriptionTargetMicrosoftAzureServiceBusEnum;
+    /**
+     * 'Directory (Tenant) ID' from the app registration in 'Microsoft Entra ID' (formerly 'Azure AD').
+     * @type {string}
+     * @memberof SubscriptionTargetMicrosoftAzureServiceBus
+     */
+    tenantId: string;
+    /**
+     * 'Application (Client) ID' from the app registration in 'Microsoft Entra ID' (formerly 'Azure AD').
+     * @type {string}
+     * @memberof SubscriptionTargetMicrosoftAzureServiceBus
+     */
+    clientId: string;
+    /**
+     * Client secret from the used Azure application.
+     * @type {string}
+     * @memberof SubscriptionTargetMicrosoftAzureServiceBus
+     */
+    clientSecret: string;
+    /**
+     * The Azure Service Bus namespace.
+     * @type {string}
+     * @memberof SubscriptionTargetMicrosoftAzureServiceBus
+     */
+    namespace: string;
+    /**
+     * Name of the queue or topic in the Service Bus namespace.
+     * @type {string}
+     * @memberof SubscriptionTargetMicrosoftAzureServiceBus
+     */
+    queueOrTopicName: string;
+}
+/**
+ * Type of subscription target Microsoft Azure Service Bus.
+ * @export
+ * @enum {string}
+ */
+export enum SubscriptionTargetMicrosoftAzureServiceBusEnum {
+    MICROSOFTAZURESERVICEBUS = 'MICROSOFT_AZURE_SERVICE_BUS'
+}
+/**
+ * Subscriptions model for a Webhook target.
+ * @export
+ * @interface SubscriptionTargetWebhook
+ */
+export interface SubscriptionTargetWebhook {
+    /**
+     * 
+     * @type {SubscriptionTargetWebhookEnum}
+     * @memberof SubscriptionTargetWebhook
+     */
+    type: SubscriptionTargetWebhookEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionTargetWebhook
+     */
+    callbackUrl: string;
+    /**
+     * 
+     * @type {Array<CallbackHeader>}
+     * @memberof SubscriptionTargetWebhook
+     */
+    headers?: Array<CallbackHeader>;
+}
+/**
+ * Type of subscription target webhook.
+ * @export
+ * @enum {string}
+ */
+export enum SubscriptionTargetWebhookEnum {
+    WEBHOOK = 'WEBHOOK'
+}
+/**
+ * Subscriptions
  * @export
  * @interface Subscriptions
  */
@@ -29393,7 +46303,7 @@ export interface Subscriptions {
     total?: number;
 }
 /**
- * 
+ * Substitute
  * @export
  * @interface Substitute
  */
@@ -29436,7 +46346,7 @@ export interface Substitute {
     title: string;
 }
 /**
- * 
+ * SubstituteAttributeItem
  * @export
  * @interface SubstituteAttributeItem
  */
@@ -29450,7 +46360,7 @@ export interface SubstituteAttributeItem extends ArticleAttributeItem {
 export namespace SubstituteAttributeItem {
 }
 /**
- * 
+ * SubstituteLineItem
  * @export
  * @interface SubstituteLineItem
  */
@@ -29505,7 +46415,7 @@ export interface SubstituteLineItem {
     partialStockLocations?: Array<SubstituteLineItemPartialStockLocation>;
 }
 /**
- * 
+ * SubstituteLineItemArticle
  * @export
  * @interface SubstituteLineItemArticle
  */
@@ -29518,7 +46428,7 @@ export interface SubstituteLineItemArticle extends AbstractArticle {
     attributes?: Array<ArticleAttributeItem>;
 }
 /**
- * 
+ * SubstituteLineItemForCreation
  * @export
  * @interface SubstituteLineItemForCreation
  */
@@ -29543,7 +46453,7 @@ export interface SubstituteLineItemForCreation {
     pickedAt?: Date;
 }
 /**
- * 
+ * SubstituteLineItemPartialStockLocation
  * @export
  * @interface SubstituteLineItemPartialStockLocation
  */
@@ -29562,7 +46472,7 @@ export interface SubstituteLineItemPartialStockLocation {
     location: Location;
 }
 /**
- * 
+ * Substitutes
  * @export
  * @interface Substitutes
  */
@@ -29587,7 +46497,7 @@ export interface Substitutes extends Entity {
     version: number;
 }
 /**
- * 
+ * SubstitutesForUpsert
  * @export
  * @interface SubstitutesForUpsert
  */
@@ -29612,7 +46522,7 @@ export interface SubstitutesForUpsert {
     version: number;
 }
 /**
- * 
+ * Substitution Configuration
  * @export
  * @interface SubstitutionConfiguration
  */
@@ -29625,7 +46535,143 @@ export interface SubstitutionConfiguration extends VersionedResource {
     active: boolean;
 }
 /**
- * 
+ * Supplier
+ * @export
+ * @interface Supplier
+ */
+export interface Supplier extends Facility {
+    /**
+     * 
+     * @type {FacilityAddress}
+     * @memberof Supplier
+     */
+    address?: FacilityAddress;
+}
+/**
+ * SupplierForCreation
+ * @export
+ * @interface SupplierForCreation
+ */
+export interface SupplierForCreation extends FacilityForCreation {
+    /**
+     * 
+     * @type {FacilityAddressForCreation}
+     * @memberof SupplierForCreation
+     */
+    address?: FacilityAddressForCreation;
+}
+/**
+ * SupplierForModification
+ * @export
+ * @interface SupplierForModification
+ */
+export interface SupplierForModification {
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof SupplierForModification
+     */
+    version: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SupplierForModification
+     */
+    name?: string;
+    /**
+     * 
+     * @type {FacilityAddressForCreation}
+     * @memberof SupplierForModification
+     */
+    address?: FacilityAddressForCreation;
+    /**
+     * 
+     * @type {FacilityStatus}
+     * @memberof SupplierForModification
+     */
+    status?: FacilityStatus;
+    /**
+     * The id of the facility in the tenants own system
+     * @type {string}
+     * @memberof SupplierForModification
+     */
+    tenantFacilityId?: string;
+    /**
+     * 
+     * @type {Array<TagReference>}
+     * @memberof SupplierForModification
+     */
+    tags?: Array<TagReference>;
+    /**
+     * Attributes that can be added to the facility. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof SupplierForModification
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {FacilityType}
+     * @memberof SupplierForModification
+     */
+    type: FacilityType;
+}
+/**
+ * SupplierForReplacement
+ * @export
+ * @interface SupplierForReplacement
+ */
+export interface SupplierForReplacement {
+    /**
+     * The version of the document to be used in optimistic locking mechanisms.
+     * @type {number}
+     * @memberof SupplierForReplacement
+     */
+    version: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SupplierForReplacement
+     */
+    name: string;
+    /**
+     * 
+     * @type {FacilityStatus}
+     * @memberof SupplierForReplacement
+     */
+    status: FacilityStatus;
+    /**
+     * 
+     * @type {FacilityAddressForCreation}
+     * @memberof SupplierForReplacement
+     */
+    address?: FacilityAddressForCreation;
+    /**
+     * The id of the facility in the tenants own system
+     * @type {string}
+     * @memberof SupplierForReplacement
+     */
+    tenantFacilityId?: string;
+    /**
+     * 
+     * @type {Array<TagReference>}
+     * @memberof SupplierForReplacement
+     */
+    tags?: Array<TagReference>;
+    /**
+     * Attributes that can be added to the facility. These attributes cannot be used within fulfillment processes, but it could be useful to have the informations carried here.
+     * @type {any}
+     * @memberof SupplierForReplacement
+     */
+    customAttributes?: any;
+    /**
+     * 
+     * @type {FacilityType}
+     * @memberof SupplierForReplacement
+     */
+    type: FacilityType;
+}
+/**
+ * SupplyingFacilityConfiguration
  * @export
  * @interface SupplyingFacilityConfiguration
  */
@@ -29644,7 +46690,7 @@ export interface SupplyingFacilityConfiguration {
     deliveryEvents: Array<DeliveryEvent>;
 }
 /**
- * 
+ * SupportedEvent
  * @export
  * @interface SupportedEvent
  */
@@ -29663,7 +46709,7 @@ export interface SupportedEvent {
     event?: string;
 }
 /**
- * 
+ * SupportedEvents
  * @export
  * @interface SupportedEvents
  */
@@ -29684,7 +46730,7 @@ export enum SupportedFilterEntityTypesEnum {
     STICKER = 'STICKER'
 }
 /**
- * <center><img src='https://storage.googleapis.com/ocff-assets/api/beta_174x74.png'   /></center> <br /> <i>This part of the API is currently under development.   That means that this endpoint, model, etc. can contain breaking changes   and / or might not be available at all times in your API instance. It   could disappear also without warning. Thus, it currently does not fall   under our SLA regulations. For details on this topic please check our   <a href=\"https://docs.fulfillmenttools.com/api-docs/connecting-to-fulfillmenttools/restful-api/general-topics/api-release-life-cycle\">documentation</a></i><br /><br />ISO 3166 conform country code and ISO 639-1 conform language code (de_DE, en_US, ch_FR, etc.)
+ * This part of the API is in Beta status. For details please check the <a href=\"https://docs.fulfillmenttools.com/documentation/developer-docs/api/core-concepts/api-release-life-cycle#beta\" target=\"_blank\">api-release-life-cycle documentation</a>.<br /><br />ISO 3166 conform country code and ISO 639-1 conform language code (de_DE, en_US, ch_FR, etc.)
  * @export
  * @enum {string}
  */
@@ -29708,12 +46754,12 @@ export enum SupportedLocale {
     HuHU = 'hu_HU'
 }
 /**
- * 
+ * SupportedLocales
  * @export
  */
 export type SupportedLocales = Array<SupportedLocale>
 /**
- * 
+ * Tag
  * @export
  * @interface Tag
  */
@@ -29732,7 +46778,7 @@ export interface Tag extends VersionedResource {
     allowedValues: Array<string>;
 }
 /**
- * 
+ * TagConfiguration
  * @export
  * @interface TagConfiguration
  */
@@ -29751,7 +46797,7 @@ export interface TagConfiguration {
     offeredDocumentsByDefault: Array<OfferedDocument>;
 }
 /**
- * 
+ * TagForCreation
  * @export
  * @interface TagForCreation
  */
@@ -29770,7 +46816,7 @@ export interface TagForCreation {
     allowedValues: Array<string>;
 }
 /**
- * 
+ * TagPatchActions
  * @export
  * @interface TagPatchActions
  */
@@ -29789,7 +46835,7 @@ export interface TagPatchActions {
     version: number;
 }
 /**
- * 
+ * TagReference
  * @export
  * @interface TagReference
  */
@@ -29808,7 +46854,7 @@ export interface TagReference {
     id: string;
 }
 /**
- * 
+ * TagScanningConfiguration
  * @export
  * @interface TagScanningConfiguration
  */
@@ -29821,7 +46867,7 @@ export interface TagScanningConfiguration {
     offeredScanningRuleByTag?: Array<OfferedScanningRuleByTag>;
 }
 /**
- * 
+ * TakeOverPickJobConfiguration
  * @export
  * @interface TakeOverPickJobConfiguration
  */
@@ -29834,7 +46880,32 @@ export interface TakeOverPickJobConfiguration {
     active: boolean;
 }
 /**
- * 
+ * TakenStowLineItemTakeFromForCreation
+ * @export
+ * @interface TakenStowLineItemTakeFromForCreation
+ */
+export interface TakenStowLineItemTakeFromForCreation {
+    /**
+     * Time and date on which the item was taken
+     * @type {Date}
+     * @memberof TakenStowLineItemTakeFromForCreation
+     */
+    takenAt?: Date;
+    /**
+     * Quantity that was taken
+     * @type {number}
+     * @memberof TakenStowLineItemTakeFromForCreation
+     */
+    takenQuantity: number;
+    /**
+     * Specifies the stock from which the goods will be taken.   Exception: If stowTo.type is \"UNREGISTERED\", this field may be null. If a stock is specified, its quantity will be reduced regardless of the type.
+     * @type {string}
+     * @memberof TakenStowLineItemTakeFromForCreation
+     */
+    takenStockRef: string;
+}
+/**
+ * TargetAddress
  * @export
  * @interface TargetAddress
  */
@@ -29847,7 +46918,7 @@ export interface TargetAddress extends ConsumerAddress {
     facilityRef?: string;
 }
 /**
- * 
+ * TenantConfiguration
  * @export
  * @interface TenantConfiguration
  */
@@ -29860,7 +46931,7 @@ export interface TenantConfiguration extends VersionedResource {
     clearName: string;
 }
 /**
- * 
+ * TenantConfigurationForUpsert
  * @export
  * @interface TenantConfigurationForUpsert
  */
@@ -29879,7 +46950,7 @@ export interface TenantConfigurationForUpsert extends VersionedResource {
     version: number;
 }
 /**
- * 
+ * TenantConnectorConfiguration
  * @export
  * @interface TenantConnectorConfiguration
  */
@@ -29922,7 +46993,7 @@ export interface TenantConnectorConfiguration {
     firebaseAppIdDebug: string;
 }
 /**
- * 
+ * TenantConnectorConfigurations
  * @export
  * @interface TenantConnectorConfigurations
  */
@@ -29935,13 +47006,13 @@ export interface TenantConnectorConfigurations extends VersionedResource {
     connectApps: Array<TenantConnectorConfiguration>;
 }
 /**
- * 
+ * ThresholdPriceValue
  * @export
  * @interface ThresholdPriceValue
  */
 export interface ThresholdPriceValue {
     /**
-     * 
+     * The lower the value the higher is the priority, e.g. priority 1 is higher than priority 10. The priority is used when comparing multiple carriers.
      * @type {number}
      * @memberof ThresholdPriceValue
      */
@@ -29954,7 +47025,7 @@ export interface ThresholdPriceValue {
     priceRange: PriceRange;
 }
 /**
- * 
+ * TimeRange
  * @export
  * @interface TimeRange
  */
@@ -29979,7 +47050,7 @@ export interface TimeRange {
     capacity?: number;
 }
 /**
- * 
+ * TimeStamp
  * @export
  * @interface TimeStamp
  */
@@ -30023,7 +47094,7 @@ export interface TimeZone {
     timeZoneName: string;
 }
 /**
- * 
+ * ToolKitComparisonDetails
  * @export
  * @interface ToolKitComparisonDetails
  */
@@ -30054,7 +47125,7 @@ export interface ToolKitComparisonDetails {
     predicate: ToolkitComparisonPredicate;
 }
 /**
- * 
+ * ToolKitComparisonPart
  * @export
  * @interface ToolKitComparisonPart
  */
@@ -30073,17 +47144,18 @@ export interface ToolKitComparisonPart {
     transformedValue: Array<string>;
 }
 /**
- * The entities that can be compared by the toolkit fence or rating   * `ORDER`   * `FACILITY`   * `CARRIERCONNECTION`
+ * The entities that can be compared by the toolkit fence or rating   * `ORDER`   * `FACILITY`   * `CARRIERCONNECTION`   * `LISTING`
  * @export
  * @enum {string}
  */
 export enum ToolkitAllowedEntities {
     ORDER = 'ORDER',
     FACILITY = 'FACILITY',
-    CARRIERCONNECTION = 'CARRIERCONNECTION'
+    CARRIERCONNECTION = 'CARRIERCONNECTION',
+    LISTING = 'LISTING'
 }
 /**
- * 
+ * Toolkit Comparison Decision Detail.
  * @export
  * @interface ToolkitComparisonDecisionDetail
  */
@@ -30180,9 +47252,15 @@ export interface ToolkitComparisonRule {
      * @memberof ToolkitComparisonRule
      */
     predicates: Array<ToolkitComparisonPredicate>;
+    /**
+     * 
+     * @type {ToolkitRuleScope}
+     * @memberof ToolkitComparisonRule
+     */
+    evaluationScope?: ToolkitRuleScope;
 }
 /**
- * 
+ * Toolkit Decision Detail.
  * @export
  * @interface ToolkitDecisionDetail
  */
@@ -30267,7 +47345,7 @@ export enum ToolkitEntityOperatorType {
     LESSEQUALS = 'LESS_EQUALS'
 }
 /**
- * 
+ * ToolkitFence
  * @export
  * @interface ToolkitFence
  */
@@ -30298,7 +47376,7 @@ export interface ToolkitFence extends ToolkitFenceForModification {
     id: string;
 }
 /**
- * 
+ * ToolkitFenceForCreation
  * @export
  * @interface ToolkitFenceForCreation
  */
@@ -30365,7 +47443,7 @@ export interface ToolkitFenceForCreation {
     comparisonRule?: ToolkitComparisonRule;
 }
 /**
- * 
+ * ToolkitFenceForModification
  * @export
  * @interface ToolkitFenceForModification
  */
@@ -30378,7 +47456,7 @@ export interface ToolkitFenceForModification extends ToolkitFenceForCreation {
     version: number;
 }
 /**
- * 
+ * ToolkitFencesTransporter
  * @export
  * @interface ToolkitFencesTransporter
  */
@@ -30453,7 +47531,7 @@ export enum ToolkitPredicateConnector {
     AND = 'AND'
 }
 /**
- * 
+ * ToolkitPredicateDecisionDetail
  * @export
  * @interface ToolkitPredicateDecisionDetail
  */
@@ -30484,7 +47562,7 @@ export interface ToolkitPredicateDecisionDetail {
     predicate: ToolkitPredicate;
 }
 /**
- * 
+ * ToolkitPredicatesDecisionDetail
  * @export
  * @interface ToolkitPredicatesDecisionDetail
  */
@@ -30503,7 +47581,7 @@ export interface ToolkitPredicatesDecisionDetail {
     predicates: Array<ToolkitPredicateDecisionDetail>;
 }
 /**
- * 
+ * ToolkitRating
  * @export
  * @interface ToolkitRating
  */
@@ -30534,7 +47612,7 @@ export interface ToolkitRating extends ToolkitRatingForModification {
     id: string;
 }
 /**
- * 
+ * ToolkitRatingForCreation
  * @export
  * @interface ToolkitRatingForCreation
  */
@@ -30601,7 +47679,7 @@ export interface ToolkitRatingForCreation {
     maxPenalty: number;
 }
 /**
- * 
+ * ToolkitRatingForModification
  * @export
  * @interface ToolkitRatingForModification
  */
@@ -30614,7 +47692,7 @@ export interface ToolkitRatingForModification extends ToolkitRatingForCreation {
     version: number;
 }
 /**
- * 
+ * ToolkitRatingTransporter
  * @export
  * @interface ToolkitRatingTransporter
  */
@@ -30656,9 +47734,15 @@ export interface ToolkitRule {
      * @memberof ToolkitRule
      */
     rightPart: ToolkitRulePart;
+    /**
+     * 
+     * @type {ToolkitRuleScope}
+     * @memberof ToolkitRule
+     */
+    evaluationScope?: ToolkitRuleScope;
 }
 /**
- * 
+ * ToolkitRuleComparePropertiesOperatorResultExplanation
  * @export
  * @enum {string}
  */
@@ -30678,7 +47762,7 @@ export enum ToolkitRuleComparisonOperatorType {
     RIGHTCONTAINSLEFT = 'RIGHT_CONTAINS_LEFT'
 }
 /**
- * 
+ * ToolkitRuleOperatorResultExplanation
  * @export
  * @enum {string}
  */
@@ -30717,6 +47801,15 @@ export interface ToolkitRulePart {
     predicates: Array<ToolkitPredicate>;
 }
 /**
+ * ToolkitRuleScope
+ * @export
+ * @enum {string}
+ */
+export enum ToolkitRuleScope {
+    WHOLEENTITY = 'WHOLE_ENTITY',
+    LINEITEM = 'LINE_ITEM'
+}
+/**
  * The transformations available to apply on the entity property value before a predicate is evaluated
  * @export
  * @enum {string}
@@ -30748,7 +47841,7 @@ export enum TrackingStatus {
     Notification = 'notification'
 }
 /**
- * 
+ * Transfer
  * @export
  * @interface Transfer
  */
@@ -30782,7 +47875,7 @@ export namespace Transfer {
     }
 }
 /**
- * 
+ * TransitTimeConfiguration
  * @export
  * @interface TransitTimeConfiguration
  */
@@ -30816,7 +47909,7 @@ export namespace TransitTimeConfiguration {
     }
 }
 /**
- * 
+ * TransitTimeConfigurationForUpsert
  * @export
  * @interface TransitTimeConfigurationForUpsert
  */
@@ -30844,23 +47937,117 @@ export namespace TransitTimeConfigurationForUpsert {
     }
 }
 /**
+ * UpcomingTimeTriggeredRerouteWebHookEvent
+ * @export
+ * @interface UpcomingTimeTriggeredRerouteWebHookEvent
+ */
+export interface UpcomingTimeTriggeredRerouteWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {UpcomingTimeTriggeredRerouteWebHookEventPayload}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEvent
+     */
+    payload: UpcomingTimeTriggeredRerouteWebHookEventPayload;
+}
+/**
+ * UpcomingTimeTriggeredRerouteWebHookEventPayload
+ * @export
+ * @interface UpcomingTimeTriggeredRerouteWebHookEventPayload
+ */
+export interface UpcomingTimeTriggeredRerouteWebHookEventPayload {
+    /**
+     * 
+     * @type {UpcomingTimeTriggeredRerouteWebHookEventPayloadPickJobData}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayload
+     */
+    pickJobData: UpcomingTimeTriggeredRerouteWebHookEventPayloadPickJobData;
+    /**
+     * 
+     * @type {UpcomingTimeTriggeredRerouteWebHookEventPayloadFacilityData}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayload
+     */
+    facilityData: UpcomingTimeTriggeredRerouteWebHookEventPayloadFacilityData;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayload
+     */
+    rerouteDate: Date;
+}
+/**
  * 
+ * @export
+ * @interface UpcomingTimeTriggeredRerouteWebHookEventPayloadFacilityData
+ */
+export interface UpcomingTimeTriggeredRerouteWebHookEventPayloadFacilityData {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayloadFacilityData
+     */
+    name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayloadFacilityData
+     */
+    facilityRef: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayloadFacilityData
+     */
+    timeZone: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpcomingTimeTriggeredRerouteWebHookEventPayloadPickJobData
+ */
+export interface UpcomingTimeTriggeredRerouteWebHookEventPayloadPickJobData {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayloadPickJobData
+     */
+    pickJobRef: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayloadPickJobData
+     */
+    tenantOrderId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayloadPickJobData
+     */
+    shortId: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UpcomingTimeTriggeredRerouteWebHookEventPayloadPickJobData
+     */
+    created: Date;
+}
+/**
+ * UpdateChannelByIdAction
  * @export
  * @interface UpdateChannelByIdAction
  */
 export interface UpdateChannelByIdAction {
     /**
      * 
-     * @type {string}
-     * @memberof UpdateChannelByIdAction
-     */
-    name: UpdateChannelByIdAction.NameEnum;
-    /**
-     * 
      * @type {EmailNotificationChannel}
      * @memberof UpdateChannelByIdAction
      */
     channel: EmailNotificationChannel;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateChannelByIdAction
+     */
+    name: UpdateChannelByIdAction.NameEnum;
     /**
      * 
      * @type {number}
@@ -30883,7 +48070,7 @@ export namespace UpdateChannelByIdAction {
     }
 }
 /**
- * 
+ * Update facility Coorindates.
  * @export
  * @interface UpdateFacilityCoordinatesActionParameter
  */
@@ -30916,7 +48103,7 @@ export namespace UpdateFacilityCoordinatesActionParameter {
     }
 }
 /**
- * 
+ * Action to a update a line item of a packing target container.
  * @export
  * @interface UpdateLineItemOnPackingTargetContainerAction
  */
@@ -30949,7 +48136,7 @@ export namespace UpdateLineItemOnPackingTargetContainerAction {
     }
 }
 /**
- * 
+ * Action to update a packing target container of a line item.
  * @export
  * @interface UpdatePackingTargetContainerLineItemAction
  */
@@ -30987,7 +48174,7 @@ export interface UpdatePackingTargetContainerLineItemActionPayload {
     lineItem: PackingTargetContainerLineItem;
 }
 /**
- * 
+ * UpdatePackingTargetContainerLineItemEnum
  * @export
  * @enum {string}
  */
@@ -30995,7 +48182,40 @@ export enum UpdatePackingTargetContainerLineItemEnum {
     UpdateLineItem = 'UpdateLineItem'
 }
 /**
- * 
+ * Action to a update the recordable attributes of the line items of a packing target container.
+ * @export
+ * @interface UpdateRecordableAttributesPackingTargetContainerAction
+ */
+export interface UpdateRecordableAttributesPackingTargetContainerAction extends AbstractModificationAction {
+    /**
+     * Use this action to update the recordable attributes of the line items of a packing target container
+     * @type {string}
+     * @memberof UpdateRecordableAttributesPackingTargetContainerAction
+     */
+    action: UpdateRecordableAttributesPackingTargetContainerAction.ActionEnum;
+    /**
+     * 
+     * @type {Array<RecordableAttributeForUpdate>}
+     * @memberof UpdateRecordableAttributesPackingTargetContainerAction
+     */
+    recordableAttributeUpdates: Array<RecordableAttributeForUpdate>;
+}
+
+/**
+ * @export
+ * @namespace UpdateRecordableAttributesPackingTargetContainerAction
+ */
+export namespace UpdateRecordableAttributesPackingTargetContainerAction {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum ActionEnum {
+        UpdateRecordableAttributesPackingTargetContainer = 'UpdateRecordableAttributesPackingTargetContainer'
+    }
+}
+/**
+ * UpdateRefuseReasonParameter
  * @export
  * @interface UpdateRefuseReasonParameter
  */
@@ -31014,31 +48234,67 @@ export interface UpdateRefuseReasonParameter {
     availableRefuseReasonForUpdate: AvailableRefuseReasonForUpdate;
 }
 /**
- * 
+ * User
  * @export
  * @interface User
  */
-export interface User extends VersionedResource {
+export interface User {
+    /**
+     * The assigned facilities of the user
+     * @type {Array<UserAssignedFacility>}
+     * @memberof User
+     */
+    assignedFacilities?: Array<UserAssignedFacility>;
+    /**
+     * The assigned roles of a user
+     * @type {Array<AssignedRoles>}
+     * @memberof User
+     */
+    assignedRoles: Array<AssignedRoles>;
+    /**
+     * The authentication provider of the user
+     * @type {AuthenticationProvider}
+     * @memberof User
+     */
+    authenticationProvider: AuthenticationProvider;
     /**
      * 
+     * @type {SupportedLocale}
+     * @memberof User
+     */
+    authenticationProviderType?: SupportedLocale;
+    /**
+     * Creation date of the user
+     * @type {Date}
+     * @memberof User
+     */
+    created?: Date;
+    /**
+     * The custom claims of the user
      * @type {CustomClaims}
      * @memberof User
      */
     customClaims?: CustomClaims;
     /**
-     * 
+     * The first name of the user
      * @type {string}
      * @memberof User
      */
     firstname: string;
     /**
-     * 
+     * The id of the user
      * @type {string}
      * @memberof User
      */
     id: string;
     /**
-     * 
+     * Last modification date of the user
+     * @type {Date}
+     * @memberof User
+     */
+    lastModified?: Date;
+    /**
+     * The last name of the user
      * @type {string}
      * @memberof User
      */
@@ -31048,100 +48304,182 @@ export interface User extends VersionedResource {
      * @type {SupportedLocale}
      * @memberof User
      */
-    locale: SupportedLocale;
+    locale?: SupportedLocale;
     /**
-     * 
+     * The username of the user
      * @type {string}
      * @memberof User
      */
     username: string;
     /**
-     * <center><img src='https://storage.googleapis.com/ocff-assets/api/fft-deprectated_254x51.png'></center> <br /> <i>This endpoint is deprecated and has been replaced.</i><br /><br />@deprecated use authenticationProvider instead.
-     * @type {string}
+     * Version of the user
+     * @type {number}
      * @memberof User
      */
-    authenticationProviderType?: User.AuthenticationProviderTypeEnum;
-    /**
-     * 
-     * @type {AuthenticationProvider}
-     * @memberof User
-     */
-    authenticationProvider: AuthenticationProvider;
-    /**
-     * 
-     * @type {Array<UserAssignedFacility>}
-     * @memberof User
-     */
-    assignedFacilities?: Array<UserAssignedFacility>;
-    /**
-     * Attributes that can be added to the user. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof User
-     */
-    customAttributes?: any;
+    version: number;
 }
-
 /**
+ * The type of action to perform
  * @export
- * @namespace User
+ * @enum {string}
  */
-export namespace User {
-    /**
-     * @export
-     * @enum {string}
-     */
-    export enum AuthenticationProviderTypeEnum {
-        EMAILPASSWORD = 'EMAIL_PASSWORD',
-        OIDC = 'OIDC'
-    }
+export enum UserActionEnum {
+    ModifyUser = 'ModifyUser'
 }
 /**
- * A facility that was assigned to an user
+ * UserAssignedFacilitiesFilter
+ * @export
+ * @interface UserAssignedFacilitiesFilter
+ */
+export interface UserAssignedFacilitiesFilter {
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof UserAssignedFacilitiesFilter
+     */
+    facilityRef?: StringFilter;
+}
+/**
+ * UserAssignedFacilitiesListFilter
+ * @export
+ * @interface UserAssignedFacilitiesListFilter
+ */
+export interface UserAssignedFacilitiesListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {UserAssignedFacilitiesFilter}
+     * @memberof UserAssignedFacilitiesListFilter
+     */
+    contains?: UserAssignedFacilitiesFilter;
+}
+/**
+ * UserAssignedFacility
  * @export
  * @interface UserAssignedFacility
  */
-export interface UserAssignedFacility extends UserAssignedFacilityForCreation {
+export interface UserAssignedFacility {
     /**
-     * 
+     * The assigned zones of the user
+     * @type {Array<UserAssignedZone>}
+     * @memberof UserAssignedFacility
+     */
+    assignedZones?: Array<UserAssignedZone>;
+    /**
+     * The id of the assigned facility
+     * @type {string}
+     * @memberof UserAssignedFacility
+     */
+    facilityRef: string;
+    /**
+     * The id of the assigned facility
      * @type {string}
      * @memberof UserAssignedFacility
      */
     id: string;
 }
 /**
- * A facility that was assigned to an user
+ * UserAssignedFacilityForCreation
  * @export
  * @interface UserAssignedFacilityForCreation
  */
 export interface UserAssignedFacilityForCreation {
+    /**
+     * The assigned zones of the user
+     * @type {Array<UserAssignedZone>}
+     * @memberof UserAssignedFacilityForCreation
+     */
+    assignedZones?: Array<UserAssignedZone>;
     /**
      * The id of the assigned facility
      * @type {string}
      * @memberof UserAssignedFacilityForCreation
      */
     facilityRef: string;
-    /**
-     * 
-     * @type {Array<UserAssignedZone>}
-     * @memberof UserAssignedFacilityForCreation
-     */
-    assignedZones?: Array<UserAssignedZone>;
 }
 /**
- * A facility zone that was assigned to an user
+ * UserAssignedZone
  * @export
  * @interface UserAssignedZone
  */
 export interface UserAssignedZone {
     /**
-     * 
+     * The id of the assigned zone
      * @type {string}
      * @memberof UserAssignedZone
      */
     zoneRef: string;
 }
 /**
- * 
+ * UserAuthAuthenticationProviderTypeEnumFilter
+ * @export
+ * @interface UserAuthAuthenticationProviderTypeEnumFilter
+ */
+export interface UserAuthAuthenticationProviderTypeEnumFilter {
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof UserAuthAuthenticationProviderTypeEnumFilter
+     */
+    eq?: UserAuthAuthenticationProviderTypeEnumFilter.EqEnum;
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof UserAuthAuthenticationProviderTypeEnumFilter
+     */
+    _in?: UserAuthAuthenticationProviderTypeEnumFilter.InEnum;
+    /**
+     * Search by type
+     * @type {string}
+     * @memberof UserAuthAuthenticationProviderTypeEnumFilter
+     */
+    notEq?: UserAuthAuthenticationProviderTypeEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace UserAuthAuthenticationProviderTypeEnumFilter
+ */
+export namespace UserAuthAuthenticationProviderTypeEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        EMAILPASSWORD = 'EMAIL_PASSWORD',
+        OIDC = 'OIDC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        EMAILPASSWORD = 'EMAIL_PASSWORD',
+        OIDC = 'OIDC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        EMAILPASSWORD = 'EMAIL_PASSWORD',
+        OIDC = 'OIDC'
+    }
+}
+/**
+ * UserAuthFilter
+ * @export
+ * @interface UserAuthFilter
+ */
+export interface UserAuthFilter {
+    /**
+     * Search by type
+     * @type {UserAuthAuthenticationProviderTypeEnumFilter}
+     * @memberof UserAuthFilter
+     */
+    type?: UserAuthAuthenticationProviderTypeEnumFilter;
+}
+/**
+ * UserCreatedWebHookEvent
  * @export
  * @interface UserCreatedWebHookEvent
  */
@@ -31154,7 +48492,111 @@ export interface UserCreatedWebHookEvent extends WebHookEvent {
     payload: User;
 }
 /**
- * 
+ * UserCustomClaimsFilter
+ * @export
+ * @interface UserCustomClaimsFilter
+ */
+export interface UserCustomClaimsFilter {
+    /**
+     * Nested list search by roles
+     * @type {UserCustomClaimsRolesListFilter}
+     * @memberof UserCustomClaimsFilter
+     */
+    roles?: UserCustomClaimsRolesListFilter;
+}
+/**
+ * UserCustomClaimsRolesFilter
+ * @export
+ * @interface UserCustomClaimsRolesFilter
+ */
+export interface UserCustomClaimsRolesFilter {
+    /**
+     * Search by facilities
+     * @type {StringListFilter}
+     * @memberof UserCustomClaimsRolesFilter
+     */
+    facilities?: StringListFilter;
+    /**
+     * Search by name
+     * @type {UserCustomClaimsRolesUserRoleNamesEnumFilter}
+     * @memberof UserCustomClaimsRolesFilter
+     */
+    name?: UserCustomClaimsRolesUserRoleNamesEnumFilter;
+}
+/**
+ * UserCustomClaimsRolesListFilter
+ * @export
+ * @interface UserCustomClaimsRolesListFilter
+ */
+export interface UserCustomClaimsRolesListFilter {
+    /**
+     * Contains returns if at least one entry matches
+     * @type {UserCustomClaimsRolesFilter}
+     * @memberof UserCustomClaimsRolesListFilter
+     */
+    contains?: UserCustomClaimsRolesFilter;
+}
+/**
+ * UserCustomClaimsRolesUserRoleNamesEnumFilter
+ * @export
+ * @interface UserCustomClaimsRolesUserRoleNamesEnumFilter
+ */
+export interface UserCustomClaimsRolesUserRoleNamesEnumFilter {
+    /**
+     * Search by name
+     * @type {string}
+     * @memberof UserCustomClaimsRolesUserRoleNamesEnumFilter
+     */
+    eq?: UserCustomClaimsRolesUserRoleNamesEnumFilter.EqEnum;
+    /**
+     * Search by name
+     * @type {string}
+     * @memberof UserCustomClaimsRolesUserRoleNamesEnumFilter
+     */
+    _in?: UserCustomClaimsRolesUserRoleNamesEnumFilter.InEnum;
+    /**
+     * Search by name
+     * @type {string}
+     * @memberof UserCustomClaimsRolesUserRoleNamesEnumFilter
+     */
+    notEq?: UserCustomClaimsRolesUserRoleNamesEnumFilter.NotEqEnum;
+}
+
+/**
+ * @export
+ * @namespace UserCustomClaimsRolesUserRoleNamesEnumFilter
+ */
+export namespace UserCustomClaimsRolesUserRoleNamesEnumFilter {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum EqEnum {
+        FULFILLER = 'FULFILLER',
+        SUPERVISOR = 'SUPERVISOR',
+        ADMINISTRATOR = 'ADMINISTRATOR'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum InEnum {
+        FULFILLER = 'FULFILLER',
+        SUPERVISOR = 'SUPERVISOR',
+        ADMINISTRATOR = 'ADMINISTRATOR'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum NotEqEnum {
+        FULFILLER = 'FULFILLER',
+        SUPERVISOR = 'SUPERVISOR',
+        ADMINISTRATOR = 'ADMINISTRATOR'
+    }
+}
+/**
+ * UserDeletedWebHookEvent
  * @export
  * @interface UserDeletedWebHookEvent
  */
@@ -31167,19 +48609,25 @@ export interface UserDeletedWebHookEvent extends WebHookEvent {
     payload: User;
 }
 /**
- * 
+ * UserForCreation
  * @export
  * @interface UserForCreation
  */
 export interface UserForCreation {
     /**
-     * 
+     * The assigned facilities of the user
+     * @type {Array<UserAssignedFacilityForCreation>}
+     * @memberof UserForCreation
+     */
+    assignedFacilities?: Array<UserAssignedFacilityForCreation>;
+    /**
+     * The first name of the user
      * @type {string}
      * @memberof UserForCreation
      */
     firstname: string;
     /**
-     * 
+     * The last name of the user
      * @type {string}
      * @memberof UserForCreation
      */
@@ -31191,38 +48639,26 @@ export interface UserForCreation {
      */
     locale?: SupportedLocale;
     /**
-     * 
+     * The password of the user
      * @type {string}
      * @memberof UserForCreation
      */
     password: string;
     /**
-     * 
-     * @type {UserRoles}
+     * The roles of the user
+     * @type {Array<UserRole>}
      * @memberof UserForCreation
      */
-    roles: UserRoles;
+    roles: Array<UserRole>;
     /**
-     * 
+     * The username of the user
      * @type {string}
      * @memberof UserForCreation
      */
     username: string;
-    /**
-     * 
-     * @type {Array<UserAssignedFacilityForCreation>}
-     * @memberof UserForCreation
-     */
-    assignedFacilities?: Array<UserAssignedFacilityForCreation>;
-    /**
-     * Attributes that can be added to the user. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
-     * @type {any}
-     * @memberof UserForCreation
-     */
-    customAttributes?: any;
 }
 /**
- * 
+ * UserModificationHistory
  * @export
  * @interface UserModificationHistory
  */
@@ -31247,40 +48683,51 @@ export interface UserModificationHistory {
     modificationDate: Date;
 }
 /**
- * Attribute to order a user list
+ * UserPaginatedResult
  * @export
- * @enum {string}
+ * @interface UserPaginatedResult
  */
-export enum UserOrderBy {
-    LASTNAME = 'LASTNAME'
+export interface UserPaginatedResult {
+    /**
+     * The total number of items matching the search criteria. Only filled, if withTotal is set to true in the search options.
+     * @type {number}
+     * @memberof UserPaginatedResult
+     */
+    total?: number;
+    /**
+     * 
+     * @type {Array<User>}
+     * @memberof UserPaginatedResult
+     */
+    users: Array<User>;
 }
 /**
- * 
+ * UserPatchActions
  * @export
  * @interface UserPatchActions
  */
 export interface UserPatchActions {
     /**
-     * 
+     * The actions to perform
      * @type {Array<ModifyUserAction>}
      * @memberof UserPatchActions
      */
     actions: Array<ModifyUserAction>;
     /**
-     * The version of the document to be used in optimistic locking mechanisms.
+     * The version of the user to modify
      * @type {number}
      * @memberof UserPatchActions
      */
     version: number;
 }
 /**
- * 
+ * UserRole
  * @export
  * @interface UserRole
  */
 export interface UserRole {
     /**
-     * List of facility Ids that the user is assigned to
+     * The facilities the user has access to
      * @type {Array<string>}
      * @memberof UserRole
      */
@@ -31293,7 +48740,7 @@ export interface UserRole {
     name: UserRoleNames;
 }
 /**
- * 
+ * All available user roles
  * @export
  * @enum {string}
  */
@@ -31303,12 +48750,167 @@ export enum UserRoleNames {
     ADMINISTRATOR = 'ADMINISTRATOR'
 }
 /**
- * roles of a user 
+ * UserSearchPayload
  * @export
+ * @interface UserSearchPayload
  */
-export type UserRoles = Array<UserRole>
+export interface UserSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof UserSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {UserSearchQuery}
+     * @memberof UserSearchPayload
+     */
+    query: UserSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof UserSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<UserSort>}
+     * @memberof UserSearchPayload
+     */
+    sort?: Array<UserSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof UserSearchPayload
+     */
+    startAfterId?: string;
+}
 /**
- * 
+ * UserSearchQuery
+ * @export
+ * @interface UserSearchQuery
+ */
+export interface UserSearchQuery {
+    /**
+     * 
+     * @type {Array<UserSearchQuery>}
+     * @memberof UserSearchQuery
+     */
+    and?: Array<UserSearchQuery>;
+    /**
+     * Nested list search by assignedFacilities
+     * @type {UserAssignedFacilitiesListFilter}
+     * @memberof UserSearchQuery
+     */
+    assignedFacilities?: UserAssignedFacilitiesListFilter;
+    /**
+     * Nested search by auth
+     * @type {UserAuthFilter}
+     * @memberof UserSearchQuery
+     */
+    auth?: UserAuthFilter;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof UserSearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Nested search by customClaims
+     * @type {UserCustomClaimsFilter}
+     * @memberof UserSearchQuery
+     */
+    customClaims?: UserCustomClaimsFilter;
+    /**
+     * Search by firstname
+     * @type {StringSearchFilter}
+     * @memberof UserSearchQuery
+     */
+    firstname?: StringSearchFilter;
+    /**
+     * Search by lastname
+     * @type {StringSearchFilter}
+     * @memberof UserSearchQuery
+     */
+    lastname?: StringSearchFilter;
+    /**
+     * 
+     * @type {Array<UserSearchQuery>}
+     * @memberof UserSearchQuery
+     */
+    or?: Array<UserSearchQuery>;
+    /**
+     * Search by username
+     * @type {StringSearchFilter}
+     * @memberof UserSearchQuery
+     */
+    username?: StringSearchFilter;
+}
+/**
+ * UserSort
+ * @export
+ * @interface UserSort
+ */
+export interface UserSort {
+    /**
+     * 
+     * @type {{ [key: string]: any; }}
+     * @memberof UserSort
+     */
+    customAttributes?: { [key: string]: any; };
+    /**
+     * 
+     * @type {string}
+     * @memberof UserSort
+     */
+    firstname?: UserSort.FirstnameEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserSort
+     */
+    lastname?: UserSort.LastnameEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserSort
+     */
+    username?: UserSort.UsernameEnum;
+}
+
+/**
+ * @export
+ * @namespace UserSort
+ */
+export namespace UserSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum FirstnameEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastnameEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum UsernameEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * UserUpdatedWebHookEvent
  * @export
  * @interface UserUpdatedWebHookEvent
  */
@@ -31321,20 +48923,14 @@ export interface UserUpdatedWebHookEvent extends WebHookEvent {
     payload: User;
 }
 /**
- * 
+ * Configuration of VCE Carrier
  * @export
  * @interface VceCarrierConfiguration
  */
 export interface VceCarrierConfiguration extends CarrierConfiguration {
-    /**
-     * 
-     * @type {FacilityAddress}
-     * @memberof VceCarrierConfiguration
-     */
-    alternativeReturnAddress?: FacilityAddress;
 }
 /**
- * 
+ * VCE Credentials.
  * @export
  * @interface VceCarrierCredentials
  */
@@ -31353,17 +48949,11 @@ export interface VceCarrierCredentials extends AbstractCarrierCredentials {
     password: string;
 }
 /**
- * 
+ * VCE Facility Carrier Configuration.
  * @export
  * @interface VceFacilityCarrierConfiguration
  */
 export interface VceFacilityCarrierConfiguration extends AbstractFacilityCarrierConfiguration {
-    /**
-     * 
-     * @type {FacilityAddress}
-     * @memberof VceFacilityCarrierConfiguration
-     */
-    alternativeReturnAddress?: FacilityAddress;
     /**
      * 
      * @type {string}
@@ -31372,7 +48962,7 @@ export interface VceFacilityCarrierConfiguration extends AbstractFacilityCarrier
     trackAndTraceUrl?: string;
 }
 /**
- * 
+ * VersionedResource
  * @export
  * @interface VersionedResource
  */
@@ -31397,7 +48987,7 @@ export interface VersionedResource {
     version: number;
 }
 /**
- * 
+ * WaitForInputItemReturnActionEnum
  * @export
  * @enum {string}
  */
@@ -31405,7 +48995,7 @@ export enum WaitForInputItemReturnActionEnum {
     WaitForInputItemReturn = 'WaitForInputItemReturn'
 }
 /**
- * 
+ * WaitForInputItemReturnActionParameter
  * @export
  * @interface WaitForInputItemReturnActionParameter
  */
@@ -31424,7 +49014,7 @@ export interface WaitForInputItemReturnActionParameter {
     itemReturnJobVersion: number;
 }
 /**
- * 
+ * WebHookEvent
  * @export
  * @interface WebHookEvent
  */
@@ -31457,7 +49047,7 @@ export enum WeekDay {
     SUNDAY = 'SUNDAY'
 }
 /**
- * 
+ * Zone
  * @export
  * @interface Zone
  */
@@ -31494,11 +49084,11 @@ export interface Zone extends ZoneForReplacement {
     facilityRef: string;
 }
 /**
- * 
+ * ZoneForCreation
  * @export
  * @interface ZoneForCreation
  */
-export interface ZoneForCreation {
+export interface ZoneForCreation extends CustomAttributesResource {
     /**
      * The name of this zone
      * @type {string}
@@ -31513,7 +49103,7 @@ export interface ZoneForCreation {
     score: number;
 }
 /**
- * 
+ * ZoneForReplacement
  * @export
  * @interface ZoneForReplacement
  */
@@ -31524,4 +49114,180 @@ export interface ZoneForReplacement extends ZoneForCreation {
      * @memberof ZoneForReplacement
      */
     version: number;
+}
+/**
+ * ZoneSearchPayload
+ * @export
+ * @interface ZoneSearchPayload
+ */
+export interface ZoneSearchPayload {
+    /**
+     * 
+     * @type {SearchOptions}
+     * @memberof ZoneSearchPayload
+     */
+    options?: SearchOptions;
+    /**
+     * 
+     * @type {ZoneSearchQuery}
+     * @memberof ZoneSearchPayload
+     */
+    query: ZoneSearchQuery;
+    /**
+     * Number of items to return.
+     * @type {number}
+     * @memberof ZoneSearchPayload
+     */
+    size?: number;
+    /**
+     * Use for sorting the result.
+     * @type {Array<ZoneSort>}
+     * @memberof ZoneSearchPayload
+     */
+    sort?: Array<ZoneSort>;
+    /**
+     * The ID to start after.
+     * @type {string}
+     * @memberof ZoneSearchPayload
+     */
+    startAfterId?: string;
+}
+/**
+ * ZoneSearchQuery
+ * @export
+ * @interface ZoneSearchQuery
+ */
+export interface ZoneSearchQuery {
+    /**
+     * 
+     * @type {Array<ZoneSearchQuery>}
+     * @memberof ZoneSearchQuery
+     */
+    and?: Array<ZoneSearchQuery>;
+    /**
+     * Search by custom attributes
+     * @type {{ [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; }}
+     * @memberof ZoneSearchQuery
+     */
+    customAttributes?: { [key: string]: BooleanFilter | StringEqFilter | NumberEqFilter | DateFilter; };
+    /**
+     * Search by facilityRef
+     * @type {StringFilter}
+     * @memberof ZoneSearchQuery
+     */
+    facilityRef?: StringFilter;
+    /**
+     * Search by id
+     * @type {StringFilter}
+     * @memberof ZoneSearchQuery
+     */
+    id?: StringFilter;
+    /**
+     * Search by name
+     * @type {StringFilter}
+     * @memberof ZoneSearchQuery
+     */
+    name?: StringFilter;
+    /**
+     * 
+     * @type {Array<ZoneSearchQuery>}
+     * @memberof ZoneSearchQuery
+     */
+    or?: Array<ZoneSearchQuery>;
+}
+/**
+ * ZoneSort
+ * @export
+ * @interface ZoneSort
+ */
+export interface ZoneSort {
+    /**
+     * 
+     * @type {string}
+     * @memberof ZoneSort
+     */
+    lastModified?: ZoneSort.LastModifiedEnum;
+}
+
+/**
+ * @export
+ * @namespace ZoneSort
+ */
+export namespace ZoneSort {
+    /**
+     * @export
+     * @enum {string}
+     */
+    export enum LastModifiedEnum {
+        ASC = 'ASC',
+        DESC = 'DESC'
+    }
+}
+/**
+ * ZoneWebHookEventPayload
+ * @export
+ * @interface ZoneWebHookEventPayload
+ */
+export interface ZoneWebHookEventPayload {
+    /**
+     * The date when the zone was created
+     * @type {Date}
+     * @memberof ZoneWebHookEventPayload
+     */
+    created?: Date;
+    /**
+     * Attributes that can be added to this entity. These attributes **cannot** be used within fulfillment processes, but enable you to attach custom data from your systems to fulfillmenttools entities.
+     * @type {any}
+     * @memberof ZoneWebHookEventPayload
+     */
+    customAttributes?: any;
+    /**
+     * The reference to the facility associated with the zone
+     * @type {string}
+     * @memberof ZoneWebHookEventPayload
+     */
+    facilityRef: string;
+    /**
+     * The unique identifier of the zone
+     * @type {string}
+     * @memberof ZoneWebHookEventPayload
+     */
+    id: string;
+    /**
+     * The date when the zone was last modified
+     * @type {Date}
+     * @memberof ZoneWebHookEventPayload
+     */
+    lastModified?: Date;
+    /**
+     * The name of the zone
+     * @type {string}
+     * @memberof ZoneWebHookEventPayload
+     */
+    name: string;
+    /**
+     * The score of the zone
+     * @type {number}
+     * @memberof ZoneWebHookEventPayload
+     */
+    score: number;
+    /**
+     * The version of the zone
+     * @type {number}
+     * @memberof ZoneWebHookEventPayload
+     */
+    version: number;
+}
+/**
+ * ZoneWebHookEventPayloadWebHookEvent
+ * @export
+ * @interface ZoneWebHookEventPayloadWebHookEvent
+ */
+export interface ZoneWebHookEventPayloadWebHookEvent extends WebHookEvent {
+    /**
+     * 
+     * @type {ZoneWebHookEventPayload}
+     * @memberof ZoneWebHookEventPayloadWebHookEvent
+     */
+    payload: ZoneWebHookEventPayload;
 }

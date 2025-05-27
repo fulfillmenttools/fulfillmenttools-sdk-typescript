@@ -10,18 +10,21 @@ import {
   StrippedPickJobs,
 } from '../types';
 import { FftApiClient, MAX_ARRAY_SIZE } from '../common';
-import { isDate, QueryParams } from '../../common';
+import { isDate, Logger, QueryParams } from '../../common';
 
 export class FftPickJobService {
   private readonly path = 'pickjobs';
+  private readonly log: Logger;
 
-  constructor(private readonly apiClient: FftApiClient) {}
+  constructor(private readonly apiClient: FftApiClient) {
+    this.log = apiClient.getLogger();
+  }
 
   public async getByTenantOrderId(tenantOrderId: string): Promise<StrippedPickJobs> {
     try {
       return await this.apiClient.get<StrippedPickJobs>(this.path, { tenantOrderId });
     } catch (err) {
-      console.error(`Could not get pick jobs with tenant order id '${tenantOrderId}'.`, err);
+      this.log.error(`Could not get pick jobs with tenant order id '${tenantOrderId}'.`, err);
       throw err;
     }
   }
@@ -49,7 +52,7 @@ export class FftPickJobService {
         version,
       });
     } catch (err) {
-      console.error(`Could not update pick job with id '${pickJobId}' and version ${version}.`, err);
+      this.log.error(`Could not update pick job with id '${pickJobId}' and version ${version}.`, err);
       throw err;
     }
   }
@@ -58,7 +61,7 @@ export class FftPickJobService {
     try {
       return await this.apiClient.get<PickJob>(`${this.path}/${pickJobId}`);
     } catch (err) {
-      console.error(`Could not get pick job with id '${pickJobId}'.`, err);
+      this.log.error(`Could not get pick job with id '${pickJobId}'.`, err);
       throw err;
     }
   }
@@ -80,7 +83,7 @@ export class FftPickJobService {
     try {
       return await this.apiClient.get<StrippedPickJobs>(this.path, params);
     } catch (err) {
-      console.error(`Could not get pick jobs for facility '${id}'.`, err);
+      this.log.error(`Could not get pick jobs for facility '${id}'.`, err);
       throw err;
     }
   }
@@ -89,7 +92,7 @@ export class FftPickJobService {
     try {
       return await this.apiClient.patch<PickJob>(`${this.path}/${pickJob.id}`, { version: pickJob.version, actions });
     } catch (err) {
-      console.error(`Could not update pick job with id '${pickJob.id}'.`, err);
+      this.log.error(`Could not update pick job with id '${pickJob.id}'.`, err);
       throw err;
     }
   }
@@ -185,7 +188,7 @@ export class FftPickJobService {
 
       return await this.apiClient.get<StrippedPickJobs>(this.path, queryParams);
     } catch (err) {
-      console.error(`Fetching all pick jobs failed.`, err);
+      this.log.error(`Fetching all pick jobs failed.`, err);
       throw err;
     }
   }

@@ -5,7 +5,7 @@ This tutorial will guide you through the first steps to get started with the ful
 ## Requirements
 
 To follow this tutorial, you will need to:
-* have [access](https://docs.fulfillmenttools.com/api-docs/getting-started/setup-your-access-to-fulfillmenttools) to a fulfillmenttools project
+* have [access](https://docs.fulfillmenttools.com/documentation/developer-docs/technical-basics/access-to-fulfillmenttools) to a fulfillmenttools project
 * have a basic understanding of [TypeScript](https://www.typescriptlang.org/)
 * have [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and npm installed
 
@@ -71,7 +71,7 @@ Finally, open `package.json` and make the following modifications:
   "license": "ISL",
   "description": "",
   "devDependencies": {
-    "@types/node": "^22.5.4",
+    "@types/node": "^22.9.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },
