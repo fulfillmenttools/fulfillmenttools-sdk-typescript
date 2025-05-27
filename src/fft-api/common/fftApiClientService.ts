@@ -26,6 +26,10 @@ export class FftApiClient {
     );
   }
 
+  public async getToken() {
+    return await this.authService.getToken();
+  }
+
   public getLogger(): Logger {
     return this.config.getLogger?.() ?? getDefaultLogger();
   }
