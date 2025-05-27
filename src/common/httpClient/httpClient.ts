@@ -22,6 +22,7 @@ export class HttpClient implements BasicHttpClient {
 
     if (config.customHeaders) {
       Object.entries(config?.customHeaders).forEach(([key, value]) => {
+        // TODO 'value' will use Object's default stringification format when stringified
         requestHeaders.set(key, String(value));
       });
     }
