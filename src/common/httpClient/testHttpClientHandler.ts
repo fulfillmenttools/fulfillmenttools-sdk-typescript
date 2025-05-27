@@ -53,7 +53,6 @@ export class TestHttpClientHandler {
    * @param request
    */
   public lookupRequest(request: BasicTestHttpRequest) {
-    // const combinedUrl = this.generateCombinedUrl(request);
     if (this.notExpectedRequests.some((call) => this.callMatchesRequest(call, request))) {
       this.notExpectedRequestsCalled.push(request);
       return request;

@@ -39,7 +39,7 @@ export class FftFacilityService {
     this.log.log(`Getting facility ${tenantFacilityId}...`);
 
     if (FftFacilityService.facilityCache.has(tenantFacilityId)) {
-      return FftFacilityService.facilityCache.get(tenantFacilityId) as string;
+      return FftFacilityService.facilityCache.get(tenantFacilityId);
     }
 
     const strippedFacilities = await this.apiClient.get<StrippedFacilities>(this.PATH, { tenantFacilityId });
@@ -54,15 +54,13 @@ export class FftFacilityService {
           `Did not find exactly 1 facility with tenantFacilityId '${tenantFacilityId}' but ${length}, returning first one with id '${facility.id}'`
         );
       }
+    } else if (relaxed) {
+      return undefined;
     } else {
-      if (relaxed) {
-        return undefined;
-      } else {
-        this.log.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
-        throw new FftApiError({
-          message: `Did not find facility with tenantFacilityId '${tenantFacilityId}'`,
-        });
-      }
+      this.log.error(`Did not find facility with tenantFacilityId '${tenantFacilityId}'`);
+      throw new FftApiError({
+        message: `Did not find facility with tenantFacilityId '${tenantFacilityId}'`,
+      });
     }
 
     return facility.id;

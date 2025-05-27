@@ -88,7 +88,7 @@ export class FftApiClient {
         retries: method === HttpMethod.GET ? MAX_RETRIES : 0,
         responseType,
       });
-      return result.body as T;
+      return result.body;
     } catch (error) {
       handleError(error);
     }
