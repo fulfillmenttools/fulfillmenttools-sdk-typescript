@@ -29,8 +29,15 @@ export class HttpClient implements BasicHttpClient {
 
     if (config.params) {
       Object.entries(config?.params).forEach(([name, value]) => {
-        url.searchParams.append(name, String(value));
+        if ( Array.isArray(value)) {
+          value.forEach((item) => {
+            url.searchParams.append(name, decodeURIComponent(String(item)));
+          });
+        } else {
+          url.searchParams.append(name, decodeURIComponent(String(value)));
+        }
       });
+      url.search = decodeURIComponent(url.search);
     }
 
     // eslint-disable-next-line no-undef
