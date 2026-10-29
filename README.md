@@ -1,12 +1,6 @@
 # fulfillmenttools TypeScript SDK
 
-This is a JavaScript/TypeScript SDK (beta) for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/documentation/developer-docs).
-
-<p align="center">
-  <a href="https://fulfillmenttools.com/">
-    <img alt="fulfillmenttools logo" src="./.github/images/Github-banner-1240x620.png">
-  </a><br />
-</p>
+This is a JavaScript/TypeScript SDK (beta) for the [fulfillmenttools REST API](https://docs.fulfillmenttools.com/documentation/api-reference).
 
 [![npm version](https://img.shields.io/npm/v/@fulfillmenttools/fulfillmenttools-sdk-typescript.svg?style=flat)](https://www.npmjs.com/package/@fulfillmenttools/fulfillmenttools-sdk-typescript)
 [![Release](https://img.shields.io/github/v/release/fulfillmenttools/fulfillmenttools-sdk-typescript)](https://github.com/fulfillmenttools/fulfillmenttools-sdk-typescript/releases)
@@ -19,7 +13,7 @@ This is a JavaScript/TypeScript SDK (beta) for the [fulfillmenttools REST API](h
 
 ## What is fulfillmenttools?
 
-[fulfillmenttools](https://fulfillmenttools.com) is a next generation order management system that helps retailers and brands to serve their customers faster and more reliably. Its MACH based architecture enables an easy and quick integration.
+[fulfillmenttools](https://fulfillmenttools.com) is an Agentic Order Management System that helps retailers and brands to serve their customers faster and more reliably.
 
 ## Table of contents
 
@@ -48,10 +42,10 @@ Learn how to set up and use the TypeScript SDK with our [tutorial](./TUTORIAL.md
 
 ## 📖 Documentation
 
-The official fulfillmenttools API documentation can be found [here](https://docs.fulfillmenttools.com/documentation/developer-docs), and we also publish our [OpenAPI specification](https://fulfillmenttools.github.io/fulfillmenttools-api-reference-ui/).
+The official fulfillmenttools API documentation can be found in the [API reference section of our documentation](https://docs.fulfillmenttools.com/documentation/api-reference).
 
 > [!NOTE]
-> Currently, the SDK is still in _beta_ status. It does not provide access to all of the features of our API but we are continuously extending it and pushing out new versions.
+> Currently, the SDK is still in Beta status. It does not provide access to all of the features of our API but we are continuously extending it and pushing out new versions.
 > The releases of this SDK follow the Semantic Versioning convention. However, until we have shipped a first stable 1.0 release, breaking changes can and will occur!
 > We hope you will find it easy to use and are looking forward to your feedback.
 
